@@ -20,6 +20,25 @@ public class ContextModel : MonoBehaviour
         }
     }
 
+    public static Context parseContext(JSONNode node)
+    {
+        try
+        {
+            Context context = new Context();
+            context.Id = node["id"];
+            context.Name = node["name"];
+            context.TeacherId = node["teacherId"];
+            context.Description = node["description"];
+            context.Content = node["content"];
+
+            return context;
+        }catch(Exception e)
+        {
+            Debug.Log(e);
+        }
+        return null;
+    }
+
     public void loadContext(int contextId, Action<JSONNode> callBack)
     {
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.LOAD_CONTEXT);
@@ -33,6 +52,7 @@ public class ContextModel : MonoBehaviour
             else
             {
                 Debug.Log(data.error + ": " + data.message);
+                callBack(null);
             }
         }));
     }
@@ -50,6 +70,7 @@ public class ContextModel : MonoBehaviour
             else
             {
                 Debug.Log(data.error + ": " + data.message);
+                callBack(null);
             }
         }));
     }
@@ -67,6 +88,7 @@ public class ContextModel : MonoBehaviour
             else
             {
                 Debug.Log(data.error + ": " + data.message);
+                callBack(null);
             }
         }));
     }
@@ -88,6 +110,7 @@ public class ContextModel : MonoBehaviour
             else
             {
                 Debug.Log(data.error + ": " + data.message);
+                callBack(null);
             }
         }));
     }
@@ -110,6 +133,7 @@ public class ContextModel : MonoBehaviour
             else
             {
                 Debug.Log(data.error + ": " + data.message);
+                callBack(null);
             }
         }));
     }
@@ -128,6 +152,7 @@ public class ContextModel : MonoBehaviour
             else
             {
                 Debug.Log(data.error + ": " + data.message);
+                callBack(null);
             }
         }));
     }
