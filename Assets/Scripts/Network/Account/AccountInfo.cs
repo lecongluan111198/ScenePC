@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,9 @@ public class AccountInfo
     private int uid;
     private string username;
     private string email;
-    private string sessionKey = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNTg2MTYyNzIwLCJpYXQiOjE1ODM1NzA3MjB9.cCb-jUHdLVlCtDzCAx1vGlimeHTSV52OIN3vSdT0SPZCdCoj4dmZOT2BjuVyRBrc_eqQgkHwzBN4tqgDe8ehIg";
+    private string role;
+    private string session = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNTg2MTYyNzIwLCJpYXQiOjE1ODM1NzA3MjB9.cCb-jUHdLVlCtDzCAx1vGlimeHTSV52OIN3vSdT0SPZCdCoj4dmZOT2BjuVyRBrc_eqQgkHwzBN4tqgDe8ehIg";
+    private byte[] image;
 
 
     public static AccountInfo Instance
@@ -23,27 +26,44 @@ public class AccountInfo
         }
     }
 
-    public int UID
-    {
-        get { return uid; }
-        set { uid = value; }
-    }
+    //public int UID
+    //{
+    //    get { return uid; }
+    //    set { uid = value; }
+    //}
 
-    public string Username
-    {
-        get { return username; }
-        set { username = value; }
-    }
+    //public string Username
+    //{
+    //    get { return username; }
+    //    set { username = value; }
+    //}
 
-    public string Email
-    {
-        get { return email; }
-        set { email = value; }
-    }
+    //public string Email
+    //{
+    //    get { return email; }
+    //    set { email = value; }
+    //}
 
-    public string Session
+    //public string Session
+    //{
+    //    get { return sessionKey; }
+    //    set { sessionKey = value; }
+    //}
+
+    public string Role { get => role; set => role = value; }
+    public byte[] Image { get => image; set => image = value; }
+    public int Uid { get => uid; set => uid = value; }
+    public string Username { get => username; set => username = value; }
+    public string Email { get => email; set => email = value; }
+    public string Session { get => session; set => session = value; }
+
+    public void reset()
     {
-        get { return sessionKey; }
-        set { sessionKey = value; }
+        Uid = -1;
+        Username = "";
+        Email = "";
+        SessionKey = "";
+        role = "";
+        image = null;
     }
 }

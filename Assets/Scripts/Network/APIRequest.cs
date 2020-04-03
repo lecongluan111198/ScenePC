@@ -122,7 +122,7 @@ public class APIRequest
         }
     }
 
-    public IEnumerator uploadFile(string url, string path, Action<bool> callBack)
+    public IEnumerator uploadFile(string url, string path, Action<APIResponse> callBack)
     {
         WWWForm form = new WWWForm();
 
@@ -136,15 +136,15 @@ public class APIRequest
         req.SetRequestHeader("Authorization", AccountInfo.Instance.Session);
         yield return req.SendWebRequest();
 
-        if (req.isNetworkError)
+        if (req.responseCode == 200)
         {
-            Debug.Log(req.error);
-            callBack(false);
+            string reponseJson = req.downloadHandler.text;
+            callBack(APIResponse.textToReponse(reponseJson));
         }
         else
         {
             Debug.Log(ECode.SUCCESS);
-            callBack(true);
+            callBack(null);
         }
     }
 }
