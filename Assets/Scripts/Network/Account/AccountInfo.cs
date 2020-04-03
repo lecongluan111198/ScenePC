@@ -52,17 +52,17 @@ public class AccountInfo
 
     public string Role { get => role; set => role = value; }
     public byte[] Image { get => image; set => image = value; }
-    public int Uid { get => uid; set => uid = value; }
+    public int UID { get => uid; set => uid = value; }
     public string Username { get => username; set => username = value; }
     public string Email { get => email; set => email = value; }
     public string Session { get => session; set => session = value; }
 
     public void reset()
     {
-        Uid = -1;
-        Username = "";
-        Email = "";
-        SessionKey = "";
+        uid = -1;
+        username = "";
+        email = "";
+        session = "";
         role = "";
         image = null;
     }
