@@ -36,38 +36,41 @@ public class EditContext : MonoBehaviour
         //    {"Obj", objtmp }
         //};
     }
-    //public void SaveScene() {
-    //    var mno = new Scenes {
-    //        scenes = new Dictionary<string, Scene>
-    //        {
-    //            {"scene1",listScene }
-    //        }
-    //    };
-    //}
-    public void writeToJson() { 
-        var setting = new JsonSerializerSettings();
-        setting.Formatting = Formatting.Indented;
-        setting.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+    public void SaveScene()
+    {
+        var mno = new Scenes
+        {
+            scenes = new Dictionary<string, Scene>
+            {
+                {"scene1",listScene }
+            }
+        };
+    }
+    public void writeToJson()
+    {
+        //var setting = new JsonSerializerSettings();
+        //setting.Formatting = Formatting.Indented;
+        //setting.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 
-        // write
-        // var accountsFromCode = new List<Account> { accountJames, accountOnion };
-        // var accountsFromCode = new List<List<List<List<Obj>>>> {data};
-        var scenesFromCode = new List<List<Obj>> { listObj };
-        var json = JsonConvert.SerializeObject(scenesFromCode, setting);
-        var path = Path.Combine(Application.dataPath, "hiiii.json");
-        Debug.Log(path);
-        File.WriteAllText(path, json);
+        //// write
+        //// var accountsFromCode = new List<Account> { accountJames, accountOnion };
+        //// var accountsFromCode = new List<List<List<List<Obj>>>> {data};
+        //var scenesFromCode = new List<List<Obj>> { listObj };
+        //var json = JsonConvert.SerializeObject(scenesFromCode, setting);
+        //var path = Path.Combine(Application.dataPath, "hiiii.json");
+        //Debug.Log(path);
+        //File.WriteAllText(path, json);
     }
     public void readFromJson()
     {
-        var setting = new JsonSerializerSettings();
-        setting.Formatting = Formatting.Indented;
-        setting.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-        var path = Path.Combine(Application.dataPath, "hiiii.json");
-        var fileContent = File.ReadAllText(path);
-        var objFromFile = JsonConvert.DeserializeObject<List<List<Obj>>>(fileContent);
-        var reSerializedJson = JsonConvert.SerializeObject(objFromFile, setting);
-        print(reSerializedJson);
+        //var setting = new JsonSerializerSettings();
+        //setting.Formatting = Formatting.Indented;
+        //setting.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+        //var path = Path.Combine(Application.dataPath, "hiiii.json");
+        //var fileContent = File.ReadAllText(path);
+        //var objFromFile = JsonConvert.DeserializeObject<List<List<Obj>>>(fileContent);
+        //var reSerializedJson = JsonConvert.SerializeObject(objFromFile, setting);
+        //print(reSerializedJson);
     }
 
 
@@ -103,7 +106,8 @@ public class EditContext : MonoBehaviour
 
     void Start()
     {
-        WithForeachLoop();
+        json();
+        //WithForeachLoop();
     }
     void WithForeachLoop()
     {
@@ -112,6 +116,60 @@ public class EditContext : MonoBehaviour
             print("Object con: " + child);
             addListObj(child);
         }
+    }
+
+    public class JsonObject
+    {
+        int id;
+        string name;
+        float[] position;
+        float[] rotation;
+        List<Dictionary<string, object>> components;
+
+        public JsonObject(int id, string name, float[] position, float[] rotation, List<Dictionary<string, object>> components)
+        {
+            this.id = id;
+            this.name = name;
+            this.position = position;
+            this.rotation = rotation;
+            this.components = components;
+        }
+
+        public Dictionary<string, object> toJson()
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("id", id);
+            dic.Add("name", name);
+            dic.Add("position", position);
+            dic.Add("rotation", rotation);
+            dic.Add("components", components);
+            return dic;
+        }
+    }
+
+    public void json()
+    {
+        Dictionary<string, object> jsonData = new Dictionary<string, object>();
+        List<Dictionary<string, object>> listScenes = new List<Dictionary<string, object>>();
+        jsonData.Add("phase", 5);
+        jsonData.Add("Scenes", listScenes);
+        Dictionary<string, object> scene = new Dictionary<string, object>();
+        listScenes.Add(scene);
+
+        scene.Add("nObject", 2);
+
+        List<Dictionary<string, object>> objects = new List<Dictionary<string, object>>();
+        JsonObject jsonObject;
+        for (int i = 0; i < 2; i++)
+        {
+            jsonObject = new JsonObject(i, "tham", new float[] { 1, 2, 3 }, new float[] { 1, 2, 3 }, new List<Dictionary<string, object>>());
+            Debug.Log(JsonConvert.SerializeObject(jsonObject));
+            objects.Add(jsonObject.toJson());
+        }
+        scene.Add("Objects", objects);
+
+        Debug.Log(JsonConvert.SerializeObject(jsonData));
+
     }
 }
 

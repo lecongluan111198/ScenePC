@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: 0
-  name: 
+  name: asdad
 --- !u!135 &1640242428
 SphereCollider:
   m_ObjectHideFlags: 0
