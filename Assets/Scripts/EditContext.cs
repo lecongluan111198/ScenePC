@@ -5,116 +5,113 @@ using Newtonsoft.Json;
 using UnityEngine.UI;
 using System;
 using UnityEngine.Networking;
+using System.IO;
 using SimpleJSON;
 
 public class EditContext : MonoBehaviour
 {
-    public Text textM;
-    public Text userNameText;
-    int i = 0;
-//    public void Request()
-//    {
-//        i++;
-//        userNameText.text = "" + i;
-//        string jsonfile = "abcbsbdb"; //nhap string
-//        WWW request = new WWW(jsonfile);
-//        PlayerPrefs.SetInt("authComplete", 0);
-//        textM.text = "Requested2";
-//        StartCoroutine(OnResponse(request));
-//    }
-//    private IEnumerator OnResponse(WWW req)
-//    {
-//        yield return req;
-//        textM.text = req.text; //Response Json
-//        var rt = JsonConvert.DeserializeObject<RootObject>(req.text);
-//        string nameObj = rt.jsonData.Scene.name;
-//        userNameText.text = nameObj + ":" + i;
-//        string linkObj = rt.jsonData.Scene.link;
-//        StartCoroutine(loadObject(linkObj));
-//    }  
-//    IEnumerator loadObject(string url)
-//    {
-//        if (Application.internetReachability == NetworkReachability.NotReachable)
-//        {
-//            yield return null;
-//        }
-//        var www = new WWW(url);
-//        Debug.Log("Download obj on progress");
-//        yield return www;
-//        if (string.IsNullOrEmpty(www.text))
-//            Debug.Log("Download Failed");
-//        else
-//        {
-//            //code download obj
-//            Debug.Log("Download Success");
-//        }
-//    }
-    public void GetJsonData()
-    {
-        StartCoroutine(rRequestWebService());
+    public int Id;
+    public string name = "abc";
+    List<Obj> listObj = new List<Obj>();
+    Scene listScene = new Scene();
+    public void addListObj(Transform transform)
+    {   
+        var objtmp = new Obj();
+        objtmp.ID = Id;
+        objtmp.Name = transform.name;
+        objtmp.Position = transform.position;
+        objtmp.Scale = transform.localScale;
+        listObj.Add(objtmp);
+        Debug.Log("listObj: " + listObj);
+
+        //var xyz = new Scene {
+        //    scene = new Dictionary<string, Obj>
+        //    {
+        //        {"Obj", objtmp }
+        //    }
+        //};
+
+        //listScene.scene = new Dictionary<string, Obj>
+        //{
+        //    {"Obj", objtmp }
+        //};
     }
-    IEnumerator rRequestWebService()
+    //public void SaveScene() {
+    //    var mno = new Scenes {
+    //        scenes = new Dictionary<string, Scene>
+    //        {
+    //            {"scene1",listScene }
+    //        }
+    //    };
+    //}
+    public void writeToJson() { 
+        var setting = new JsonSerializerSettings();
+        setting.Formatting = Formatting.Indented;
+        setting.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
+        // write
+        // var accountsFromCode = new List<Account> { accountJames, accountOnion };
+        // var accountsFromCode = new List<List<List<List<Obj>>>> {data};
+        var scenesFromCode = new List<List<Obj>> { listObj };
+        var json = JsonConvert.SerializeObject(scenesFromCode, setting);
+        var path = Path.Combine(Application.dataPath, "hiiii.json");
+        Debug.Log(path);
+        File.WriteAllText(path, json);
+    }
+    public void readFromJson()
     {
-        string getDataUrl = "https://drive.google.com/uc?export=download&id=13GU3xtSNds0t4UcneXxoA5RnREkoZkjL"; //duong dan
-        print(getDataUrl);
-        using(UnityWebRequest webData = UnityWebRequest.Get(getDataUrl))
+        var setting = new JsonSerializerSettings();
+        setting.Formatting = Formatting.Indented;
+        setting.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+        var path = Path.Combine(Application.dataPath, "hiiii.json");
+        var fileContent = File.ReadAllText(path);
+        var objFromFile = JsonConvert.DeserializeObject<List<List<Obj>>>(fileContent);
+        var reSerializedJson = JsonConvert.SerializeObject(objFromFile, setting);
+        print(reSerializedJson);
+    }
+
+
+    public class Obj
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public Vector3 Position { get; set; }
+        public Vector3 Rotation { get; set; }
+        public Vector3 Scale { get; set; }
+        public IList<string> Component { get; set; }
+    }
+    public class Scene
+    {
+        public Dictionary<string, Obj> scene { get; set; }
+    }
+    public class Scenes
+    {
+        public Dictionary<string, Scene> scenes { get; set; }
+    }
+    //public class Data
+    //{
+    //    int phrase;
+    //    public IList<Scenes> data { get; set; }
+    //}
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+            writeToJson();
+        if (Input.GetKeyDown(KeyCode.L))
+            readFromJson();
+    }
+
+    void Start()
+    {
+        WithForeachLoop();
+    }
+    void WithForeachLoop()
+    {
+        foreach (Transform child in transform)
         {
-            yield return webData.SendWebRequest();
-            if (webData.isNetworkError || webData.isHttpError)
-            {
-                print("Error");
-                print(webData.error);
-            }
-            else
-            {
-                if (webData.isDone)
-                {
-                    JSONNode jsonData = JSON.Parse(System.Text.Encoding.UTF8.GetString(webData.downloadHandler.data));
-                    if (jsonData == null)
-                    {
-                        print("No Data");
-                    }
-                    else
-                    {
-                        print("Json Data");
-                        print("Count:" + jsonData.Count);
-                    }
-                }
-            }
+            print("Object con: " + child);
+            addListObj(child);
         }
     }
 }
-[Serializable]
-public class Question
-{
-    public string question { get; set; }
-    public string choiceA { get; set; }
-    public string choiceB { get; set; }
-    public string choiceC { get; set; }
-    public string correct { get; set; }
-}
-[Serializable]
-public class Component
-{
-    public List<Question> questions { get; set; }
-}
-[Serializable]
-public class Scene
-{
-    public string id { get; set; }
-    public string link { get; set; }
-    public string name { get; set; }
-    public List<int> position { get; set; }
-    public List<int> rotation { get; set; }
-    public Component component { get; set; }
-}
-[Serializable]
-public class JsonData
-{
-    public Scene Scene { get; set; }
-}
-[Serializable]
-public class RootObject
-{
-    public JsonData jsonData { get; set; }
-}
+

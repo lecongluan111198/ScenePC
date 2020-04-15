@@ -8,7 +8,9 @@ public class JsonSave : MonoBehaviour
     // Start is called before the first frame update
     public int Id;
     public string Name;
-    void Save()
+    int m = 0;
+    List<JSONObject> jsonObj = new List<JSONObject>();
+    void Save(Transform tmp)
     {
         //info
         JSONObject playerJson = new JSONObject();
@@ -16,26 +18,28 @@ public class JsonSave : MonoBehaviour
         playerJson.Add("Name", Name);
         //Position
         JSONArray position = new JSONArray();
-        position.Add(transform.position.x);
-        position.Add(transform.position.y);
-        position.Add(transform.position.z);
+        position.Add(tmp.position.x);
+        position.Add(tmp.position.y);
+        position.Add(tmp.position.z);
         playerJson.Add("Position", position);
         //Rotation
         JSONArray rotation = new JSONArray();
-        rotation.Add(transform.rotation.x);
-        rotation.Add(transform.rotation.y);
-        rotation.Add(transform.rotation.z);
+        rotation.Add(tmp.rotation.x);
+        rotation.Add(tmp.rotation.y);
+        rotation.Add(tmp.rotation.z);
         playerJson.Add("Rotation", rotation);
         //Scale
         JSONArray scale = new JSONArray();
-        scale.Add(transform.localScale.x);
-        scale.Add(transform.localScale.y);
-        scale.Add(transform.localScale.z);
+        scale.Add(tmp.localScale.x);
+        scale.Add(tmp.localScale.y);
+        scale.Add(tmp.localScale.z);
         playerJson.Add("Scale", scale);
         //Save json to laptop
-        string path = Application.persistentDataPath + "/data.json";
-        Debug.Log(path);
-        File.WriteAllText(path, playerJson.ToString());
+        //string path = Application.persistentDataPath + "/data"+m+".json";
+       // Debug.Log(path);
+        jsonObj.Add(playerJson);
+        //File.WriteAllText(path, playerJson.ToString());
+        //m++;
     }
     void Load()
     {
@@ -55,13 +59,32 @@ public class JsonSave : MonoBehaviour
     }
     void Start()
     {
-        
+        WithForeachLoop();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S)) Save();
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            Save(transform);
+            
+            foreach (JSONObject js in jsonObj)
+            {
+                string path = Application.persistentDataPath + "/data" + m + ".json";
+                File.WriteAllText(path, js.ToString());
+                Debug.Log(path);
+                m++;
+            }
+        }
         if (Input.GetKeyDown(KeyCode.L)) Load();
+    }
+    void WithForeachLoop()
+    {
+        foreach (Transform child in transform)
+        {
+            print("Object con: " + child);
+            Save(child);
+        }
     }
 }
