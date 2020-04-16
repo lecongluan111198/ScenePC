@@ -14,30 +14,34 @@ public class UserModel : MonoBehaviour
         {
             if (_instance == null)
             {
-                _instance = new UserModel();
+                go = new GameObject();
+                _instance = go.AddComponent<UserModel>();
             }
             return _instance;
         }
     }
 
-    public void login(string email, string password, Action<bool> callBack)
+    public void Login(string email, string password, Action<bool> callBack)
     {
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.USER_LOGIN)
             .AddParam("email", email)
             .AddParam("password", password);
-
-        StartCoroutine(APIRequest.Instance.doPost(API.USER_LOGIN, reqBuilder.toBodyJson(), (data) =>
+        Debug.Log(reqBuilder.build());
+        StartCoroutine(APIRequest.Instance.doPost(reqBuilder.build(), "{}", (data) =>
         {
             if (data.error >= 0)
             {
                 AccountInfo.Instance.Email = email;
-                AccountInfo.Instance.Username = data.getParam("username", "");
-                AccountInfo.Instance.UID = data.getParam("uid", -1);
-                AccountInfo.Instance.Session = data.getParam("sessKey", "");
-                AccountInfo.Instance.Role = data.getParam("role", "");
+                AccountInfo.Instance.Username = data.getStringParam("username", "");
+                AccountInfo.Instance.UID = data.getIntParam("uid", -1);
+                AccountInfo.Instance.Session = data.getStringParam("sessKey", "");
+                AccountInfo.Instance.Role = data.getStringParam("role", "");
                 if (AccountInfo.Instance.Session == "" || AccountInfo.Instance.UID == -1 || AccountInfo.Instance.Role == "")
                 {
                     Debug.Log("Session or Uid or role are empty");
+                    Debug.Log(AccountInfo.Instance.Session);
+                    Debug.Log(AccountInfo.Instance.UID);
+                    Debug.Log(AccountInfo.Instance.Role);
                     callBack(false);
                 }
                 else
@@ -55,7 +59,7 @@ public class UserModel : MonoBehaviour
 
     public void logout(Action<bool> callBack)
     {
-        StartCoroutine(APIRequest.Instance.doPost(API.USER_LOGOUT, "", (data) =>
+        StartCoroutine(APIRequest.Instance.doPost(API.USER_LOGOUT, "{}", (data) =>
         {
             if (data.error >= 0)
             {
@@ -78,13 +82,13 @@ public class UserModel : MonoBehaviour
             .AddParam("password", password)
             .AddParam("role", role);
 
-        StartCoroutine(APIRequest.Instance.doPost(API.USER_SINGUP, reqBuilder.toBodyJson(), (data) =>
+        StartCoroutine(APIRequest.Instance.doPost(reqBuilder.build(), "{}", (data) =>
         {
             if (data.error >= 0)
             {
                 AccountInfo.Instance.Email = email;
                 AccountInfo.Instance.Username = username;
-                AccountInfo.Instance.UID = data.getParam("uid", -1);
+                AccountInfo.Instance.UID = data.getIntParam("uid", -1);
                 AccountInfo.Instance.Role = role;
                 if (AccountInfo.Instance.UID == -1)
                 {
@@ -110,11 +114,11 @@ public class UserModel : MonoBehaviour
             .AddParam("uid", uid)
             .AddParam("verifyCode", verifyCode);
 
-        StartCoroutine(APIRequest.Instance.doPost(API.USER_AUTHENTICATION, reqBuilder.toBodyJson(), (data) =>
+        StartCoroutine(APIRequest.Instance.doPost(reqBuilder.build(), "{}", (data) =>
         {
             if (data.error >= 0)
             {
-                AccountInfo.Instance.Session = data.getParam("sessKey", "");
+                AccountInfo.Instance.Session = data.getStringParam("sessKey", "");
                 if (AccountInfo.Instance.Session == "")
                 {
                     Debug.Log("Uid are empty");
@@ -138,7 +142,7 @@ public class UserModel : MonoBehaviour
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.USER_UPDATE_PROFILE)
             .AddParam("username", username);
 
-        StartCoroutine(APIRequest.Instance.doPost(API.USER_AUTHENTICATION, reqBuilder.toBodyJson(), (data) =>
+        StartCoroutine(APIRequest.Instance.doPost(reqBuilder.build(), "{}", (data) =>
         {
             if (data.error >= 0)
             {

@@ -24,14 +24,54 @@ public class APIResponse
         };
     }
 
-    public T getParam<T>(string name, T defautValue)
+    //public T getParam<T>(string name, T defaultValue)
+    //{
+    //    try
+    //    {
+    //        return (T)response[name];
+    //    }catch(Exception e)
+    //    {
+    //        Debug.Log(e.Message);
+    //        return defaultValue;
+    //    }
+    //}
+
+    public int getIntParam(string name, int defaultValue)
     {
         try
         {
-            return (T)response[name];
-        }catch(Exception e)
+            return Convert.ToInt32(response[name]);
+        }
+        catch (Exception e)
         {
-            return defautValue;
+            Debug.Log(e.Message);
+            return defaultValue;
+        }
+    }
+
+    public double getDoubleParam(string name, double defaultValue)
+    {
+        try
+        {
+            return Convert.ToDouble(response[name]);
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            return defaultValue;
+        }
+    }
+
+    public string getStringParam(string name, string defaultValue)
+    {
+        try
+        {
+            return Convert.ToString(response[name]);
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            return defaultValue;
         }
     }
 }

@@ -61,6 +61,7 @@ namespace Michsky.UI.ModernUIPack
 
         public void Animate()
         {
+            Debug.Log("animate");
             isClicked = true;
             inputFieldAnimator.Play(inAnim);
             fieldTrigger.SetActive(true);
