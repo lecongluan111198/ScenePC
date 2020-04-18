@@ -10,9 +10,10 @@ public class API
     public static string USER_LOGOUT = DOMAIN + "logout";
     public static string USER_SINGUP = DOMAIN + "register";
     public static string USER_AUTHENTICATION = DOMAIN + "authenVerifyCode";
+    public static string USER_AUTHENTICATION_RESEND = DOMAIN + "register/resendVerifyCode";
     public static string USER_UPDATE_PROFILE = DOMAIN + "profile";
-    public static string USER_UPDATE_IMAGE_PROFILE;
-    public static string USER_LOAD_PROFILE_IMAGE = DOMAIN + "profile/image";
+    public static string USER_UPDATE_IMAGE_PROFILE = DOMAIN + "profile/image";
+    public static string USER_LOAD_PROFILE_IMAGE;
 
 
     public static string CREATE_CONTEXT = DOMAIN + "context/create";

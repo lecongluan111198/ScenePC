@@ -68,7 +68,7 @@ public class CourseModel : MonoBehaviour
         }));
     }
 
-    public void loadOwnCourse(Action<List<Course>> callBack)
+    public void loadOwnCourse(int length, int offset, Action<List<Course>> callBack)
     {
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.LOAD_OWN_COURSE);
         string uri = reqBuilder.build();
@@ -99,7 +99,7 @@ public class CourseModel : MonoBehaviour
         }));
     }
 
-    public void loadAccessCourse(Action<List<Course>> callBack)
+    public void loadAccessCourse(int length, int offset, Action<List<Course>> callBack)
     {
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.LOAD_ALL_ACCESS_COURSE);
         string uri = reqBuilder.build();
