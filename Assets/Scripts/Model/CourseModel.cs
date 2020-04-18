@@ -1,4 +1,5 @@
-﻿using SimpleJSON;
+﻿using Newtonsoft.Json;
+using SimpleJSON;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,33 +21,62 @@ public class CourseModel : MonoBehaviour
         }
     }
 
-    public static Course parseCourse(JSONNode node)
+    //public static Course parseCourse(JSONNode node)
+    //{
+    //    try
+    //    {
+    //        Course course = new Course();
+    //        course.Id = node["id"];
+    //        course.Name = node["name"];
+    //        course.Status = node["status"];
+    //        course.TeacherId = node["teacherId"];
+    //        JSONArray contextNodes = node["contexts"] as JSONArray;
+    //        List<Context> contexts = new List<Context>();
+    //        foreach (JSONNode contextNode in contextNodes)
+    //        {
+    //            Context con = ContextModel.parseContext(contextNode);
+    //            if (con != null)
+    //            {
+    //                contexts.Add(con);
+    //            }
+    //        }
+    //        return course;
+    //    }
+    //    catch (Exception e)
+    //    {
+    //        Debug.Log(e);
+    //        return null;
+    //    }
+
+    //}
+
+    private List<Course> parseListCourse(string json)
     {
         try
         {
-            Course course = new Course();
-            course.Id = node["id"];
-            course.Name = node["name"];
-            course.Status = node["status"];
-            course.TeacherId = node["teacherId"];
-            JSONArray contextNodes = node["contexts"] as JSONArray;
-            List<Context> contexts = new List<Context>();
-            foreach (JSONNode contextNode in contextNodes)
-            {
-                Context con = ContextModel.parseContext(contextNode);
-                if (con != null)
-                {
-                    contexts.Add(con);
-                }
-            }
-            return course;
+            List<Course> courses = JsonConvert.DeserializeObject<List<Course>>(json);
+            return courses;
         }
         catch (Exception e)
         {
-            Debug.Log(e);
-            return null;
+            Debug.Log(e.Message);
         }
+        return null;
+    }
 
+
+    public Course parseCourse(string json)
+    {
+        try
+        {
+            Course courses = JsonConvert.DeserializeObject<Course>(json);
+            return courses;
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+        }
+        return null;
     }
 
     public void loadCourse(int courseId, Action<Course> callBack)
@@ -68,7 +98,7 @@ public class CourseModel : MonoBehaviour
         }));
     }
 
-    public void loadOwnCourse(Action<List<Course>> callBack)
+    public void loadOwnCourse(int length, int offset, Action<List<Course>> callBack)
     {
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.LOAD_OWN_COURSE);
         string uri = reqBuilder.build();
@@ -76,20 +106,8 @@ public class CourseModel : MonoBehaviour
         {
             if (data.error >= 0)
             {
-                List<Course> courses = new List<Course>();
-                JSONArray nodes = data.result as JSONArray;
-                foreach (JSONNode node in nodes)
-                {
-                    Course course = parseCourse(data.result);
-                    if (course != null)
-                    {
-                        courses.Add(course);
-                    }
-                }
-                if (courses.Count != 0)
-                    callBack(courses);
-                else
-                    callBack(null);
+                List<Course> courses = parseListCourse(data.result);
+                callBack(courses);
             }
             else
             {
@@ -99,7 +117,7 @@ public class CourseModel : MonoBehaviour
         }));
     }
 
-    public void loadAccessCourse(Action<List<Course>> callBack)
+    public void loadAccessCourse(int length, int offset, Action<List<Course>> callBack)
     {
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.LOAD_ALL_ACCESS_COURSE);
         string uri = reqBuilder.build();
@@ -107,20 +125,8 @@ public class CourseModel : MonoBehaviour
         {
             if (data.error >= 0)
             {
-                List<Course> courses = new List<Course>();
-                JSONArray nodes = data.result as JSONArray;
-                foreach (JSONNode node in nodes)
-                {
-                    Course course = parseCourse(data.result);
-                    if (course != null)
-                    {
-                        courses.Add(course);
-                    }
-                }
-                if (courses.Count != 0)
-                    callBack(courses);
-                else
-                    callBack(null);
+                List<Course> courses = parseListCourse(data.result);
+                callBack(courses);
             }
             else
             {
@@ -138,16 +144,8 @@ public class CourseModel : MonoBehaviour
         {
             if (data.error >= 0)
             {
-                JSONArray nodes = data.result as JSONArray;
-                Course course = parseCourse(data.result);
-                if (course != null)
-                {
-                    callBack(course);
-                }
-                else
-                {
-                    callBack(null);
-                }
+                Course courses = parseCourse(data.result);
+                callBack(courses);
             }
             else
             {
@@ -166,14 +164,14 @@ public class CourseModel : MonoBehaviour
             .AddParam("status", course.Status)
             .AddParam("discription", course.Status)
             .AddParam("contexts", course.Contexts)
+            .AddParam("avatarId", course.AvatarId)
             .build();
         StartCoroutine(APIRequest.Instance.doGet(uri, (data) =>
         {
             if (data.error >= 0)
             {
-                JSONArray nodes = data.result as JSONArray;
-                Course newCourse = parseCourse(data.result);
-                callBack(newCourse);
+                Course courses = parseCourse(data.result);
+                callBack(courses);
             }
             else
             {
@@ -197,9 +195,8 @@ public class CourseModel : MonoBehaviour
         {
             if (data.error >= 0)
             {
-                JSONArray nodes = data.result as JSONArray;
-                Course newCourse = parseCourse(data.result);
-                callBack(newCourse);
+                Course courses = parseCourse(data.result);
+                callBack(courses);
             }
             else
             {
@@ -218,9 +215,8 @@ public class CourseModel : MonoBehaviour
         {
             if (data.error >= 0)
             {
-                JSONArray nodes = data.result as JSONArray;
-                Course newCourse = parseCourse(data.result);
-                callBack(newCourse);
+                Course courses = parseCourse(data.result);
+                callBack(courses);
             }
             else
             {

@@ -34,8 +34,8 @@ public class APIRequest
         using (var request = new UnityWebRequest(url, "POST"))
         {
             request.SetRequestHeader("Authorization", AccountInfo.Instance.Session);
-            byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJson);
-            request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+            //byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJson);
+            //request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
 
@@ -44,6 +44,8 @@ public class APIRequest
             {
                 yield return null;
             }
+            Debug.Log(request.responseCode);
+            Debug.Log(request.downloadHandler.text);
             if (request.responseCode == 200)
             {
                 string reponseJson = request.downloadHandler.text;

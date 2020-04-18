@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class API 
 {
-    public static string DOMAIN = "http://localhost:8080/";
+    public static string DOMAIN = "https://hcmus-server.appspot.com/";
 
-    public static string USER_LOGIN;
-    public static string USER_LOGOUT;
-    public static string USER_SINGUP;
-    public static string USER_AUTHENTICATION;
-    public static string USER_UPDATE_PROFILE;
-    public static string USER_UPDATE_IMAGE_PROFILE;
+    public static string USER_LOGIN = DOMAIN + "login";
+    public static string USER_LOGOUT = DOMAIN + "logout";
+    public static string USER_SINGUP = DOMAIN + "register";
+    public static string USER_AUTHENTICATION = DOMAIN + "authenVerifyCode";
+    public static string USER_AUTHENTICATION_RESEND = DOMAIN + "register/resendVerifyCode";
+    public static string USER_UPDATE_PROFILE = DOMAIN + "profile";
+    public static string USER_UPDATE_IMAGE_PROFILE = DOMAIN + "profile/image";
     public static string USER_LOAD_PROFILE_IMAGE;
 
 
