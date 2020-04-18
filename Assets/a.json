@@ -1,0 +1,45 @@
+{
+  "nPhrase": 2,
+  "Phrase": [
+    {
+      "nObject": 2,
+      "Objects": [
+        {
+          "id": 0,
+          "name": "Cube",
+          "position": [
+            0,
+            0,
+            2.86
+          ],
+          "components": []
+        },
+        {
+          "id": 0,
+          "name": "Quad",
+          "position": [
+            0,
+            0,
+            2.01
+          ],
+          "components": []
+        }
+      ]
+    },
+	{
+      "nObject": 1,
+      "Objects": [
+        {
+          "id": 0,
+          "name": "Cube",
+          "position": [
+            0,
+            0,
+            2.86
+          ],
+          "components": []
+        }
+      ]
+    }
+  ]
+}
