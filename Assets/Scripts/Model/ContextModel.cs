@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SimpleJSON;
+using Newtonsoft.Json;
 
 public class ContextModel : MonoBehaviour
 {
@@ -20,26 +21,40 @@ public class ContextModel : MonoBehaviour
         }
     }
 
-    public static Context parseContext(JSONNode node)
+    //public static Context parseContext(JSONNode node)
+    //{
+    //    try
+    //    {
+    //        Context context = new Context();
+    //        context.Id = node["id"];
+    //        context.Name = node["name"];
+    //        context.TeacherId = node["teacherId"];
+    //        context.Description = node["description"];
+    //        context.Content = node["content"];
+
+    //        return context;
+    //    }catch(Exception e)
+    //    {
+    //        Debug.Log(e);
+    //    }
+    //    return null;
+    //}
+
+    public static Context parseContext(string json)
     {
         try
         {
-            Context context = new Context();
-            context.Id = node["id"];
-            context.Name = node["name"];
-            context.TeacherId = node["teacherId"];
-            context.Description = node["description"];
-            context.Content = node["content"];
-
+            Context context = JsonConvert.DeserializeObject<Context>(json);
             return context;
-        }catch(Exception e)
+        }
+        catch (Exception e)
         {
             Debug.Log(e);
         }
         return null;
     }
 
-    public void loadContext(int contextId, Action<JSONNode> callBack)
+    public void loadContext(int contextId, Action<string> callBack)
     {
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.LOAD_CONTEXT);
         string uri = reqBuilder.AddParam("contextId", contextId).build();
@@ -57,7 +72,7 @@ public class ContextModel : MonoBehaviour
         }));
     }
 
-    public void loadOwnContext(Action<JSONNode> callBack)
+    public void loadOwnContext(Action<string> callBack)
     {
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.LOAD_OWN_CONTEXT);
         string uri = reqBuilder.build();
@@ -75,7 +90,7 @@ public class ContextModel : MonoBehaviour
         }));
     }
 
-    public void loadCourseContext(int courseId, Action<JSONNode> callBack)
+    public void loadCourseContext(int courseId, Action<string> callBack)
     {
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.LOAD_COURSE_CONTEXT);
         string uri = reqBuilder.AddParam("courseId", courseId).build();
@@ -93,7 +108,7 @@ public class ContextModel : MonoBehaviour
         }));
     }
 
-    public void createContext(Context context, Action<JSONNode> callBack)
+    public void createContext(Context context, Action<string> callBack)
     {
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.LOAD_COURSE_CONTEXT);
         string uri = reqBuilder.AddParam("teacherId", context.TeacherId)
@@ -115,7 +130,7 @@ public class ContextModel : MonoBehaviour
         }));
     }
 
-    public void updateContext(Context context, Action<JSONNode> callBack)
+    public void updateContext(Context context, Action<Context> callBack)
     {
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.LOAD_COURSE_CONTEXT);
         string uri = reqBuilder.AddParam("id", context.Id)
@@ -128,7 +143,8 @@ public class ContextModel : MonoBehaviour
         {
             if (data.error >= 0)
             {
-                callBack(data.result);
+                Context updatedContext = parseContext(data.result);
+                callBack(updatedContext);
             }
             else
             {
@@ -138,7 +154,7 @@ public class ContextModel : MonoBehaviour
         }));
     }
 
-    public void deleteContext(int contextId, Action<JSONNode> callBack)
+    public void deleteContext(int contextId, Action<bool> callBack)
     {
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.LOAD_COURSE_CONTEXT);
         string uri = reqBuilder.AddParam("contextId", contextId)
@@ -147,12 +163,12 @@ public class ContextModel : MonoBehaviour
         {
             if (data.error >= 0)
             {
-                callBack(data.result);
+                callBack(true);
             }
             else
             {
                 Debug.Log(data.error + ": " + data.message);
-                callBack(null);
+                callBack(false);
             }
         }));
     }

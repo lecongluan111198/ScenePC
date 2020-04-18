@@ -9,7 +9,7 @@ public class APIResponse
 {
     public int error { get; set; }
     public string message { get; set; }
-    public JSONNode result { get; set; }
+    public string result { get; set; }
     private Dictionary<string, object> response = new Dictionary<string, object>();
 
     public static APIResponse textToReponse(string responseJson)
