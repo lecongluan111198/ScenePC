@@ -122,20 +122,19 @@ public class JsonUtils : MonoBehaviour
         return quaternion;
     }
     //read data 
-    public void readPhrase(RootObject rootObject, List<Phrase> listPhrase)
+    public void readPhrase(List<Phrase> listPhrase)
     {
-        listPhrase = rootObject.Phrase;
         foreach (Phrase phrase in listPhrase)
         {
             List<Object> listObject = new List<Object>();
-            readObject(phrase, listObject);
+            listObject = phrase.Objects;
+            readObject(listObject);
         }
     }
-    public void readObject(Phrase phrase, List<Object> listObject)
+    public void readObject(List<Object> listObject)
     {
         GameObject parent = new GameObject();
-        parent.name="listObject";
-        listObject = phrase.Objects;
+        parent.name="ListObject";
         foreach (Object obj in listObject)
         {
             loadGameObject(obj, parent);
@@ -161,7 +160,8 @@ public class JsonUtils : MonoBehaviour
         Debug.Log(jsonDataRoot);
         RootObject rootObject = JsonConvert.DeserializeObject<RootObject>(jsonDataRoot);
         List<Phrase> listPhrase = new List<Phrase>();
-        readPhrase(rootObject, listPhrase);
+        listPhrase = rootObject.Phrase;
+        readPhrase(listPhrase);
     }
     void Update()
     {
