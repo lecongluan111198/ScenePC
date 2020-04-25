@@ -10,7 +10,7 @@ public class AccountInfo
     private string username;
     private string email;
     private string role;
-    private string session = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNTg2MTYyNzIwLCJpYXQiOjE1ODM1NzA3MjB9.cCb-jUHdLVlCtDzCAx1vGlimeHTSV52OIN3vSdT0SPZCdCoj4dmZOT2BjuVyRBrc_eqQgkHwzBN4tqgDe8ehIg";
+    private string session = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNTkwMjA4MTEwLCJpYXQiOjE1ODc2MTYxMTB9.1mNWOl9rAg4-8whfwUnzToAjNggPQp3v5UIIlNEnjrwr32IiLkQCAvbKcGEvWbPekxSAlscGagnREGdqjgSi2A";
     private byte[] image;
 
 

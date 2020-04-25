@@ -15,7 +15,8 @@ public class ContextModel : MonoBehaviour
         {
             if (_instance == null)
             {
-                _instance = new ContextModel();
+                go = new GameObject();
+                _instance = go.AddComponent<ContextModel>();
             }
             return _instance;
         }
@@ -54,6 +55,20 @@ public class ContextModel : MonoBehaviour
         return null;
     }
 
+    private List<Context> parseListContext(string json)
+    {
+        try
+        {
+            List<Context> courses = JsonConvert.DeserializeObject<List<Context>>(json);
+            return courses;
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+        }
+        return null;
+    }
+
     public void loadContext(int contextId, Action<string> callBack)
     {
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.LOAD_CONTEXT);
@@ -72,7 +87,7 @@ public class ContextModel : MonoBehaviour
         }));
     }
 
-    public void loadOwnContext(Action<string> callBack)
+    public void loadOwnContext(int length, int offset, Action<List<Context>> callBack)
     {
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.LOAD_OWN_CONTEXT);
         string uri = reqBuilder.build();
@@ -80,7 +95,8 @@ public class ContextModel : MonoBehaviour
         {
             if (data.error >= 0)
             {
-                callBack(data.result);
+                List<Context> contexts = JsonConvert.DeserializeObject<List<Context>>(data.result);
+                callBack(contexts);
             }
             else
             {
@@ -108,7 +124,7 @@ public class ContextModel : MonoBehaviour
         }));
     }
 
-    public void createContext(Context context, Action<string> callBack)
+    public void createContext(Context context, Action<Context> callBack)
     {
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.LOAD_COURSE_CONTEXT);
         string uri = reqBuilder.AddParam("teacherId", context.TeacherId)
@@ -120,7 +136,7 @@ public class ContextModel : MonoBehaviour
         {
             if (data.error >= 0)
             {
-                callBack(data.result);
+                callBack(parseContext(data.result));
             }
             else
             {

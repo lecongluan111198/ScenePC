@@ -15,7 +15,8 @@ public class CourseModel : MonoBehaviour
         {
             if (_instance == null)
             {
-                _instance = new CourseModel();
+                go = new GameObject();
+                _instance = go.AddComponent<CourseModel>();
             }
             return _instance;
         }
@@ -101,7 +102,10 @@ public class CourseModel : MonoBehaviour
     public void loadOwnCourse(int length, int offset, Action<List<Course>> callBack)
     {
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.LOAD_OWN_COURSE);
-        string uri = reqBuilder.build();
+        string uri = reqBuilder
+            .AddParam("length", length)
+            .AddParam("offset", offset)
+            .build();
         StartCoroutine(APIRequest.Instance.doGet(uri, (data) =>
         {
             if (data.error >= 0)
@@ -120,7 +124,10 @@ public class CourseModel : MonoBehaviour
     public void loadAccessCourse(int length, int offset, Action<List<Course>> callBack)
     {
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.LOAD_ALL_ACCESS_COURSE);
-        string uri = reqBuilder.build();
+        string uri = reqBuilder
+            .AddParam("length", length)
+            .AddParam("offset", offset)
+            .build();
         StartCoroutine(APIRequest.Instance.doGet(uri, (data) =>
         {
             if (data.error >= 0)

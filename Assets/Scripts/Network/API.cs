@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class API 
 {
-    public static string DOMAIN = "https://hcmus-server.appspot.com/";
+    //public static string DOMAIN = "https://hcmus-server.appspot.com/";
+    public static string DOMAIN = "http://localhost:8080/";
 
     public static string USER_LOGIN = DOMAIN + "login";
     public static string USER_LOGOUT = DOMAIN + "logout";
@@ -23,13 +24,14 @@ public class API
     public static string UPDATE_CONTEXT = DOMAIN + "context/update";
     public static string DELETE_CONTEXT = DOMAIN + "context/delete";
 
-    public static string CREATE_COURSE = DOMAIN + "context/create";
-    public static string LOAD_COURSE = DOMAIN + "context";
-    public static string LOAD_OWN_COURSE = DOMAIN + "context/own";
-    public static string LOAD_ALL_ACCESS_COURSE = DOMAIN + "context/access/all";
-    public static string LOAD_ACCESS_COURSE = DOMAIN + "context/access";
-    public static string UPDATE_COURSE = DOMAIN + "context/update";
-    public static string DELETE_COURSE = DOMAIN + "context/delete";
+    public static string CREATE_COURSE = DOMAIN + "course/create";
+    public static string LOAD_COURSE = DOMAIN + "course";
+    public static string LOAD_OWN_COURSE = DOMAIN + "course/own";
+    public static string LOAD_ALL_ACCESS_COURSE = DOMAIN + "course/access/all";
+    public static string LOAD_ACCESS_COURSE = DOMAIN + "course/access";
+    public static string ADD_ACCESS_COURSE = DOMAIN + "/course/access/add";
+    public static string UPDATE_COURSE = DOMAIN + "course/update";
+    public static string DELETE_COURSE = DOMAIN + "course/delete";
 
     public static string DOWNLOAD_FILE = DOMAIN + "model/";
     public static string UPLOAD_FILE = DOMAIN + "model/upload";

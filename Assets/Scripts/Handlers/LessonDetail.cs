@@ -1,0 +1,60 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class LessonDetail : MonoBehaviour
+{
+    [Header("INFORMATION")]
+    public TMP_Text title;
+    public TMP_Text description;
+    public TMP_Text author;
+    public TMP_Text createTime;
+    public Image background;
+
+    private Context context;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    public void LoadData(Context context)
+    {
+        this.context = context;
+
+        title.SetText(context.Name);
+        description.SetText(context.Description);
+        author.SetText("Unknown");
+        TimeSpan time = TimeSpan.FromMilliseconds(context.CreateTime);
+        DateTime dt = new DateTime(1970, 1, 1) + time;
+        createTime.SetText(dt.ToShortDateString());
+        string pathImage = ResourceManager.LESSON_AVATARS[context.AvatarId];
+        background.sprite = Resources.Load<Sprite>(pathImage);
+
+    }
+
+    public void PlayContext()
+    {
+
+    }
+
+    public void EditLesson()
+    {
+
+    }
+
+    public void DeleteLesson()
+    {
+
+    }
+}

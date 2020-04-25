@@ -15,12 +15,13 @@ public class APIResponse
     public static APIResponse textToReponse(string responseJson)
     {
         var jsonDB = JSON.Parse(responseJson);
+        Dictionary<string, object> mapData = JsonConvert.DeserializeObject<Dictionary<string, object>>(responseJson);
         return new APIResponse
         {
-            response = JsonConvert.DeserializeObject<Dictionary<string, object>>(responseJson),
+            response = mapData,
             error = jsonDB["error"].AsInt,
             message = jsonDB["message"],
-            result = jsonDB["result"]
+            result = Convert.ToString(mapData["result"])
         };
     }
 

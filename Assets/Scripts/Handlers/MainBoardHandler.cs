@@ -1,9 +1,17 @@
-﻿using System.Collections;
+﻿using Michsky.UI.Frost;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MainBoardHandler : MonoBehaviour
 {
+    [Header("Panel")]
+    public GameObject CourseDetail;
+    public GameObject LessonDetail;
+
+    [Header("TOP PANNEL")]
+    public TopPanelManager topManager;
+
     [Header("RESOURCES")]
     public GameObject mainPanels;
     public Animator backgroundAnimator;
@@ -23,5 +31,17 @@ public class MainBoardHandler : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void LoadCourseDetail(Course course)
+    {
+        CourseDetail.GetComponent<CourseDetail>().LoadData(course);
+        topManager.ExtraPanelAnim(0);
+    }
+
+    public void LoadLessonDetail(Context context)
+    {
+        LessonDetail.GetComponent<LessonDetail>().LoadData(context);
+        topManager.ExtraPanelAnim(1);
     }
 }
