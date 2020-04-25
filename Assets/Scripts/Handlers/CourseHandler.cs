@@ -36,15 +36,15 @@ public class CourseHandler : MonoBehaviour
 
     public void LoadCourse()
     {
-        int currentPanel = topManager.currentPanelIndex;
-        if (currentPanel == 0)
-        {
-            LoadOwnCourse();
-        }
-        else if (currentPanel == 1)
-        {
-            LoadAccessCourse();
-        }
+        //int currentPanel = topManager.currentPanelIndex;
+        //if (currentPanel == 0)
+        //{
+        //    LoadOwnCourse();
+        //}
+        //else if (currentPanel == 1)
+        //{
+        //    LoadAccessCourse();
+        //}
     }
 
     private void LoadOwnCourse()

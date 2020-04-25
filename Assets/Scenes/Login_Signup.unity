@@ -2890,6 +2890,7 @@ MonoBehaviour:
   panels:
   - {fileID: 591163339}
   - {fileID: 1075896110}
+  extraPanels: []
   buttons:
   - {fileID: 147721443}
   - {fileID: 1519715289}
@@ -5459,6 +5460,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  extraPanels: []
   buttons:
   - {fileID: 0}
   - {fileID: 0}

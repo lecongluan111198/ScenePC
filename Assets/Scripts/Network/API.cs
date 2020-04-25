@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class API 
 {
-    //public static string DOMAIN = "https://hcmus-server.appspot.com/";
-    public static string DOMAIN = "http://localhost:8080/";
+    public static string DOMAIN = "https://hcmus-server.appspot.com/";
+    //public static string DOMAIN = "http://localhost:8080/";
 
     public static string USER_LOGIN = DOMAIN + "login";
     public static string USER_LOGOUT = DOMAIN + "logout";

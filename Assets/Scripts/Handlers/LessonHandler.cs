@@ -15,19 +15,18 @@ public class LessonHandler : MonoBehaviour
 
     public void LoadLesson()
     {
-        ContextModel.Instance.loadOwnContext(length, 0, (data) =>
-        {
-            if (data != null)
-            {
-                foreach (Context context in data)
-                {
-                    GameObject item = Instantiate(contextItem, list.transform, false);
-                    item.GetComponent<ContextItem>().LoadData(context);
-                    item.transform.SetParent(list.transform);
-                    contexts.Add(item);
-                }
-            }
-        });
+        //ContextModel.Instance.loadOwnContext(length, 0, (data) =>
+        //{
+        //    if (data != null)
+        //    {
+        //        foreach (Context context in data)
+        //        {
+        //            GameObject item = Instantiate(contextItem, list.transform, false);
+        //            item.GetComponent<ContextItem>().LoadData(context);
+        //            item.transform.SetParent(list.transform);
+        //            contexts.Add(item);
+        //        }
+        //    }
+        //});
     }
-
 }

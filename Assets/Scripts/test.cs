@@ -19,9 +19,12 @@ public class test : MonoBehaviour
         //{
         //    Debug.Log(course.Name);
         //}
-        TimeSpan time = TimeSpan.FromMilliseconds(1587740328899);
-        DateTime dt = new DateTime(1970, 1, 1) + time;
-        Debug.Log(dt.ToShortDateString());
+        Dictionary<string, object> dic = new Dictionary<string, object>();
+        object d;
+        bool isOk = dic.TryGetValue("aa", out d);
+        Debug.Log(isOk);
+        Debug.Log(d);
+        Debug.Log(Convert.ToString(d));
     }
 
     // Update is called once per frame

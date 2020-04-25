@@ -16,12 +16,14 @@ public class APIResponse
     {
         var jsonDB = JSON.Parse(responseJson);
         Dictionary<string, object> mapData = JsonConvert.DeserializeObject<Dictionary<string, object>>(responseJson);
+        object resultObj;
+        mapData.TryGetValue("result", out resultObj);
         return new APIResponse
         {
             response = mapData,
             error = jsonDB["error"].AsInt,
             message = jsonDB["message"],
-            result = Convert.ToString(mapData["result"])
+            result = Convert.ToString(resultObj)
         };
     }
 
