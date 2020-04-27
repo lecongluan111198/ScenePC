@@ -1,0 +1,106 @@
+﻿using Photon.Pun;
+using Photon.Realtime;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
+{
+    //Room info
+    public static PhotonRoom room;
+    private PhotonView PV;
+
+    //public bool isGameLoaded;
+    public int currentScene;
+    public int multiplayerScene;
+
+    //Player info
+    //Player[] photonPlayers;
+    //public int playersInRoom;
+    //public int myNumberInRoom;
+
+    //public int playerInGame;
+
+
+    private void Awake()
+    {
+        if(room == null)
+        {
+            room = this;
+        }
+        else
+        {
+            if(room != this)
+            {
+                Destroy(room.gameObject);
+                room = this;
+            }
+        }
+
+        DontDestroyOnLoad(this.gameObject);
+        PV = GetComponent<PhotonView>();
+    }
+
+
+    public override void OnEnable()
+    {
+        Debug.Log("Photon room enable");
+        base.OnEnable();
+        PhotonNetwork.AddCallbackTarget(this);
+        SceneManager.sceneLoaded += OnSceneFinishedLoading;
+    }
+
+    public override void OnDisable()
+    {
+        Debug.Log("Photon room disable");
+        base.OnDisable();
+        PhotonNetwork.RemoveCallbackTarget(this);
+        SceneManager.sceneLoaded -= OnSceneFinishedLoading;
+    }
+
+    public override void OnJoinedRoom()
+    {
+        base.OnJoinedRoom();
+        Debug.Log("Has joined room");
+        //photonPlayers = PhotonNetwork.PlayerList;
+        //playersInRoom = photonPlayers.Length;
+        //myNumberInRoom = playersInRoom;
+        //PhotonNetwork.NickName = myNumberInRoom.ToString();
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            return;
+        }
+        StartGame();
+    }
+
+    private void StartGame()
+    {
+        Debug.Log("Loading level");
+        PhotonNetwork.LoadLevel(multiplayerScene);
+    }
+
+    private void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        //call when multiplayer scene is loaded
+        currentScene = scene.buildIndex;
+        if(currentScene == multiplayerScene)
+        {
+            CreatePlayer();
+        }
+    }
+
+    private void CreatePlayer()
+    {
+        //creates players network controller but not player character
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PhotonPlayer"), transform.position, Quaternion.identity, 0);
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
+        Debug.Log(otherPlayer.NickName + " has left the game");
+    }
+}
