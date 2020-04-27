@@ -1371,11 +1371,6 @@ PrefabInstance:
       propertyPath: m_CullingMode
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 95849645372582810, guid: 798587d4c4cd9e745ab193bc2bc3696a,
-        type: 3}
-      propertyPath: m_CullingMode
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 114297160241734288, guid: 798587d4c4cd9e745ab193bc2bc3696a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1390,6 +1385,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 95849645372582810, guid: 798587d4c4cd9e745ab193bc2bc3696a,
+        type: 3}
+      propertyPath: m_CullingMode
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 798587d4c4cd9e745ab193bc2bc3696a, type: 3}
@@ -2890,6 +2890,7 @@ MonoBehaviour:
   panels:
   - {fileID: 591163339}
   - {fileID: 1075896110}
+  extraPanels: []
   buttons:
   - {fileID: 147721443}
   - {fileID: 1519715289}
@@ -3727,11 +3728,6 @@ PrefabInstance:
       propertyPath: m_CullingMode
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 95849645372582810, guid: 798587d4c4cd9e745ab193bc2bc3696a,
-        type: 3}
-      propertyPath: m_CullingMode
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 114297160241734288, guid: 798587d4c4cd9e745ab193bc2bc3696a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -3746,6 +3742,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 95849645372582810, guid: 798587d4c4cd9e745ab193bc2bc3696a,
+        type: 3}
+      propertyPath: m_CullingMode
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 798587d4c4cd9e745ab193bc2bc3696a, type: 3}
@@ -5459,6 +5460,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  extraPanels: []
   buttons:
   - {fileID: 0}
   - {fileID: 0}
