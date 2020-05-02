@@ -2005,6 +2005,16 @@ PrefabInstance:
       propertyPath: _offset
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 114423589803851248, guid: eabd3a7ad1bede746b82407c5090927a,
+        type: 3}
+      propertyPath: m_ChildScaleWidth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114423589803851248, guid: eabd3a7ad1bede746b82407c5090927a,
+        type: 3}
+      propertyPath: m_ChildScaleHeight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114217951079694988, guid: eabd3a7ad1bede746b82407c5090927a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -2050,6 +2060,11 @@ PrefabInstance:
       propertyPath: m_HorizontalFit
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114830141463999106, guid: eabd3a7ad1bede746b82407c5090927a,
+        type: 3}
+      propertyPath: _offset
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 95363968109065884, guid: eabd3a7ad1bede746b82407c5090927a,
         type: 3}
       propertyPath: m_CullingMode
@@ -2059,11 +2074,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CullingMode
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114830141463999106, guid: eabd3a7ad1bede746b82407c5090927a,
-        type: 3}
-      propertyPath: _offset
-      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eabd3a7ad1bede746b82407c5090927a, type: 3}
@@ -2279,21 +2289,6 @@ PrefabInstance:
       propertyPath: m_HorizontalFit
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 95363968109065884, guid: eabd3a7ad1bede746b82407c5090927a,
-        type: 3}
-      propertyPath: m_CullingMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 95792731512715764, guid: eabd3a7ad1bede746b82407c5090927a,
-        type: 3}
-      propertyPath: m_CullingMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 95792731512715764, guid: eabd3a7ad1bede746b82407c5090927a,
-        type: 3}
-      propertyPath: m_UpdateMode
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 114830141463999106, guid: eabd3a7ad1bede746b82407c5090927a,
         type: 3}
       propertyPath: _effectGradient.key0.r
@@ -2317,6 +2312,21 @@ PrefabInstance:
     - target: {fileID: 114830141463999106, guid: eabd3a7ad1bede746b82407c5090927a,
         type: 3}
       propertyPath: _blendMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 95363968109065884, guid: eabd3a7ad1bede746b82407c5090927a,
+        type: 3}
+      propertyPath: m_CullingMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 95792731512715764, guid: eabd3a7ad1bede746b82407c5090927a,
+        type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95792731512715764, guid: eabd3a7ad1bede746b82407c5090927a,
+        type: 3}
+      propertyPath: m_UpdateMode
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
