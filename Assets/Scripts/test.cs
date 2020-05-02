@@ -19,17 +19,13 @@ public class test : MonoBehaviour
         //{
         //    Debug.Log(course.Name);
         //}
-        Dictionary<string, object> dic = new Dictionary<string, object>();
-        object d;
-        bool isOk = dic.TryGetValue("aa", out d);
-        Debug.Log(isOk);
-        Debug.Log(d);
-        Debug.Log(Convert.ToString(d));
+
+        Debug.Log(Application.dataPath);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

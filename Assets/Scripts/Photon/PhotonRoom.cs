@@ -14,8 +14,9 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     private PhotonView PV;
 
     //public bool isGameLoaded;
-    public int currentScene;
-    public int multiplayerScene;
+    public string currentScene;
+    public string waitingRoomScene;
+    public string playRoomScene;
 
     //Player info
     //Player[] photonPlayers;
@@ -73,20 +74,26 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         {
             return;
         }
-        StartGame();
+        LoadWaitingRoomScene();
     }
 
-    private void StartGame()
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
+        Debug.Log(otherPlayer.NickName + " has left the game");
+    }
+
+    private void LoadWaitingRoomScene()
     {
         Debug.Log("Loading level");
-        PhotonNetwork.LoadLevel(multiplayerScene);
+        PhotonNetwork.LoadLevel(waitingRoomScene);
     }
 
     private void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         //call when multiplayer scene is loaded
-        currentScene = scene.buildIndex;
-        if(currentScene == multiplayerScene)
+        currentScene = scene.name;
+        if(currentScene == waitingRoomScene)
         {
             CreatePlayer();
         }
@@ -95,12 +102,17 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     private void CreatePlayer()
     {
         //creates players network controller but not player character
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PhotonPlayer"), transform.position, Quaternion.identity, 0);
+        Debug.Log("Create player");
+        PhotonNetwork.Instantiate("PhotonPlayer", new Vector3(1.13f, 1.22f, -7.6f), Quaternion.identity, 0);
     }
 
-    public override void OnPlayerLeftRoom(Player otherPlayer)
+    public void StartGame()
     {
-        base.OnPlayerLeftRoom(otherPlayer);
-        Debug.Log(otherPlayer.NickName + " has left the game");
+        if (PhotonNetwork.IsMasterClient)
+        {
+            //load play scene
+            PhotonNetwork.LoadLevel(playRoomScene);
+        }
     }
+
 }
