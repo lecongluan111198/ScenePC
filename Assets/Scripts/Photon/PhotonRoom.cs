@@ -103,7 +103,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     {
         //creates players network controller but not player character
         Debug.Log("Create player");
-        PhotonNetwork.Instantiate("PhotonPlayer", new Vector3(1.13f, 1.22f, -7.6f), Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("ThirdPersonController", new Vector3(1.13f, 1.22f, -7.6f), Quaternion.identity, 0);
     }
 
     public void StartGame()
