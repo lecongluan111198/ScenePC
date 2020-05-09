@@ -8,36 +8,34 @@ using UnityEngine;
 public class PhotonLobby : MonoBehaviourPunCallbacks, IInRoomCallbacks
 {
     public static PhotonLobby instance;
+    private Queue<Action<bool>> queue = new Queue<Action<bool>>();
     private Action<bool> currentCallBack;
-
-    //public GameObject battleButton; //click to start joining room
-    //public GameObject cancelButton;
 
     private string createdRoomName;
 
 
     private void Awake()
     {
-        //instance = this;
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            if (instance != this)
-            {
-                Destroy(instance.gameObject);
-                instance = this;
-            }
-        }
-        DontDestroyOnLoad(this.gameObject);
+        instance = this;
+        //if (instance == null)
+        //{
+        //    instance = this;
+        //}
+        //else
+        //{
+        //    if (instance != this)
+        //    {
+        //        Destroy(instance.gameObject);
+        //        instance = this;
+        //    }
+        //}
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-       
+
     }
 
     //this callback will be called whether connection to server is successfull
@@ -46,8 +44,11 @@ public class PhotonLobby : MonoBehaviourPunCallbacks, IInRoomCallbacks
         base.OnConnectedToMaster();
         Debug.Log("Player has connected to the Photon master server.");
         PhotonNetwork.AutomaticallySyncScene = true;
-        //battleButton.SetActive(true);
-        currentCallBack(true);
+        if (queue.Count > 0)
+        {
+            Action<bool> callback = queue.Dequeue();
+            callback(true);
+        }
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -78,10 +79,18 @@ public class PhotonLobby : MonoBehaviourPunCallbacks, IInRoomCallbacks
         }
     }
 
-    public void ConnectToServer(Action<bool> callback)
+    public void Connect(Action<bool> callback)
     {
-        PhotonNetwork.ConnectUsingSettings(); //Connects to Master photon server (reading configuration file "PhotonServerSetting")
-        currentCallBack = callback;
+        Debug.Log(PhotonNetwork.IsConnected);
+        if (!PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.ConnectUsingSettings(); //Connects to Master photon server (reading configuration file "PhotonServerSetting")
+            queue.Enqueue(callback);
+        }
+        else
+        {
+            callback(true);
+        }
     }
 
     public void CreateRoom()
@@ -95,18 +104,14 @@ public class PhotonLobby : MonoBehaviourPunCallbacks, IInRoomCallbacks
             MaxPlayers = 10
         };
         PhotonNetwork.CreateRoom(roomName, roomOps);
-        Debug.Log("Room" + roomName);
+        Debug.Log("Room: " + roomName);
         createdRoomName = roomName;
+        PhotonRoom.instance.RoomName = roomName;
     }
 
-    public void OnBattleButtonClicked()
+    public void JoinRoom(string roomName)
     {
-        PhotonNetwork.JoinRoom(PhotonRoomUtils.GetRoomName());
-    }
-
-    public void OnCancelButtonClicked()
-    {
-        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.JoinRoom(roomName);
     }
 
 }

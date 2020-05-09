@@ -44,4 +44,10 @@ public class MainBoardHandler : MonoBehaviour
         LessonDetail.GetComponent<LessonDetail>().LoadData(context);
         topManager.ExtraPanelAnim(1);
     }
+
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }

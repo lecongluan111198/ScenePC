@@ -10,13 +10,17 @@ using UnityEngine.SceneManagement;
 public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 {
     //Room info
-    public static PhotonRoom room;
+    public static PhotonRoom instance;
     private PhotonView PV;
 
     //public bool isGameLoaded;
     public string currentScene;
     public string waitingRoomScene;
     public string playRoomScene;
+
+    private string roomName;
+
+    public string RoomName { get => roomName; set => roomName = value; }
 
     //Player info
     //Player[] photonPlayers;
@@ -28,16 +32,16 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     private void Awake()
     {
-        if(room == null)
+        if(instance == null)
         {
-            room = this;
+            instance = this;
         }
         else
         {
-            if(room != this)
+            if(instance != this)
             {
-                Destroy(room.gameObject);
-                room = this;
+                Destroy(instance.gameObject);
+                instance = this;
             }
         }
 
@@ -113,6 +117,21 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
             //load play scene
             PhotonNetwork.LoadLevel(playRoomScene);
         }
+    }
+
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
+    public override void OnLeftRoom()
+    {
+        base.OnLeftRoom();
+        //if (PV.IsMine)
+        //{
+        //    Destroy(PhotonRoom.instance.gameObject);
+        //    SceneManager.LoadScene("MainBoard");
+        //}
     }
 
 }
