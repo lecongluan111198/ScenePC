@@ -10,9 +10,8 @@ public class test : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        KeyValuePair<bool, string> k = new KeyValuePair<bool, string>(false, "Fail");
 
-        Debug.Log(k.Key);
+        Debug.Log(ResourceManager.GetCourseAvatarId("Placeholder 5"));
     }
 
     // Update is called once per frame

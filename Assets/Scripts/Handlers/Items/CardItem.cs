@@ -46,6 +46,12 @@ public class CardItem : MonoBehaviour
         MenuManager.GetComponent<MainBoardHandler>().LoadCourseDetail(course);
     }
 
+    public void EditClick()
+    {
+        Debug.Log("Edit click");
+        MenuManager.GetComponent<MainBoardHandler>().LoadCourseEdit(course);
+    }
+
     public void DeleteClick()
     {
 

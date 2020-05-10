@@ -45,7 +45,7 @@ public class ResourceManager
 
     public static int GetCourseAvatarId(string name)
     {
-        if (COURSE_ID.ContainsKey(name))
+        if (!COURSE_ID.ContainsKey(name))
         {
             return -1;
         }

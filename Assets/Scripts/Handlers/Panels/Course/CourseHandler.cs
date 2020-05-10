@@ -1,6 +1,8 @@
 ﻿using Michsky.UI.Frost;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,23 +20,42 @@ public class CourseHandler : MonoBehaviour
 
     [Header("RESOURCE")]
     public Animator loadingAnim;
+    public ScrollRect scrollRect;
 
     private int length = 12;
+    private int maxOwnOffset = 2;
     private int currentOwnOffset = -1;
     private int currentAccessOffset = -1;
 
     private List<GameObject> ownCourses = new List<GameObject>();
     private List<GameObject> accessCourses = new List<GameObject>();
+    
+    GameObject MenuManager;
+    static readonly object _object = new object();
     // Start is called before the first frame update
     void Start()
     {
-
+        MenuManager = GameObject.Find("Menu Manager");
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    private void OnEnable()
+    {
+        scrollRect.onValueChanged.AddListener(scrollRectCallBack);
+    }
+
+    private void scrollRectCallBack(Vector2 value)
+    {
+        Debug.Log("ScrollRect Changed: " + value);
+        if (value.y <= -0.1f)
+        {
+            LoadOwnCourse();
+        }
     }
 
     public void LoadCourse()
@@ -52,25 +73,45 @@ public class CourseHandler : MonoBehaviour
 
     private void LoadOwnCourse()
     {
-        if (currentOwnOffset < 0)
+        if (Monitor.TryEnter(_object))
         {
-            loadingAnim.Play("Modal Window In");
-            currentOwnOffset = 0;
-            CourseModel.Instance.loadOwnCourse(length, currentOwnOffset, (data) =>
+            bool isUpdate = false;
+            if (currentOwnOffset < 0)
             {
-                if (data != null)
+                loadingAnim.Play("Modal Window In");
+                currentOwnOffset = 0;
+                isUpdate = true;
+            }
+            else if (currentOwnOffset < maxOwnOffset)
+            {
+                currentOwnOffset++;
+                isUpdate = true;
+            }
+
+            if (isUpdate)
+            {
+                Debug.Log(length + " " + currentOwnOffset);
+                CourseModel.Instance.loadOwnCourse(length, currentOwnOffset, (data) =>
                 {
-                    //var group = listOwn.GetComponent<GridLayoutGroup>();
-                    foreach (Course course in data)
+                    if (data != null)
                     {
-                        GameObject item = Instantiate(courseItem, listOwn.transform, false);
-                        item.GetComponent<CardItem>().LoadData(course);
-                        item.transform.SetParent(listOwn.transform);
-                        ownCourses.Add(item);
+                        //var group = listOwn.GetComponent<GridLayoutGroup>();
+                        if (data.Count < length)
+                        {
+                            maxOwnOffset = currentOwnOffset;
+                        }
+                        foreach (Course course in data)
+                        {
+                            GameObject item = Instantiate(courseItem, listOwn.transform, false);
+                            item.GetComponent<CardItem>().LoadData(course);
+                            item.transform.SetParent(listOwn.transform);
+                            ownCourses.Add(item);
+                        }
                     }
-                }
-                loadingAnim.Play("Modal Window Out");
-            });
+                    loadingAnim.Play("Modal Window Out");
+                    Monitor.Exit(_object);
+                });
+            }
         }
     }
 
@@ -100,7 +141,7 @@ public class CourseHandler : MonoBehaviour
 
     public void AllOwnCourse()
     {
-        foreach(GameObject go in ownCourses)
+        foreach (GameObject go in ownCourses)
         {
             go.SetActive(true);
         }
@@ -134,5 +175,10 @@ public class CourseHandler : MonoBehaviour
                 go.SetActive(true);
             }
         }
+    }
+
+    public void CreateCourse()
+    {
+        MenuManager.GetComponent<MainBoardHandler>().LoadCourseCreate();
     }
 }

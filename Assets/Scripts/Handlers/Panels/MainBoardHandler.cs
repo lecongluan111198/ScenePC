@@ -7,7 +7,9 @@ public class MainBoardHandler : MonoBehaviour
 {
     [Header("Panel")]
     public GameObject CourseDetail;
+    public GameObject CourseCreate;
     public GameObject LessonDetail;
+    public GameObject LessonCreate;
 
     [Header("TOP PANNEL")]
     public TopPanelManager topManager;
@@ -44,6 +46,18 @@ public class MainBoardHandler : MonoBehaviour
         LessonDetail.GetComponent<LessonDetail>().LoadData(context);
         topManager.ExtraPanelAnim(1);
     }
+
+    public void LoadCourseCreate()
+    {
+        CourseCreate.GetComponent<CourseCreate>().ClearInformation();
+        topManager.ExtraPanelAnim(2);
+    }
+    public void LoadCourseEdit(Course course)
+    {
+        CourseCreate.GetComponent<CourseCreate>().UpdateInformation(course);
+        topManager.ExtraPanelAnim(2);
+    }
+
 
 
     public void ExitGame()

@@ -6921,36 +6921,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
-        type: 3}
-      propertyPath: m_text
-      value: LOG IN
-      objectReference: {fileID: 0}
-    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 114297160241734288, guid: 37c9f4cd1842f42498f35c5973acef21,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -7009,6 +6979,36 @@ PrefabInstance:
     - target: {fileID: 95426381857987206, guid: 37c9f4cd1842f42498f35c5973acef21,
         type: 3}
       propertyPath: m_CullingMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
+        type: 3}
+      propertyPath: m_text
+      value: LOG IN
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114679383627600594, guid: 37c9f4cd1842f42498f35c5973acef21,
@@ -7148,36 +7148,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
-        type: 3}
-      propertyPath: m_text
-      value: SIGN UP
-      objectReference: {fileID: 0}
-    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 114297160241734288, guid: 37c9f4cd1842f42498f35c5973acef21,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -7216,6 +7186,36 @@ PrefabInstance:
     - target: {fileID: 95426381857987206, guid: 37c9f4cd1842f42498f35c5973acef21,
         type: 3}
       propertyPath: m_CullingMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
+        type: 3}
+      propertyPath: m_text
+      value: SIGN UP
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114868620089633518, guid: 37c9f4cd1842f42498f35c5973acef21,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114679383627600594, guid: 37c9f4cd1842f42498f35c5973acef21,

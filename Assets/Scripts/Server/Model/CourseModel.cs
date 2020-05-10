@@ -169,56 +169,82 @@ public class CourseModel : MonoBehaviour
             .AddParam("teacherId", course.TeacherId)
             .AddParam("name", course.Name)
             .AddParam("status", course.Status)
-            .AddParam("discription", course.Status)
+            .AddParam("description", course.Status)
             .AddParam("contexts", course.Contexts)
+            .AddParam("type", course.Type)
             .AddParam("avatarId", course.AvatarId)
             .build();
-        StartCoroutine(APIRequest.Instance.doGet(uri, (data) =>
+        StartCoroutine(APIRequest.Instance.doPost(uri, "{}", (data) =>
         {
-            if (data.error >= 0)
+            if (data == null)
             {
-                Course newCourse = parseCourse(data.result);
-                if(newCourse != null)
-                {
-                    callBack(new KeyValuePair<bool, string>(true, "Create successfully"));
-                }
-                else
-                {
-                    callBack(new KeyValuePair<bool, string>(false, "Create failly"));
-                }
+                Debug.Log(uri);
+                callBack(new KeyValuePair<bool, string>(false, "Data is empty"));
             }
             else
             {
-                string mess = data.error + ": " + data.message;
-                Debug.Log(mess);
-                callBack(new KeyValuePair<bool, string>(false, data.message));
+                if (data.error >= 0)
+                {
+                    Course newCourse = parseCourse(data.result);
+                    if (newCourse != null)
+                    {
+                        callBack(new KeyValuePair<bool, string>(true, "Create successfully"));
+                    }
+                    else
+                    {
+                        callBack(new KeyValuePair<bool, string>(false, "Create failly"));
+                    }
+                }
+                else
+                {
+                    string mess = data.error + ": " + data.message;
+                    Debug.Log(mess);
+                    callBack(new KeyValuePair<bool, string>(false, data.message));
+                }
             }
         }));
     }
 
-    public void updateCourse(Course course, Action<Course> callBack)
+    public void updateCourse(Course course, Action<KeyValuePair<bool, string>> callBack)
     {
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.UPDATE_COURSE);
         string uri = reqBuilder.AddParam("id", course.Id)
             .AddParam("teacherId", course.TeacherId)
             .AddParam("name", course.Name)
             .AddParam("status", course.Status)
-            .AddParam("discription", course.Status)
+            .AddParam("description", course.Status)
             .AddParam("contexts", course.Contexts)
+            .AddParam("type", course.Type)
+            .AddParam("avatarId", course.AvatarId)
             .build();
-        StartCoroutine(APIRequest.Instance.doGet(uri, (data) =>
-        {
-            if (data.error >= 0)
-            {
-                Course courses = parseCourse(data.result);
-                callBack(courses);
-            }
-            else
-            {
-                Debug.Log(data.error + ": " + data.message);
-                callBack(null);
-            }
-        }));
+        StartCoroutine(APIRequest.Instance.doPost(uri, "{}", (data) =>
+         {
+             if (data == null)
+             {
+                 Debug.Log(uri);
+                 callBack(new KeyValuePair<bool, string>(false, "Data is empty"));
+             }
+             else
+             {
+                 if (data.error >= 0)
+                 {
+                     Course newCourse = parseCourse(data.result);
+                     if (newCourse != null)
+                     {
+                         callBack(new KeyValuePair<bool, string>(true, "Update successfully"));
+                     }
+                     else
+                     {
+                         callBack(new KeyValuePair<bool, string>(false, "Update failly"));
+                     }
+                 }
+                 else
+                 {
+                     Debug.Log(data.error + ": " + data.message);
+                     callBack(new KeyValuePair<bool, string>(false, data.message));
+                 }
+             }
+         }));
     }
 
     public void deleteCourse(int courseId, Action<Course> callBack)
