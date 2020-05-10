@@ -30,7 +30,7 @@ public class LessonHandler : MonoBehaviour
                     foreach (Context context in data)
                     {
                         GameObject item = Instantiate(contextItem, list.transform, false);
-                        item.GetComponent<ContextItem>().LoadData(context);
+                        item.GetComponent<LessonItem>().UpdateInformation(context);
                         item.transform.SetParent(list.transform);
                         contexts.Add(item);
                     }

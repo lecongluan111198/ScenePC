@@ -54,7 +54,7 @@ public class CourseDetail : MonoBehaviour
         foreach (Context context in course.Contexts)
         {
             GameObject item = Instantiate(contextItem, list.transform, false);
-            item.GetComponent<ContextItem>().LoadData(context);
+            item.GetComponent<LessonItem>().UpdateInformation(context);
             item.transform.SetParent(list.transform);
             lessons.Add(item);
         }

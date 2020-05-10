@@ -162,7 +162,7 @@ public class CourseModel : MonoBehaviour
         }));
     }
 
-    public void createCourse(Course course, Action<Course> callBack)
+    public void createCourse(Course course, Action<KeyValuePair<bool, string>> callBack)
     {
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.CREATE_COURSE);
         string uri = reqBuilder
@@ -177,13 +177,21 @@ public class CourseModel : MonoBehaviour
         {
             if (data.error >= 0)
             {
-                Course courses = parseCourse(data.result);
-                callBack(courses);
+                Course newCourse = parseCourse(data.result);
+                if(newCourse != null)
+                {
+                    callBack(new KeyValuePair<bool, string>(true, "Create successfully"));
+                }
+                else
+                {
+                    callBack(new KeyValuePair<bool, string>(false, "Create failly"));
+                }
             }
             else
             {
-                Debug.Log(data.error + ": " + data.message);
-                callBack(null);
+                string mess = data.error + ": " + data.message;
+                Debug.Log(mess);
+                callBack(new KeyValuePair<bool, string>(false, data.message));
             }
         }));
     }

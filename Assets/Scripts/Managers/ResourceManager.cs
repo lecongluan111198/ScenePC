@@ -27,4 +27,29 @@ public class ResourceManager
         "Images/Backgrounds/Lessons/tree_icon",
         "Images/Backgrounds/Lessons/tube_icon"
     };
+
+    static Dictionary<string, int> COURSE_ID = new Dictionary<string, int>()
+    {
+        { "Placeholder 1" , 0},
+        { "Placeholder 2" , 1},
+        { "Placeholder 3" , 2},
+        { "Placeholder 4" , 3},
+        { "Placeholder 5" , 4},
+        { "Placeholder 6" , 5},
+        { "Placeholder 7" , 6},
+        { "Placeholder 8" , 7},
+        { "Placeholder 9" , 8},
+        { "Placeholder 10" , 9},
+    };
+
+
+    public static int GetCourseAvatarId(string name)
+    {
+        if (COURSE_ID.ContainsKey(name))
+        {
+            return -1;
+        }
+        return COURSE_ID[name];
+    }
+
 }

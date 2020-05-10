@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ContextItem : MonoBehaviour
+public class LessonItem : MonoBehaviour
 {
     //[Header("MenuManager")]
     GameObject MenuManager;
@@ -29,7 +29,7 @@ public class ContextItem : MonoBehaviour
         return context;
     }
 
-    public void LoadData(Context context)
+    public void UpdateInformation(Context context)
     {
         this.context = context;
         this.title.text = context.Name;
@@ -37,6 +37,8 @@ public class ContextItem : MonoBehaviour
         string pathImage = ResourceManager.LESSON_AVATARS[context.AvatarId];
         background.sprite = Resources.Load<Sprite>(pathImage);
     }
+    
+   
 
     public void Detail()
     {
