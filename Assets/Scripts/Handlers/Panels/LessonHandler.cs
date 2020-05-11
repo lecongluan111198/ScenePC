@@ -10,23 +10,33 @@ public class LessonHandler : MonoBehaviour
     [Header("Container")]
     public GameObject list;
 
+    [Header("RESOURCE")]
+    public Animator loadingAnim;
+
     private List<GameObject> contexts = new List<GameObject>();
     private int length = 12;
+    private int currentOwnOffset = -1;
 
     public void LoadLesson()
     {
-        ContextModel.Instance.loadOwnContext(length, 0, (data) =>
+        if (currentOwnOffset < 0)
         {
-            if (data != null)
+            currentOwnOffset = 0;
+            loadingAnim.Play("Modal Window In");
+            ContextModel.Instance.loadOwnContext(length, currentOwnOffset, (data) =>
             {
-                foreach (Context context in data)
+                if (data != null)
                 {
-                    GameObject item = Instantiate(contextItem, list.transform, false);
-                    item.GetComponent<ContextItem>().LoadData(context);
-                    item.transform.SetParent(list.transform);
-                    contexts.Add(item);
+                    foreach (Context context in data)
+                    {
+                        GameObject item = Instantiate(contextItem, list.transform, false);
+                        item.GetComponent<LessonItem>().UpdateInformation(context);
+                        item.transform.SetParent(list.transform);
+                        contexts.Add(item);
+                    }
                 }
-            }
-        });
+                loadingAnim.Play("Modal Window Out");
+            });
+        }
     }
 }

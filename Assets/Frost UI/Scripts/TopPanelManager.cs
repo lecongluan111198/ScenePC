@@ -57,17 +57,30 @@ namespace Michsky.UI.Frost
         {
             if (newPanel != currentPanelIndex)
             {
-                currentPanel = panels[currentPanelIndex];
+                if(currentExPanelIndex >= 0)
+                {
+                    currentPanel = extraPanels[currentExPanelIndex];
+                    backQueue.Clear();
+                    currentExPanelIndex = -1;
+                    Debug.Log("Expanel");
+                }
+                else
+                {
+                    currentPanel = panels[currentPanelIndex];
+                }
 
                 currentPanelIndex = newPanel;
                 nextPanel = panels[currentPanelIndex];
 
-                currentPanelAnimator = currentPanel.GetComponent<Animator>();
-                nextPanelAnimator = nextPanel.GetComponent<Animator>();
+                PlayPanelAnim(currentPanel, nextPanel);
 
-                currentPanelAnimator.Play(panelFadeOut);
-                nextPanelAnimator.Play(panelFadeIn);
+                //currentPanelAnimator = currentPanel.GetComponent<Animator>();
+                //nextPanelAnimator = nextPanel.GetComponent<Animator>();
 
+                //currentPanelAnimator.Play(panelFadeOut);
+                //nextPanelAnimator.Play(panelFadeIn);
+
+                //button
                 currentButton = buttons[currentButtonlIndex];
 
                 currentButtonlIndex = newPanel;

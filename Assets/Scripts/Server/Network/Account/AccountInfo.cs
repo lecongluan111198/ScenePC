@@ -26,30 +26,6 @@ public class AccountInfo
         }
     }
 
-    //public int UID
-    //{
-    //    get { return uid; }
-    //    set { uid = value; }
-    //}
-
-    //public string Username
-    //{
-    //    get { return username; }
-    //    set { username = value; }
-    //}
-
-    //public string Email
-    //{
-    //    get { return email; }
-    //    set { email = value; }
-    //}
-
-    //public string Session
-    //{
-    //    get { return sessionKey; }
-    //    set { sessionKey = value; }
-    //}
-
     public string Role { get => role; set => role = value; }
     public byte[] Image { get => image; set => image = value; }
     public int UID { get => uid; set => uid = value; }

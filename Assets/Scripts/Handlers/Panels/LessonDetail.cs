@@ -14,6 +14,9 @@ public class LessonDetail : MonoBehaviour
     public TMP_Text createTime;
     public Image background;
 
+    [Header("RESOURCE")]
+    public Animator roomOption;
+
     private Context context;
 
     // Start is called before the first frame update
@@ -45,7 +48,7 @@ public class LessonDetail : MonoBehaviour
 
     public void PlayContext()
     {
-
+        roomOption.Play("Modal Window In");
     }
 
     public void EditLesson()
