@@ -175,13 +175,14 @@ public class ContextManager : MonoBehaviour
 
     public void loadJson(int contextId)
     {
-        ContextModel.Instance.loadContext(contextId, (data) => {
+        ContextModel.Instance.loadContext(contextId, (data) =>
+        {
             Debug.Log(data);
             RootObject rootObject = JsonConvert.DeserializeObject<RootObject>(data);
             List<Phase> listPhrase = new List<Phase>();
             readPhrase(rootObject, listPhrase);
         });
-        //var path = Path.Combine(Application.dataPath, "data.json");
+        //var path = Path.Combine(Application.dataPath, "data1.json");
         //var jsonDataRoot = File.ReadAllText(path);
         //Debug.Log(jsonDataRoot);
         //RootObject rootObject = JsonConvert.DeserializeObject<RootObject>(jsonDataRoot);
