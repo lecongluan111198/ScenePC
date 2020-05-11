@@ -98,7 +98,7 @@ public class ContextManager : MonoBehaviour
         rootObject.Phrase = phrase;
     }
     
-    public void saveJson(Context context)
+    public void saveJson(/*Context context*/)
     {
         //Create root
         RootObject rootObject = new RootObject();
@@ -110,15 +110,15 @@ public class ContextManager : MonoBehaviour
         addDataToPhrase(phrase, objects);
         //Get all phrase add to root
         addDataToRoot(rootObject, phrase);
-        context.Content = JsonConvert.SerializeObject(rootObject);
-        ContextModel.Instance.updateContext(context, (data) => {
-            //data = updated context
+        //context.Content = JsonConvert.SerializeObject(rootObject);
+        //ContextModel.Instance.updateContext(context, (data) => {
+        //    //data = updated context
 
-        });
-        //var path = Path.Combine(Application.dataPath, "data.json");
-        //File.WriteAllText(path, JsonConvert.SerializeObject(rootObject));
-        //string json = JsonConvert.SerializeObject(rootObject);
-        //Debug.Log(json);
+        //});
+        var path = Path.Combine(Application.dataPath, "datanew.json");
+        File.WriteAllText(path, JsonConvert.SerializeObject(rootObject));
+        string json = JsonConvert.SerializeObject(rootObject);
+        Debug.Log(json);
     }
     //**Load**
     //Convert list to vector3 and quaternion 
@@ -192,7 +192,7 @@ public class ContextManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))
-            saveJson(new Context());
+            saveJson();
         if (Input.GetKeyDown(KeyCode.L))
             loadJson(1);
     }
