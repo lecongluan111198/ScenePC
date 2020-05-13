@@ -1,26 +1,26 @@
 [
   {
     "id": 0,
-    "object": 'https://abc,xyz'
+    "name": 'https://abc,xyz'
   },
   {
     "id": 1,
-    "source": "https://abc,xyz"
+    "name": "Aircraft"
   },
   {
     "id": 2,
-    "source": "https://abc,xyz"
+    "name": "Airplane"
   },
   {
     "id": 3,
-    "source": "https://abc,xyz"
+    "name": "Seahawk"
   },
   {
     "id": 4,
-    "source": "https://abc,xyz"
+    "name": "Airplane"
   },
   {
     "id": 5,
-    "source": "https://abc,xyz"
+    "name": "Seahawk"
   }
 ]

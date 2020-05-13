@@ -172,6 +172,7 @@ public class ContextManager : MonoBehaviour
         }
         else
         {
+            
             go = GameObject.CreatePrimitive(PrimitiveType.Capsule);
         }
         go.name = obj.name;
@@ -192,7 +193,7 @@ public class ContextManager : MonoBehaviour
         }
         else
         {
-            return ms.source;
+            return ms.name;
         }
         return null;
     }

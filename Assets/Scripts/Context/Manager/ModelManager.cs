@@ -10,7 +10,7 @@ public class ModelManager : MonoBehaviour
     public class managerSource
     {
         public int id { get; set; }
-        public string source { get; set; }
+        public string name { get; set; }
     }
     public managerSource checkInList(int id, List<managerSource> list)
     {
