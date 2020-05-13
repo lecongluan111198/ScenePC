@@ -16,6 +16,7 @@ public class ModelManager : MonoBehaviour
     {
         foreach(managerSource s in list)
         {
+            Debug.Log("id " + s);
             if (s.id == id)
                 return s;
         }
@@ -27,6 +28,7 @@ public class ModelManager : MonoBehaviour
         var dataManager = File.ReadAllText(path);
         Debug.Log(dataManager);
         List<managerSource> ms = JsonConvert.DeserializeObject<List<managerSource>>(dataManager);
+        Debug.Log(ms);
         tmp = checkInList(id, ms);
     }
 }

@@ -1,1 +1,52 @@
-{"nPhrase":1,"Phrase":[{"nObject":2,"Objects":[{"id":0,"name":"Cube","position":[0.0,0.0,0.0],"rotation":[0.0,0.0,0.0],"scale":[10.0,10.0,10.0],"components":[]},{"id":0,"name":"Cube (1)","position":[-45.169998168945313,0.0,0.0],"rotation":[0.0,0.0,0.0],"scale":[10.0,10.0,10.0],"components":[]}]}]}
+{
+  "nPhrase": 1,
+  "Phrase": [
+    {
+      "nObject": 2,
+      "Objects": [
+        {
+          "id": 0,
+          "nameObj": "AircraftObj",
+          "nameDownload": "Aircraft",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            20,
+            20,
+            20
+          ],
+          "scale": [
+            100,
+            100,
+            100
+          ],
+          "components": []
+        },
+        {
+          "id": 0,
+          "nameObj": "SeahawkObj",
+          "nameDownload": "Seahawk",
+          "position": [
+            -45.16999816894531,
+            0,
+            0
+          ],
+          "rotation": [
+            10,
+            10,
+            10
+          ],
+          "scale": [
+            100,
+            100,
+            100
+          ],
+          "components": []
+        }
+      ]
+    }
+  ]
+}

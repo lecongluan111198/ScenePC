@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Dummiesman;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,16 +15,17 @@ public class ContextManager : MonoBehaviour
     public class ContextObject
     {
         public int id { get; set; }
-        public string name { get; set; }
+        public string nameObj { get; set; }
+        public string nameDownload { get; set; }
         public List<double> position { get; set; }
         public List<double> rotation { get; set; }
         public List<double> scale { get; set; }
         public List<AbstractComponent> components { get; set; }
 
-        public ContextObject (int id, string name, List<double>position, List<double> rotation, List<double> scale)
+        public ContextObject (int id, string nameObj, List<double>position, List<double> rotation, List<double> scale)
         {
             this.id = 0;
-            this.name = name;
+            this.nameObj = nameObj;
             this.position = position;
             this.rotation =rotation;
             this.scale = scale;
@@ -148,54 +150,42 @@ public class ContextManager : MonoBehaviour
     }
     private void readObject(Phase phrase, List<ContextObject> listObject)
     {
-        //GameObject parent = new GameObject();
-        //parent.name="listObject";
         listObject = phrase.Objects;
         foreach (ContextObject obj in listObject)
         {
-            //loadGameObject(obj, parent);
-            GameObject go = loadGameObject(obj);
-            go.transform.SetParent(container.transform);
+            loadGameObject(obj);
         }
     }
 
-    private GameObject loadGameObject(ContextObject obj)
+    private OBJLoader loader = new OBJLoader();
+    private void loadGameObject(ContextObject obj)
     {
         Vector3 position = new Vector3();
         Vector3 scale = new Vector3();
         Quaternion quaternion = new Quaternion();
-        string source = checkModel(obj);
-        GameObject go = new GameObject();
-        if (source == null)
+        if (obj.nameDownload == null)
         {
-            go = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            Debug.Log("source null " + obj.nameDownload);
+            GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
         }
         else
         {
+            Debug.Log("start download " + obj.nameDownload);
             
-            go = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+            FileModel.Instance._DownloadObject(obj.nameDownload + ".obj", obj.nameDownload + ".mtl", (file)=> {
+                Debug.Log("file "+file[0]);
+                if(file != null)
+                {
+                    GameObject go = loader.Load(new MemoryStream(file[0]), new MemoryStream(file[1]));
+                    go.name = obj.nameObj;
+                    go.transform.localPosition = listToVector3(position, obj.position);
+                    go.transform.localRotation = listToQuaternion(quaternion, obj.rotation);
+                    go.transform.localScale = listToVector3(scale, obj.scale);
+                    // go.transform.SetParent(container.transform);
+                    //go.transform.parent = container.transform;
+                }
+            } );
         }
-        go.name = obj.name;
-        go.transform.localPosition = listToVector3(position, obj.position);
-        go.transform.localRotation = listToQuaternion(quaternion, obj.rotation);
-        go.transform.localScale = listToVector3(scale, obj.position);
-        //go.transform.parent = container.transform;
-        return go;
-    }
-    private string checkModel(ContextObject obj)
-    {
-        ModelManager mm = new ModelManager();
-        ModelManager.managerSource ms = new ModelManager.managerSource();
-        mm.loadObjectFromSource(obj.id, ms);
-        if (ms == null)
-        {
-            Debug.Log("Can not find source object");
-        }
-        else
-        {
-            return ms.name;
-        }
-        return null;
     }
 
     public void loadJson(/*int contextId*/)
