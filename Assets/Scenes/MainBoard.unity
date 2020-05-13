@@ -14816,6 +14816,11 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 114603040465195964, guid: 798587d4c4cd9e745ab193bc2bc3696a,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114542031152606852, guid: 798587d4c4cd9e745ab193bc2bc3696a,
         type: 3}
       propertyPath: _effectGradient.key0.r
@@ -14911,11 +14916,6 @@ PrefabInstance:
       propertyPath: _effectGradient.key3.b
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 95426381857987206, guid: 798587d4c4cd9e745ab193bc2bc3696a,
-        type: 3}
-      propertyPath: m_CullingMode
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 114679383627600594, guid: 798587d4c4cd9e745ab193bc2bc3696a,
         type: 3}
       propertyPath: _effectGradient.key0.r
@@ -14946,10 +14946,10 @@ PrefabInstance:
       propertyPath: _effectGradient.ctime3
       value: 42405
       objectReference: {fileID: 0}
-    - target: {fileID: 114603040465195964, guid: 798587d4c4cd9e745ab193bc2bc3696a,
+    - target: {fileID: 95426381857987206, guid: 798587d4c4cd9e745ab193bc2bc3696a,
         type: 3}
-      propertyPath: m_Color.a
-      value: 1
+      propertyPath: m_CullingMode
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 798587d4c4cd9e745ab193bc2bc3696a, type: 3}
@@ -36506,7 +36506,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1380041657}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
