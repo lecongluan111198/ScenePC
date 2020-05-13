@@ -30,8 +30,10 @@ public class FileModel : MonoBehaviour
         }));
     }
 
-    public void _DownloadObject(string objPath, string mtlPath, Action<List<byte[]>> callBack)
+    public void _DownloadObject(string objName, string mtlName, Action<List<byte[]>> callBack)
     {
+        string objPath = API.DOWNLOAD_FILE + objName;
+        string mtlPath = API.DOWNLOAD_FILE + mtlName;
         Debug.Log(objPath + " " + mtlPath);
         StartCoroutine(APIRequest.Instance.downloadFile(objPath, (obj) =>
         {
