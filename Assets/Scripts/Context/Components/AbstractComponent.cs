@@ -6,17 +6,17 @@ public class AbstractComponent : MonoBehaviour
 {
     public class ObjectComponent
     {
-        public int id { get; set; }
-        public string name { get; set; }
+        public int idcpn { get; set; }
+        public string namecpn { get; set; }
         public ObjectComponent(int id, string name)
         {
-            this.id = id;
-            this.name = name;
+            this.idcpn = id;
+            this.namecpn = name;
         }
         public ObjectComponent()
         {
-            id = 0;
-            name = "";
+            idcpn = 0;
+            namecpn = "";
         }
     }
     public class QuestionComponent : ObjectComponent
@@ -38,7 +38,7 @@ public class AbstractComponent : MonoBehaviour
     public void loadComponent()
     {
         ObjectComponent objC = new ObjectComponent();
-        switch (objC.id)
+        switch (objC.idcpn)
         {
             case 1:
                 loadQuestion();

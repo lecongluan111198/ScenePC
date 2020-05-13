@@ -30,10 +30,10 @@ public class ContextManager : MonoBehaviour
             this.components = new List<AbstractComponent>();
         }
 
-        public ContextObject(int id, string name, List<double> position, List<double> rotation, List<double> scale, List<AbstractComponent> components) : this(id, name, position, rotation, scale)
-        {
-            this.components = components;
-        }
+        //public ContextObject(int id, string name, List<double> position, List<double> rotation, List<double> scale, List<AbstractComponent> components) : this(id, name, position, rotation, scale)
+        //{
+        //    this.components = components;
+        //}
     }
 
     public class Phase
@@ -164,7 +164,16 @@ public class ContextManager : MonoBehaviour
         Vector3 position = new Vector3();
         Vector3 scale = new Vector3();
         Quaternion quaternion = new Quaternion();
+        string source = checkModel(obj);
         GameObject go = new GameObject();
+        if (source == null)
+        {
+            go = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        }
+        else
+        {
+            go = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+        }
         go.name = obj.name;
         go.transform.localPosition = listToVector3(position, obj.position);
         go.transform.localRotation = listToQuaternion(quaternion, obj.rotation);
@@ -172,28 +181,43 @@ public class ContextManager : MonoBehaviour
         //go.transform.parent = container.transform;
         return go;
     }
-
-    public void loadJson(int contextId)
+    private string checkModel(ContextObject obj)
     {
-        ContextModel.Instance.loadContext(contextId, (data) =>
+        ModelManager mm = new ModelManager();
+        ModelManager.managerSource ms = new ModelManager.managerSource();
+        mm.loadObjectFromSource(obj.id, ms);
+        if (ms == null)
         {
-            Debug.Log(data);
-            RootObject rootObject = JsonConvert.DeserializeObject<RootObject>(data);
-            List<Phase> listPhrase = new List<Phase>();
-            readPhrase(rootObject, listPhrase);
-        });
-        //var path = Path.Combine(Application.dataPath, "data1.json");
-        //var jsonDataRoot = File.ReadAllText(path);
-        //Debug.Log(jsonDataRoot);
-        //RootObject rootObject = JsonConvert.DeserializeObject<RootObject>(jsonDataRoot);
-        //List<Phase> listPhrase = new List<Phase>();
-        //readPhrase(rootObject, listPhrase);
+            Debug.Log("Can not find source object");
+        }
+        else
+        {
+            return ms.source;
+        }
+        return null;
+    }
+
+    public void loadJson(/*int contextId*/)
+    {
+        //ContextModel.Instance.loadContext(contextId, (data) =>
+        //{
+        //    Debug.Log(data);
+        //    RootObject rootObject = JsonConvert.DeserializeObject<RootObject>(data);
+        //    List<Phase> listPhrase = new List<Phase>();
+        //    readPhrase(rootObject, listPhrase);
+        //});
+        var path = Path.Combine(Application.dataPath, "datanew.json");
+        var jsonDataRoot = File.ReadAllText(path);
+        Debug.Log(jsonDataRoot);
+        RootObject rootObject = JsonConvert.DeserializeObject<RootObject>(jsonDataRoot);
+        List<Phase> listPhrase = new List<Phase>();
+        readPhrase(rootObject, listPhrase);
     }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))
             saveJson();
         if (Input.GetKeyDown(KeyCode.L))
-            loadJson(1);
+            loadJson();
     }
 }
