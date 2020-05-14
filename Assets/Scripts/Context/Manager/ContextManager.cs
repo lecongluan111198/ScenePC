@@ -176,16 +176,29 @@ public class ContextManager : MonoBehaviour
                 Debug.Log("file "+file[0]);
                 if(file != null)
                 {
-                    GameObject go = loader.Load(new MemoryStream(file[0]), new MemoryStream(file[1]));
-                    go.name = obj.nameObj;
-                    go.transform.localPosition = listToVector3(position, obj.position);
-                    go.transform.localRotation = listToQuaternion(quaternion, obj.rotation);
-                    go.transform.localScale = listToVector3(scale, obj.scale);
-                    // go.transform.SetParent(container.transform);
-                    //go.transform.parent = container.transform;
+                    GameObject loadedObj = new OBJLoader().Load(new MemoryStream(file[0]), new MemoryStream(file[1]));
+                    loadedObj.transform.localPosition = listToVector3(position, obj.position);
+                    loadedObj.name = obj.nameObj;
+                    loadedObj.transform.localScale = listToVector3(scale, obj.scale);
+                    loadedObj.transform.localRotation = listToQuaternion(quaternion, obj.rotation);
+                    foreach (Transform child in loadedObj.transform)
+                    {
+                        _Prepare(child.gameObject);
+                    }
+                    loadedObj.transform.parent = container.transform;
                 }
             } );
         }
+    }
+
+    private void _Prepare(GameObject child)
+    {
+        Rigidbody rigid = child.AddComponent<Rigidbody>();
+        rigid.mass = 1;
+        rigid.useGravity = false;
+        MeshCollider collider = child.AddComponent<MeshCollider>();
+        collider.convex = true;
+        collider.isTrigger = true;
     }
 
     public void loadJson(/*int contextId*/)
