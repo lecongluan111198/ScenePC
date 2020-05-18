@@ -4,11 +4,11 @@
     {
       "nObject": 2,
   "backgroundObject": {
-        "nameBackground": "School Room",
+        "nameBackground": "Surgery Room",
         "position": [
           0,
-          0,
-          2.859999895095825
+          -1.62,
+          -3.39
         ],
         "rotation": [
           0,
