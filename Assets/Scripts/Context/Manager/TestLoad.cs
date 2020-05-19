@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
 using UnityEngine;
 public class TestLoad : MonoBehaviour
 {
@@ -238,26 +239,12 @@ public class TestLoad : MonoBehaviour
     }
     private void loadBackground(BackgroundObject bo)
     {
-        //Vector3 position = new Vector3();
-        //Vector3 scale = new Vector3();
-        //Quaternion quaternion = new Quaternion();
-        //GameObject loadedObj = new GameObject();
-        Debug.Log("Load background");
-        foreach (Transform ts in GUI.transform)
-        {
-            Debug.Log("ts.name: " + ts.name);
-            Debug.Log("ts.transform.name: " + ts.transform.name);
-            Debug.Log("bo.nameBackgroud: " + bo.nameBackground);
-            if (ts.transform.name == bo.nameBackground)
-            {
-                ts.gameObject.SetActive(true);
-                Debug.Log("day");
-            }
-        }
-        //loadedObj.transform.localPosition = listToVector3(position, bo.position);
-        //loadedObj.name = bo.nameBackgound;
-        //loadedObj.transform.localScale = listToVector3(scale, bo.scale);
-        //loadedObj.transform.localRotation = listToQuaternion(quaternion, bo.rotation);
+        Vector3 position = new Vector3();
+        Quaternion quaternion = new Quaternion();
+        string path = "Assets/Prefabs/UI/Room/" + bo.nameBackground + ".prefab";
+        Debug.Log("path: "+path);
+        GameObject myGameObject = (GameObject)Instantiate((GameObject)AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)), listToVector3(position, bo.position), listToQuaternion(quaternion, bo.rotation),GUI.transform);
+       // myGameObject.transform.parent = GUI.transform;
     }
     private void _Prepare(GameObject child)
     {
