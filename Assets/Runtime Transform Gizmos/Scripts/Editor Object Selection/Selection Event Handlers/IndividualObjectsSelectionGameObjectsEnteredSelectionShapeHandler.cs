@@ -17,7 +17,6 @@ namespace RTEditor
         public override bool Handle(List<GameObject> gameObjects)
         {
             EditorObjectSelection editorObjectSelection = EditorObjectSelection.Instance;
-
             // If multi-object deselection is enabled, we will deselect the game objects which were intersetced by the selection shape
             if (editorObjectSelection.MultiDeselect) return editorObjectSelection.DeselectGameObjectCollection(gameObjects);
             else

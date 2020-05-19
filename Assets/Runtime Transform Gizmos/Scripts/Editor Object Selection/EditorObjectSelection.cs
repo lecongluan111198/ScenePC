@@ -2,6 +2,7 @@
 using UnityEngine.EventSystems;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RTEditor
 {
@@ -184,12 +185,12 @@ namespace RTEditor
         public bool SelectGameObject(GameObject gameObject)
         {
             // Make sure the game object can be selected
-            if(CanOperate() && !IsGameObjectSelected(gameObject) && !IsMasked(gameObject))
-            {
+            if (CanOperate() && !IsGameObjectSelected(gameObject) && !IsMasked(gameObject))
+            {               
                 // Select the game object and adjust the last selected game object reference
                 _selectedObjects.Add(gameObject);
                 _lastSelectedGameObject = gameObject;
-
+                
                 // Selection was changed
                 return true;
             }
@@ -255,7 +256,7 @@ namespace RTEditor
         public bool DeselectGameObject(GameObject gameObject)
         {
             // Make sure the game object can be deselected
-            if(CanOperate() && IsGameObjectSelected(gameObject))
+            if (CanOperate() && IsGameObjectSelected(gameObject))
             {
                 // Deselect the game object and adjust the last selected game object reference by 
                 // retrieving a random object from the set.
@@ -330,7 +331,7 @@ namespace RTEditor
         public bool ClearSelection(bool allowUndoRedo = true)
         {
             // Only clear the selection if necessary
-            if(_selectedObjects.Count != 0)
+            if (_selectedObjects.Count != 0)
             {
                 if(allowUndoRedo)
                 {
