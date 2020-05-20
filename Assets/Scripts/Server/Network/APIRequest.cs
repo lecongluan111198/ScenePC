@@ -87,7 +87,6 @@ public class APIRequest
             }
             else
             {
-                //Debug.Log(API.ERROR_CONNECT);
                 callBack(null);
             }
         }

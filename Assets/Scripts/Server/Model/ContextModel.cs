@@ -132,7 +132,7 @@ public class ContextModel : MonoBehaviour
                 .AddParam("description", context.Description)
                 .AddParam("content", context.Content)
                 .build();
-        StartCoroutine(APIRequest.Instance.doGet(uri, (data) =>
+        StartCoroutine(APIRequest.Instance.doPost(uri, "{}", (data) =>
         {
             if (data.error >= 0)
             {
@@ -148,23 +148,31 @@ public class ContextModel : MonoBehaviour
 
     public void updateContext(Context context, Action<Context> callBack)
     {
-        ReqParamBuilder reqBuilder = new ReqParamBuilder(API.LOAD_COURSE_CONTEXT);
+        ReqParamBuilder reqBuilder = new ReqParamBuilder(API.UPDATE_CONTEXT);
         string uri = reqBuilder.AddParam("id", context.Id)
-                .AddParam("teacherId", context.TeacherId)
                 .AddParam("name", context.Name)
                 .AddParam("description", context.Description)
                 .AddParam("content", context.Content)
+                .AddParam("avatarId", context.AvatarId)
                 .build();
-        StartCoroutine(APIRequest.Instance.doGet(uri, (data) =>
+        StartCoroutine(APIRequest.Instance.doPost(uri, "{}",(data) =>
         {
-            if (data.error >= 0)
+            if(data != null)
             {
-                Context updatedContext = parseContext(data.result);
-                callBack(updatedContext);
+                if (data.error >= 0)
+                {
+                    Context updatedContext = parseContext(data.result);
+                    callBack(updatedContext);
+                }
+                else
+                {
+                    Debug.Log(data.error + ": " + data.message);
+                    callBack(null);
+                }
             }
             else
             {
-                Debug.Log(data.error + ": " + data.message);
+                Debug.Log("data is null");
                 callBack(null);
             }
         }));
@@ -175,7 +183,7 @@ public class ContextModel : MonoBehaviour
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.LOAD_COURSE_CONTEXT);
         string uri = reqBuilder.AddParam("contextId", contextId)
                 .build();
-        StartCoroutine(APIRequest.Instance.doGet(uri, (data) =>
+        StartCoroutine(APIRequest.Instance.doPost(uri, "{}", (data) =>
         {
             if (data.error >= 0)
             {

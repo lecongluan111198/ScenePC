@@ -9,7 +9,7 @@ using UnityEditor;
 using UnityEngine;
 using WebSocketSharp;
 
-public class TestLoad : MonoBehaviour
+public class EditMR : MonoBehaviour
 {
     [Header("CONTAINER")]
     public GameObject container;
@@ -66,16 +66,15 @@ public class TestLoad : MonoBehaviour
         public List<double> position { get; set; }
         public List<double> rotation { get; set; }
         public List<double> scale { get; set; }
+        public BackgroundObject()
+        {
+        }
         public BackgroundObject(string nameObj, List<double> position, List<double> rotation, List<double> scale)
         {
             this.nameBackground = nameObj;
             this.position = position;
             this.rotation = rotation;
             this.scale = scale;
-        }
-        public BackgroundObject()
-        {
-
         }
     }
 
@@ -91,28 +90,6 @@ public class TestLoad : MonoBehaviour
         public int nPhase { get; set; }
         public List<Phase> Phase { get; set; }
     }
-    //**Save**
-    //Convert vector3 and quaternion to list
-    private List<double> vector3ToList(Vector3 vector3)
-    {
-        List<double> list = new List<double>()
-            {
-                vector3.x,
-                vector3.y,
-                vector3.z
-            };
-        return list;
-    }
-    private List<double> quaternionToList( Quaternion quaternion)
-    {
-        List<double> list = new List<double>()
-            {
-                quaternion.x,
-                quaternion.y,
-                quaternion.z
-            };
-        return list;
-    }
     //add object, data to list and save
     private void addObjToList(List<ContextObject> objects)
     {
@@ -123,9 +100,9 @@ public class TestLoad : MonoBehaviour
             BasicInformation bInfo = child.GetComponent<BasicInformation>();
             if (bInfo != null)
             {
-                position = vector3ToList(child.localPosition);
-                rotation = quaternionToList(child.rotation);
-                scale = vector3ToList(child.localScale);
+                position = ConvertTypeUtils.vector3ToList(child.localPosition);
+                rotation = ConvertTypeUtils.quaternionToList(child.rotation);
+                scale = ConvertTypeUtils.vector3ToList(child.localScale);
                 //id,nameObj, nameDownload, fromServer, position, rotation, scale, component
                 obje = new ContextObject(bInfo.Id, child.name, bInfo.DownloadName, bInfo.FromServer, position, rotation, scale);
                 objects.Add(obje);
@@ -136,10 +113,10 @@ public class TestLoad : MonoBehaviour
     {
         foreach (Transform ts in GUI.transform)
         {
-            bo.nameBackground = ts.transform.name;
-            bo.position = vector3ToList(ts.transform.localPosition);
-            bo.rotation = quaternionToList(ts.transform.localRotation);
-            bo.scale = vector3ToList(ts.transform.localScale);
+            bo.nameBackground = ts.transform.name.Replace("(Clone)","");
+            bo.position = ConvertTypeUtils.vector3ToList(ts.transform.localPosition);
+            bo.rotation = ConvertTypeUtils.quaternionToList(ts.transform.localRotation);
+            bo.scale = ConvertTypeUtils.vector3ToList(ts.transform.localScale);
             break;
         }
     }
@@ -156,10 +133,9 @@ public class TestLoad : MonoBehaviour
         rootObject.nPhase = phases.Count;
         rootObject.Phase = phases;
     }
-    public void saveJson()
-    {
-        Context context = EditContextHolder.Instance.CurrentContext;
 
+    private RootObject exportRootObject()
+    {
         RootObject rootObject = new RootObject();
         List<Phase> phases = new List<Phase>();
         BackgroundObject bo = new BackgroundObject();
@@ -173,44 +149,32 @@ public class TestLoad : MonoBehaviour
         addDataToPhase(phases, bo, objects);
         //Get all phase add to root
         addDataToRoot(rootObject, phases);
+        return rootObject;
+    }
+    public void saveJson()
+    {
+        Context context = EditContextHolder.Instance.CurrentContext;
+        RootObject rootObject = exportRootObject();
         string json = JsonConvert.SerializeObject(rootObject);
         if (!json.IsNullOrEmpty())
         {
             context.Content = json;
+            Debug.Log(json);
             ContextModel.Instance.updateContext(context, (data) =>
             {
                 if (data == null)
                 {
                     Debug.Log("Cannot save");
                 }
+                else
+                {
+                    Debug.Log("Success");
+                }
             });
         }
-        
-        //var path = Path.Combine(Application.dataPath, "datanew12.json");
-        //File.WriteAllText(path, JsonConvert.SerializeObject(rootObject));
-        //string json = JsonConvert.SerializeObject(rootObject);
-        //Debug.Log(json);
-    }
-    //**Load**
-    //Convert list to vector3 and quaternion 
-    private Vector3 listToVector3(List<double> list)
-    {
-        Vector3 vector3 = new Vector3();
-        vector3.x = Convert.ToSingle(list[0]);
-        vector3.y = Convert.ToSingle(list[1]);
-        vector3.z = Convert.ToSingle(list[2]);
-        return vector3;
-    }
-    private Quaternion listToQuaternion(List<double> list)
-    {
-        Quaternion quaternion = new Quaternion();
-        quaternion.x = (float)list[0];
-        quaternion.y = (float)list[1];
-        quaternion.z = (float)list[2];
-        return quaternion;
     }
     //read data 
-    private void readPhase(RootObject rootObject, int phaseIndex)
+    private void loadPhase(RootObject rootObject, int phaseIndex)
     {
         List<Phase> listPhase = rootObject.Phase;
         //load only 1 phase
@@ -218,21 +182,17 @@ public class TestLoad : MonoBehaviour
         {
             Phase phase = listPhase[phaseIndex];
             BackgroundObject bo = phase.backgroundObject;
+            //load background
             loadBackground(bo);
-            List<ContextObject> listObject = new List<ContextObject>();
-            readObject(phase, listObject);
+            //load gameobject
+            foreach (ContextObject obj in phase.Objects)
+            {
+                loadGameObject(obj);
+            }
         }
         else
         {
             Debug.Log("Cannot load phase at " + phaseIndex);
-        }
-    }
-    private void readObject(Phase phase, List<ContextObject> listObject)
-    {
-        listObject = phase.Objects;
-        foreach (ContextObject obj in listObject)
-        {
-            loadGameObject(obj);
         }
     }
     private void loadGameObject(ContextObject obj)
@@ -241,9 +201,9 @@ public class TestLoad : MonoBehaviour
         {
             Debug.Log("source null " + obj.nameDownload);
             GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            go.transform.localPosition = listToVector3(obj.position);
-            go.transform.localScale = listToVector3(obj.scale);
-            go.transform.localRotation = listToQuaternion(obj.rotation);
+            go.transform.localPosition = ConvertTypeUtils.listToVector3(obj.position);
+            go.transform.localScale = ConvertTypeUtils.listToVector3(obj.scale);
+            go.transform.localRotation = ConvertTypeUtils.listToQuaternion(obj.rotation);
             go.transform.parent = container.transform;
         }
         else
@@ -257,49 +217,52 @@ public class TestLoad : MonoBehaviour
                     if (file != null)
                     {
                         GameObject loadedObj = new OBJLoader().Load(new MemoryStream(file[0]), new MemoryStream(file[1]));
-                        loadedObj.transform.localPosition = listToVector3(obj.position);
+                        loadedObj.transform.localPosition = ConvertTypeUtils.listToVector3(obj.position);
                         loadedObj.name = obj.nameObj;
-                        loadedObj.transform.localScale = listToVector3(obj.scale);
-                        loadedObj.transform.localRotation = listToQuaternion(obj.rotation);
+                        loadedObj.transform.localScale = ConvertTypeUtils.listToVector3(obj.scale);
+                        loadedObj.transform.localRotation = ConvertTypeUtils.listToQuaternion(obj.rotation);
                         loadedObj.transform.parent = container.transform;
+                        BasicInformation bInfo = loadedObj.AddComponent<BasicInformation>();
+                        bInfo.DownloadName = obj.nameDownload;
+                        bInfo.FromServer = true;
+                        bInfo.Id = obj.id;
                     }
                 });
             }
             else
             {
-                Debug.Log(obj.nameDownload + " " + listToVector3(obj.position).x);
-                GameObject loadedObj = Instantiate(Resources.Load("Prefabs/MR/" + obj.nameDownload) as GameObject, listToVector3(obj.position), listToQuaternion(obj.rotation), container.transform);
-                loadedObj.transform.localScale = listToVector3(obj.scale);
+                GameObject loadedObj = Instantiate(Resources.Load("Prefabs/MR/" + obj.nameDownload) as GameObject, ConvertTypeUtils.listToVector3(obj.position), ConvertTypeUtils.listToQuaternion(obj.rotation), container.transform);
+                loadedObj.transform.localScale = ConvertTypeUtils.listToVector3(obj.scale);
+                BasicInformation bInfo = loadedObj.AddComponent<BasicInformation>();
+                bInfo.DownloadName = obj.nameDownload;
+                bInfo.FromServer = false;
+                bInfo.Id = obj.id;
             }
 
         }
     }
     private void loadBackground(BackgroundObject bo)
     {
-        Instantiate(Resources.Load(@"Prefabs/MR/" + bo.nameBackground) as GameObject, listToVector3(bo.position), listToQuaternion(bo.rotation), GUI.transform);
+        Instantiate(Resources.Load(@"Prefabs/MR/" + bo.nameBackground) as GameObject, ConvertTypeUtils.listToVector3(bo.position), ConvertTypeUtils.listToQuaternion(bo.rotation), GUI.transform);
     }
 
     public void loadJson()
     {
-        //var path = Path.Combine(Application.dataPath, "datanew12.json");
-        //var jsonDataRoot = File.ReadAllText(path);
-        //RootObject rootObject = JsonConvert.DeserializeObject<RootObject>(jsonDataRoot);
-        //readPhase(rootObject, 0);
-
         Context context = EditContextHolder.Instance.CurrentContext;
         string json = context.Content;
-        if(json.IsNullOrEmpty() || "{}".Equals(json))
+        if (json.IsNullOrEmpty() || "{}".Equals(json))
         {
             json = EditContextHolder.Instance.DefaultContent;
         }
+        Debug.Log(json);
         RootObject rootObject = JsonConvert.DeserializeObject<RootObject>(json);
-        readPhase(rootObject, 0);
+        loadPhase(rootObject, 0);
     }
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.S))
-        //    saveJson();
-        //if (Input.GetKeyDown(KeyCode.L))
-        //    loadJson();
+        if (Input.GetKeyDown(KeyCode.S))
+            saveJson();
+        if (Input.GetKeyDown(KeyCode.L))
+            loadJson();
     }
 }
