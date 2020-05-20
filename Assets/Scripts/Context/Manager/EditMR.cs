@@ -260,9 +260,9 @@ public class EditMR : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
-            saveJson();
-        if (Input.GetKeyDown(KeyCode.L))
-            loadJson();
+        //if (Input.GetKeyDown(KeyCode.S))
+        //    saveJson();
+        //if (Input.GetKeyDown(KeyCode.L))
+        //    loadJson();
     }
 }
