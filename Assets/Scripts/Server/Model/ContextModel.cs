@@ -69,7 +69,7 @@ public class ContextModel : MonoBehaviour
         return null;
     }
 
-    public void loadContext(int contextId, Action<string> callBack)
+    public void loadContext(int contextId, Action<Context> callBack)
     {
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.LOAD_CONTEXT);
         string uri = reqBuilder.AddParam("contextId", contextId).build();
@@ -77,7 +77,7 @@ public class ContextModel : MonoBehaviour
         {
             if (data.error >= 0)
             {
-                callBack(data.result);
+                callBack(parseContext(data.result));
             }
             else
             {
