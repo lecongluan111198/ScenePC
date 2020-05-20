@@ -185,7 +185,6 @@ public class ContextManager : MonoBehaviour
         {
             backgroundObject bo = new backgroundObject();
             bo = phrase.backgroundObject;
-            Debug.Log("bo.name: " + bo.nameBackground);
             loadBackground(bo);
             List<ContextObject> listObject = new List<ContextObject>();
             readObject(phrase, listObject);
@@ -200,7 +199,6 @@ public class ContextManager : MonoBehaviour
         }
     }
 
-    private OBJLoader loader = new OBJLoader();
     private void loadGameObject(ContextObject obj)
     {
         Vector3 position = new Vector3();
