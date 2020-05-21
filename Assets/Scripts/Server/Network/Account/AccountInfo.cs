@@ -10,7 +10,7 @@ public class AccountInfo
     private string username = "LuanLee";
     private string email = "lecongluan111198@gmail.com";
     private string role = "ADMIN";
-    private string session = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNTkyMjA4ODYyLCJpYXQiOjE1ODk2MTY4NjJ9.nOvz8nq8v3S-P-wAY9_8LRNSZEdQheS2mbvyGJMNURhCvfuPi8u8U8EMGPL7GeWubBaFbCcI3Nc4c8XivoUWTg";
+    private string session = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNTkyMjA5NDcxLCJpYXQiOjE1ODk2MTc0NzF9.JiTkRIH4B62pM1PfbmMPBt5yO_dAXOqRD8mXNCEzaNIAXe1BvFaiiK9NELuiPEKiFxch1rMY09qOQExicLPs1g";
     private byte[] image;
 
 
