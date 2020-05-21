@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,6 +23,7 @@ public abstract class AbstractComponent
     //    name = "";
     //}
 
-    public abstract Component toComponent();
-    
+    public abstract void updateInfomation(Component component);
+
+    public abstract Type getType();
 }

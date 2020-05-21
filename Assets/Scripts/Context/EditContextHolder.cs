@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class EditContextHolder
     private static EditContextHolder instance = null;
     private string defaultContent;
     private Context currentContext;
+    private bool isMR = false;
 
     public static EditContextHolder Instance
     {
@@ -36,8 +38,10 @@ public class EditContextHolder
             TeacherId = 1,
             Author = "Luan Lee"
         };
+        isMR = true;
     }
 
     public Context CurrentContext { get => currentContext; set => currentContext = value; }
     public string DefaultContent { get => defaultContent; set => defaultContent = value; }
+    public bool IsMR { get => isMR; set => isMR = value; }
 }

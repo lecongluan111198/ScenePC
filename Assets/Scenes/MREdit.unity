@@ -776,6 +776,19 @@ MonoBehaviour:
   id: 0
   downloadName: chair_2
   fromServer: 0
+--- !u!65 &407733150
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407733147}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.30438623, y: 0.51486045, z: 0.3043863}
+  m_Center: {x: 0, y: 0.25733367, z: 0}
 --- !u!1 &435040455 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1702618180684472, guid: 8c21111ae907dd04199eccc96ad26e57,
@@ -1685,6 +1698,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce3a7099cc1364c4fa28a8478481fd38, type: 3}
+--- !u!1 &599414674 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2012771761045262624, guid: ce3a7099cc1364c4fa28a8478481fd38,
+    type: 3}
+  m_PrefabInstance: {fileID: 599414673}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &599414675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599414674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3f2860471a2f6749be8536a474e36d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  downloadName: Surgery Room
+  fromServer: 0
 --- !u!1 &601450849 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1368450949628088, guid: 8c21111ae907dd04199eccc96ad26e57,
@@ -1709,15 +1743,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: surgical_instruments
       objectReference: {fileID: 0}
-    - target: {fileID: 211081599474670801, guid: dd408256d51b9e642a37058ed5e85e13,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 211081599474670814, guid: dd408256d51b9e642a37058ed5e85e13,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.9790227
+      value: 1.678
       objectReference: {fileID: 0}
     - target: {fileID: 211081599474670814, guid: dd408256d51b9e642a37058ed5e85e13,
         type: 3}
@@ -1727,7 +1756,7 @@ PrefabInstance:
     - target: {fileID: 211081599474670814, guid: dd408256d51b9e642a37058ed5e85e13,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.2006834
+      value: 2.292
       objectReference: {fileID: 0}
     - target: {fileID: 211081599474670814, guid: dd408256d51b9e642a37058ed5e85e13,
         type: 3}
@@ -2673,6 +2702,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 216355a01f9fb0546972c2f3777fa15d, type: 3}
+--- !u!1 &780231866 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7232609664691702968, guid: 216355a01f9fb0546972c2f3777fa15d,
+    type: 3}
+  m_PrefabInstance: {fileID: 780231865}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &780231867
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780231866}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.767443, y: 0.73190653, z: 2.454535}
+  m_Center: {x: -0.00000011920932, y: 0.36426127, z: 0}
 --- !u!1 &811437066
 GameObject:
   m_ObjectHideFlags: 0
@@ -3433,33 +3481,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 798587d4c4cd9e745ab193bc2bc3696a, type: 3}
---- !u!1 &1068240511 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 211081599474670801, guid: dd408256d51b9e642a37058ed5e85e13,
-    type: 3}
-  m_PrefabInstance: {fileID: 612586387}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1068240512 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 211081599474670814, guid: dd408256d51b9e642a37058ed5e85e13,
     type: 3}
   m_PrefabInstance: {fileID: 612586387}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1068240513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1068240511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3f2860471a2f6749be8536a474e36d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 0
-  downloadName: surgical_instruments
-  fromServer: 0
 --- !u!1 &1095837093 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2113648377095306855, guid: 8b8aacf1bc7b1ab46b1012d5b7c816c0,
@@ -4168,19 +4195,6 @@ MonoBehaviour:
   id: 0
   downloadName: drop_counter
   fromServer: 0
---- !u!65 &1282968732
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1282968729}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.42946827, y: 1.5282699, z: 0.40845668}
-  m_Center: {x: 0.00000423193, y: 0.76397747, z: 0.018801816}
 --- !u!114 &1282968735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4243,7 +4257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 1282968729}
-  boundsOverride: {fileID: 1282968732}
+  boundsOverride: {fileID: 0}
   boundsCalculationMethod: 0
   activation: 0
   scaleMinimum: 0.2
@@ -5491,10 +5505,76 @@ BoxCollider:
   m_GameObject: {fileID: 1507204948}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.64312965, y: 1.3483068, z: 1.1841013}
   m_Center: {x: 0, y: 0.6739755, z: 0.16908957}
+--- !u!114 &1507204952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507204948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23f9be7a3cb53794ead8b55e784b65aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObject: {fileID: 1507204948}
+  boundsOverride: {fileID: 1507204951}
+  boundsCalculationMethod: 0
+  activation: 0
+  scaleMinimum: 0.2
+  scaleMaximum: 2
+  flattenAxis: 0
+  flattenAxisDisplayScale: 0
+  boxPadding: {x: 0, y: 0, z: 0}
+  boxMaterial: {fileID: 0}
+  boxGrabbedMaterial: {fileID: 0}
+  showWireframe: 1
+  wireframeShape: 0
+  wireframeMaterial: {fileID: 0}
+  wireframeEdgeRadius: 0.001
+  handleMaterial: {fileID: 0}
+  handleGrabbedMaterial: {fileID: 0}
+  scaleHandlePrefab: {fileID: 0}
+  scaleHandleSlatePrefab: {fileID: 0}
+  scaleHandleSize: 0.016
+  scaleHandleColliderPadding: {x: 0.016, y: 0.016, z: 0.016}
+  rotationHandlePrefab: {fileID: 0}
+  rotationHandleSize: 0.016
+  rotateHandleColliderPadding: {x: 0.016, y: 0.016, z: 0.016}
+  rotationHandlePrefabColliderType: 1
+  showScaleHandles: 1
+  showRotationHandleForX: 1
+  showRotationHandleForY: 1
+  showRotationHandleForZ: 1
+  drawTetherWhenManipulating: 1
+  proximityEffectActive: 0
+  handleMediumProximity: 0.1
+  handleCloseProximity: 0.03
+  farScale: 0
+  mediumScale: 1
+  closeScale: 1.5
+  farGrowRate: 0.3
+  mediumGrowRate: 0.2
+  closeGrowRate: 0.3
+  handlesIgnoreCollider: {fileID: 0}
+  debugText: {fileID: 0}
+  hideElementsInInspector: 1
+  RotateStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  RotateStopped:
+    m_PersistentCalls:
+      m_Calls: []
+  ScaleStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  ScaleStopped:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1507204954
 MonoBehaviour:
   m_ObjectHideFlags: 0

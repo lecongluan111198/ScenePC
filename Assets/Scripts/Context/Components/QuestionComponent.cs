@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ public class QuestionComponent : AbstractComponent
     public List<string> Choose { get => choose; set => choose = value; }
     public string Answer { get => answer; set => answer = value; }
 
-    public QuestionComponent(string question, List<string> choose, string answer) : base(1, "Question")
+    public QuestionComponent(string name, string question, List<string> choose, string answer) : base((int)EComponent.QUESTION, name)
     {
         this.question = question;
         this.choose = choose;
@@ -24,7 +25,7 @@ public class QuestionComponent : AbstractComponent
 
     }
 
-    public override Component toComponent()
+    public override void updateInfomation(Component component)
     {
         switch (id)
         {
@@ -38,7 +39,11 @@ public class QuestionComponent : AbstractComponent
                 Debug.Log("ID Component not found");
                 break;
         }
-        return null;
+    }
+
+    public override Type getType()
+    {
+        throw new NotImplementedException();
     }
 }
 
