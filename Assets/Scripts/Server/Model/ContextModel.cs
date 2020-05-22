@@ -155,7 +155,7 @@ public class ContextModel : MonoBehaviour
                 .AddParam("content", context.Content)
                 .AddParam("avatarId", context.AvatarId)
                 .build();
-        StartCoroutine(APIRequest.Instance.doPost(uri, "{}",(data) =>
+        StartCoroutine(APIRequest.Instance.doPost(API.UPDATE_CONTEXT, reqBuilder.toMap(), (data) =>
         {
             if(data != null)
             {

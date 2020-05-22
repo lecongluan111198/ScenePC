@@ -43,4 +43,9 @@ public class ReqParamBuilder
     {
         return JsonConvert.SerializeObject(param);
     }
+
+    public Dictionary<string, object> toMap()
+    {
+        return param;
+    }
 }

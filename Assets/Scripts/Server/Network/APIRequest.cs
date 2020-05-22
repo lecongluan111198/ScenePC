@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -38,7 +39,7 @@ public class APIRequest
             //request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
-
+            
             request.SendWebRequest();
             while (!request.isDone)
             {
@@ -59,7 +60,40 @@ public class APIRequest
         }
     }
 
+    public IEnumerator doPost(string url, Dictionary<string, object> mapData, Action<APIResponse> callBack)
+    {
+        WWWForm form = new WWWForm();
+        foreach (KeyValuePair<string, object> entry in mapData)
+        {
+            form.AddField(entry.Key, entry.Value.ToString());
+        }
+        using (var request = UnityWebRequest.Post(url, form))
+        {
+            request.SetRequestHeader("Authorization", AccountInfo.Instance.Session);
+            //byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJson);
+            //request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
 
+            request.SendWebRequest();
+            while (!request.isDone)
+            {
+                yield return null;
+            }
+            Debug.Log(request.responseCode);
+            Debug.Log(request.downloadHandler.text);
+            if (request.responseCode == 200)
+            {
+                string reponseJson = request.downloadHandler.text;
+                callBack(APIResponse.textToReponse(reponseJson));
+            }
+            else
+            {
+                //Debug.Log(API.ERROR_CONNECT);
+                callBack(null);
+            }
+        }
+    }
 
     /// <summary>
     /// send request to server with api link

@@ -1,4 +1,6 @@
 ﻿using Dummiesman;
+using Microsoft.MixedReality.Toolkit.Input;
+using Microsoft.MixedReality.Toolkit.UI;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
@@ -18,144 +20,69 @@ public class EditMR : MonoBehaviour
 
     private OBJLoader loader = new OBJLoader();
 
-    private Context context;
-
     //**Create and define**
-    public class ContextObject
+    private List<AbstractComponent> getComponents()
     {
-        public int id { get; set; }
-        public string nameObj { get; set; }
-        public string nameDownload { get; set; }
-        public bool fromServer { get; set; }
-        public List<double> position { get; set; }
-        public List<double> rotation { get; set; }
-        public List<double> scale { get; set; }
-        public List<AbstractComponent> components { get; set; }
 
-        public ContextObject()
-        {
-        }
-
-        public ContextObject(int id, string nameObj, string nameDownload, bool fromServer, List<double> position, List<double> rotation, List<double> scale)
-        {
-            this.id = id;
-            this.nameObj = nameObj;
-            this.nameDownload = nameDownload;
-            this.fromServer = fromServer;
-            this.position = position;
-            this.rotation = rotation;
-            this.scale = scale;
-            this.components = new List<AbstractComponent>();
-        }
-
-        public ContextObject(int id, string nameObj, string nameDownload, bool fromServer, List<double> position, List<double> rotation, List<double> scale, List<AbstractComponent> components)
-        {
-            this.id = id;
-            this.nameObj = nameObj;
-            this.nameDownload = nameDownload;
-            this.fromServer = fromServer;
-            this.position = position;
-            this.rotation = rotation;
-            this.scale = scale;
-            this.components = components;
-        }
+        return null;
     }
-    public class BackgroundObject
+    private List<ContextObject> toListObj()
     {
-        public string nameBackground { get; set; }
-        public List<double> position { get; set; }
-        public List<double> rotation { get; set; }
-        public List<double> scale { get; set; }
-        public BackgroundObject()
-        {
-        }
-        public BackgroundObject(string nameObj, List<double> position, List<double> rotation, List<double> scale)
-        {
-            this.nameBackground = nameObj;
-            this.position = position;
-            this.rotation = rotation;
-            this.scale = scale;
-        }
-    }
-
-    public class Phase
-    {
-        public int nObject { get; set; }
-        public BackgroundObject backgroundObject { get; set; }
-        public List<ContextObject> Objects { get; set; }
-    }
-
-    public class RootObject
-    {
-        public int nPhase { get; set; }
-        public List<Phase> Phase { get; set; }
-    }
-    //add object, data to list and save
-    private void addObjToList(List<ContextObject> objects)
-    {
-        ContextObject obje;
-        List<double> position, rotation, scale;
+        List<ContextObject> objects = new List<ContextObject>();
         foreach (Transform child in container.transform)
         {
-            BasicInformation bInfo = child.GetComponent<BasicInformation>();
+            ObjBasicInfo bInfo = child.GetComponent<ObjBasicInfo>();
             if (bInfo != null)
             {
-                position = ConvertTypeUtils.vector3ToList(child.localPosition);
-                rotation = ConvertTypeUtils.quaternionToList(child.rotation);
-                scale = ConvertTypeUtils.vector3ToList(child.localScale);
-                //id,nameObj, nameDownload, fromServer, position, rotation, scale, component
-                obje = new ContextObject(bInfo.Id, child.name, bInfo.DownloadName, bInfo.FromServer, position, rotation, scale);
-                objects.Add(obje);
+                ContextObject contextObj = ContextObject.toContextObject(child.gameObject);
+                if (contextObj != null)
+                {
+                    objects.Add(contextObj);
+                }
             }
         }
+        return objects;
     }
-    private void addBackgroundPhase(BackgroundObject bo)
+    private BackgroundObject toBackgroundObject()
     {
-        foreach (Transform ts in GUI.transform)
+        BackgroundObject bo = null;
+        foreach (Transform child in GUI.transform)
         {
-            bo.nameBackground = ts.transform.name.Replace("(Clone)","");
-            bo.position = ConvertTypeUtils.vector3ToList(ts.transform.localPosition);
-            bo.rotation = ConvertTypeUtils.quaternionToList(ts.transform.localRotation);
-            bo.scale = ConvertTypeUtils.vector3ToList(ts.transform.localScale);
-            break;
+            ObjBasicInfo bInfo = child.GetComponent<ObjBasicInfo>();
+            if (bInfo != null)
+            {
+                bo = BackgroundObject.toBackGroundObject(child.gameObject);
+                break;
+            }
         }
+        return bo;
     }
-    private void addDataToPhase(List<Phase> phase, BackgroundObject bo, List<ContextObject> objects)
+    private List<Phase> toPhase(BackgroundObject bo, List<ContextObject> objects)
     {
-        Phase phrs = new Phase();
-        phrs.nObject = objects.Count;
-        phrs.Objects = objects;
-        phrs.backgroundObject = bo;
-        phase.Add(phrs);
+        List<Phase> phases = new List<Phase>();
+        Phase phrs = Phase.toPhase(bo, objects);
+        phases.Add(phrs);
+        return phases;
     }
-    private void addDataToRoot(RootObject rootObject, List<Phase> phases)
+    private RootObject toRoot(List<Phase> phases)
     {
-        rootObject.nPhase = phases.Count;
-        rootObject.Phase = phases;
+        RootObject rootObject = RootObject.toRootObject(phases);
+        return rootObject;
     }
 
     private RootObject exportRootObject()
     {
-        RootObject rootObject = new RootObject();
-        List<Phase> phases = new List<Phase>();
-        BackgroundObject bo = new BackgroundObject();
-        List<ContextObject> objects = new List<ContextObject>();
-
-        //Get all children and add to objects
-        addObjToList(objects);
-        //Get background
-        addBackgroundPhase(bo);
-        //Get all object add to phase
-        addDataToPhase(phases, bo, objects);
-        //Get all phase add to root
-        addDataToRoot(rootObject, phases);
+        List<ContextObject> objects = toListObj();
+        BackgroundObject bo = toBackgroundObject();
+        List<Phase> phases = toPhase(bo, objects);
+        RootObject rootObject = toRoot(phases);
         return rootObject;
     }
     public void saveJson()
     {
         Context context = EditContextHolder.Instance.CurrentContext;
         RootObject rootObject = exportRootObject();
-        string json = JsonConvert.SerializeObject(rootObject);
+        string json = JSONUtils.toJSONString(rootObject);
         if (!json.IsNullOrEmpty())
         {
             context.Content = json;
@@ -176,7 +103,7 @@ public class EditMR : MonoBehaviour
     //read data 
     private void loadPhase(RootObject rootObject, int phaseIndex)
     {
-        List<Phase> listPhase = rootObject.Phase;
+        List<Phase> listPhase = rootObject.Phases;
         //load only 1 phase
         if (listPhase != null && listPhase.Count > phaseIndex)
         {
@@ -195,6 +122,22 @@ public class EditMR : MonoBehaviour
             Debug.Log("Cannot load phase at " + phaseIndex);
         }
     }
+
+    private void updateObject(GameObject go, ContextObject obj)
+    {
+        go = obj.toGameObject();
+        go.transform.parent = container.transform;
+        if (EditContextHolder.Instance.IsMR)
+        {
+            go.AddComponent<NearInteractionGrabbable>();
+            BoundingBox bbox = go.AddComponent<BoundingBox>();
+            bbox.Target = go.gameObject;
+            bbox.BoundsOverride = go.GetComponent<BoxCollider>();
+            ManipulationHandler mHandler = go.AddComponent<ManipulationHandler>();
+            mHandler.HostTransform = go.transform;
+        }
+    }
+
     private void loadGameObject(ContextObject obj)
     {
         if (obj.nameDownload == null)
@@ -213,37 +156,24 @@ public class EditMR : MonoBehaviour
                 Debug.Log("start download " + obj.nameDownload);
                 FileModel.Instance._DownloadObject(obj.nameDownload + ".obj", obj.nameDownload + ".mtl", (file) =>
                 {
-                    Debug.Log("file " + file[0]);
                     if (file != null)
                     {
                         GameObject loadedObj = new OBJLoader().Load(new MemoryStream(file[0]), new MemoryStream(file[1]));
-                        loadedObj.transform.localPosition = ConvertTypeUtils.listToVector3(obj.position);
-                        loadedObj.name = obj.nameObj;
-                        loadedObj.transform.localScale = ConvertTypeUtils.listToVector3(obj.scale);
-                        loadedObj.transform.localRotation = ConvertTypeUtils.listToQuaternion(obj.rotation);
-                        loadedObj.transform.parent = container.transform;
-                        BasicInformation bInfo = loadedObj.AddComponent<BasicInformation>();
-                        bInfo.DownloadName = obj.nameDownload;
-                        bInfo.FromServer = true;
-                        bInfo.Id = obj.id;
+                        updateObject(loadedObj, obj);
                     }
                 });
             }
             else
             {
-                GameObject loadedObj = Instantiate(Resources.Load("Prefabs/MR/" + obj.nameDownload) as GameObject, ConvertTypeUtils.listToVector3(obj.position), ConvertTypeUtils.listToQuaternion(obj.rotation), container.transform);
-                loadedObj.transform.localScale = ConvertTypeUtils.listToVector3(obj.scale);
-                BasicInformation bInfo = loadedObj.AddComponent<BasicInformation>();
-                bInfo.DownloadName = obj.nameDownload;
-                bInfo.FromServer = false;
-                bInfo.Id = obj.id;
+                GameObject loadedObj = Instantiate(Resources.Load(ResourceManager.MRPrefab + obj.nameDownload) as GameObject);
+                updateObject(loadedObj, obj);
             }
 
         }
     }
     private void loadBackground(BackgroundObject bo)
     {
-        Instantiate(Resources.Load(@"Prefabs/MR/" + bo.nameBackground) as GameObject, ConvertTypeUtils.listToVector3(bo.position), ConvertTypeUtils.listToQuaternion(bo.rotation), GUI.transform);
+        Instantiate(Resources.Load(ResourceManager.MRPrefab + bo.nameBackground) as GameObject, ConvertTypeUtils.listToVector3(bo.position), ConvertTypeUtils.listToQuaternion(bo.rotation), GUI.transform);
     }
 
     public void loadJson()
@@ -255,13 +185,13 @@ public class EditMR : MonoBehaviour
             json = EditContextHolder.Instance.DefaultContent;
         }
         Debug.Log(json);
-        RootObject rootObject = JsonConvert.DeserializeObject<RootObject>(json);
+        RootObject rootObject = JSONUtils.toObject<RootObject>(json);
         loadPhase(rootObject, 0);
     }
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.S))
-        //    saveJson();
+        if (Input.GetKeyDown(KeyCode.S))
+            saveJson();
         //if (Input.GetKeyDown(KeyCode.L))
         //    loadJson();
     }
