@@ -30,17 +30,21 @@ public class APIRequest
     /// <param name="url">API link</param>
     /// <param name="bodyJson">json body</param>
     /// <returns></returns>
-    public IEnumerator doPost(string url, string bodyJson, Action<APIResponse> callBack)
+    public IEnumerator doPost(string url, string param, Action<APIResponse> callBack)
     {
-        using (var request = new UnityWebRequest(url, "POST"))
+        List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
+        formData.Add(new MultipartFormDataSection(param));
+
+        //using (var request = new UnityWebRequest(url, "POST"))
+        using (var request = UnityWebRequest.Post(url, formData))
         {
             request.SetRequestHeader("Authorization", AccountInfo.Instance.Session);
             //byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJson);
             //request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
-            
-            request.SendWebRequest();
+
+            yield return request.SendWebRequest();
             while (!request.isDone)
             {
                 yield return null;
@@ -67,15 +71,17 @@ public class APIRequest
         {
             form.AddField(entry.Key, entry.Value.ToString());
         }
+        Debug.Log(form.ToString());
         using (var request = UnityWebRequest.Post(url, form))
         {
             request.SetRequestHeader("Authorization", AccountInfo.Instance.Session);
             //byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJson);
             //request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
-            request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
+            //request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+            //request.SetRequestHeader("Content-Type", "application/json");
 
-            request.SendWebRequest();
+            yield return request.SendWebRequest();
+
             while (!request.isDone)
             {
                 yield return null;
@@ -94,6 +100,8 @@ public class APIRequest
             }
         }
     }
+
+
 
     /// <summary>
     /// send request to server with api link

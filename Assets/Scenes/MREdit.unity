@@ -587,33 +587,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 20992958}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &296770198 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5165782508831844977, guid: 889bf3339e09a6f4f859d598b8be8f9d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1739573932}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &296770199 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5168966972844045329, guid: 889bf3339e09a6f4f859d598b8be8f9d,
     type: 3}
   m_PrefabInstance: {fileID: 1739573932}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &296770200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 296770198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3f2860471a2f6749be8536a474e36d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 0
-  downloadName: operating_lamp
-  fromServer: 0
 --- !u!224 &306977950 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224689695389559356, guid: 798587d4c4cd9e745ab193bc2bc3696a,
@@ -1603,7 +1582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &585247591
 Transform:
   m_ObjectHideFlags: 0
@@ -2721,6 +2700,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.767443, y: 0.73190653, z: 2.454535}
   m_Center: {x: -0.00000011920932, y: 0.36426127, z: 0}
+--- !u!114 &780231868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780231866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3f2860471a2f6749be8536a474e36d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  downloadName: truck
+  fromServer: 0
 --- !u!1 &811437066
 GameObject:
   m_ObjectHideFlags: 0
@@ -2815,7 +2809,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &875334867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7659,7 +7653,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1784723438
 Transform:
   m_ObjectHideFlags: 0
@@ -7675,6 +7669,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1808052704 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6045652439111275558, guid: daf5cfb1cbf728f4f9f8a288def4aef0,
+    type: 3}
+  m_PrefabInstance: {fileID: 5319999803664492700}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1808052705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808052704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3f2860471a2f6749be8536a474e36d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  downloadName: X-ray_monitor
+  fromServer: 0
+--- !u!65 &1808052708
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808052704}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5844096, y: 1.5424123, z: 1.1012514}
+  m_Center: {x: 0.03466563, y: 0.77275443, z: -0.19789018}
 --- !u!1001 &1855327348
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8215,7 +8243,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1969412590
 MonoBehaviour:
   m_ObjectHideFlags: 0

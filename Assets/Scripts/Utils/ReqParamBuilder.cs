@@ -39,9 +39,19 @@ public class ReqParamBuilder
         return sb.ToString();
     }
 
-    public string toBodyJson()
+    public string toParamString()
     {
-        return JsonConvert.SerializeObject(param);
+        StringBuilder sb = new StringBuilder();
+        if (param.Count != 0)
+        {
+            foreach (KeyValuePair<string, object> entry in param)
+            {
+                sb.Append(entry.Key).Append("=").Append(entry.Value).Append("&");
+            }
+            int length = sb.Length;
+            sb.Remove(length - 1, 1);
+        }
+        return sb.ToString();
     }
 
     public Dictionary<string, object> toMap()

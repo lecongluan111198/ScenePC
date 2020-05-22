@@ -27,7 +27,7 @@ public class UserModel : MonoBehaviour
             .AddParam("email", email)
             .AddParam("password", password);
         Debug.Log(reqBuilder.build());
-        StartCoroutine(APIRequest.Instance.doPost(reqBuilder.build(), "{}", (data) =>
+        StartCoroutine(APIRequest.Instance.doPost(reqBuilder.build(), "", (data) =>
         {
             if (data == null)
             {
@@ -64,7 +64,7 @@ public class UserModel : MonoBehaviour
 
     public void Logout(Action<bool> callBack)
     {
-        StartCoroutine(APIRequest.Instance.doPost(API.USER_LOGOUT, "{}", (data) =>
+        StartCoroutine(APIRequest.Instance.doPost(API.USER_LOGOUT, "", (data) =>
         {
             if (data == null)
             {
@@ -92,7 +92,7 @@ public class UserModel : MonoBehaviour
             .AddParam("password", password)
             .AddParam("role", role);
 
-        StartCoroutine(APIRequest.Instance.doPost(reqBuilder.build(), "{}", (data) =>
+        StartCoroutine(APIRequest.Instance.doPost(reqBuilder.build(), "", (data) =>
         {
             if (data == null)
             {
@@ -130,7 +130,7 @@ public class UserModel : MonoBehaviour
             .AddParam("uid", uid)
             .AddParam("verifyCode", verifyCode);
 
-        StartCoroutine(APIRequest.Instance.doPost(reqBuilder.build(), "{}", (data) =>
+        StartCoroutine(APIRequest.Instance.doPost(reqBuilder.build(), "", (data) =>
         {
             if (data == null)
             {
@@ -163,7 +163,7 @@ public class UserModel : MonoBehaviour
         int uid = AccountInfo.Instance.UID;
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.USER_AUTHENTICATION_RESEND);
 
-        StartCoroutine(APIRequest.Instance.doPost(reqBuilder.build(), "{}", (data) =>
+        StartCoroutine(APIRequest.Instance.doPost(reqBuilder.build(), "", (data) =>
         {
             if (data == null)
             {
@@ -196,7 +196,7 @@ public class UserModel : MonoBehaviour
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.USER_UPDATE_PROFILE)
             .AddParam("username", username);
 
-        StartCoroutine(APIRequest.Instance.doPost(reqBuilder.build(), "{}", (data) =>
+        StartCoroutine(APIRequest.Instance.doPost(reqBuilder.build(), "", (data) =>
         {
             if (data == null)
             {

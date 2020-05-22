@@ -125,10 +125,11 @@ public class EditMR : MonoBehaviour
 
     private void updateObject(GameObject go, ContextObject obj)
     {
-        go = obj.toGameObject();
+        obj.toGameObject(go);
         go.transform.parent = container.transform;
         if (EditContextHolder.Instance.IsMR)
         {
+            Debug.Log(obj.nameObj);
             go.AddComponent<NearInteractionGrabbable>();
             BoundingBox bbox = go.AddComponent<BoundingBox>();
             bbox.Target = go.gameObject;
@@ -192,7 +193,7 @@ public class EditMR : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S))
             saveJson();
-        //if (Input.GetKeyDown(KeyCode.L))
-        //    loadJson();
+        if (Input.GetKeyDown(KeyCode.L))
+            loadJson();
     }
 }

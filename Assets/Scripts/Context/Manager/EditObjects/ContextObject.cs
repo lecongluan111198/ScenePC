@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ContextObject
@@ -41,9 +42,8 @@ public class ContextObject
         this.components = components;
     }
 
-    public GameObject toGameObject()
+    public GameObject toGameObject(GameObject go)
     {
-        GameObject go = new GameObject();
         go.transform.localPosition = ConvertTypeUtils.listToVector3(position);
         go.name = nameObj;
         go.transform.localScale = ConvertTypeUtils.listToVector3(scale);
@@ -77,9 +77,18 @@ public class ContextObject
 
     public static ContextObject toContextObject(GameObject go)
     {
+        ObjBasicInfo bInfo = go.GetComponent<ObjBasicInfo>();
         ContextObject ret = null;
         Transform tf = go.transform;
+        if(bInfo == null)
+        {
+            return ret;
+        }
         ret = new ContextObject();
+        ret.nameObj = go.name;
+        ret.nameDownload = bInfo.DownloadName;
+        ret.fromServer = bInfo.FromServer;
+        ret.id = bInfo.Id;
         ret.position = ConvertTypeUtils.vector3ToList(tf.localPosition);
         ret.rotation = ConvertTypeUtils.quaternionToList(tf.rotation);
         ret.scale = ConvertTypeUtils.vector3ToList(tf.localScale);

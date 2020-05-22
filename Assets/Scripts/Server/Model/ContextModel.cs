@@ -132,7 +132,7 @@ public class ContextModel : MonoBehaviour
                 .AddParam("description", context.Description)
                 .AddParam("content", context.Content)
                 .build();
-        StartCoroutine(APIRequest.Instance.doPost(uri, "{}", (data) =>
+        StartCoroutine(APIRequest.Instance.doPost(uri, "", (data) =>
         {
             if (data.error >= 0)
             {
@@ -154,6 +154,8 @@ public class ContextModel : MonoBehaviour
                 .AddParam("description", context.Description)
                 .AddParam("content", context.Content)
                 .AddParam("avatarId", context.AvatarId)
+                .AddParam("createTime", context.CreateTime)
+                .AddParam("teacherId", context.TeacherId)
                 .build();
         StartCoroutine(APIRequest.Instance.doPost(API.UPDATE_CONTEXT, reqBuilder.toMap(), (data) =>
         {
@@ -183,7 +185,7 @@ public class ContextModel : MonoBehaviour
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.LOAD_COURSE_CONTEXT);
         string uri = reqBuilder.AddParam("contextId", contextId)
                 .build();
-        StartCoroutine(APIRequest.Instance.doPost(uri, "{}", (data) =>
+        StartCoroutine(APIRequest.Instance.doPost(uri, "", (data) =>
         {
             if (data.error >= 0)
             {

@@ -174,7 +174,7 @@ public class CourseModel : MonoBehaviour
             .AddParam("type", course.Type)
             .AddParam("avatarId", course.AvatarId)
             .build();
-        StartCoroutine(APIRequest.Instance.doPost(uri, "{}", (data) =>
+        StartCoroutine(APIRequest.Instance.doPost(uri, "", (data) =>
         {
             if (data == null)
             {
@@ -217,7 +217,7 @@ public class CourseModel : MonoBehaviour
             .AddParam("type", course.Type)
             .AddParam("avatarId", course.AvatarId)
             .build();
-        StartCoroutine(APIRequest.Instance.doPost(uri, "{}", (data) =>
+        StartCoroutine(APIRequest.Instance.doPost(uri, "", (data) =>
          {
              if (data == null)
              {
