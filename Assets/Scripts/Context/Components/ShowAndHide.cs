@@ -5,7 +5,8 @@ using UnityEngine;
 public class ShowAndHide : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject go;
+    public GameObject listBG;
+    public GameObject content;
     void Start()
     {
         
@@ -14,10 +15,10 @@ public class ShowAndHide : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+    
     }
     public void SetActiveGameobject()
     {
-        go.SetActive(!go.active);
+        listBG.SetActive(!listBG.active);
     }
 }
