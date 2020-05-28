@@ -45,6 +45,9 @@ public class LessonDetail : MonoBehaviour
         string pathImage = ResourceManager.LESSON_AVATARS[context.AvatarId];
         background.sprite = Resources.Load<Sprite>(pathImage);
 
+        //update to MRDataHolder
+        MRDataHolder.Instance.CurrentContext = this.context;
+        Debug.Log(context.Content);
     }
 
     public void PlayContext()

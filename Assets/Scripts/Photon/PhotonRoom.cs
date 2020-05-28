@@ -99,7 +99,9 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         currentScene = scene.name;
         if(currentScene == waitingRoomScene)
         {
-            CreatePlayer();
+            //CreatePlayer();
+            //load data
+            MRContextManager.Instance.loadContext();
         }
     }
 
