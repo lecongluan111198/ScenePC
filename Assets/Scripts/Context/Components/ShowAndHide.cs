@@ -6,7 +6,6 @@ public class ShowAndHide : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject listBG;
-    public GameObject content;
     void Start()
     {
         

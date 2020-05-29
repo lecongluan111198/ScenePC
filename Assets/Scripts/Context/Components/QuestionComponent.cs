@@ -19,6 +19,10 @@ public class QuestionComponent : AbstractComponent
         this.choose = choose;
         this.answer = answer;
     }
+    public QuestionComponent(string name) : base((int)EComponent.QUESTION,name)
+    {
+
+    }
 
     private void loadQuestion()
     {

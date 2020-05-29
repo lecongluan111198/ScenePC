@@ -57,22 +57,18 @@ public class SwipeMenu : MonoBehaviour
     }
     public void next()
     {
-        Debug.Log("13");
         if (posisi < pos.Length - 1)
         {
             posisi += 1;
             scroll_pos = pos[posisi];
-            Debug.Log("123");
         }
     }
     public void prev()
     {
-        Debug.Log("31");
         if (posisi > 0)
         {
             posisi -= 1;
             scroll_pos = pos[posisi];
-            Debug.Log("321");
         }
     }
 }
