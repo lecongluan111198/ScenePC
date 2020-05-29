@@ -5,23 +5,19 @@ using UnityEngine;
 
 public class QuestionComponent : AbstractComponent
 {
-    private string question;
+    private string questionText;
     private List<string> choose;
-    private string answer;
+    private int answer;
 
-    public string Question { get => question; set => question = value; }
+    public string QuestionText { get => questionText; set => questionText = value; }
     public List<string> Choose { get => choose; set => choose = value; }
-    public string Answer { get => answer; set => answer = value; }
+    public int Answer { get => answer; set => answer = value; }
 
-    public QuestionComponent(string name, string question, List<string> choose, string answer) : base((int)EComponent.QUESTION, name)
+    public QuestionComponent(string name, string question, List<string> choose, int answer) : base((int)EComponent.QUESTION, name)
     {
-        this.question = question;
+        this.questionText = question;
         this.choose = choose;
         this.answer = answer;
-    }
-    public QuestionComponent(string name) : base((int)EComponent.QUESTION,name)
-    {
-
     }
 
     private void loadQuestion()
@@ -31,23 +27,23 @@ public class QuestionComponent : AbstractComponent
 
     public override void updateInfomation(Component component)
     {
-        switch (id)
+        try
         {
-            case 1:
-                loadQuestion();
-                break;
-            case 2:
-
-                break;
-            default:
-                Debug.Log("ID Component not found");
-                break;
+            Question qs = component as Question;
+            qs.QuestionText = this.QuestionText;
+            qs.Choose = Choose;
+            qs.Answer = Answer;
         }
+        catch (Exception ex)
+        {
+            Debug.Log(ex);
+        }
+
     }
 
     public override Type getType()
     {
-        throw new NotImplementedException();
+        return typeof(Question);
     }
 }
 
