@@ -65,7 +65,11 @@ public class ContextObject
             abComponents.Add(new BoxColliderComponent("BXC", bxc.isTrigger, ConvertTypeUtils.vector3ToList(bxc.center), ConvertTypeUtils.vector3ToList(bxc.size)));
         }
         //expand for another components
-        QuestionComponent qc = new QuestionComponent("QC");
+        Question qs = go.GetComponent<Question>();
+        if(qs != null)
+        {
+            abComponents.Add(new QuestionComponent("QS", qs.QuestionText, qs.Choose, qs.Answer));
+        }
         
         return abComponents;
     }
