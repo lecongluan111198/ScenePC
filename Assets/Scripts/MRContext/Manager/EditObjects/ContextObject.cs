@@ -12,14 +12,13 @@ public class ContextObject
     public List<double> position { get; set; }
     public List<double> rotation { get; set; }
     public List<double> scale { get; set; }
-    public List<string> animation { get; set; }
     public List<AbstractComponent> components { get; set; }
 
     public ContextObject()
     {
     }
 
-    public ContextObject(int id, string nameObj, string nameDownload, bool fromServer, List<double> position, List<double> rotation, List<double> scale, List<string> animation, List<AbstractComponent> components)
+    public ContextObject(int id, string nameObj, string nameDownload, bool fromServer, List<double> position, List<double> rotation, List<double> scale,  List<AbstractComponent> components)
     {
         this.id = id;
         this.nameObj = nameObj;
@@ -28,7 +27,6 @@ public class ContextObject
         this.position = position;
         this.rotation = rotation;
         this.scale = scale;
-        this.animation = animation;
         this.components = components;
     }
 
@@ -69,6 +67,12 @@ public class ContextObject
         if(qs != null)
         {
             abComponents.Add(new QuestionComponent("QS", qs.QuestionText, qs.Choose, qs.Answer));
+        }
+
+        CustAnimation anim = go.GetComponent<CustAnimation>();
+        if(anim != null)
+        {
+            abComponents.Add(new AnimationComponent("AIMATION", anim.Mode, anim.ControllerName, anim.ClipName));
         }
         
         return abComponents;

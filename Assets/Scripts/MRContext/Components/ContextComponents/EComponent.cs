@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 enum EComponent
 {
     QUESTION = 1,
-    BOX_COLLIDER = 2
+    BOX_COLLIDER = 2,
+    ANIMTION = 3
 
 }
