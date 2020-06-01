@@ -39,8 +39,8 @@ public class MRContextManager : MonoBehaviour
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.S))
-        //    saveContext();
+        if (Input.GetKeyDown(KeyCode.S))
+            saveContext();
         if (Input.GetKeyDown(KeyCode.L))
             loadContext();
     }
@@ -157,7 +157,7 @@ public class MRContextManager : MonoBehaviour
             bbox.BoundsOverride = go.GetComponent<BoxCollider>();
             ManipulationHandler mHandler = go.AddComponent<ManipulationHandler>();
             mHandler.HostTransform = go.transform;
-
+            
             go.AddComponent<NearInteractionGrabbable>();
 
         }
