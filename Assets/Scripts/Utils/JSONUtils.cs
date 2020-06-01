@@ -36,4 +36,18 @@ class JSONUtils
         }
 
     }
+
+    public static T toObject<T>(string json, T defaultValue)
+    {
+        try
+        {
+            T ret = JsonConvert.DeserializeObject<T>(json, settings);
+            return ret;
+        }
+        catch (Exception e)
+        {
+            return defaultValue;
+        }
+
+    }
 }

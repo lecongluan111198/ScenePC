@@ -46,7 +46,7 @@ public class RightController : MonoBehaviour
     private void OnEnable()
     {
         Debug.Log("RightController OnEnable");
-        //InteractionManager.InteractionSourcePressed += InteractionSourcePressed;
+        InteractionManager.InteractionSourcePressed += InteractionSourcePressed;
     }
 
     private void InteractionSourcePressed(InteractionSourcePressedEventArgs obj)

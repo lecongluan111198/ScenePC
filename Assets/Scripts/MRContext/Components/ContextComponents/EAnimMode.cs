@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-enum EComponent
+public enum EAnimMode
 {
-    QUESTION = 1,
-    BOX_COLLIDER = 2,
-    ANIMTION = 3,
-    RECORD_ANIMATION = 4
-
+    CLICK,
+    START,
+    START_LOOP,
+    CLICK_LOOP
 }

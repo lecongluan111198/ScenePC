@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Microsoft.MixedReality.Toolkit.Input;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,13 +27,13 @@ public class ObjBasicInfo : MonoBehaviour
     {
         if (RightController.Instance != null && RightController.Instance.enabled)
         {
-            Debug.Log("enabled");
+            //Debug.Log("enabled");
             if(RightController.Instance.CurrController.Type == AbstractController.ControllerType.BRUSH)
             {
-                Debug.Log("BRUSH");
+                //Debug.Log("BRUSH");
                 if (boxCollider != null && boxCollider.enabled)
                 {
-                    Debug.Log("false");
+                    //Debug.Log("false");
                     boxCollider.enabled = false;
                 }
             }

@@ -9,22 +9,22 @@ public class HandController : AbstractController
 {
     protected override void doOnDisable()
     {
-        Debug.Log("doOnDisable");
+        //Debug.Log("doOnDisable");
     }
 
     protected override void doOnEnable()
     {
-        Debug.Log("doOnEnable");
+        //Debug.Log("doOnEnable");
     }
 
     protected override void doOnStart()
     {
         this.Type = ControllerType.HAND;
-        Debug.Log("doOnStart");
+        //Debug.Log("doOnStart");
     }
 
     protected override void doOnUpdate()
     {
-        Debug.Log("doOnUpdate");
+        //Debug.Log("doOnUpdate");
     }
 }

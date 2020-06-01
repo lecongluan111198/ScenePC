@@ -39,8 +39,8 @@ public class MRContextManager : MonoBehaviour
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.S))
-        //    saveContext();
+        if (Input.GetKeyDown(KeyCode.K))
+            saveContext();
         if (Input.GetKeyDown(KeyCode.L))
             loadContext();
     }
@@ -157,10 +157,11 @@ public class MRContextManager : MonoBehaviour
             bbox.BoundsOverride = go.GetComponent<BoxCollider>();
             ManipulationHandler mHandler = go.AddComponent<ManipulationHandler>();
             mHandler.HostTransform = go.transform;
-
             go.AddComponent<NearInteractionGrabbable>();
-
+            //add record MR
+            //go.AddComponent<RecordTransform>();
         }
+
         obj.toGameObject(go);
 
         if (!MRDataHolder.Instance.IsEdit)
@@ -204,6 +205,7 @@ public class MRContextManager : MonoBehaviour
         }
         Debug.Log(json);
         RootObject rootObject = JSONUtils.toObject<RootObject>(json);
+        Debug.Log(rootObject);
         loadPhase(rootObject, 0);
     }
 }

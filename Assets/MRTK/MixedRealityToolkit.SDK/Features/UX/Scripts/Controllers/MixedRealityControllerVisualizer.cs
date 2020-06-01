@@ -28,6 +28,8 @@ namespace Microsoft.MixedReality.Toolkit.Input
         public override void OnInputDown(InputEventData eventData)
         {
             base.OnInputDown(eventData);
+            if (eventData.selectedObject != null)
+                Debug.Log(eventData.selectedObject.name);
             // TODO Visualize digital and single axis controls down state
         }
 
