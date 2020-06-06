@@ -29,7 +29,7 @@ public class RecordAnimation : MonoBehaviour, IMixedRealityPointerHandler
                 break;
         }
 
-        if (mode == EAnimMode.START || mode == EAnimMode.START_LOOP)
+        if ((mode == EAnimMode.START || mode == EAnimMode.START_LOOP) && !MRDataHolder.Instance.IsEdit)
         {
             //TODO: start animation
             StartCoroutine("startAnimation");
@@ -41,10 +41,19 @@ public class RecordAnimation : MonoBehaviour, IMixedRealityPointerHandler
     {
     }
 
+    public void PlayAnimation()
+    {
+        isLoop = false;
+        StartCoroutine("startAnimation");
+    }
+
     public void OnPointerClicked(MixedRealityPointerEventData eventData)
     {
         //TODO: start animation
-        StartCoroutine("startAnimation");
+        if (!MRDataHolder.Instance.IsEdit)
+        {
+            StartCoroutine("startAnimation");
+        }
     }
 
     public void OnPointerDown(MixedRealityPointerEventData eventData)
@@ -61,31 +70,41 @@ public class RecordAnimation : MonoBehaviour, IMixedRealityPointerHandler
 
     IEnumerator startAnimation()
     {
-        if(ListStatuses != null)
+        if (ListStatuses != null)
         {
             int index = 0;
             int maxIndex = ListStatuses.Count;
             float pre = interval * 1.0f / 1000;
             RecordTransform.ObjectStatus status;
-            while(true)
+            while (true)
             {
                 index = 0;
                 while (index < maxIndex)
                 {
-                    Debug.Log(index + " " + ListStatuses.Count);
-                    status = ListStatuses[index];
-                    transform.localPosition = ConvertTypeUtils.listToVector3(status.Position);
-                    transform.localRotation = ConvertTypeUtils.listToQuaternion(status.Rotation);
-                    transform.localScale = ConvertTypeUtils.listToVector3(status.Scale);
-                    index++;
-                    yield return new WaitForSeconds(pre);
+                    status = ListStatuses[index++];
+                    Vector3 destPos = ConvertTypeUtils.listToVector3(status.Position);
+                    Quaternion destRotation = ConvertTypeUtils.listToQuaternion(status.Rotation);
+                    Vector3 destScale = ConvertTypeUtils.listToVector3(status.Scale);
+                    var i = 0.0f;
+                    var rate = 1.0f / pre;
+                    while (i < 1.0)
+                    {
+                        i += Time.deltaTime * rate;
+                        if(i < 1.0f)
+                        {
+                            transform.localPosition = Vector3.Lerp(transform.localPosition, destPos, i);
+                            transform.localRotation = Quaternion.Lerp(transform.localRotation, destRotation, i);
+                            transform.localScale = Vector3.Lerp(transform.localScale, destScale, i);
+                        }
+                        yield return new WaitForEndOfFrame();
+                    }
                 }
+
                 if (!isLoop)
                 {
                     break;
                 }
             }
         }
-        yield return null;
     }
 }

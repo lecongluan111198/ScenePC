@@ -25,15 +25,17 @@ class JSONUtils
 
     public static T toObject<T>(string json)
     {
-        try
-        {
-            T ret = JsonConvert.DeserializeObject<T>(json, settings);
-            return ret;
-        }
-        catch (Exception e)
-        {
-            return default(T);
-        }
+        T ret = JsonConvert.DeserializeObject<T>(json, settings);
+        return ret;
+        //try
+        //{
+        //    T ret = JsonConvert.DeserializeObject<T>(json, settings);
+        //    return ret;
+        //}
+        //catch (Exception e)
+        //{
+        //    return default(T);
+        //}
 
     }
 

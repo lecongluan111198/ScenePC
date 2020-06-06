@@ -17,38 +17,46 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
     public string ClipName { get => clipName; set => clipName = value; }
     public EAnimMode Mode { get => mode; set => mode = value; }
     public string ControllerName { get => controllerName; set => controllerName = value; }
+    public bool IsLoop { get => isLoop; set => isLoop = value; }
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
-        if(anim == null)
+        if (anim == null)
         {
             anim = gameObject.AddComponent<Animator>();
         }
         anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(ResourceManager.AnimController + controllerName);
 
+        if (anim.runtimeAnimatorController == null)
+        {
+            Destroy(this);
+        }
         switch (mode)
         {
             case EAnimMode.CLICK:
             case EAnimMode.START:
-                isLoop = false;
+                IsLoop = false;
                 break;
             case EAnimMode.CLICK_LOOP:
             case EAnimMode.START_LOOP:
-                isLoop = true;
+                IsLoop = true;
                 break;
         }
 
-        if (mode == EAnimMode.START || mode == EAnimMode.START_LOOP)
+        if ((mode == EAnimMode.START || mode == EAnimMode.START_LOOP) && !MRDataHolder.Instance.IsEdit)
         {
             foreach (AnimationClip ac in anim.runtimeAnimatorController.animationClips)
             {
                 AnimationClipSettings setting = AnimationUtility.GetAnimationClipSettings(ac);
-                setting.loopTime = isLoop;
-                Debug.Log(ac.name);
-                Debug.Log(setting.loopTime);
-                AnimationUtility.SetAnimationClipSettings(ac, setting);
+                if (setting.loopTime != isLoop)
+                {
+                    setting.loopTime = IsLoop;
+                    Debug.Log(ac.name);
+                    Debug.Log(setting.loopTime);
+                    AnimationUtility.SetAnimationClipSettings(ac, setting);
+                }
             }
             anim.SetTrigger(clipName);
         }
@@ -70,34 +78,58 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
         }
     }
 
+    public void refreshAnimation()
+    {
+        anim = GetComponent<Animator>();
+        if (anim == null)
+        {
+            anim = gameObject.AddComponent<Animator>();
+        }
+        anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(ResourceManager.AnimController + controllerName);
+        if (anim.runtimeAnimatorController == null)
+        {
+            Destroy(this);
+            return;
+        }
+        foreach (AnimationClip ac in anim.runtimeAnimatorController.animationClips)
+        {
+            AnimationClipSettings setting = AnimationUtility.GetAnimationClipSettings(ac);
+            setting.loopTime = IsLoop;
+            Debug.Log(ac.name);
+            Debug.Log(setting.loopTime);
+            AnimationUtility.SetAnimationClipSettings(ac, setting);
+        }
+    }
+
+    public void Play()
+    {
+        anim.SetTrigger(clipName);
+    }
+
     public void OnPointerDown(MixedRealityPointerEventData eventData)
     {
-        Debug.Log("OnPointerDown");
     }
 
     public void OnPointerDragged(MixedRealityPointerEventData eventData)
     {
-        Debug.Log("OnPointerDragged");
     }
 
     public void OnPointerUp(MixedRealityPointerEventData eventData)
     {
-        Debug.Log("OnPointerUp");
     }
 
     public void OnPointerClicked(MixedRealityPointerEventData eventData)
     {
-        Debug.Log("OnPointerClicked");
         if (Monitor.TryEnter(_LOCK))
         {
             try
             {
-                if (mode == EAnimMode.CLICK || mode == EAnimMode.CLICK_LOOP)
+                if ((mode == EAnimMode.CLICK || mode == EAnimMode.CLICK_LOOP) && !MRDataHolder.Instance.IsEdit)
                 {
                     foreach (AnimationClip ac in anim.runtimeAnimatorController.animationClips)
                     {
                         AnimationClipSettings setting = AnimationUtility.GetAnimationClipSettings(ac);
-                        setting.loopTime = isLoop;
+                        setting.loopTime = IsLoop;
                         Debug.Log(ac.name);
                         Debug.Log(setting.loopTime);
                         AnimationUtility.SetAnimationClipSettings(ac, setting);

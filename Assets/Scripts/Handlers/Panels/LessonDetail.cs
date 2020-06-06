@@ -46,18 +46,21 @@ public class LessonDetail : MonoBehaviour
         background.sprite = Resources.Load<Sprite>(pathImage);
 
         //update to MRDataHolder
-        MRDataHolder.Instance.CurrentContext = this.context;
+        //MRDataHolder.Instance.CurrentContext = this.context;
+        MRDataHolder.Instance.updateCurrentContext(this.context);
         Debug.Log(context.Content);
     }
 
     public void PlayContext()
     {
+        MRDataHolder.Instance.IsEdit = false;
         roomOption.Play("Modal Window In");
     }
 
     public void EditLesson()
     {
-        SceneManager.LoadScene("Edit");
+        MRDataHolder.Instance.IsEdit = true;
+        SceneManager.LoadScene("MREdit");
     }
 
     public void DeleteLesson()
