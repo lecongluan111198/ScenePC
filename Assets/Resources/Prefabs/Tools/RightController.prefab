@@ -66,8 +66,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllers:
-  - {fileID: 6672716337269071823}
   - {fileID: 1323353943808576786}
+  - {fileID: 6672716337269071823}
 --- !u!1001 &476868950941445544
 PrefabInstance:
   m_ObjectHideFlags: 0

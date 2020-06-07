@@ -59,6 +59,7 @@ public class BrushController : AbstractController
 
     protected override void doOnEnable()
     {
+        Debug.Log("OnEnable");
         InteractionManager.InteractionSourcePressed += InteractionSourcePressed;
         InteractionManager.InteractionSourceReleased += InteractionSourceReleased;
     }
@@ -87,6 +88,8 @@ public class BrushController : AbstractController
 
     private void InteractionSourcePressed(InteractionSourcePressedEventArgs obj)
     {
+        Debug.Log(obj.state.source.handedness);
+        Debug.Log(obj.pressType);
         if (obj.state.source.handedness == InteractionSourceHandedness.Right && obj.pressType == InteractionSourcePressType.Select)
         {
             Draw = true;
