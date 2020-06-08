@@ -1,2 +1,0 @@
-F:\NamCuoiTryHard\Unity\ScenePC\Assets\Dependencies\netstandard2.0\ScenePC.Dependencies.msb4u.deps.json
-F:\NamCuoiTryHard\Unity\ScenePC\MSBuild\Output\obj\Dependencies\Release\netstandard2.0\ScenePC.Dependencies.msb4u.csprojAssemblyReference.cache
