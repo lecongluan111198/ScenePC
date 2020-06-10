@@ -2,6 +2,7 @@
 using Microsoft.MixedReality.Toolkit.Input;
 using Microsoft.MixedReality.Toolkit.UI;
 using Newtonsoft.Json;
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -204,9 +205,39 @@ public class MRContextManager : MonoBehaviour
 
         obj.toGameObject(go);
 
+        PhotonView pv = go.AddComponent<PhotonView>();
+        PhotonTransformView ptv = go.AddComponent<PhotonTransformView>();
+        ptv.m_SynchronizePosition = true;
+        ptv.m_SynchronizeRotation = true;
+        ptv.m_SynchronizeScale = true;
+        PhotonAnimatorView pav = go.AddComponent<PhotonAnimatorView>();
+        List<PhotonAnimatorView.SynchronizedParameter> listParam = pav.GetSynchronizedParameters();
+        foreach (PhotonAnimatorView.SynchronizedParameter param in listParam)
+        {
+            param.SynchronizeType = PhotonAnimatorView.SynchronizeType.Discrete;
+        }
+        pv.ObservedComponents = new List<Component>();
+        pv.ObservedComponents.Add(ptv);
+        pv.ObservedComponents.Add(pav);
+
         if (!MRDataHolder.Instance.IsEdit)
         {
+
             //TODO: add necessary components for multiplayer mode
+            //PhotonView pv = go.AddComponent<PhotonView>();
+            //PhotonTransformView ptv = go.AddComponent<PhotonTransformView>();
+            //ptv.m_SynchronizePosition = true;
+            //ptv.m_SynchronizeRotation = true;
+            //ptv.m_SynchronizeScale = true;
+            //PhotonAnimatorView pav = go.AddComponent<PhotonAnimatorView>();
+            //List<PhotonAnimatorView.SynchronizedParameter> listParam = pav.GetSynchronizedParameters();
+            //foreach (PhotonAnimatorView.SynchronizedParameter param in listParam)
+            //{
+            //    param.SynchronizeType = PhotonAnimatorView.SynchronizeType.Discrete;
+            //}
+            //pv.ObservedComponents = new List<Component>();
+            //pv.ObservedComponents.Add(ptv);
+            //pv.ObservedComponents.Add(pav);
         }
     }
     private void loadGameObject(ContextObject obj)
@@ -235,7 +266,7 @@ public class MRContextManager : MonoBehaviour
     {
         GameObject go = Instantiate(Resources.Load(ResourceManager.MRPrefab + bo.nameBackground) as GameObject, ConvertTypeUtils.listToVector3(bo.position), ConvertTypeUtils.listToQuaternion(bo.rotation), GUI.transform);
         ObjBasicInfo bInfo = go.GetComponent<ObjBasicInfo>();
-        if(bInfo == null)
+        if (bInfo == null)
         {
             bInfo = go.AddComponent<ObjBasicInfo>();
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.MixedReality.Toolkit.Input;
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -33,6 +34,9 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
         {
             Destroy(this);
         }
+
+        updatePhotonAnimatorView();
+
         switch (mode)
         {
             case EAnimMode.CLICK:
@@ -62,6 +66,7 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
         }
     }
 
+    bool isDiscrete = false;
     // Update is called once per frame
     void Update()
     {
@@ -76,6 +81,34 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
             case EAnimMode.CLICK_LOOP:
                 break;
         }
+        if (!isDiscrete)
+        {
+            updatePhotonAnimatorView();
+        }
+    }
+
+    private void updatePhotonAnimatorView()
+    {
+        PhotonAnimatorView pav = gameObject.GetComponent<PhotonAnimatorView>();
+        if(pav == null)
+        {
+            pav = gameObject.AddComponent<PhotonAnimatorView>();
+        }
+        List<PhotonAnimatorView.SynchronizedLayer> listLayers = pav.GetSynchronizedLayers();
+        foreach (PhotonAnimatorView.SynchronizedLayer layer in listLayers)
+        {
+            layer.SynchronizeType = PhotonAnimatorView.SynchronizeType.Discrete;
+        }
+        List<PhotonAnimatorView.SynchronizedParameter> listParam = pav.GetSynchronizedParameters();
+        foreach (PhotonAnimatorView.SynchronizedParameter param in listParam)
+        {
+            param.SynchronizeType = PhotonAnimatorView.SynchronizeType.Discrete;
+        }
+
+        if(listLayers.Count != 0 && listParam.Count != 0)
+        {
+            isDiscrete = true;
+        }
     }
 
     public void refreshAnimation()
@@ -86,11 +119,15 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
             anim = gameObject.AddComponent<Animator>();
         }
         anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(ResourceManager.AnimController + controllerName);
+
         if (anim.runtimeAnimatorController == null)
         {
             Destroy(this);
             return;
         }
+
+        updatePhotonAnimatorView();
+
         foreach (AnimationClip ac in anim.runtimeAnimatorController.animationClips)
         {
             AnimationClipSettings setting = AnimationUtility.GetAnimationClipSettings(ac);
