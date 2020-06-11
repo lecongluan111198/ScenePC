@@ -22,11 +22,12 @@ public class AddQuestionToMenu : MonoBehaviour
     }
     private void show()
     {
-        string pathAnswer = "Assets/Prefabs/UI/Buttons/Question.prefab";
+        //string pathAnswer = "Assets/Prefabs/UI/Buttons/Question.prefab";
+        string pathAnswer = @"Prefabs/UI/Buttons/Question";
         int tmp = 0;
         foreach (var i in choose)
         {
-            GameObject button = (GameObject)Instantiate((GameObject)AssetDatabase.LoadAssetAtPath(pathAnswer, typeof(GameObject)));
+            GameObject button = (GameObject)Instantiate((GameObject)Resources.Load(pathAnswer));
             button.name = i;
             button.GetComponentInChildren<TextMeshProUGUI>().text = i;
             Button buttonCtrl = button.GetComponent<Button>();

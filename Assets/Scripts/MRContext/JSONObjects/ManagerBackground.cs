@@ -34,20 +34,20 @@ public class ManagerBackground : MonoBehaviour
     }
     private void loadListRoom()
     {
-        var pathButton = "Assets/Prefabs/UI/Buttons/RoomButton.prefab";
-        var pathImage = "Assets/Resources/Images/Backgrounds/EditTheme/SurgeryRoom.jpg";
-        var path = "Assets/Prefabs/UI/Room/";
-        var absolutePaths = System.IO.Directory.GetFiles(path, "*.prefab", System.IO.SearchOption.AllDirectories);
-        foreach(var a in absolutePaths)
-        {
-            var textButton = a.Substring(a.LastIndexOf("/") + 1);
-            textButton = textButton.Substring(0, textButton.Length - 7);
-            GameObject button = (GameObject)Instantiate((GameObject)AssetDatabase.LoadAssetAtPath(pathButton, typeof(GameObject)),listRoom.transform.position,listRoom.transform.rotation,listRoom.transform);
-            button.name = textButton;
-            button.GetComponentInChildren<TextMeshProUGUI>().text = textButton;
-            Button buttonCtrl = button.GetComponent<Button>();
-            buttonCtrl.onClick.AddListener(() => loadNewBG(a));
-        }
+        //var pathButton = "Assets/Prefabs/UI/Buttons/RoomButton.prefab";
+        //var pathImage = "Assets/Resources/Images/Backgrounds/EditTheme/SurgeryRoom.jpg";
+        //var path = "Assets/Prefabs/UI/Room/";
+        //var absolutePaths = System.IO.Directory.GetFiles(path, "*.prefab", System.IO.SearchOption.AllDirectories);
+        //foreach(var a in absolutePaths)
+        //{
+        //    var textButton = a.Substring(a.LastIndexOf("/") + 1);
+        //    textButton = textButton.Substring(0, textButton.Length - 7);
+        //    GameObject button = (GameObject)Instantiate((GameObject)AssetDatabase.LoadAssetAtPath(pathButton, typeof(GameObject)),listRoom.transform.position,listRoom.transform.rotation,listRoom.transform);
+        //    button.name = textButton;
+        //    button.GetComponentInChildren<TextMeshProUGUI>().text = textButton;
+        //    Button buttonCtrl = button.GetComponent<Button>();
+        //    buttonCtrl.onClick.AddListener(() => loadNewBG(a));
+        //}
     }
     private void destroyRoom()
     {
@@ -60,6 +60,6 @@ public class ManagerBackground : MonoBehaviour
     {
         destroyRoom();
         Debug.Log(path);
-        GameObject myGameObject = (GameObject)Instantiate((GameObject)AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)), GUI.transform); //, listToVector3(position, bo.position), listToQuaternion(quaternion, bo.rotation), GUI.transform);
+        //GameObject myGameObject = (GameObject)Instantiate((GameObject)AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)), GUI.transform); //, listToVector3(position, bo.position), listToQuaternion(quaternion, bo.rotation), GUI.transform);
     }
 }

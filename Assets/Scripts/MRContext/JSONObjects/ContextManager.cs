@@ -237,11 +237,7 @@ public class ContextManager : MonoBehaviour
     }
     private void loadBackground(backgroundObject bo)
     {
-        Vector3 position = new Vector3();
-        Quaternion quaternion = new Quaternion();
-        string path = "Assets/Prefabs/UI/Room/" + bo.nameBackground + ".prefab";
-        Debug.Log("path: " + path);
-        GameObject myGameObject = (GameObject)Instantiate((GameObject)AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)), listToVector3(position, bo.position), listToQuaternion(quaternion, bo.rotation), GUI.transform);
+        GameObject go = Instantiate(Resources.Load(ResourceManager.MRPrefab + bo.nameBackground) as GameObject, ConvertTypeUtils.listToVector3(bo.position), ConvertTypeUtils.listToQuaternion(bo.rotation), GUI.transform);
     }
     private void _Prepare(GameObject child)
     {

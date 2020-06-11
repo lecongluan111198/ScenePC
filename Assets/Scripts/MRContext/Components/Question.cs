@@ -40,8 +40,8 @@ public class Question : MonoBehaviour
         questionText = Ques;
         choose = listChoose;
         answer = ans;
-        string path = "Assets/Resources/Prefabs/UI/MenuQuestion.prefab";
-        GameObject menuQuestion = (GameObject)Instantiate((GameObject)AssetDatabase.LoadAssetAtPath(path, typeof(GameObject)));
+        string path = @"Prefabs/UI/MenuQuestion";
+        GameObject menuQuestion = Instantiate(Resources.Load(path) as GameObject);
         menuQuestion.GetComponentInChildren<Text>().text = QuestionText;
         menuQuestion.GetComponent<AddQuestionToMenu>().questionText = QuestionText;
         menuQuestion.GetComponent<AddQuestionToMenu>().choose = Choose;

@@ -99,17 +99,21 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         currentScene = scene.name;
         if(currentScene == waitingRoomScene)
         {
-            //CreatePlayer();
             //load data
             MRContextManager.Instance.loadContext();
+            //create player
+            //CreatePlayer();
         }
     }
 
     private void CreatePlayer()
     {
         //creates players network controller but not player character
-        Debug.Log("Create player");
-        PhotonNetwork.Instantiate("ThirdPersonController", new Vector3(1.13f, 1.22f, -7.6f), Quaternion.identity, 0);
+        if (!PV.IsMine)
+        {
+            Debug.Log("Create player");
+            PhotonNetwork.Instantiate("ThirdPersonController", new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
+        }
     }
 
     public void StartGame()

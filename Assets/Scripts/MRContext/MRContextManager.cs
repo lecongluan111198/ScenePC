@@ -10,7 +10,7 @@ using System.IO;
 using System.Security.Cryptography;
 using UnityEditor;
 using UnityEngine;
-using WebSocketSharp;
+//using WebSocketSharp;
 
 public class MRContextManager : MonoBehaviour
 {
@@ -34,6 +34,8 @@ public class MRContextManager : MonoBehaviour
     public static MRContextManager Instance = null;
 
     public GameObject CurrentObject { get => currentObject; set => currentObject = value; }
+
+    public static int currentPVId = 10;
 
     private void Awake()
     {
@@ -145,7 +147,7 @@ public class MRContextManager : MonoBehaviour
         Context context = MRDataHolder.Instance.CurrentContext;
         RootObject rootObject = exportRootObject();
         string json = JSONUtils.toJSONString(rootObject);
-        if (!json.IsNullOrEmpty())
+        if (json != null && json != "")
         {
             context.Content = json;
             Debug.Log(json);
@@ -160,6 +162,10 @@ public class MRContextManager : MonoBehaviour
                     Debug.Log("Success");
                 }
             });
+        }
+        else
+        {
+            Debug.Log("Wrong format JSON :" + json);
         }
     }
 
@@ -205,39 +211,26 @@ public class MRContextManager : MonoBehaviour
 
         obj.toGameObject(go);
 
-        PhotonView pv = go.AddComponent<PhotonView>();
-        PhotonTransformView ptv = go.AddComponent<PhotonTransformView>();
-        ptv.m_SynchronizePosition = true;
-        ptv.m_SynchronizeRotation = true;
-        ptv.m_SynchronizeScale = true;
-        PhotonAnimatorView pav = go.AddComponent<PhotonAnimatorView>();
-        List<PhotonAnimatorView.SynchronizedParameter> listParam = pav.GetSynchronizedParameters();
-        foreach (PhotonAnimatorView.SynchronizedParameter param in listParam)
-        {
-            param.SynchronizeType = PhotonAnimatorView.SynchronizeType.Discrete;
-        }
-        pv.ObservedComponents = new List<Component>();
-        pv.ObservedComponents.Add(ptv);
-        pv.ObservedComponents.Add(pav);
-
         if (!MRDataHolder.Instance.IsEdit)
         {
 
             //TODO: add necessary components for multiplayer mode
-            //PhotonView pv = go.AddComponent<PhotonView>();
-            //PhotonTransformView ptv = go.AddComponent<PhotonTransformView>();
-            //ptv.m_SynchronizePosition = true;
-            //ptv.m_SynchronizeRotation = true;
-            //ptv.m_SynchronizeScale = true;
-            //PhotonAnimatorView pav = go.AddComponent<PhotonAnimatorView>();
-            //List<PhotonAnimatorView.SynchronizedParameter> listParam = pav.GetSynchronizedParameters();
-            //foreach (PhotonAnimatorView.SynchronizedParameter param in listParam)
-            //{
-            //    param.SynchronizeType = PhotonAnimatorView.SynchronizeType.Discrete;
-            //}
-            //pv.ObservedComponents = new List<Component>();
-            //pv.ObservedComponents.Add(ptv);
-            //pv.ObservedComponents.Add(pav);
+            PhotonView pv = go.AddComponent<PhotonView>();
+            pv.ViewID = currentPVId++;
+            PhotonTransformView ptv = go.AddComponent<PhotonTransformView>();
+            ptv.m_SynchronizePosition = true;
+            ptv.m_SynchronizeRotation = true;
+            ptv.m_SynchronizeScale = true;
+            PhotonAnimatorView pav = go.AddComponent<PhotonAnimatorView>();
+            List<PhotonAnimatorView.SynchronizedParameter> listParam = pav.GetSynchronizedParameters();
+            foreach (PhotonAnimatorView.SynchronizedParameter param in listParam)
+            {
+                param.SynchronizeType = PhotonAnimatorView.SynchronizeType.Discrete;
+            }
+            pv.ObservedComponents = new List<Component>();
+            pv.ObservedComponents.Add(ptv);
+            pv.ObservedComponents.Add(pav);
+            go.AddComponent<SynchronizeEvent>();
         }
     }
     private void loadGameObject(ContextObject obj)
@@ -279,7 +272,7 @@ public class MRContextManager : MonoBehaviour
     {
         Context context = MRDataHolder.Instance.CurrentContext;
         string json = context.Content;
-        if (json.IsNullOrEmpty() || "{}".Equals(json))
+        if (json == null || "".Equals(json) || "{}".Equals(json))
         {
             json = MRDataHolder.Instance.DefaultContent;
         }

@@ -10,7 +10,7 @@ public class SynchronizeEvent : MonoBehaviour, IMixedRealityPointerHandler
 
     private BoxCollider boxCollider;
 
-    private bool isEnableCollider = false;
+    private bool isEnableCollider = true;
 
     // Start is called before the first frame update
     void Start()

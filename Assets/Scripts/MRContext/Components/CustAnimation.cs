@@ -3,7 +3,6 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-using UnityEditor;
 using UnityEngine;
 
 public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
@@ -51,17 +50,25 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
 
         if ((mode == EAnimMode.START || mode == EAnimMode.START_LOOP) && !MRDataHolder.Instance.IsEdit)
         {
-            foreach (AnimationClip ac in anim.runtimeAnimatorController.animationClips)
-            {
-                AnimationClipSettings setting = AnimationUtility.GetAnimationClipSettings(ac);
-                if (setting.loopTime != isLoop)
-                {
-                    setting.loopTime = IsLoop;
-                    Debug.Log(ac.name);
-                    Debug.Log(setting.loopTime);
-                    AnimationUtility.SetAnimationClipSettings(ac, setting);
-                }
-            }
+            //foreach (AnimationClip ac in anim.runtimeAnimatorController.animationClips)
+            //{
+            //    AnimationClipSettings setting = AnimationUtility.GetAnimationClipSettings(ac);
+            //    if (setting.loopTime != isLoop)
+            //    {
+            //        setting.loopTime = IsLoop;
+            //        Debug.Log(ac.name);
+            //        Debug.Log(setting.loopTime);
+            //        AnimationUtility.SetAnimationClipSettings(ac, setting);
+            //    }
+            //}
+            anim.SetTrigger(clipName);
+        }
+    }
+
+    public void FinishAnim()
+    {
+        if (isLoop)
+        {
             anim.SetTrigger(clipName);
         }
     }
@@ -128,14 +135,14 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
 
         updatePhotonAnimatorView();
 
-        foreach (AnimationClip ac in anim.runtimeAnimatorController.animationClips)
-        {
-            AnimationClipSettings setting = AnimationUtility.GetAnimationClipSettings(ac);
-            setting.loopTime = IsLoop;
-            Debug.Log(ac.name);
-            Debug.Log(setting.loopTime);
-            AnimationUtility.SetAnimationClipSettings(ac, setting);
-        }
+        //foreach (AnimationClip ac in anim.runtimeAnimatorController.animationClips)
+        //{
+        //    AnimationClipSettings setting = AnimationUtility.GetAnimationClipSettings(ac);
+        //    setting.loopTime = IsLoop;
+        //    Debug.Log(ac.name);
+        //    Debug.Log(setting.loopTime);
+        //    AnimationUtility.SetAnimationClipSettings(ac, setting);
+        //}
     }
 
     public void Play()
@@ -163,14 +170,14 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
             {
                 if ((mode == EAnimMode.CLICK || mode == EAnimMode.CLICK_LOOP) && !MRDataHolder.Instance.IsEdit)
                 {
-                    foreach (AnimationClip ac in anim.runtimeAnimatorController.animationClips)
-                    {
-                        AnimationClipSettings setting = AnimationUtility.GetAnimationClipSettings(ac);
-                        setting.loopTime = IsLoop;
-                        Debug.Log(ac.name);
-                        Debug.Log(setting.loopTime);
-                        AnimationUtility.SetAnimationClipSettings(ac, setting);
-                    }
+                    //foreach (AnimationClip ac in anim.runtimeAnimatorController.animationClips)
+                    //{
+                    //    AnimationClipSettings setting = AnimationUtility.GetAnimationClipSettings(ac);
+                    //    setting.loopTime = IsLoop;
+                    //    Debug.Log(ac.name);
+                    //    Debug.Log(setting.loopTime);
+                    //    AnimationUtility.SetAnimationClipSettings(ac, setting);
+                    //}
                     anim.SetTrigger(clipName);
                 }
             }
