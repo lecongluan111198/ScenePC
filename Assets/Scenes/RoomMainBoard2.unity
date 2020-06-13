@@ -27011,6 +27011,41 @@ PrefabInstance:
       propertyPath: keyboard
       value: 
       objectReference: {fileID: 1481419912}
+    - target: {fileID: 4337865900133675245, guid: 8a0a10e33259a0f4ca9d042557583f3d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337865900915888856, guid: 8a0a10e33259a0f4ca9d042557583f3d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337865900385430591, guid: 8a0a10e33259a0f4ca9d042557583f3d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337865899803625376, guid: 8a0a10e33259a0f4ca9d042557583f3d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1606869483000382243, guid: 8a0a10e33259a0f4ca9d042557583f3d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337865900898173752, guid: 8a0a10e33259a0f4ca9d042557583f3d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337865901787743642, guid: 8a0a10e33259a0f4ca9d042557583f3d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a0a10e33259a0f4ca9d042557583f3d, type: 3}
 --- !u!1 &1429983021
