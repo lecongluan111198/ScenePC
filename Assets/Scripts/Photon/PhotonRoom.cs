@@ -76,6 +76,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         //PhotonNetwork.NickName = myNumberInRoom.ToString();
         if (!PhotonNetwork.IsMasterClient)
         {
+            Debug.Log("Not master");
             return;
         }
         LoadWaitingRoomScene();

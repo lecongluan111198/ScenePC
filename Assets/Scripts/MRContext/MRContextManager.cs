@@ -215,22 +215,22 @@ public class MRContextManager : MonoBehaviour
         {
 
             //TODO: add necessary components for multiplayer mode
-            PhotonView pv = go.AddComponent<PhotonView>();
-            pv.ViewID = currentPVId++;
-            PhotonTransformView ptv = go.AddComponent<PhotonTransformView>();
-            ptv.m_SynchronizePosition = true;
-            ptv.m_SynchronizeRotation = true;
-            ptv.m_SynchronizeScale = true;
-            PhotonAnimatorView pav = go.AddComponent<PhotonAnimatorView>();
-            List<PhotonAnimatorView.SynchronizedParameter> listParam = pav.GetSynchronizedParameters();
-            foreach (PhotonAnimatorView.SynchronizedParameter param in listParam)
-            {
-                param.SynchronizeType = PhotonAnimatorView.SynchronizeType.Discrete;
-            }
-            pv.ObservedComponents = new List<Component>();
-            pv.ObservedComponents.Add(ptv);
-            pv.ObservedComponents.Add(pav);
-            go.AddComponent<SynchronizeEvent>();
+            //PhotonView pv = go.AddComponent<PhotonView>();
+            //pv.ViewID = currentPVId++;
+            //PhotonTransformView ptv = go.AddComponent<PhotonTransformView>();
+            //ptv.m_SynchronizePosition = true;
+            //ptv.m_SynchronizeRotation = true;
+            //ptv.m_SynchronizeScale = true;
+            //PhotonAnimatorView pav = go.AddComponent<PhotonAnimatorView>();
+            //List<PhotonAnimatorView.SynchronizedParameter> listParam = pav.GetSynchronizedParameters();
+            //foreach (PhotonAnimatorView.SynchronizedParameter param in listParam)
+            //{
+            //    param.SynchronizeType = PhotonAnimatorView.SynchronizeType.Discrete;
+            //}
+            //pv.ObservedComponents = new List<Component>();
+            //pv.ObservedComponents.Add(ptv);
+            //pv.ObservedComponents.Add(pav);
+            //go.AddComponent<SynchronizeEvent>();
         }
     }
     private void loadGameObject(ContextObject obj)
