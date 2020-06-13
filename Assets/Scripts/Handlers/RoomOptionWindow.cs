@@ -33,10 +33,11 @@ public class RoomOptionWindow : MonoBehaviour
     public void JoinRoom()
     {
         //SceneManager.LoadScene("HUD");
-        Debug.Log("Create room!");
+        Debug.Log("Join room!");
         PhotonLobby.instance.Connect((isConnect) => {
             if (isConnect)
             {
+                Debug.Log("Connect to server success!");
                 PhotonLobby.instance.JoinRoom(roomCode.text);
             }
             else

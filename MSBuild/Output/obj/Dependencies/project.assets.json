@@ -163,17 +163,17 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Library\\IT\\Thesis\\Unity\\ScenePC\\Assets\\ScenePC.Dependencies.msb4u.csproj",
+      "projectUniqueName": "F:\\Library\\IT\\Thesis\\Unity\\ScenePC - Copy\\Assets\\ScenePC.Dependencies.msb4u.csproj",
       "projectName": "ScenePC.Dependencies.msb4u",
-      "projectPath": "F:\\Library\\IT\\Thesis\\Unity\\ScenePC\\Assets\\ScenePC.Dependencies.msb4u.csproj",
+      "projectPath": "F:\\Library\\IT\\Thesis\\Unity\\ScenePC - Copy\\Assets\\ScenePC.Dependencies.msb4u.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "F:\\Library\\IT\\Thesis\\Unity\\ScenePC\\MSBuild\\Output\\obj\\Dependencies\\",
+      "outputPath": "F:\\Library\\IT\\Thesis\\Unity\\ScenePC - Copy\\MSBuild\\Output\\obj\\Dependencies\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "F:\\Library\\IT\\Thesis\\Unity\\ScenePC\\Assets\\NuGet.Config",
+        "F:\\Library\\IT\\Thesis\\Unity\\ScenePC - Copy\\Assets\\NuGet.Config",
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -188,8 +188,8 @@
       "frameworks": {
         "net46": {
           "projectReferences": {
-            "F:\\Library\\IT\\Thesis\\Unity\\ScenePC\\Assets\\MRTK\\MixedRealityToolkit.Providers\\WindowsMixedReality\\Shared\\DotNetAdapter\\DotNetAdapter.csproj": {
-              "projectPath": "F:\\Library\\IT\\Thesis\\Unity\\ScenePC\\Assets\\MRTK\\MixedRealityToolkit.Providers\\WindowsMixedReality\\Shared\\DotNetAdapter\\DotNetAdapter.csproj",
+            "F:\\Library\\IT\\Thesis\\Unity\\ScenePC - Copy\\Assets\\MRTK\\MixedRealityToolkit.Providers\\WindowsMixedReality\\Shared\\DotNetAdapter\\DotNetAdapter.csproj": {
+              "projectPath": "F:\\Library\\IT\\Thesis\\Unity\\ScenePC - Copy\\Assets\\MRTK\\MixedRealityToolkit.Providers\\WindowsMixedReality\\Shared\\DotNetAdapter\\DotNetAdapter.csproj",
               "privateAssets": "analyzers"
             }
           }
