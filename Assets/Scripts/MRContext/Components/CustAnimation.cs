@@ -63,7 +63,8 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
             //}
             if (PhotonNetwork.IsMasterClient)
             {
-                anim.SetTrigger(clipName);
+                //anim.SetTrigger(clipName);
+                anim.SetBool("test", true);
             }
         }
     }
@@ -72,7 +73,9 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
     {
         if (isLoop)
         {
-            anim.SetTrigger(clipName);
+            //anim.SetTrigger(clipName);
+            anim.SetBool("test", false);
+            anim.SetBool("test", true);
         }
     }
 
@@ -150,7 +153,8 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
 
     public void Play()
     {
-        anim.SetTrigger(clipName);
+        //anim.SetTrigger(clipName);
+        anim.SetBool("test", true);
     }
 
     public void OnPointerDown(MixedRealityPointerEventData eventData)
