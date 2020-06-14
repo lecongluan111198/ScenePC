@@ -192,6 +192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2012771761045262627}
   - component: {fileID: 2012771761045262626}
+  - component: {fileID: -7388409511722560126}
   m_Layer: 0
   m_Name: Surgery Room
   m_TagString: Untagged
@@ -230,6 +231,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 9.752747, y: 4.5994453, z: 0}
   m_Center: {x: 1.2856293, y: 2.020894, z: 7.0702477}
+--- !u!114 &-7388409511722560126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012771761045262624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &2012771761058667930
 GameObject:
   m_ObjectHideFlags: 0

@@ -251,12 +251,14 @@ public class MRContextManager : MonoBehaviour
             else
             {
                 GameObject loadedObj = Instantiate(Resources.Load(ResourceManager.MRPrefab + obj.nameDownload) as GameObject);
+                //GameObject loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, obj.nameDownload), transform.position, transform.rotation, 0);
                 updateObject(loadedObj, obj);
             }
         }
     }
     private void loadBackground(BackgroundObject bo)
     {
+        //GameObject go = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, bo.nameBackground), ConvertTypeUtils.listToVector3(bo.position), ConvertTypeUtils.listToQuaternion(bo.rotation), 0);
         GameObject go = Instantiate(Resources.Load(ResourceManager.MRPrefab + bo.nameBackground) as GameObject, ConvertTypeUtils.listToVector3(bo.position), ConvertTypeUtils.listToQuaternion(bo.rotation), GUI.transform);
         ObjBasicInfo bInfo = go.GetComponent<ObjBasicInfo>();
         if (bInfo == null)
