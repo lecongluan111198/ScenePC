@@ -5,10 +5,10 @@ using UnityEngine;
 public class Phase
 {
     public int nObject { get; set; }
-    public BackgroundObject backgroundObject { get; set; }
+    public ContextObject backgroundObject { get; set; }
     public List<ContextObject> Objects { get; set; }
 
-    public static Phase toPhase(BackgroundObject bo, List<ContextObject> objects)
+    public static Phase toPhase(ContextObject bo, List<ContextObject> objects)
     {
         Phase phase = null;
         if (bo != null && objects != null)

@@ -102,7 +102,10 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         {
             //load data
             if (PhotonNetwork.IsMasterClient)
-                MRContextManager.Instance.loadContext();
+            {
+                //MRContextManager.Instance.loadContext();
+                MRGamePlayManager.Instance.loadPlayContext();
+            }
             //create player
             //CreatePlayer();
         }
