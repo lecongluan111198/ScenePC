@@ -1,21 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "F:\\NamCuoiTryHard\\Unity\\ScenePC\\Assets\\ScenePC.Dependencies.msb4u.csproj": {}
+    "F:\\Library\\IT\\Thesis\\Unity\\ScenePC - Copy\\Assets\\ScenePC.Dependencies.msb4u.csproj": {}
   },
   "projects": {
-    "F:\\NamCuoiTryHard\\Unity\\ScenePC\\Assets\\ScenePC.Dependencies.msb4u.csproj": {
+    "F:\\Library\\IT\\Thesis\\Unity\\ScenePC - Copy\\Assets\\MRTK\\MixedRealityToolkit.Providers\\WindowsMixedReality\\Shared\\DotNetAdapter\\DotNetAdapter.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\NamCuoiTryHard\\Unity\\ScenePC\\Assets\\ScenePC.Dependencies.msb4u.csproj",
-        "projectName": "ScenePC.Dependencies.msb4u",
-        "projectPath": "F:\\NamCuoiTryHard\\Unity\\ScenePC\\Assets\\ScenePC.Dependencies.msb4u.csproj",
-        "packagesPath": "C:\\Users\\hvtham\\.nuget\\packages\\",
-        "outputPath": "F:\\NamCuoiTryHard\\Unity\\ScenePC\\MSBuild\\Output\\obj\\Dependencies\\",
+        "projectUniqueName": "F:\\Library\\IT\\Thesis\\Unity\\ScenePC - Copy\\Assets\\MRTK\\MixedRealityToolkit.Providers\\WindowsMixedReality\\Shared\\DotNetAdapter\\DotNetAdapter.csproj",
+        "projectName": "DotNetAdapter",
+        "projectPath": "F:\\Library\\IT\\Thesis\\Unity\\ScenePC - Copy\\Assets\\MRTK\\MixedRealityToolkit.Providers\\WindowsMixedReality\\Shared\\DotNetAdapter\\DotNetAdapter.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "F:\\Library\\IT\\Thesis\\Unity\\ScenePC - Copy\\Assets\\MRTK\\MixedRealityToolkit.Providers\\WindowsMixedReality\\Shared\\DotNetAdapter\\.obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "F:\\NamCuoiTryHard\\Unity\\ScenePC\\Assets\\NuGet.Config",
-          "C:\\Users\\hvtham\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "F:\\Library\\IT\\Thesis\\Unity\\ScenePC - Copy\\Assets\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +43,60 @@
       "frameworks": {
         "net46": {
           "dependencies": {
+            "Microsoft.Windows.MixedReality.DotNetWinRT": {
+              "suppressParent": "Analyzers",
+              "target": "Package",
+              "version": "[0.5.1045, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "F:\\Library\\IT\\Thesis\\Unity\\ScenePC - Copy\\Assets\\ScenePC.Dependencies.msb4u.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Library\\IT\\Thesis\\Unity\\ScenePC - Copy\\Assets\\ScenePC.Dependencies.msb4u.csproj",
+        "projectName": "ScenePC.Dependencies.msb4u",
+        "projectPath": "F:\\Library\\IT\\Thesis\\Unity\\ScenePC - Copy\\Assets\\ScenePC.Dependencies.msb4u.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "F:\\Library\\IT\\Thesis\\Unity\\ScenePC - Copy\\MSBuild\\Output\\obj\\Dependencies\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "F:\\Library\\IT\\Thesis\\Unity\\ScenePC - Copy\\Assets\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net46"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/UnityDeveloperTools/MSBuildForUnity/_packaging/UnityDeveloperTools/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net46": {
+            "projectReferences": {
+              "F:\\Library\\IT\\Thesis\\Unity\\ScenePC - Copy\\Assets\\MRTK\\MixedRealityToolkit.Providers\\WindowsMixedReality\\Shared\\DotNetAdapter\\DotNetAdapter.csproj": {
+                "projectPath": "F:\\Library\\IT\\Thesis\\Unity\\ScenePC - Copy\\Assets\\MRTK\\MixedRealityToolkit.Providers\\WindowsMixedReality\\Shared\\DotNetAdapter\\DotNetAdapter.csproj",
+                "privateAssets": "analyzers"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net46": {
+          "dependencies": {
             "MSBuildForUnity": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers",
               "suppressParent": "Analyzers",
@@ -47,7 +104,7 @@
               "version": "[0.9.1-*, 0.9.1]"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

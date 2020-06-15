@@ -27,7 +27,7 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
         {
             anim = gameObject.AddComponent<Animator>();
         }
-        anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(ResourceManager.AnimController + controllerName);
+        //anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(ResourceManager.AnimController + controllerName);
 
         if (anim.runtimeAnimatorController == null)
         {
@@ -61,7 +61,10 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
             //        AnimationUtility.SetAnimationClipSettings(ac, setting);
             //    }
             //}
-            anim.SetTrigger(clipName);
+            if (PhotonNetwork.IsMasterClient)
+            {
+                anim.SetTrigger(clipName);
+            }
         }
     }
 
@@ -97,7 +100,7 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
     private void updatePhotonAnimatorView()
     {
         PhotonAnimatorView pav = gameObject.GetComponent<PhotonAnimatorView>();
-        if(pav == null)
+        if (pav == null)
         {
             pav = gameObject.AddComponent<PhotonAnimatorView>();
         }
@@ -112,7 +115,7 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
             param.SynchronizeType = PhotonAnimatorView.SynchronizeType.Discrete;
         }
 
-        if(listLayers.Count != 0 && listParam.Count != 0)
+        if (listLayers.Count != 0 && listParam.Count != 0)
         {
             isDiscrete = true;
         }
