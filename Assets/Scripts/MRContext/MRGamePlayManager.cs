@@ -102,6 +102,7 @@ public class MRGamePlayManager : MonoBehaviour
         {
             //Debug.Log(co.nameDownload + " is null");
             //return;
+            go = GameObject.Find(co.nameObj);
         }
         Debug.Log(co.nameDownload);
 
