@@ -84,8 +84,8 @@ public class ConvertContextUtils
                 //GameObject loadedObj = Instantiate(Resources.Load(ResourceManager.MRPrefab + obj.nameDownload) as GameObject);
                 try
                 {
-                    loadedObj = GameObject.Instantiate(Resources.Load(ResourceManager.MRPrefab + obj.nameDownload) as GameObject);
-                    //loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, obj.nameDownload), Vector3.zero, Quaternion.identity, 0);
+                    //loadedObj = GameObject.Instantiate(Resources.Load(ResourceManager.MRPrefab + obj.nameDownload) as GameObject);
+                    loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, "Templates/Template"), Vector3.zero, Quaternion.identity, 0);
                 }
                 catch (Exception ex)
                 {
@@ -94,10 +94,10 @@ public class ConvertContextUtils
 
             }
 
-            if(loadedObj != null)
-            {
-                loadedObj.name = obj.nameObj;
-            }
+            //if(loadedObj != null)
+            //{
+            //    loadedObj.name = obj.nameObj;
+            //}
         }
         return loadedObj;
     }
