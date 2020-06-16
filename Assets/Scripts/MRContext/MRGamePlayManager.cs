@@ -96,6 +96,11 @@ public class MRGamePlayManager : MonoBehaviour
             Debug.Log("ContextObject is null");
         }
 
+        StartCoroutine(updateComponent(containerName, co, isBackground));
+    }
+
+    IEnumerator updateComponent(string containerName, ContextObject co, bool isBackground)
+    {
         GameObject container = GameObject.Find(containerName);
         GameObject go = GameObject.Find(co.nameObj);
         while (go == null)
@@ -103,6 +108,7 @@ public class MRGamePlayManager : MonoBehaviour
             //Debug.Log(co.nameDownload + " is null");
             //return;
             go = GameObject.Find(co.nameObj);
+            yield return null;
         }
         Debug.Log(co.nameDownload);
 
@@ -141,5 +147,6 @@ public class MRGamePlayManager : MonoBehaviour
         //go.AddComponent<SynchronizeEvent>();
 
         co.toGameObject(go);
+        yield return null;
     }
 }
