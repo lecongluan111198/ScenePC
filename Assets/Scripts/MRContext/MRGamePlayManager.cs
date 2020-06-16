@@ -108,8 +108,13 @@ public class MRGamePlayManager : MonoBehaviour
             //Debug.Log(co.nameDownload + " is null");
             //return;
             go = GameObject.Find(co.nameObj);
+            if(go == null)
+            {
+                go = GameObject.Find(co.nameObj + "(Clone)");
+            }
             yield return null;
         }
+        go.name = co.nameObj;
         Debug.Log(co.nameDownload);
 
         if (container != null)
