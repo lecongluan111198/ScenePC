@@ -300,7 +300,6 @@ GameObject:
   m_Component:
   - component: {fileID: 211081599474670814}
   - component: {fileID: 1068240513}
-  - component: {fileID: 890772999}
   m_Layer: 0
   m_Name: surgical_instruments
   m_TagString: Untagged
@@ -345,19 +344,6 @@ MonoBehaviour:
   id: 0
   downloadName: surgical_instruments
   fromServer: 0
---- !u!65 &890772999
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 211081599474670801}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.52479506, y: 0.75470495, z: 0.40406895}
-  m_Center: {x: 0.013112068, y: 0.3605665, z: -0.0058653355}
 --- !u!1001 &211081599203382488
 PrefabInstance:
   m_ObjectHideFlags: 0

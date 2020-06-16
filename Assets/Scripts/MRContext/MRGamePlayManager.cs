@@ -57,7 +57,12 @@ public class MRGamePlayManager : MonoBehaviour
         {
             json = MRDataHolder.Instance.DefaultContent;
         }
-        BinaryFormatter formater = new BinaryFormatter();
+        PV.RPC("loadObjects", RpcTarget.AllBuffered, json);
+    }
+
+    [PunRPC]
+    private void loadObjects(string json)
+    {
         //list phase
         List<ConvertContextUtils.ContextInfo> contextInfos = ConvertContextUtils.toGameObjects(json);
         if (contextInfos.Count == 0)
@@ -66,92 +71,74 @@ public class MRGamePlayManager : MonoBehaviour
             return;
         }
         //load phase 1
+        int viewId = 10;
         ConvertContextUtils.ContextInfo info = contextInfos[0];
         KeyValuePair<ContextObject, GameObject> bo = info.Bo;
-        using (var ms = new MemoryStream())
-        {
-            formater.Serialize(ms, bo.Key);
-            PV.RPC("updateMRObjectComponent", RpcTarget.AllBuffered, GUI.name, ms.ToArray(), true);
-        }
+        updateMRObjectComponent(GUI.name, bo.Key, true, viewId++);
         foreach (KeyValuePair<ContextObject, GameObject> entry in info.GameObjs)
         {
-            using (var ms = new MemoryStream())
-            {
-                formater.Serialize(ms, entry.Key);
-                PV.RPC("updateMRObjectComponent", RpcTarget.AllBuffered, container.name, ms.ToArray(), false);
-            }
+            updateMRObjectComponent(container.name, entry.Key, false, viewId++);
         }
     }
 
-    [PunRPC]
-    private void updateMRObjectComponent(string containerName, byte[] data, bool isBackground)
+    private void updateMRObjectComponent(string containerName, ContextObject co, bool isBackground, int viewId)
     {
-        ContextObject co = null;
-        using (var ms = new MemoryStream(data))
-        {
-            co = (ContextObject)(new BinaryFormatter()).Deserialize(ms);
-        }
-        if (co == null)
-        {
-            Debug.Log("ContextObject is null");
-        }
-
-        StartCoroutine(updateComponent(containerName, co, isBackground));
+        StartCoroutine(updateComponent(containerName, co, isBackground, viewId));
     }
 
-    IEnumerator updateComponent(string containerName, ContextObject co, bool isBackground)
+    IEnumerator updateComponent(string containerName, ContextObject co, bool isBackground, int viewId)
     {
         GameObject container = GameObject.Find(containerName);
         GameObject go = GameObject.Find(co.nameObj);
-        while (go == null)
+        if (go == null)
         {
-            //Debug.Log(co.nameDownload + " is null");
-            //return;
-            go = GameObject.Find(co.nameObj);
-            if(go == null)
+            go = GameObject.Find(co.nameObj + "(Clone)");
+        }
+        if (go == null)
+        {
+            Debug.Log(co.nameObj + " is null");
+        }
+        else
+        {
+            go.name = co.nameObj;
+            Debug.Log(co.nameDownload);
+
+            if (container != null)
             {
-                go = GameObject.Find(co.nameObj + "(Clone)");
+                go.transform.SetParent(container.transform);
             }
-            yield return null;
-        }
-        go.name = co.nameObj;
-        Debug.Log(co.nameDownload);
 
-        if (container != null)
-        {
-            go.transform.SetParent(container.transform);
-        }
+            //MR
+            if (!isBackground)
+            {
+                BoundingBox bbox = go.AddComponent<BoundingBox>();
+                bbox.Target = go.gameObject;
+                bbox.BoundsOverride = go.GetComponent<BoxCollider>();
+                ManipulationHandler mHandler = go.AddComponent<ManipulationHandler>();
+                mHandler.HostTransform = go.transform;
+                go.AddComponent<NearInteractionGrabbable>();
+            }
+            //Photon
+            //TODO: add necessary components for multiplayer mode
+            PhotonView pv = go.AddComponent<PhotonView>();
+            pv.ViewID = viewId;
+            PhotonTransformView ptv = go.AddComponent<PhotonTransformView>();
+            ptv.m_SynchronizePosition = true;
+            ptv.m_SynchronizeRotation = true;
+            ptv.m_SynchronizeScale = true;
+            PhotonAnimatorView pav = go.AddComponent<PhotonAnimatorView>();
+            List<PhotonAnimatorView.SynchronizedParameter> listParam = pav.GetSynchronizedParameters();
+            foreach (PhotonAnimatorView.SynchronizedParameter param in listParam)
+            {
+                param.SynchronizeType = PhotonAnimatorView.SynchronizeType.Discrete;
+            }
+            pv.ObservedComponents = new List<Component>();
+            pv.ObservedComponents.Add(ptv);
+            pv.ObservedComponents.Add(pav);
+            go.AddComponent<SynchronizeEvent>();
 
-        //MR
-        if (!isBackground)
-        {
-            BoundingBox bbox = go.AddComponent<BoundingBox>();
-            bbox.Target = go.gameObject;
-            bbox.BoundsOverride = go.GetComponent<BoxCollider>();
-            ManipulationHandler mHandler = go.AddComponent<ManipulationHandler>();
-            mHandler.HostTransform = go.transform;
-            go.AddComponent<NearInteractionGrabbable>();
+            co.toGameObject(go);
         }
-        //Photon
-        //TODO: add necessary components for multiplayer mode
-        //PhotonView pv = go.AddComponent<PhotonView>();
-        //pv.ViewID = currentPVId++;
-        //PhotonTransformView ptv = go.AddComponent<PhotonTransformView>();
-        //ptv.m_SynchronizePosition = true;
-        //ptv.m_SynchronizeRotation = true;
-        //ptv.m_SynchronizeScale = true;
-        //PhotonAnimatorView pav = go.AddComponent<PhotonAnimatorView>();
-        //List<PhotonAnimatorView.SynchronizedParameter> listParam = pav.GetSynchronizedParameters();
-        //foreach (PhotonAnimatorView.SynchronizedParameter param in listParam)
-        //{
-        //    param.SynchronizeType = PhotonAnimatorView.SynchronizeType.Discrete;
-        //}
-        //pv.ObservedComponents = new List<Component>();
-        //pv.ObservedComponents.Add(ptv);
-        //pv.ObservedComponents.Add(pav);
-        //go.AddComponent<SynchronizeEvent>();
-
-        co.toGameObject(go);
         yield return null;
     }
 }
