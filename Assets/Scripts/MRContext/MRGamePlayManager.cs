@@ -4,6 +4,8 @@ using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public class MRGamePlayManager : MonoBehaviour
@@ -30,12 +32,15 @@ public class MRGamePlayManager : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        PV = gameObject.GetComponent<PhotonView>();
+        Debug.Log(PV);
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        PV = gameObject.GetComponent<PhotonView>();
+
     }
 
     // Update is called once per frame
@@ -52,6 +57,7 @@ public class MRGamePlayManager : MonoBehaviour
         {
             json = MRDataHolder.Instance.DefaultContent;
         }
+        BinaryFormatter formater = new BinaryFormatter();
         //list phase
         List<ConvertContextUtils.ContextInfo> contextInfos = ConvertContextUtils.toGameObjects(json);
         if (contextInfos.Count == 0)
@@ -62,16 +68,33 @@ public class MRGamePlayManager : MonoBehaviour
         //load phase 1
         ConvertContextUtils.ContextInfo info = contextInfos[0];
         KeyValuePair<ContextObject, GameObject> bo = info.Bo;
-        PV.RPC("updateMRObjectComponent", RpcTarget.AllBuffered, GUI.name, bo.Key);
+        using (var ms = new MemoryStream())
+        {
+            formater.Serialize(ms, bo.Key);
+            PV.RPC("updateMRObjectComponent", RpcTarget.AllBuffered, GUI.name, ms.ToArray(), true);
+        }
         foreach (KeyValuePair<ContextObject, GameObject> entry in info.GameObjs)
         {
-            PV.RPC("updateMRObjectComponent", RpcTarget.AllBuffered, container.name, entry.Key);
+            using (var ms = new MemoryStream())
+            {
+                formater.Serialize(ms, entry.Key);
+                PV.RPC("updateMRObjectComponent", RpcTarget.AllBuffered, container.name, ms.ToArray(), false);
+            }
         }
     }
 
     [PunRPC]
-    private void updateMRObjectComponent(string containerName, ContextObject co)
+    private void updateMRObjectComponent(string containerName, byte[] data, bool isBackground)
     {
+        ContextObject co = null;
+        using (var ms = new MemoryStream(data))
+        {
+            co = (ContextObject)(new BinaryFormatter()).Deserialize(ms);
+        }
+        if (co == null)
+        {
+            Debug.Log("ContextObject is null");
+        }
         GameObject container = GameObject.Find(containerName);
         GameObject go = GameObject.Find(co.nameObj);
         if (go == null)
@@ -84,13 +107,15 @@ public class MRGamePlayManager : MonoBehaviour
         }
 
         //MR
-        BoundingBox bbox = go.AddComponent<BoundingBox>();
-        bbox.Target = go.gameObject;
-        bbox.BoundsOverride = go.GetComponent<BoxCollider>();
-        ManipulationHandler mHandler = go.AddComponent<ManipulationHandler>();
-        mHandler.HostTransform = go.transform;
-        go.AddComponent<NearInteractionGrabbable>();
-
+        if (!isBackground)
+        {
+            BoundingBox bbox = go.AddComponent<BoundingBox>();
+            bbox.Target = go.gameObject;
+            bbox.BoundsOverride = go.GetComponent<BoxCollider>();
+            ManipulationHandler mHandler = go.AddComponent<ManipulationHandler>();
+            mHandler.HostTransform = go.transform;
+            go.AddComponent<NearInteractionGrabbable>();
+        }
         //Photon
         //TODO: add necessary components for multiplayer mode
         //PhotonView pv = go.AddComponent<PhotonView>();
