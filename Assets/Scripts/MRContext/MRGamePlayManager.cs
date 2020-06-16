@@ -95,6 +95,8 @@ public class MRGamePlayManager : MonoBehaviour
         {
             Debug.Log("ContextObject is null");
         }
+        Debug.Log(co.nameDownload);
+
         GameObject container = GameObject.Find(containerName);
         GameObject go = GameObject.Find(co.nameObj);
         if (go == null)
