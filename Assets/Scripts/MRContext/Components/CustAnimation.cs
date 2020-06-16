@@ -27,7 +27,7 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
         {
             anim = gameObject.AddComponent<Animator>();
         }
-        //anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(ResourceManager.AnimController + controllerName);
+        anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(ResourceManager.AnimController + controllerName);
 
         if (anim.runtimeAnimatorController == null)
         {
