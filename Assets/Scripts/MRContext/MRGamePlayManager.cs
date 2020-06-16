@@ -101,6 +101,7 @@ public class MRGamePlayManager : MonoBehaviour
         GameObject go = GameObject.Find(co.nameObj);
         if (go == null)
         {
+            Debug.Log(co.nameDownload + " is null");
             return;
         }
         if (container != null)
