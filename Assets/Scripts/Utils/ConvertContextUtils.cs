@@ -84,7 +84,8 @@ public class ConvertContextUtils
                 //GameObject loadedObj = Instantiate(Resources.Load(ResourceManager.MRPrefab + obj.nameDownload) as GameObject);
                 try
                 {
-                    loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, obj.nameDownload), Vector3.zero, Quaternion.identity, 0);
+                    loadedObj = GameObject.Instantiate(Resources.Load(ResourceManager.MRPrefab + obj.nameDownload) as GameObject);
+                    //loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, obj.nameDownload), Vector3.zero, Quaternion.identity, 0);
                 }
                 catch (Exception ex)
                 {
