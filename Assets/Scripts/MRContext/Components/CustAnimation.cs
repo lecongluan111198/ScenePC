@@ -110,12 +110,12 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
         List<PhotonAnimatorView.SynchronizedLayer> listLayers = pav.GetSynchronizedLayers();
         foreach (PhotonAnimatorView.SynchronizedLayer layer in listLayers)
         {
-            layer.SynchronizeType = PhotonAnimatorView.SynchronizeType.Discrete;
+            layer.SynchronizeType = PhotonAnimatorView.SynchronizeType.Continuous;
         }
         List<PhotonAnimatorView.SynchronizedParameter> listParam = pav.GetSynchronizedParameters();
         foreach (PhotonAnimatorView.SynchronizedParameter param in listParam)
         {
-            param.SynchronizeType = PhotonAnimatorView.SynchronizeType.Discrete;
+            param.SynchronizeType = PhotonAnimatorView.SynchronizeType.Continuous;
         }
 
         if (listLayers.Count != 0 && listParam.Count != 0)
