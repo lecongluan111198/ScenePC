@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1270333919478152941}
   - component: {fileID: 5943120156720254068}
   - component: {fileID: 6240624629484285245}
-  - component: {fileID: 2457942988017173444}
+  - component: {fileID: -1664428257821495636}
   - component: {fileID: 7819613494581160279}
   m_Layer: 0
   m_Name: Template
@@ -63,7 +63,7 @@ Animator:
   m_GameObject: {fileID: 1448616350633974371}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c02da79776b0024b980f1efd8235938, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 5943120156720254068}
   - {fileID: 6240624629484285245}
-  - {fileID: 2457942988017173444}
+  - {fileID: -1664428257821495636}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 1
   m_TeleportIfDistanceGreaterThan: 3
---- !u!114 &2457942988017173444
+--- !u!114 &-1664428257821495636
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,8 +141,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters: []
-  m_SynchronizeLayers: []
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 2
+    Name: test
+  m_SynchronizeLayers:
+  - SynchronizeType: 2
+    LayerIndex: 0
 --- !u!114 &7819613494581160279
 MonoBehaviour:
   m_ObjectHideFlags: 0
