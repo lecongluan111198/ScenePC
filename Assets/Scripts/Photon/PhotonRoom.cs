@@ -32,13 +32,13 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
         else
         {
-            if(instance != this)
+            if (instance != this)
             {
                 Destroy(instance.gameObject);
                 instance = this;
@@ -98,10 +98,14 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     {
         //call when multiplayer scene is loaded
         currentScene = scene.name;
-        if(currentScene == waitingRoomScene)
+        if (currentScene == waitingRoomScene)
         {
             //load data
-            MRContextManager.Instance.loadContext();
+            if (PhotonNetwork.IsMasterClient)
+            {
+                //MRContextManager.Instance.loadContext();
+                MRGamePlayManager.Instance.loadPlayContext();
+            }
             //create player
             //CreatePlayer();
         }

@@ -14,9 +14,10 @@ using UnityEngine;
 
 public class MRContextManager : MonoBehaviour
 {
+    [Header("PHOTON")]
+    public PhotonView PV;
     [Header("CONTAINER")]
     public GameObject container;
-
     public GameObject GUI;
 
     [Header("PANEL")]
@@ -60,14 +61,12 @@ public class MRContextManager : MonoBehaviour
             loadContext();
     }
 
-
     public void ShowAnimation()
     {
         //TODO: get data from server and add to list of animations
 
         animationPanel.SetActive(true);
     }
-
     public void Record()
     {
         Debug.Log("Recording");
@@ -76,7 +75,6 @@ public class MRContextManager : MonoBehaviour
         animationPanel.SetActive(false);
         //questionPanel.SetActive(false);
     }
-
     public void ShowRecordOption()
     {
         Debug.Log("Show record option");
@@ -121,7 +119,7 @@ public class MRContextManager : MonoBehaviour
         }
         return bo;
     }
-    private List<Phase> toPhase(BackgroundObject bo, List<ContextObject> objects)
+    private List<Phase> toPhase(ContextObject bo, List<ContextObject> objects)
     {
         List<Phase> phases = new List<Phase>();
         Phase phrs = Phase.toPhase(bo, objects);
@@ -135,12 +133,13 @@ public class MRContextManager : MonoBehaviour
     }
     private RootObject exportRootObject()
     {
-        List<ContextObject> objects = toListObj();
-        Debug.Log(objects.Count);
-        BackgroundObject bo = toBackgroundObject();
-        List<Phase> phases = toPhase(bo, objects);
-        RootObject rootObject = toRoot(phases);
-        return rootObject;
+        //List<ContextObject> objects = toListObj();
+        //Debug.Log(objects.Count);
+        //BackgroundObject bo = toBackgroundObject();
+        //List<Phase> phases = toPhase(bo, objects);
+        //RootObject rootObject = toRoot(phases);
+        //return rootObject;
+        return null;
     }
     public void saveContext()
     {
@@ -171,24 +170,24 @@ public class MRContextManager : MonoBehaviour
 
     private void loadPhase(RootObject rootObject, int phaseIndex)
     {
-        List<Phase> listPhase = rootObject.Phases;
-        //load only 1 phase
-        if (listPhase != null && listPhase.Count > phaseIndex)
-        {
-            Phase phase = listPhase[phaseIndex];
-            BackgroundObject bo = phase.backgroundObject;
-            //load background
-            loadBackground(bo);
-            //load gameobject
-            foreach (ContextObject obj in phase.Objects)
-            {
-                loadGameObject(obj);
-            }
-        }
-        else
-        {
-            Debug.Log("Cannot load phase at " + phaseIndex);
-        }
+        //List<Phase> listPhase = rootObject.Phases;
+        ////load only 1 phase
+        //if (listPhase != null && listPhase.Count > phaseIndex)
+        //{
+        //    Phase phase = listPhase[phaseIndex];
+        //    BackgroundObject bo = phase.backgroundObject;
+        //    //load background
+        //    loadBackground(bo);
+        //    //load gameobject
+        //    foreach (ContextObject obj in phase.Objects)
+        //    {
+        //        loadGameObject(obj);
+        //    }
+        //}
+        //else
+        //{
+        //    Debug.Log("Cannot load phase at " + phaseIndex);
+        //}
     }
     private void updateObject(GameObject go, ContextObject obj)
     {
@@ -250,14 +249,17 @@ public class MRContextManager : MonoBehaviour
             }
             else
             {
-                GameObject loadedObj = Instantiate(Resources.Load(ResourceManager.MRPrefab + obj.nameDownload) as GameObject);
+                //GameObject loadedObj = Instantiate(Resources.Load(ResourceManager.MRPrefab + obj.nameDownload) as GameObject);
+                GameObject loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, obj.nameDownload), transform.position, transform.rotation, 0);
                 updateObject(loadedObj, obj);
             }
         }
     }
     private void loadBackground(BackgroundObject bo)
     {
-        GameObject go = Instantiate(Resources.Load(ResourceManager.MRPrefab + bo.nameBackground) as GameObject, ConvertTypeUtils.listToVector3(bo.position), ConvertTypeUtils.listToQuaternion(bo.rotation), GUI.transform);
+        GameObject go = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, bo.nameBackground), ConvertTypeUtils.listToVector3(bo.position), ConvertTypeUtils.listToQuaternion(bo.rotation), 0);
+        //GameObject go = Instantiate(Resources.Load(ResourceManager.MRPrefab + bo.nameBackground) as GameObject, ConvertTypeUtils.listToVector3(bo.position), ConvertTypeUtils.listToQuaternion(bo.rotation), GUI.transform);
+        go.transform.SetParent(GUI.transform);
         ObjBasicInfo bInfo = go.GetComponent<ObjBasicInfo>();
         if (bInfo == null)
         {

@@ -10,6 +10,7 @@ public class RecordTransform : MonoBehaviour, IMixedRealityPointerHandler
     private long intervalTime;
     private List<ObjectStatus> listStatuses;
 
+    [Serializable]
     public class ObjectStatus
     {
         List<double> position;

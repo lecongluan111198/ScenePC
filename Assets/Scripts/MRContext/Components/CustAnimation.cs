@@ -27,7 +27,7 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
         {
             anim = gameObject.AddComponent<Animator>();
         }
-        //anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(ResourceManager.AnimController + controllerName);
+        anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(ResourceManager.AnimController + controllerName);
 
         if (anim.runtimeAnimatorController == null)
         {
@@ -63,16 +63,19 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
             //}
             if (PhotonNetwork.IsMasterClient)
             {
-                anim.SetTrigger(clipName);
+                //anim.SetTrigger(clipName);
+                anim.SetBool("test", true);
             }
         }
     }
 
     public void FinishAnim()
     {
+        anim.SetBool("test", false);
         if (isLoop)
         {
-            anim.SetTrigger(clipName);
+            //anim.SetTrigger(clipName);
+            anim.SetBool("test", true);
         }
     }
 
@@ -107,12 +110,12 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
         List<PhotonAnimatorView.SynchronizedLayer> listLayers = pav.GetSynchronizedLayers();
         foreach (PhotonAnimatorView.SynchronizedLayer layer in listLayers)
         {
-            layer.SynchronizeType = PhotonAnimatorView.SynchronizeType.Discrete;
+            layer.SynchronizeType = PhotonAnimatorView.SynchronizeType.Continuous;
         }
         List<PhotonAnimatorView.SynchronizedParameter> listParam = pav.GetSynchronizedParameters();
         foreach (PhotonAnimatorView.SynchronizedParameter param in listParam)
         {
-            param.SynchronizeType = PhotonAnimatorView.SynchronizeType.Discrete;
+            param.SynchronizeType = PhotonAnimatorView.SynchronizeType.Continuous;
         }
 
         if (listLayers.Count != 0 && listParam.Count != 0)
@@ -150,7 +153,8 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
 
     public void Play()
     {
-        anim.SetTrigger(clipName);
+        //anim.SetTrigger(clipName);
+        anim.SetBool("test", true);
     }
 
     public void OnPointerDown(MixedRealityPointerEventData eventData)
@@ -181,7 +185,8 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
                     //    Debug.Log(setting.loopTime);
                     //    AnimationUtility.SetAnimationClipSettings(ac, setting);
                     //}
-                    anim.SetTrigger(clipName);
+                    //anim.SetTrigger(clipName);
+                    anim.SetBool("test", true);
                 }
             }
             finally
