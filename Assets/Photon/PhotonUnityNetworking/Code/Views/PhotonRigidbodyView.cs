@@ -73,7 +73,9 @@ namespace Photon.Pun
             }
             else
             {
-                this.m_NetworkPosition = (Vector3)stream.ReceiveNext();
+                object obj = stream.ReceiveNext();
+                Debug.Log(obj.GetType());
+                this.m_NetworkPosition = (Vector3)obj;
                 this.m_NetworkRotation = (Quaternion)stream.ReceiveNext();
 
                 if (this.m_TeleportEnabled)
