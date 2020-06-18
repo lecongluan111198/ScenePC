@@ -71,10 +71,10 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
 
     public void FinishAnim()
     {
+        anim.SetBool("test", false);
         if (isLoop)
         {
             //anim.SetTrigger(clipName);
-            anim.SetBool("test", false);
             anim.SetBool("test", true);
         }
     }
@@ -185,7 +185,8 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
                     //    Debug.Log(setting.loopTime);
                     //    AnimationUtility.SetAnimationClipSettings(ac, setting);
                     //}
-                    anim.SetTrigger(clipName);
+                    //anim.SetTrigger(clipName);
+                    anim.SetBool("test", true);
                 }
             }
             finally
