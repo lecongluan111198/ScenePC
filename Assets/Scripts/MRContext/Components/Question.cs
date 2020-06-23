@@ -7,14 +7,6 @@ using UnityEngine.UI;
 
 public class Question : MonoBehaviour
 {
-    public string Ques;
-    public List<string> listChoose;
-    public int ans;
-
-    //private string questionText = "ABC la gi?";
-    //private List<string> choose = new List<string> { "Dap an A","Dap an B","Dap an C"};
-    //private int answer = 1;
-
     private string questionText;
     private List<string> choose;
     private int answer;
@@ -23,28 +15,31 @@ public class Question : MonoBehaviour
     public List<string> Choose { get => choose; set => choose = value; }
     public int Answer { get => answer; set => answer = value; }
 
+    private float t = 0.5f;
     public void Start()
     {
-        
+
     }
     void Update()
     {
-        if (Input.GetKey(KeyCode.P))
-        {
-            showQuestion();
-        }   
     }
 
     public void showQuestion()
     {
-        questionText = Ques;
-        choose = listChoose;
-        answer = ans;
-        string path = @"Prefabs/UI/MenuQuestion";
-        GameObject menuQuestion = Instantiate(Resources.Load(path) as GameObject);
-        menuQuestion.GetComponentInChildren<Text>().text = QuestionText;
-        menuQuestion.GetComponent<AddQuestionToMenu>().questionText = QuestionText;
-        menuQuestion.GetComponent<AddQuestionToMenu>().choose = Choose;
-        menuQuestion.GetComponent<AddQuestionToMenu>().answer = Answer;
+        //get position
+        Vector3 src = gameObject.transform.position;
+        Vector3 dest = Camera.main.transform.position;
+        Vector3 newPos = new Vector3();
+        newPos.x = src.x + (dest.x - src.x) * t;
+        newPos.y = src.y + (dest.y - src.y) * t;
+        newPos.z = src.z + (dest.z - src.z) * t;
+        newPos.y += 0.6f;
+        GameObject menuQuestion = Instantiate(Resources.Load(ResourceManager.MRCanvasPrefab + "MenuQuestion") as GameObject);
+        menuQuestion.transform.position = newPos;
+        MenuQuestionPanel panel = menuQuestion.GetComponent<MenuQuestionPanel>();
+        if(panel != null)
+        {
+            panel.updateInfomation(this);
+        }
     }
 }

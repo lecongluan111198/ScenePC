@@ -107,6 +107,7 @@ public class MRGamePlayManager : MonoBehaviour
 
         //update mesh to template object
         updateMesh(co.nameDownload, go);
+        ConvertContextUtils.addComponent<ObjectSetting>(go);
 
         go.name = co.nameObj;
 
@@ -118,12 +119,12 @@ public class MRGamePlayManager : MonoBehaviour
         //MR
         if (!isBackground)
         {
-            BoundingBox bbox = go.AddComponent<BoundingBox>();
+            BoundingBox bbox = addComponent<BoundingBox>(go);
             bbox.Target = go.gameObject;
             bbox.BoundsOverride = go.GetComponent<BoxCollider>();
-            ManipulationHandler mHandler = go.AddComponent<ManipulationHandler>();
+            ManipulationHandler mHandler = addComponent<ManipulationHandler>(go);
             mHandler.HostTransform = go.transform;
-            go.AddComponent<NearInteractionGrabbable>();
+            addComponent<NearInteractionGrabbable>(go);
         }
         else
         {
@@ -190,7 +191,7 @@ public class MRGamePlayManager : MonoBehaviour
         T comDest = dest.GetComponent<T>();
         if (comDest == null)
         {
-            comDest = dest.AddComponent<T>();
+            comDest = addComponent<T>(dest);
         }
         ConvertTypeUtils.GetCopyOf(comDest, comSrc);
         //FieldInfo[] fields = type.GetFields();
@@ -199,7 +200,7 @@ public class MRGamePlayManager : MonoBehaviour
         //    field.SetValue(comDest, field.GetValue(comSrc));
         //}
     }
-    
+
 
     private void getAndUpdateTransform(GameObject src, GameObject dest)
     {
@@ -212,7 +213,7 @@ public class MRGamePlayManager : MonoBehaviour
         MeshRenderer com = src.GetComponent<MeshRenderer>();
         if (com != null)
         {
-            MeshRenderer newCom = dest.AddComponent<MeshRenderer>();
+            MeshRenderer newCom = addComponent<MeshRenderer>(dest);
             newCom.materials = com.materials;
 
             newCom.shadowCastingMode = com.shadowCastingMode;
@@ -235,96 +236,13 @@ public class MRGamePlayManager : MonoBehaviour
         }
     }
 
-    //public void loadPlayContext()
-    //{
-    //    currentContext = MRDataHolder.Instance.CurrentContext;
-    //    string json = currentContext.Content;
-    //    if (json == null || "".Equals(json) || "{}".Equals(json))
-    //    {
-    //        json = MRDataHolder.Instance.DefaultContent;
-    //    }
-    //    PV.RPC("loadObjects", RpcTarget.AllBuffered, json);
-    //}
-
-    //[PunRPC]
-    //private void loadObjects(string json)
-    //{
-    //    //list phase
-    //    List<ConvertContextUtils.ContextInfo> contextInfos = ConvertContextUtils.toGameObjects(json);
-    //    if (contextInfos.Count == 0)
-    //    {
-    //        Debug.Log("Convert to ContextInfos error!");
-    //        return;
-    //    }
-    //    //load phase 1
-    //    int viewId = 10;
-    //    ConvertContextUtils.ContextInfo info = contextInfos[0];
-    //    KeyValuePair<ContextObject, GameObject> bo = info.Bo;
-    //    updateMRObjectComponent(GUI.name, bo.Key, true, viewId++);
-    //    foreach (KeyValuePair<ContextObject, GameObject> entry in info.GameObjs)
-    //    {
-    //        updateMRObjectComponent(container.name, entry.Key, false, viewId++);
-    //    }
-    //}
-
-    //private void updateMRObjectComponent(string containerName, ContextObject co, bool isBackground, int viewId)
-    //{
-    //    StartCoroutine(updateComponent(containerName, co, isBackground, viewId));
-    //}
-
-    //IEnumerator updateComponent(string containerName, ContextObject co, bool isBackground, int viewId)
-    //{
-    //    GameObject container = GameObject.Find(containerName);
-    //    GameObject go = GameObject.Find(co.nameObj);
-    //    if (go == null)
-    //    {
-    //        go = GameObject.Find(co.nameObj + "(Clone)");
-    //    }
-    //    if (go == null)
-    //    {
-    //        Debug.Log(co.nameObj + " is null");
-    //    }
-    //    else
-    //    {
-    //        go.name = co.nameObj;
-    //        Debug.Log(co.nameDownload);
-
-    //        if (container != null)
-    //        {
-    //            go.transform.SetParent(container.transform);
-    //        }
-
-    //        //MR
-    //        if (!isBackground)
-    //        {
-    //            BoundingBox bbox = go.AddComponent<BoundingBox>();
-    //            bbox.Target = go.gameObject;
-    //            bbox.BoundsOverride = go.GetComponent<BoxCollider>();
-    //            ManipulationHandler mHandler = go.AddComponent<ManipulationHandler>();
-    //            mHandler.HostTransform = go.transform;
-    //            go.AddComponent<NearInteractionGrabbable>();
-    //        }
-    //        //Photon
-    //        //TODO: add necessary components for multiplayer mode
-    //        PhotonView pv = go.AddComponent<PhotonView>();
-    //        pv.ViewID = viewId;
-    //        PhotonTransformView ptv = go.AddComponent<PhotonTransformView>();
-    //        ptv.m_SynchronizePosition = true;
-    //        ptv.m_SynchronizeRotation = true;
-    //        ptv.m_SynchronizeScale = true;
-    //        PhotonAnimatorView pav = go.AddComponent<PhotonAnimatorView>();
-    //        List<PhotonAnimatorView.SynchronizedParameter> listParam = pav.GetSynchronizedParameters();
-    //        foreach (PhotonAnimatorView.SynchronizedParameter param in listParam)
-    //        {
-    //            param.SynchronizeType = PhotonAnimatorView.SynchronizeType.Discrete;
-    //        }
-    //        pv.ObservedComponents = new List<Component>();
-    //        pv.ObservedComponents.Add(ptv);
-    //        pv.ObservedComponents.Add(pav);
-    //        go.AddComponent<SynchronizeEvent>();
-
-    //        co.toGameObject(go);
-    //    }
-    //    yield return null;
-    //}
+    private T addComponent<T>(GameObject go) where T : Component
+    {
+        T com = go.GetComponent<T>();
+        if (com == null)
+        {
+            com = go.AddComponent<T>();
+        }
+        return com;
+    }
 }

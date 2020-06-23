@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class ResourceManager
 {
-    public static string MRPrefab = "Prefabs/MR/";
+    public static string MRPrefab = @"Prefabs/MR/";
+    public static string MRCanvasPrefab = @"Prefabs/MRPanels/Canvases/";
     public static string AnimController = @"Animations/MR/";
+    public static string Avatar = MRPrefab + @"Avatars/";
 
     public static List<string> COURSE_AVATARS = new List<string>()
     {

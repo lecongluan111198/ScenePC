@@ -20,10 +20,7 @@ public class RecordOption : MonoBehaviour
 
     private void OnEnable()
     {
-        currentObject = MRContextManager.Instance.CurrentObject;
-        Vector3 cameraPos = Camera.main.transform.position;
-        Vector3 distance = MRDataHolder.Instance.Distance;
-        transform.position = new Vector3(cameraPos.x + distance.x, cameraPos.y + distance.y, cameraPos.z + distance.z - 0.15f);
+        currentObject = MRDataHolder.Instance.CurrentClickObject;
     }
 
     public void Play()

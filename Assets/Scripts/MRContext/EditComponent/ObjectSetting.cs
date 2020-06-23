@@ -14,18 +14,8 @@ public class ObjectSetting : MonoBehaviour, IMixedRealityPointerHandler
     // Start is called before the first frame update
     void Start()
     {
-        settingPanel = MRContextManager.Instance.settingPanel;
-        settingMennu = settingPanel.GetComponent<SettingMenuPanel>();
-        //settingPanel = gameObject.transform.Fi
-        //foreach (Transform child in transform)
-        //{
-        //    if (child.name.Equals(MRDataHolder.Instance.SettingPanelName))
-        //    {
-        //        //Debug.Log("Child found. Mame: " + eachChild.name);
-        //        settingPanel = child.gameObject;
-        //        settingPanel.SetActive(false);
-        //    }
-        //}
+        //settingPanel = MRContextManager.Instance.settingPanel;
+        //settingMennu = settingPanel.GetComponent<SettingMenuPanel>();
     }
 
     // Update is called once per frame
@@ -35,7 +25,9 @@ public class ObjectSetting : MonoBehaviour, IMixedRealityPointerHandler
         {
             //TODO: show setting panel
             //settingMennu.CurrentObject = gameObject;
-            settingPanel.SetActive(true);
+            MRDataHolder.Instance.CurrentClickObject = gameObject;
+            //settingPanel.SetActive(true);
+            TagAlongManager.Instance.ControllerOut();
             //TODO: set transform directly with player
             isDown = false;
         }
@@ -53,7 +45,7 @@ public class ObjectSetting : MonoBehaviour, IMixedRealityPointerHandler
     public void OnPointerDown(MixedRealityPointerEventData eventData)
     {
         isDown = !isDown;
-        MRContextManager.Instance.CurrentObject = gameObject;
+        //MRContextManager.Instance.CurrentObject = gameObject;
     }
 
     public void OnPointerDragged(MixedRealityPointerEventData eventData)

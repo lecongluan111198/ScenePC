@@ -31,12 +31,9 @@ public class QuestionComponent : AbstractComponent
         try
         {
             Question qs = component as Question;
-            //qs.QuestionText = this.QuestionText;
-            //qs.Choose = Choose;
-            //qs.Answer = Answer;
-            qs.Ques = this.QuestionText;
-            qs.listChoose = Choose;
-            qs.ans = Answer;
+            qs.QuestionText = this.QuestionText;
+            qs.Choose = Choose;
+            qs.Answer = Answer;
         }
         catch (Exception ex)
         {
