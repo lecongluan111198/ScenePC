@@ -16,28 +16,32 @@ public class RecordTransform : MonoBehaviour, IMixedRealityPointerHandler
         List<double> position;
         List<double> rotation;
         List<double> scale;
+        float timeRange;
 
         public ObjectStatus()
         {
         }
 
-        public ObjectStatus(List<double> position, List<double> rotation, List<double> scale)
+        public ObjectStatus(List<double> position, List<double> rotation, List<double> scale, float timeRange)
         {
             this.Position = position;
             this.Rotation = rotation;
             this.Scale = scale;
+            this.TimeRange = timeRange;
         }
 
-        public ObjectStatus(Vector3 position, Quaternion rotation, Vector3 scale)
+        public ObjectStatus(Vector3 position, Quaternion rotation, Vector3 scale, float timeRange)
         {
             this.Position = ConvertTypeUtils.vector3ToList(position);
             this.Rotation = ConvertTypeUtils.quaternionToList(rotation);
             this.Scale = ConvertTypeUtils.vector3ToList(scale);
+            this.TimeRange = timeRange;
         }
 
         public List<double> Position { get => position; set => position = value; }
         public List<double> Rotation { get => rotation; set => rotation = value; }
         public List<double> Scale { get => scale; set => scale = value; }
+        public float TimeRange { get => timeRange; set => timeRange = value; }
     }
 
     // Start is called before the first frame update
@@ -52,6 +56,19 @@ public class RecordTransform : MonoBehaviour, IMixedRealityPointerHandler
     void Update()
     {
 
+    }
+
+    private void FixedUpdate()
+    {
+        if (MRDataHolder.Instance.IsRecord)
+        {
+            //record
+            if (listStatuses.Count > Math.Round(5f / Time.fixedDeltaTime))
+            {
+                listStatuses.RemoveAt(0);
+            }
+            listStatuses.Add(new ObjectStatus(transform.localPosition, transform.localRotation, transform.localScale, 0f));
+        }
     }
 
     public void EnableStartRecord()
@@ -69,7 +86,7 @@ public class RecordTransform : MonoBehaviour, IMixedRealityPointerHandler
         {
             //TODO: start thread for recording its transform
             MRDataHolder.Instance.IsRecord = true;
-            StartCoroutine("recordingTransform");
+            //StartCoroutine("recordingTransform");
         }
     }
 
@@ -93,32 +110,59 @@ public class RecordTransform : MonoBehaviour, IMixedRealityPointerHandler
             }
             recordAnim.Mode = EAnimMode.CLICK;
             recordAnim.ListStatuses = listStatuses;
-            recordAnim.Interval = intervalTime;
 
             //TODO: active record option
-            MRContextManager.Instance.ShowRecordOption();
+            //MRContextManager.Instance.ShowRecordOption();
+            SettingMenuPanel.Instance.ShowRecordOption();
         }
     }
 
     IEnumerator recordingTransform()
     {
-        long startTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-        long current = 0;
+        //long startTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+        //long current = 0;
+        //while (isStart)
+        //{
+        //    current = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+        //    if (current - startTime >= intervalTime)
+        //    {
+        //        startTime = current;
+        //        StartCoroutine("saveTransform");
+        //    }
+        //    yield return null;
+        //}
+
+        float startTime = Time.time;
+        float current = 0;
+        float range = intervalTime * 1.0f / 1000;
         while (isStart)
         {
-            current = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-            if(current - startTime >= intervalTime)
+            current = Time.time;
+            Debug.Log(current - startTime);
+            if (current - startTime >= range)
             {
                 startTime = current;
                 StartCoroutine("saveTransform");
             }
             yield return null;
         }
+
+        //float startTime = Time.time;
+        //float timeSinceStarted = 0;
+        //while (isStart)
+        //{
+        //    timeSinceStarted = Time.time - startTime;
+        //    StartCoroutine(saveTransform(timeSinceStarted));
+        //    Debug.Log(timeSinceStarted);
+        //    startTime = Time.time;
+        //    yield return null;
+        //}
     }
 
     IEnumerator saveTransform()
     {
-        listStatuses.Add(new ObjectStatus(transform.localPosition, transform.localRotation, transform.localScale));
+        float timeRange = 0f;
+        listStatuses.Add(new ObjectStatus(transform.localPosition, transform.localRotation, transform.localScale, timeRange));
         yield return null;
     }
 

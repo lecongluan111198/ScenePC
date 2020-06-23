@@ -80,7 +80,7 @@ public class ContextObject
         RecordAnimation recordAnim = go.GetComponent<RecordAnimation>();
         if(recordAnim != null)
         {
-            abComponents.Add(new RecordAnimComponent("RECORD", recordAnim.Mode, recordAnim.Interval, recordAnim.ListStatuses));
+            abComponents.Add(new RecordAnimComponent("RECORD", recordAnim.Mode, recordAnim.ListStatuses));
         }
         return abComponents;
     }

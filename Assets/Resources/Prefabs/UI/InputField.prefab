@@ -454,9 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65c7917835d8a04b94c8b906234b09e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputFieldAnimator: {fileID: 4477652090515832765}
   fieldTrigger: {fileID: 4573243645336266355}
-  inputText: {fileID: 4532021325316408121}
 --- !u!95 &4477652090515832765
 Animator:
   serializedVersion: 3
@@ -568,38 +566,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "C\xF4ng T\u1EED Ta C\u01B0\u1EDBi Ch\xE0ng Ch\u1EAFc R\u1ED3i l\xE0 t\xE1c
-    ph\u1EA9m ng\xF4n t\xECnh c\u1ED5 trang v\u1EDBi s\u1EF1 g\xF3p m\u1EB7t c\u1EE7a
-    d\xE0n di\u1EC5n vi\xEAn tr\u1EBB th\u1EF1c l\u1EF1c. Tuy kh\xF4ng ph\u1EA3i do
-    d\xE0n sao h\u1EA1ng A \u0111\u1EA3m nh\u1EADn, nh\u01B0ng b\u1ED9 phim m\u1EDBi
-    \u0111\u01B0\u1EE3c c\u1EA3i bi\xEAn t\u1EEB ti\u1EC3u thuy\u1EBFt \u201CKim Ch\u1EE7
-    \u0110\u1EA1i Nh\xE2n Xin H\xE3y T\u1EF1 Tr\u1ECDng\u201D c\u1EE7a t\xE1c gi\u1EA3
-    \u0110\xE0o Qu\xE1n n\xE0y, v\u1EABn th\xE0nh c\xF4ng \u0111\u1ED1n tim kh\xE1n
-    gi\u1EA3, t\u1EA1o n\xEAn nh\u1EEFng ti\u1EBFng c\u01B0\u1EDDi vui v\u1EBB, s\u1EA3ng
-    kho\xE1i.\r\n\r\nB\u1ED9 phim b\u1EAFt \u0111\u1EA7u khi c\xF4 n\xE0ng Di\u1EC7p
-    Ti\u1EC3u \u0110\u01B0\u1EDDng \u0111\xE1nh m\u1EA5t tinh th\u1EA1ch t\u1EA1o
-    gi\u1EA5c m\u01A1. C\xF4 n\xE0ng thi\xEAn kim ti\u1EC3u th\u01B0 nh\xE0 gi\xE0u
-    bu\u1ED9c ph\u1EA3i tuy\u1EC3n r\u1EC3 tr\u01B0\u1EDBc hai m\u01B0\u01A1i tu\u1ED5i.
-    Th\xEC m\u1EDBi c\xF3 th\u1EC3 k\xE9o d\xE0i m\u1EA1ng s\u1ED1ng. Nh\u01B0ng tr\xE1i
-    tim c\xF4 n\xE0ng l\u1EA1i m\u1ED9t l\xF2ng h\u01B0\u1EDBng \u0111\u1EBFn th\u01B0
-    sinh l\u1EA1nh l\xF9ng M\u1ED9 C\u1EA9n Ng\xF4n. V\xEC v\u1EADy Ti\u1EC3u \u0110\u01B0\u1EDDng
-    quy\u1EBFt t\xE2m t\xECm m\u1ECDi c\xE1ch \u0111\u1EC3 theo \u0111u\u1ED5i anh
-    ch\xE0ng. V\xE0 k\xE9o anh v\u1EC1 l\xE0m r\u1EC3. C\xF4 n\xE0ng ho\xE0n to\xE0n
-    kh\xF4ng ng\u1EDD r\u1EB1ng. Theo \u0111u\u1ED5i C\u1EA9n Ng\xF4n \u0111\xE2u
-    ch\u01B0a th\u1EA5y, nh\u01B0ng h\u1ECDa \u0111\xE0o hoa th\xEC \u0111\xE3 t\xECm
-    \u0111\u1EBFn r\u1ED3i. Ho\xE0ng t\u1EED L\u0103ng T\u1EED Nhi\xEAn \u0111\xF9ng
-    \u0111\xF9ng xu\u1EA5t hi\u1EC7n, c\xF4ng khai theo \u0111u\u1ED5i c\xF4 n\xE0ng.\r\n\r\nM\u1ED9t
-    ng\xE0y n\u1ECD, m\u1ED9t v\u1EE5 \xE1n k\u1EF3 l\u1EA1 \u0111\xE3 x\u1EA3y ra.
-    \u0110\u1ED3ng th\u1EDDi, khi\u1EBFn v\u1EADn m\u1EC7nh c\u1EE7a ba ng\u01B0\u1EDDi
-    h\u1ECD bu\u1ED9c l\u1EA1i chung v\u1EDBi nhau. N\u1EBFu nh\u01B0 T\u1EED Nhi\xEAn
-    v\u1EABn m\u1EB7t d\xE0y b\xE1m ri\u1EBFt khi\u1EBFn ng\u01B0\u1EDDi ng\u01B0\u1EDDi
-    ch\xE1n n\u1EA3n. Th\xEC Ti\u1EC3u \u0110\u01B0\u1EDDng v\u1EABn n\u1ED7 l\u1EF1c
-    theo \u0111u\u1ED5i lang qu\xE2n b\u1EB1ng c\xE1ch ph\u1EE5 gi\xFAp ph\xE1 \xE1n.
-    H\u1ECD c\u0169ng kh\xF4ng ng\u1EDD r\u1EB1ng s\u1ED1 m\u1EC7nh \u0111\xE3 \u0111\u1ECBnh
-    s\u1EB5n, s\u1EBD chia l\xECa \u0111\xF4i l\u1EE9a. Li\u1EC7u \u0111\u1EBFn cu\u1ED1i
-    c\xF9ng, m\u1ED1i t\xECnh tay ba s\u1EBD k\u1EBFt th\xFAc ra sao? H\u1ECD c\xF3
-    th\u1EC3 th\xE0nh c\xF4ng thay \u0111\u1ED5i s\u1ED1 m\u1EC7nh? Hai ng\u01B0\u1EDDi
-    y\xEAu nhau li\u1EC7u c\xF3 th\u1EC3 v\u1EC1 b\xEAn nhau?\u200B"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -668,14 +635,14 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 4532662227086714373}
-    characterCount: 1326
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 294
-    wordCount: 295
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 13
-    pageCount: 1
-    materialCount: 2
+    lineCount: 0
+    pageCount: 0
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}

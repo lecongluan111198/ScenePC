@@ -13,6 +13,10 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (keyboard.isActiveAndEnabled)
+            {
+                keyboard.Close();
+            }
             keyboard.PresentKeyboard();
 
             keyboard.OnClosed += DisableKeyboard;

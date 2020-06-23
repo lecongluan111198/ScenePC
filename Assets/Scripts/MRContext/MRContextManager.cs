@@ -270,6 +270,7 @@ public class MRContextManager : MonoBehaviour
         bInfo.FromServer = false;
 
     }
+
     public void loadContext()
     {
         Context context = MRDataHolder.Instance.CurrentContext;

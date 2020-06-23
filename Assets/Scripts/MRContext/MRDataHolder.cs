@@ -15,6 +15,7 @@ public class MRDataHolder
     private bool isMR;
     private bool isEdit;
     private bool isRecord;
+    private GameObject currentClickObject;
 
     public static MRDataHolder Instance
     {
@@ -47,7 +48,7 @@ public class MRDataHolder
         isEdit = true;
         IsRecord = false;
         settingPanelName = "SettingPanel";
-        recordInterval = 500; //ms
+        recordInterval = 250; //ms
         distance = new Vector3(0, 0.2f, 1.5f);
     }
 
@@ -70,4 +71,5 @@ public class MRDataHolder
     public long RecordInterval { get => recordInterval; set => recordInterval = value; }
     public Vector3 Distance { get => distance; set => distance = value; }
     public bool IsRecord { get => isRecord; set => isRecord = value; }
+    public GameObject CurrentClickObject { get => currentClickObject; set => currentClickObject = value; }
 }

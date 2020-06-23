@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class ConvertContextUtils
 {
+    private static bool templete = true;
     public class ContextInfo
     {
         KeyValuePair<ContextObject, GameObject> bo;
@@ -17,8 +18,9 @@ public class ConvertContextUtils
         public List<KeyValuePair<ContextObject, GameObject>> GameObjs { get => gameObjs; set => gameObjs = value; }
     }
 
-    public static List<ContextInfo> toGameObjects(string json)
+    public static List<ContextInfo> toGameObjects(string json, bool loadTemplate = true)
     {
+        templete = loadTemplate;
         List<ContextInfo> ret = new List<ContextInfo>();
         RootObject root = JSONUtils.toObject<RootObject>(json);
         foreach (Phase phase in root.Phases)
@@ -81,13 +83,19 @@ public class ConvertContextUtils
             }
             else
             {
-                //GameObject loadedObj = Instantiate(Resources.Load(ResourceManager.MRPrefab + obj.nameDownload) as GameObject);
-                try
+                if (templete)
                 {
-                    //loadedObj = GameObject.Instantiate(Resources.Load(ResourceManager.MRPrefab + obj.nameDownload) as GameObject);
-                    loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, "Templates/Template"), Vector3.zero, Quaternion.identity, 0);
+                    try
+                    {
+                        //loadedObj = GameObject.Instantiate(Resources.Load(ResourceManager.MRPrefab + obj.nameDownload) as GameObject);
+                        loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, "Templates/Template"), Vector3.zero, Quaternion.identity, 0);
+                    }
+                    catch (Exception ex)
+                    {
+                        loadedObj = GameObject.Instantiate(Resources.Load(ResourceManager.MRPrefab + obj.nameDownload) as GameObject);
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
                     loadedObj = GameObject.Instantiate(Resources.Load(ResourceManager.MRPrefab + obj.nameDownload) as GameObject);
                 }
@@ -100,5 +108,15 @@ public class ConvertContextUtils
             //}
         }
         return loadedObj;
+    }
+
+    public static T addComponent<T>(GameObject go) where T : Component
+    {
+        T com = go.GetComponent<T>();
+        if (com == null)
+        {
+            com = go.AddComponent<T>();
+        }
+        return com;
     }
 }
