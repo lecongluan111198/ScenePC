@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public PhotonView PV;
     public Animator anim;
+    public TextMesh username;
 
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         Debug.Log("mine " + PV.IsMine);
+        username.text = AccountInfo.Instance.Username;
         //if (PV.IsMine)
         //{
         //    Camera.main.transform.localPosition = new Vector3(0, 0.64f, -0.071f);
