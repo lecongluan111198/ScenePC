@@ -114,12 +114,13 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     private void CreatePlayer()
     {
         //creates players network controller but not player character
-        if (PV.IsMine)
-        {
+        //if (PV.IsMine)
+        //{
             Debug.Log("Create player");
             GameObject player = PhotonNetwork.Instantiate(ResourceManager.Avatar + "ThirdPersonController", new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
             player.transform.SetParent(Camera.main.transform);
-        }
+            player.transform.localPosition = new Vector3(0f, 0f, -0.1f);
+        //}
     }
 
     public void StartGame()

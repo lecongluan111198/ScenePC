@@ -74,7 +74,6 @@ namespace Photon.Pun
             else
             {
                 object obj = stream.ReceiveNext();
-                Debug.Log(obj.GetType());
                 this.m_NetworkPosition = (Vector3)obj;
                 this.m_NetworkRotation = (Quaternion)stream.ReceiveNext();
 

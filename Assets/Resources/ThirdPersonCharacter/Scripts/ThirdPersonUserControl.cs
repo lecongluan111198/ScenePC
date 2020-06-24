@@ -37,10 +37,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             if (!m_Jump)
             {
-                if (Input.GetKey(KeyCode.Space))
-                {
-                    m_Jump = true;
-                }
+                //if (Input.GetKey(KeyCode.Space))
+                //{
+                //    m_Jump = true;
+                //}
             }
         }
 
