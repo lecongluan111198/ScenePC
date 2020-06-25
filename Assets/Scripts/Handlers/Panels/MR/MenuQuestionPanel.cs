@@ -7,6 +7,7 @@ public class MenuQuestionPanel : MonoBehaviour
 {
     public Text question;
     public Text[] answers;
+    public Image[] ansColors;
     private int correctAns;
 
     private void OnEnable()
@@ -30,12 +31,19 @@ public class MenuQuestionPanel : MonoBehaviour
         {
             //show correct ans
             Debug.Log("correct");
+            ansColors[ans].color = Color.green;
         }
         else
         {
             //show wrong ans
             Debug.Log("wrong");
+            ansColors[ans].color = Color.red;
         }
+    }
+
+    public void Close()
+    {
+        gameObject.SetActive(false);
     }
 
 }
