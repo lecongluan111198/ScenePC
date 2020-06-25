@@ -4,9 +4,8 @@ namespace Michsky.UI.Frost
 {
     public class TooltipManager : MonoBehaviour
     {
-        [Header("RESOURCES")]
-        [SerializeField]
         private Camera UICamera;
+        [Header("RESOURCES")]
         public GameObject tooltipObject;
         public GameObject tooltipContent;
         public RectTransform tooltipHelper;
@@ -29,6 +28,7 @@ namespace Michsky.UI.Frost
 
         void Start()
         {
+            UICamera = Camera.main;
             tooltipObject.SetActive(true);
             tooltipRect = tooltipObject.GetComponent<RectTransform>();
             // tooltipContent.transform.localPosition = tooltipPosition;

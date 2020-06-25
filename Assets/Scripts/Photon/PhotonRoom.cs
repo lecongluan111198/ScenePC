@@ -14,9 +14,9 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     private PhotonView PV;
 
     //public bool isGameLoaded;
-    public string currentScene;
+    public string currentScene = "";
     public string waitingRoomScene;
-    public string playRoomScene;
+    public string gamePlayScene;
 
     private string roomName;
 
@@ -47,6 +47,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
         DontDestroyOnLoad(this.gameObject);
         PV = GetComponent<PhotonView>();
+        SceneManager.LoadScene(currentScene, LoadSceneMode.Additive);
     }
 
 
@@ -73,13 +74,14 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         //photonPlayers = PhotonNetwork.PlayerList;
         //playersInRoom = photonPlayers.Length;
         //myNumberInRoom = playersInRoom;
-        //PhotonNetwork.NickName = myNumberInRoom.ToString();
+        PhotonNetwork.NickName = AccountInfo.Instance.Username;
         if (!PhotonNetwork.IsMasterClient)
         {
             Debug.Log("Not master");
             return;
         }
-        LoadWaitingRoomScene();
+        //LoadWaitingRoomScene();
+        LoadGamePlayScene();
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -90,15 +92,31 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     private void LoadWaitingRoomScene()
     {
-        Debug.Log("Loading level");
+        Debug.Log("Loading WaitingRoomScene");
+        Debug.Log(currentScene);
+        if (currentScene != null && currentScene != "")
+        {
+            SceneManager.UnloadSceneAsync(currentScene);
+        }
         PhotonNetwork.LoadLevel(waitingRoomScene);
+    }
+
+    private void LoadGamePlayScene()
+    {
+        Debug.Log("Loading GamePlayScene");
+        Debug.Log(currentScene);
+        if (currentScene != null && currentScene != "")
+        {
+            SceneManager.UnloadSceneAsync(currentScene);
+        }
+        PhotonNetwork.LoadLevel(gamePlayScene);
     }
 
     private void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         //call when multiplayer scene is loaded
         currentScene = scene.name;
-        if (currentScene == waitingRoomScene)
+        if (currentScene == gamePlayScene)
         {
             //load data
             if (PhotonNetwork.IsMasterClient)
@@ -109,6 +127,11 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
             //create player
             CreatePlayer();
         }
+        else if (currentScene == waitingRoomScene)
+        {
+            //load waiting room
+
+        }
     }
 
     private void CreatePlayer()
@@ -116,21 +139,21 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         //creates players network controller but not player character
         //if (PV.IsMine)
         //{
-            Debug.Log("Create player");
-            GameObject player = PhotonNetwork.Instantiate(ResourceManager.Avatar + "ThirdPersonController", new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
-            player.transform.SetParent(Camera.main.transform);
-            player.transform.localPosition = new Vector3(0f, 0f, -0.1f);
+        Debug.Log("Create player");
+        GameObject player = PhotonNetwork.Instantiate(ResourceManager.Avatar + "ThirdPersonController", new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
+        player.transform.SetParent(Camera.main.transform);
+        player.transform.localPosition = new Vector3(0f, 0f, -0.1f);
         //}
     }
 
-    public void StartGame()
-    {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            //load play scene
-            PhotonNetwork.LoadLevel(playRoomScene);
-        }
-    }
+    //public void StartGame()
+    //{
+    //    if (PhotonNetwork.IsMasterClient)
+    //    {
+    //        //load play scene
+    //        PhotonNetwork.LoadLevel(currentScene, mainBoardScene);
+    //    }
+    //}
 
     public void LeaveRoom()
     {

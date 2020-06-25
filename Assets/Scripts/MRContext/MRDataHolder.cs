@@ -16,6 +16,7 @@ public class MRDataHolder
     private bool isEdit;
     private bool isRecord;
     private GameObject currentClickObject;
+    private string currentScene;
 
     public static MRDataHolder Instance
     {
@@ -72,4 +73,5 @@ public class MRDataHolder
     public Vector3 Distance { get => distance; set => distance = value; }
     public bool IsRecord { get => isRecord; set => isRecord = value; }
     public GameObject CurrentClickObject { get => currentClickObject; set => currentClickObject = value; }
+    public string CurrentScene { get => currentScene; set => currentScene = value; }
 }
