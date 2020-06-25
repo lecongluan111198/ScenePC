@@ -40,6 +40,11 @@ public class PlayerController : MonoBehaviour
         //}
     }
 
+    public void SetUserName(string name)
+    {
+        username.text = name;
+    }
+
     private void FixedUpdate()
     {
         //if (PV.IsMine)

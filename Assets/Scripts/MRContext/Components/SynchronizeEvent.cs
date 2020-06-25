@@ -6,8 +6,7 @@ using UnityEngine;
 
 public class SynchronizeEvent : MonoBehaviour, IMixedRealityPointerHandler
 {
-    public PhotonView PV;
-
+    private PhotonView PV;
     private BoxCollider boxCollider;
 
     private bool isEnableCollider = true;
