@@ -48,18 +48,17 @@ public class MREditContextManager : MonoBehaviour
         {
             GameObject go = entry.Value;
             go.transform.parent = container.transform;
-            if (MRDataHolder.Instance.IsMR)
-            {
-                BoundingBox bbox = go.AddComponent<BoundingBox>();
-                bbox.Target = go.gameObject;
-                bbox.BoundsOverride = go.GetComponent<BoxCollider>();
-                ManipulationHandler mHandler = go.AddComponent<ManipulationHandler>();
-                mHandler.HostTransform = go.transform;
-                go.AddComponent<NearInteractionGrabbable>();
-                //add record MR
-                go.AddComponent<RecordTransform>();
-                go.AddComponent<ObjectSetting>();
-            }
+
+            BoundingBox bbox = go.AddComponent<BoundingBox>();
+            bbox.Target = go.gameObject;
+            bbox.BoundsOverride = go.GetComponent<BoxCollider>();
+            ManipulationHandler mHandler = go.AddComponent<ManipulationHandler>();
+            mHandler.HostTransform = go.transform;
+            go.AddComponent<NearInteractionGrabbable>();
+            //add record MR
+            go.AddComponent<RecordTransform>();
+            go.AddComponent<ObjectSetting>();
+
             entry.Key.toGameObject(go);
         }
     }

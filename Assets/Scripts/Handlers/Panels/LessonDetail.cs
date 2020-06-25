@@ -60,7 +60,7 @@ public class LessonDetail : MonoBehaviour
     public void EditLesson()
     {
         MRDataHolder.Instance.IsEdit = true;
-        SceneManager.LoadScene("MREdit");
+        LoadSceneManager.Instance.LoadScene(LoadSceneManager.SceneType.MREDIT, false);
     }
 
     public void DeleteLesson()

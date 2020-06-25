@@ -192,21 +192,20 @@ public class MRContextManager : MonoBehaviour
     private void updateObject(GameObject go, ContextObject obj)
     {
         go.transform.parent = container.transform;
-        if (MRDataHolder.Instance.IsMR)
+
+        BoundingBox bbox = go.AddComponent<BoundingBox>();
+        bbox.Target = go.gameObject;
+        bbox.BoundsOverride = go.GetComponent<BoxCollider>();
+        ManipulationHandler mHandler = go.AddComponent<ManipulationHandler>();
+        mHandler.HostTransform = go.transform;
+        go.AddComponent<NearInteractionGrabbable>();
+        //add record MR
+        if (MRDataHolder.Instance.IsEdit)
         {
-            BoundingBox bbox = go.AddComponent<BoundingBox>();
-            bbox.Target = go.gameObject;
-            bbox.BoundsOverride = go.GetComponent<BoxCollider>();
-            ManipulationHandler mHandler = go.AddComponent<ManipulationHandler>();
-            mHandler.HostTransform = go.transform;
-            go.AddComponent<NearInteractionGrabbable>();
-            //add record MR
-            if (MRDataHolder.Instance.IsEdit)
-            {
-                go.AddComponent<RecordTransform>();
-                go.AddComponent<ObjectSetting>();
-            }
+            go.AddComponent<RecordTransform>();
+            go.AddComponent<ObjectSetting>();
         }
+
 
         obj.toGameObject(go);
 

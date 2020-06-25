@@ -9,14 +9,9 @@ public class MRDataHolder
     private static MRDataHolder instance = null;
     private string defaultContent;
     private Context currentContext;
-    private string settingPanelName;
-    private long recordInterval; //ms
-    private Vector3 distance;
-    private bool isMR;
     private bool isEdit;
     private bool isRecord;
     private GameObject currentClickObject;
-    private string currentScene;
 
     public static MRDataHolder Instance
     {
@@ -45,12 +40,8 @@ public class MRDataHolder
             TeacherId = 1,
             Author = "Luan Lee"
         };
-        isMR = true;
         isEdit = true;
         IsRecord = false;
-        settingPanelName = "SettingPanel";
-        recordInterval = 250; //ms
-        distance = new Vector3(0, 0.2f, 1.5f);
     }
 
     public void updateCurrentContext(Context currentContext, bool isEdit = true)
@@ -66,12 +57,7 @@ public class MRDataHolder
 
     public Context CurrentContext { get => currentContext; set => currentContext = value; }
     public string DefaultContent { get => defaultContent; set => defaultContent = value; }
-    public bool IsMR { get => isMR; set => isMR = value; }
     public bool IsEdit { get => isEdit; set => isEdit = value; }
-    public string SettingPanelName { get => settingPanelName; set => settingPanelName = value; }
-    public long RecordInterval { get => recordInterval; set => recordInterval = value; }
-    public Vector3 Distance { get => distance; set => distance = value; }
     public bool IsRecord { get => isRecord; set => isRecord = value; }
     public GameObject CurrentClickObject { get => currentClickObject; set => currentClickObject = value; }
-    public string CurrentScene { get => currentScene; set => currentScene = value; }
 }

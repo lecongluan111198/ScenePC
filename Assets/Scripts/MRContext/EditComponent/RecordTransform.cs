@@ -7,7 +7,6 @@ using UnityEngine;
 public class RecordTransform : MonoBehaviour, IMixedRealityPointerHandler
 {
     private bool isStart;
-    private long intervalTime;
     private List<ObjectStatus> listStatuses;
 
     [Serializable]
@@ -48,7 +47,6 @@ public class RecordTransform : MonoBehaviour, IMixedRealityPointerHandler
     void Start()
     {
         isStart = false;
-        intervalTime = MRDataHolder.Instance.RecordInterval;
         listStatuses = new List<ObjectStatus>();
     }
 
@@ -115,55 +113,6 @@ public class RecordTransform : MonoBehaviour, IMixedRealityPointerHandler
             //MRContextManager.Instance.ShowRecordOption();
             SettingMenuPanel.Instance.ShowRecordOption();
         }
-    }
-
-    IEnumerator recordingTransform()
-    {
-        //long startTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-        //long current = 0;
-        //while (isStart)
-        //{
-        //    current = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-        //    if (current - startTime >= intervalTime)
-        //    {
-        //        startTime = current;
-        //        StartCoroutine("saveTransform");
-        //    }
-        //    yield return null;
-        //}
-
-        float startTime = Time.time;
-        float current = 0;
-        float range = intervalTime * 1.0f / 1000;
-        while (isStart)
-        {
-            current = Time.time;
-            Debug.Log(current - startTime);
-            if (current - startTime >= range)
-            {
-                startTime = current;
-                StartCoroutine("saveTransform");
-            }
-            yield return null;
-        }
-
-        //float startTime = Time.time;
-        //float timeSinceStarted = 0;
-        //while (isStart)
-        //{
-        //    timeSinceStarted = Time.time - startTime;
-        //    StartCoroutine(saveTransform(timeSinceStarted));
-        //    Debug.Log(timeSinceStarted);
-        //    startTime = Time.time;
-        //    yield return null;
-        //}
-    }
-
-    IEnumerator saveTransform()
-    {
-        float timeRange = 0f;
-        listStatuses.Add(new ObjectStatus(transform.localPosition, transform.localRotation, transform.localScale, timeRange));
-        yield return null;
     }
 
 }

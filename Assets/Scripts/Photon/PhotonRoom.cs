@@ -14,9 +14,9 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     private PhotonView PV;
 
     //public bool isGameLoaded;
-    public string currentScene = "";
-    public string waitingRoomScene;
-    public string gamePlayScene;
+    //public string currentScene = "";
+    //public string waitingRoomScene;
+    //public string gamePlayScene;
 
     private string roomName;
 
@@ -47,7 +47,6 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
         DontDestroyOnLoad(this.gameObject);
         PV = GetComponent<PhotonView>();
-        SceneManager.LoadScene(currentScene, LoadSceneMode.Additive);
     }
 
 
@@ -93,30 +92,33 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     private void LoadWaitingRoomScene()
     {
         Debug.Log("Loading WaitingRoomScene");
-        Debug.Log(currentScene);
-        if (currentScene != null && currentScene != "")
-        {
-            SceneManager.UnloadSceneAsync(currentScene);
-        }
-        PhotonNetwork.LoadLevel(waitingRoomScene);
+        //Debug.Log(currentScene);
+        //if (currentScene != null && currentScene != "")
+        //{
+        //    SceneManager.UnloadSceneAsync(currentScene);
+        //}
+        //PhotonNetwork.LoadLevel(waitingRoomScene);
+        LoadSceneManager.Instance.LoadScene(LoadSceneManager.SceneType.WAITING, true);
     }
 
     private void LoadGamePlayScene()
     {
         Debug.Log("Loading GamePlayScene");
-        Debug.Log(currentScene);
-        if (currentScene != null && currentScene != "")
-        {
-            SceneManager.UnloadSceneAsync(currentScene);
-        }
-        PhotonNetwork.LoadLevel(gamePlayScene);
+        //Debug.Log(currentScene);
+        //if (currentScene != null && currentScene != "")
+        //{
+        //    SceneManager.UnloadSceneAsync(currentScene);
+        //}
+        //PhotonNetwork.LoadLevel(gamePlayScene);
+
+        LoadSceneManager.Instance.LoadScene(LoadSceneManager.SceneType.GAMEPLAY, true);
     }
 
     private void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         //call when multiplayer scene is loaded
-        currentScene = scene.name;
-        if (currentScene == gamePlayScene)
+        //currentScene = scene.name;
+        if (LoadSceneManager.Instance.CurrentScene == LoadSceneManager.Instance.gamePlayScene)
         {
             //load data
             if (PhotonNetwork.IsMasterClient)
@@ -127,7 +129,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
             //create player
             CreatePlayer();
         }
-        else if (currentScene == waitingRoomScene)
+        else if (LoadSceneManager.Instance.CurrentScene == LoadSceneManager.Instance.waitingRoomScene)
         {
             //load waiting room
 
