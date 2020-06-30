@@ -1,0 +1,2 @@
+F:\NamCuoiTryHard\Luận Văn\ScenePC-master\ScenePC\Assets\Dependencies\netstandard2.0\ScenePC.Dependencies.msb4u.deps.json
+F:\NamCuoiTryHard\Luận Văn\ScenePC-master\ScenePC\MSBuild\Output\obj\Dependencies\Release\netstandard2.0\ScenePC.Dependencies.msb4u.csprojAssemblyReference.cache

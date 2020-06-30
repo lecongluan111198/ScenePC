@@ -1,25 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "F:\\NamCuoiTryHard\\Unity\\ScenePC\\Assets\\ScenePC.Dependencies.msb4u.csproj": {}
+    "F:\\NamCuoiTryHard\\Luận Văn\\ScenePC-master\\ScenePC\\Assets\\ScenePC.Dependencies.msb4u.csproj": {}
   },
   "projects": {
-    "F:\\NamCuoiTryHard\\Unity\\ScenePC\\Assets\\ScenePC.Dependencies.msb4u.csproj": {
+    "F:\\NamCuoiTryHard\\Luận Văn\\ScenePC-master\\ScenePC\\Assets\\ScenePC.Dependencies.msb4u.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\NamCuoiTryHard\\Unity\\ScenePC\\Assets\\ScenePC.Dependencies.msb4u.csproj",
+        "projectUniqueName": "F:\\NamCuoiTryHard\\Luận Văn\\ScenePC-master\\ScenePC\\Assets\\ScenePC.Dependencies.msb4u.csproj",
         "projectName": "ScenePC.Dependencies.msb4u",
-        "projectPath": "F:\\NamCuoiTryHard\\Unity\\ScenePC\\Assets\\ScenePC.Dependencies.msb4u.csproj",
+        "projectPath": "F:\\NamCuoiTryHard\\Luận Văn\\ScenePC-master\\ScenePC\\Assets\\ScenePC.Dependencies.msb4u.csproj",
         "packagesPath": "C:\\Users\\hvtham\\.nuget\\packages\\",
-        "outputPath": "F:\\NamCuoiTryHard\\Unity\\ScenePC\\MSBuild\\Output\\obj\\Dependencies\\",
+        "outputPath": "F:\\NamCuoiTryHard\\Luận Văn\\ScenePC-master\\ScenePC\\MSBuild\\Output\\obj\\Dependencies\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "F:\\NamCuoiTryHard\\Unity\\ScenePC\\Assets\\NuGet.Config",
+          "F:\\NamCuoiTryHard\\Luận Văn\\ScenePC-master\\ScenePC\\Assets\\NuGet.Config",
           "C:\\Users\\hvtham\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net46"
+          "netstandard2.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -27,7 +27,7 @@
           "https://pkgs.dev.azure.com/UnityDeveloperTools/MSBuildForUnity/_packaging/UnityDeveloperTools/nuget/v3/index.json": {}
         },
         "frameworks": {
-          "net46": {
+          "netstandard2.0": {
             "projectReferences": {}
           }
         },
@@ -38,15 +38,31 @@
         }
       },
       "frameworks": {
-        "net46": {
+        "netstandard2.0": {
           "dependencies": {
             "MSBuildForUnity": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers",
               "suppressParent": "Analyzers",
               "target": "Package",
               "version": "[0.9.1-*, 0.9.1]"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "Analyzers",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
             }
           },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.102\\RuntimeIdentifierGraph.json"
         }
       }
