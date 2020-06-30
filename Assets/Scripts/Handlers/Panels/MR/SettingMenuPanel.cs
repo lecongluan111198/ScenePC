@@ -10,6 +10,8 @@ public class SettingMenuPanel : MonoBehaviour
     public GameObject notifyRecord;
     public GameObject questionPanel;
     public GameObject recordOptionPanel;
+    public GameObject tooltipPanel;
+    public GameObject tooltipSettingPanel;
 
     public static SettingMenuPanel Instance = null;
 
@@ -52,22 +54,39 @@ public class SettingMenuPanel : MonoBehaviour
 
         //TODO: get data from server and add to list of animations
         animationPanel.SetActive(true);
+        TagAlongManager.Instance.ControllerOff();
     }
 
     public void RecordAnim()
     {
         //TODO: show notify recording animation
         notifyRecord.SetActive(true);
+        TagAlongManager.Instance.ControllerOff();
     }
 
     public void ShowRecordOption()
     {
         recordOptionPanel.SetActive(true);
+        TagAlongManager.Instance.ControllerOff();
     }
 
     public void AddQuestion()
     {
         questionPanel.SetActive(true);
+        TagAlongManager.Instance.ControllerOff();
+    }
+
+    public void ShowTooltipMenu()
+    {
+        tooltipPanel.SetActive(true);
+        TagAlongManager.Instance.ControllerOff();
+    }
+
+    public void ShowTooltipSetting(string itemName)
+    {
+        tooltipSettingPanel.SetActive(true);
+        tooltipSettingPanel.GetComponent<TooltipSettingPanel>().objName.text = itemName;
+        TagAlongManager.Instance.ControllerOff();
     }
 
     public void Close()

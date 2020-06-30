@@ -82,6 +82,12 @@ public class ContextObject
         {
             abComponents.Add(new RecordAnimComponent("RECORD", recordAnim.Mode, recordAnim.ListStatuses));
         }
+
+        MRTooltip tooltip = go.GetComponent<MRTooltip>();
+        if(tooltip != null && tooltip.TooltipDetails.Count != 0)
+        {
+            abComponents.Add(new TooltipComponent("TOOLTIP", tooltip.TooltipDetails));
+        }
         return abComponents;
     }
 

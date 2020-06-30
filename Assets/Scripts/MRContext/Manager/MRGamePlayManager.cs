@@ -15,6 +15,14 @@ public class MRGamePlayManager : MonoBehaviour
     public GameObject container;
     public GameObject GUI;
 
+    [Header("HOLOLEN2")]
+    public Material handleMaterial;
+    public Material handleGrabbedMaterial;
+    public GameObject scaleHandlePrefab;
+    public GameObject scaleHandleSlatePrefab;
+    public GameObject rotationHandlePrefab;
+
+
     private PhotonView PV;
     private Context currentContext;
 
@@ -122,6 +130,11 @@ public class MRGamePlayManager : MonoBehaviour
             BoundingBox bbox = addComponent<BoundingBox>(go);
             bbox.Target = go.gameObject;
             bbox.BoundsOverride = go.GetComponent<BoxCollider>();
+            bbox.HandleMaterial = handleMaterial;
+            bbox.HandleGrabbedMaterial = handleGrabbedMaterial;
+            bbox.ScaleHandlePrefab = scaleHandlePrefab;
+            bbox.ScaleHandleSlatePrefab = scaleHandleSlatePrefab;
+            bbox.RotationHandleSlatePrefab = rotationHandlePrefab;
             ManipulationHandler mHandler = addComponent<ManipulationHandler>(go);
             mHandler.HostTransform = go.transform;
             addComponent<NearInteractionGrabbable>(go);
@@ -244,5 +257,11 @@ public class MRGamePlayManager : MonoBehaviour
             com = go.AddComponent<T>();
         }
         return com;
+    }
+
+    public void Exit()
+    {
+        PhotonRoom.instance.LeaveRoom();
+        LoadSceneManager.Instance.LoadScene(LoadSceneManager.SceneType.MAINBOARD, false);
     }
 }

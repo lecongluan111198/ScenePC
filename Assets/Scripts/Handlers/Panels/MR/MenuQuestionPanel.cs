@@ -44,6 +44,7 @@ public class MenuQuestionPanel : MonoBehaviour
     public void Close()
     {
         gameObject.SetActive(false);
+        TagAlongManager.Instance.ControllerOn();
     }
 
 }

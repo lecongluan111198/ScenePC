@@ -10,6 +10,7 @@ enum EComponent
     QUESTION = 1,
     BOX_COLLIDER = 2,
     ANIMTION = 3,
-    RECORD_ANIMATION = 4
+    RECORD_ANIMATION = 4,
+    TOOLTIP = 5
 
 }

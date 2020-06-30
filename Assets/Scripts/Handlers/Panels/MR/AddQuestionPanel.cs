@@ -67,10 +67,12 @@ public class AddQuestionPanel : MonoBehaviour
             }
         }
         com.Answer = correctPos;
+        Cancel();
     }
 
     public void Cancel()
     {
         gameObject.SetActive(false);
+        TagAlongManager.Instance.ControllerOn();
     }
 }

@@ -49,4 +49,12 @@ public class TagAlongManager : MonoBehaviour
             titlePanel.text = "Unkown object";
         }
     }
+    public void ControllerOn()
+    {
+        anim.Play("Controller On");
+    }
+    public void ControllerOff()
+    {
+        anim.Play("Controller Off");
+    }
 }

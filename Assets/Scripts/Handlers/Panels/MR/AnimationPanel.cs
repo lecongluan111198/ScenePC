@@ -77,6 +77,7 @@ public class AnimationPanel : MonoBehaviour
         anim.Mode = playMode;
         anim.ControllerName = "truck";
         gameObject.SetActive(false);
+        TagAlongManager.Instance.ControllerOn();
     }
 
     public void Cancel()
@@ -88,5 +89,6 @@ public class AnimationPanel : MonoBehaviour
             Destroy(anim);
         }
         gameObject.SetActive(false);
+        TagAlongManager.Instance.ControllerOn();
     }
 }

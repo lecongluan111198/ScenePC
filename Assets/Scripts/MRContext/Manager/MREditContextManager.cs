@@ -173,4 +173,10 @@ public class MREditContextManager : MonoBehaviour
         return rootObject;
     }
 
+
+    public void Exit()
+    {
+        LoadSceneManager.Instance.LoadScene(LoadSceneManager.SceneType.MAINBOARD, false);
+    }
+
 }
