@@ -32,6 +32,10 @@ public class ModelItem : MonoBehaviour
         {
             GameObject go = Instantiate(Resources.Load(ResourceManager.MRPrefab + model.Name) as GameObject);
             MREditContextManager.Instance.UpdateModel(go);
+            ObjBasicInfo bInfo = ConvertContextUtils.addComponent<ObjBasicInfo>(go);
+            bInfo.DownloadName = model.Name;
+            bInfo.FromServer = model.FromServer;
+            bInfo.Id = model.Id;
         }
     }
 }

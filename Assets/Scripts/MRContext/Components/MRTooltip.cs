@@ -1,5 +1,6 @@
 ﻿using Microsoft.MixedReality.Toolkit.Input;
 using Microsoft.MixedReality.Toolkit.UI;
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -60,25 +61,25 @@ public class MRTooltip : MonoBehaviour
         {
             tooltipObject.Add(name);
             CreateTooltip(title, nestedMap[name]);
-            tooltipDetails.Add(new TooltipComponent.ToolTipDetail(name, title));
+            //tooltipDetails.Add(new TooltipComponent.ToolTipDetail(name, title));
         }
     }
 
     private void CreateTooltip(string title, GameObject go)
     {
         Debug.Log("create tooltip");
-        GameObject ttGo = Instantiate(Resources.Load(ResourceManager.MRTooltip) as GameObject);
-        ttGo.transform.localPosition = go.transform.localPosition;
-        ttGo.transform.parent = go.transform;
+        GameObject ttGo = PhotonNetwork.Instantiate(ResourceManager.MRTooltip, Vector3.zero, Quaternion.identity);
+        //ttGo.transform.localPosition = go.transform.localPosition;
+        //ttGo.transform.parent = go.transform;
         ToolTipConnector connector = ttGo.GetComponent<ToolTipConnector>();
         connector.Target = go;
-        connector.PivotDirection = ConnectorPivotDirection.North;
-        connector.PivotDistance = 0.25f;
-        connector.PivotDirectionOrient = ConnectorOrientType.OrientToObject;
-        connector.ManualPivotLocalPosition = Vector3.up;
-        connector.ManualPivotDirection = Vector3.up;
-        connector.ConnectorFollowingType = ConnectorFollowType.AnchorOnly;
-        connector.PivotMode = ConnectorPivotMode.Manual;
+        //connector.PivotDirection = ConnectorPivotDirection.North;
+        //connector.PivotDistance = 0.25f;
+        //connector.PivotDirectionOrient = ConnectorOrientType.OrientToObject;
+        //connector.ManualPivotLocalPosition = Vector3.up;
+        //connector.ManualPivotDirection = Vector3.up;
+        //connector.ConnectorFollowingType = ConnectorFollowType.AnchorOnly;
+        //connector.PivotMode = ConnectorPivotMode.Manual;
         ToolTip tooltip = ttGo.GetComponent<ToolTip>();
         tooltip.ToolTipText = title;
         tooltip.PivotPosition = transform.TransformPoint(Vector3.up);

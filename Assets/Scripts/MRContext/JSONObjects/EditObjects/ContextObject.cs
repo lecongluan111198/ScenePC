@@ -38,7 +38,7 @@ public class ContextObject
         go.name = nameObj;
         go.transform.localScale = ConvertTypeUtils.listToVector3(scale);
         go.transform.localRotation = ConvertTypeUtils.listToQuaternion(rotation);
-        ObjBasicInfo bInfo = go.AddComponent<ObjBasicInfo>();
+        ObjBasicInfo bInfo = ConvertContextUtils.addComponent<ObjBasicInfo>(go);
         bInfo.DownloadName = nameDownload;
         bInfo.FromServer = fromServer;
         bInfo.Id = id;
