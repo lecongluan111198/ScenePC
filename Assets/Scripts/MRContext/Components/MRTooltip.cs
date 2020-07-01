@@ -68,20 +68,21 @@ public class MRTooltip : MonoBehaviour
     {
         Debug.Log("create tooltip");
         GameObject ttGo = Instantiate(Resources.Load(ResourceManager.MRTooltip) as GameObject);
-        ttGo.transform.localPosition = go.transform.localPosition;
-        ttGo.transform.parent = go.transform;
-        ToolTipConnector connector = ttGo.GetComponent<ToolTipConnector>();
-        connector.Target = go;
-        connector.PivotDirection = ConnectorPivotDirection.North;
-        connector.PivotDistance = 0.25f;
-        connector.PivotDirectionOrient = ConnectorOrientType.OrientToObject;
-        connector.ManualPivotLocalPosition = Vector3.up;
-        connector.ManualPivotDirection = Vector3.up;
-        connector.ConnectorFollowingType = ConnectorFollowType.AnchorOnly;
-        connector.PivotMode = ConnectorPivotMode.Manual;
-        ToolTip tooltip = ttGo.GetComponent<ToolTip>();
-        tooltip.ToolTipText = title;
-        tooltip.PivotPosition = transform.TransformPoint(Vector3.up);
+        
+        //ttGo.transform.localPosition = go.transform.localPosition;
+        //ttGo.transform.parent = go.transform;
+        //ToolTipConnector connector = ttGo.GetComponent<ToolTipConnector>();
+        //connector.Target = go;
+        //connector.PivotDirection = ConnectorPivotDirection.North;
+        //connector.PivotDistance = 0.25f;
+        //connector.PivotDirectionOrient = ConnectorOrientType.OrientToObject;
+        //connector.ManualPivotLocalPosition = Vector3.up;
+        //connector.ManualPivotDirection = Vector3.up;
+        //connector.ConnectorFollowingType = ConnectorFollowType.AnchorOnly;
+        //connector.PivotMode = ConnectorPivotMode.Manual;
+        //ToolTip tooltip = ttGo.GetComponent<ToolTip>();
+        //tooltip.ToolTipText = title;
+        //tooltip.PivotPosition = transform.TransformPoint(Vector3.up);
     }
 
     private void BFS()
