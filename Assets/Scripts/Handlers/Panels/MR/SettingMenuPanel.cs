@@ -89,6 +89,13 @@ public class SettingMenuPanel : MonoBehaviour
         TagAlongManager.Instance.ControllerOff();
     }
 
+    public void Delete()
+    {
+        Destroy(currentObject);
+        MRDataHolder.Instance.CurrentClickObject = null;
+        TagAlongManager.Instance.ControllerIn();
+    }
+
     public void Close()
     {
         Debug.Log("close");

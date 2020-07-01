@@ -35,4 +35,5 @@ public class API
 
     public static string DOWNLOAD_FILE = DOMAIN + "model/";
     public static string UPLOAD_FILE = DOMAIN + "model/upload/";
+    public static string LOAD_ALL_MODLE = DOMAIN + "model/all";
 }

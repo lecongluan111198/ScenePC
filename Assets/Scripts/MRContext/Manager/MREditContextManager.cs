@@ -8,9 +8,26 @@ using UnityEngine;
 
 public class MREditContextManager : MonoBehaviour
 {
+    [Header("PANEL")]
+    public GameObject menuModel;
+
     [Header("CONTAINER")]
     public GameObject container;
     public GameObject GUI;
+
+    public static MREditContextManager Instance = null;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(this);
+        }
+    }
 
     private Context currentContext;
 
@@ -47,18 +64,18 @@ public class MREditContextManager : MonoBehaviour
         foreach (KeyValuePair<ContextObject, GameObject> entry in info.GameObjs)
         {
             GameObject go = entry.Value;
-            go.transform.parent = container.transform;
+            //go.transform.parent = container.transform;
 
-            BoundingBox bbox = go.AddComponent<BoundingBox>();
-            bbox.Target = go.gameObject;
-            bbox.BoundsOverride = go.GetComponent<BoxCollider>();
-            ManipulationHandler mHandler = go.AddComponent<ManipulationHandler>();
-            mHandler.HostTransform = go.transform;
-            go.AddComponent<NearInteractionGrabbable>();
-            //add record MR
-            go.AddComponent<RecordTransform>();
-            go.AddComponent<ObjectSetting>();
-
+            //BoundingBox bbox = go.AddComponent<BoundingBox>();
+            //bbox.Target = go.gameObject;
+            //bbox.BoundsOverride = go.GetComponent<BoxCollider>();
+            //ManipulationHandler mHandler = go.AddComponent<ManipulationHandler>();
+            //mHandler.HostTransform = go.transform;
+            //go.AddComponent<NearInteractionGrabbable>();
+            ////add record MR
+            //go.AddComponent<RecordTransform>();
+            //go.AddComponent<ObjectSetting>();
+            UpdateModel(go);
             entry.Key.toGameObject(go);
         }
     }
@@ -73,24 +90,24 @@ public class MREditContextManager : MonoBehaviour
         bo.toGameObject(go);
     }
 
-    private void updateContextObject(ContextObject co, GameObject go)
-    {
-        go.transform.parent = container.transform;
-        BoundingBox bbox = ConvertContextUtils.addComponent<BoundingBox>(go);
-        bbox.Target = go.gameObject;
-        bbox.BoundsOverride = ConvertContextUtils.addComponent<BoxCollider>(go);
-        ManipulationHandler mHandler = ConvertContextUtils.addComponent<ManipulationHandler>(go);
-        mHandler.HostTransform = go.transform;
-        ConvertContextUtils.addComponent<NearInteractionGrabbable>(go);
-        //add feature to use in edit mode
-        ConvertContextUtils.addComponent<RecordTransform>(go);
-        ConvertContextUtils.addComponent<ObjectSetting>(go);
-        ObjBasicInfo info = ConvertContextUtils.addComponent<ObjBasicInfo>(go);
-        info.Id = 1;
-        info.DownloadName = co.nameDownload;
-        info.FromServer = co.fromServer;
-        co.toGameObject(go);
-    }
+    //private void updateContextObject(ContextObject co, GameObject go)
+    //{
+    //    go.transform.parent = container.transform;
+    //    BoundingBox bbox = ConvertContextUtils.addComponent<BoundingBox>(go);
+    //    bbox.Target = go.gameObject;
+    //    bbox.BoundsOverride = ConvertContextUtils.addComponent<BoxCollider>(go);
+    //    ManipulationHandler mHandler = ConvertContextUtils.addComponent<ManipulationHandler>(go);
+    //    mHandler.HostTransform = go.transform;
+    //    ConvertContextUtils.addComponent<NearInteractionGrabbable>(go);
+    //    //add feature to use in edit mode
+    //    ConvertContextUtils.addComponent<RecordTransform>(go);
+    //    ConvertContextUtils.addComponent<ObjectSetting>(go);
+    //    ObjBasicInfo info = ConvertContextUtils.addComponent<ObjBasicInfo>(go);
+    //    info.Id = 1;
+    //    info.DownloadName = co.nameDownload;
+    //    info.FromServer = co.fromServer;
+    //    co.toGameObject(go);
+    //}
 
     public void saveEditContext()
     {
@@ -179,4 +196,24 @@ public class MREditContextManager : MonoBehaviour
         LoadSceneManager.Instance.LoadScene(LoadSceneManager.SceneType.MAINBOARD, false);
     }
 
+    public void ShowMenuAddModel()
+    {
+        menuModel.SetActive(true);
+        TagAlongManager.Instance.ControllerOff();
+    }
+
+    public void UpdateModel(GameObject go)
+    {
+        go.transform.parent = container.transform;
+
+        BoundingBox bbox = go.AddComponent<BoundingBox>();
+        bbox.Target = go.gameObject;
+        bbox.BoundsOverride = go.GetComponent<BoxCollider>();
+        ManipulationHandler mHandler = go.AddComponent<ManipulationHandler>();
+        mHandler.HostTransform = go.transform;
+        go.AddComponent<NearInteractionGrabbable>();
+        //add record MR
+        go.AddComponent<RecordTransform>();
+        go.AddComponent<ObjectSetting>();
+    }
 }
