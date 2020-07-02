@@ -68,11 +68,20 @@ public class MRTooltip : MonoBehaviour
     private void CreateTooltip(string title, GameObject go)
     {
         Debug.Log("create tooltip");
-        GameObject ttGo = PhotonNetwork.Instantiate(ResourceManager.MRTooltip, Vector3.zero, Quaternion.identity);
+        GameObject ttGo;
+        if (MRDataHolder.Instance.IsEdit)
+        {
+            ttGo = Instantiate(Resources.Load(ResourceManager.MRTooltip) as GameObject);
+            ttGo.transform.SetParent(MREditContextManager.Instance.container.transform);
+        }
+        else
+        {
+            ttGo = PhotonNetwork.Instantiate(ResourceManager.MRTooltip, Vector3.zero, Quaternion.identity);
+        }
         //ttGo.transform.localPosition = go.transform.localPosition;
         //ttGo.transform.parent = go.transform;
         ToolTipConnector connector = ttGo.GetComponent<ToolTipConnector>();
-        connector.Target = go;
+        //connector.Target = go;
         //connector.PivotDirection = ConnectorPivotDirection.North;
         //connector.PivotDistance = 0.25f;
         //connector.PivotDirectionOrient = ConnectorOrientType.OrientToObject;

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.WSA.Input;
@@ -48,6 +49,8 @@ public class BrushController : AbstractController
     private Transform brushObjectTransform;
     [SerializeField]
     private Renderer brushRenderer;
+    [Header("PHOTON")]
+    public PhotonView PV;
 
     //private ColorPickerWheel colorPicker;
     private Color currentStrokeColor = Color.white;
@@ -72,6 +75,7 @@ public class BrushController : AbstractController
 
     protected override void doOnStart()
     {
+        PV = gameObject.GetComponent<PhotonView>();
         this.Type = ControllerType.BRUSH;
     }
 
@@ -160,5 +164,10 @@ public class BrushController : AbstractController
             }
             yield return null;
         }
+    }
+
+    private void DrawLine(float x, float y, float z)
+    {
+        
     }
 }

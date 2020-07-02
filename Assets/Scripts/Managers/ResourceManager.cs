@@ -6,7 +6,7 @@ public class ResourceManager
 {
     public static string MRPrefab = @"Prefabs/MR/";
     public static string MRCanvasPrefab = @"Prefabs/MRPanels/Canvases/";
-    public static string MRTooltip = @"Prefabs/MR/Tooltips/Simple Line ToolTip";
+    public static string MRTooltip = @"Prefabs/MR/Tooltips/ToolTip";
     public static string AnimController = @"Animations/MR/";
     public static string Avatar = MRPrefab + @"Avatars/";
 
