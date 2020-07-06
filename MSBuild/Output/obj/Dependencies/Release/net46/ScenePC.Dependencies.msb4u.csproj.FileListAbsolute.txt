@@ -18,3 +18,4 @@ F:\Library\IT\Thesis\Unity\ScenePC - Copy\Assets\Dependencies\net46\Microsoft.Wi
 F:\Library\IT\Thesis\Unity\ScenePC - Copy\Assets\Dependencies\net46\System.Drawing.Primitives.dll
 F:\Library\IT\Thesis\Unity\ScenePC - Copy\MSBuild\Output\obj\Dependencies\Release\net46\ScenePC.Dependencies.msb4u.csprojAssemblyReference.cache
 F:\Library\IT\Thesis\Unity\ScenePC - Copy\MSBuild\Output\obj\Dependencies\Release\net46\ScenePC.Dependencies.msb4u.csproj.CopyComplete
+F:\NamCuoiTryHard\Luận Văn\ScenePC-master\ScenePC\MSBuild\Output\obj\Dependencies\Release\net46\ScenePC.Dependencies.msb4u.csprojAssemblyReference.cache
