@@ -59,10 +59,7 @@ public class LoadSceneManager : MonoBehaviour
 
     public void LoadScene(string name, bool isPhoton)
     {
-        if(CurrentScene != null && CurrentScene != "")
-        {
-            SceneManager.UnloadSceneAsync(CurrentScene);
-        }
+        UnloadCurrentScene();
         if (isPhoton)
         {
             PhotonNetwork.LoadLevel(name);
@@ -72,5 +69,13 @@ public class LoadSceneManager : MonoBehaviour
             SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
         }
         CurrentScene = name;
+    }
+
+    public void UnloadCurrentScene()
+    {
+        if (CurrentScene != null && CurrentScene != "")
+        {
+            SceneManager.UnloadSceneAsync(CurrentScene);
+        }
     }
 }

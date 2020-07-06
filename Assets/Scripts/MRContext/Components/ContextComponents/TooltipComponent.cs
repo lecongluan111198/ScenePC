@@ -9,36 +9,47 @@ public class TooltipComponent : AbstractComponent
     [Serializable]
     public class ToolTipDetail
     {
-        string name;
         string title;
-        List<double> position;
+        List<double> anchorPos;
+        List<double> pivotPos;
 
-        public ToolTipDetail(string name, string title, List<double> position)
+        public ToolTipDetail()
         {
-            this.Name = name;
-            this.Title = title;
-            this.Position = position;
         }
 
-        public string Name { get => name; set => name = value; }
+        public ToolTipDetail(string title)
+        {
+            this.Title = title;
+            anchorPos = new List<double>() { 0, 0, 0 };
+            pivotPos = new List<double>() { 0, 0, 0 };
+        }
+
+        public ToolTipDetail(string title, List<double> anchorPos, List<double> pivotPos)
+        {
+            this.Title = title;
+            this.anchorPos = anchorPos;
+            this.pivotPos = pivotPos;
+        }
+
         public string Title { get => title; set => title = value; }
-        public List<double> Position { get => position; set => position = value; }
+        public List<double> AnchorPos { get => anchorPos; set => anchorPos = value; }
+        public List<double> PivotPos { get => pivotPos; set => pivotPos = value; }
 
         public override bool Equals(object obj)
         {
             var detail = obj as ToolTipDetail;
             return detail != null &&
-                   name == detail.name &&
                    title == detail.title &&
-                   EqualityComparer<List<double>>.Default.Equals(position, detail.position);
+                   EqualityComparer<List<double>>.Default.Equals(anchorPos, detail.anchorPos) &&
+                   EqualityComparer<List<double>>.Default.Equals(pivotPos, detail.pivotPos);
         }
 
         public override int GetHashCode()
         {
-            var hashCode = 510941377;
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(name);
+            var hashCode = 1911401108;
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(title);
-            hashCode = hashCode * -1521134295 + EqualityComparer<List<double>>.Default.GetHashCode(position);
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<double>>.Default.GetHashCode(anchorPos);
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<double>>.Default.GetHashCode(pivotPos);
             return hashCode;
         }
     }

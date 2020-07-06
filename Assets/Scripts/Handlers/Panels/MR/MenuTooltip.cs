@@ -67,14 +67,14 @@ public class MenuTooltip : MonoBehaviour
             GameObject item = Instantiate(tooltipItem, objList.transform, false);
             item.transform.SetParent(objList.transform);
             TooltipItem tooltip = item.GetComponent<TooltipItem>();
-            if(mrTooltip != null && mrTooltip.TooltipObject.Contains(entry.Key))
-            {
-                tooltip.UpdateInfo(entry.Key, entry.Value, true);
-            }
-            else
-            {
-                tooltip.UpdateInfo(entry.Key, entry.Value, false);
-            }
+            //if(mrTooltip != null && mrTooltip.TooltipObject.Contains(entry.Key))
+            //{
+            //    tooltip.UpdateInfo(entry.Key, entry.Value, true);
+            //}
+            //else
+            //{
+            //    tooltip.UpdateInfo(entry.Key, entry.Value, false);
+            //}
         }
     }
 

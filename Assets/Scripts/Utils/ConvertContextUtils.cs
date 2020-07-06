@@ -88,7 +88,14 @@ public class ConvertContextUtils
                     try
                     {
                         //loadedObj = GameObject.Instantiate(Resources.Load(ResourceManager.MRPrefab + obj.nameDownload) as GameObject);
-                        loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, "Templates/Template"), Vector3.zero, Quaternion.identity, 0);
+                        if(obj.nameDownload == "Heart")
+                        {
+                            loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, "Templates/HeartTemplate"), Vector3.zero, Quaternion.identity, 0);
+                        }
+                        else
+                        {
+                            loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, "Templates/Template"), Vector3.zero, Quaternion.identity, 0);
+                        }
                     }
                     catch (Exception ex)
                     {

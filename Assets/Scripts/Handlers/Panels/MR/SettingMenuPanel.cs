@@ -78,7 +78,8 @@ public class SettingMenuPanel : MonoBehaviour
 
     public void ShowTooltipMenu()
     {
-        tooltipPanel.SetActive(true);
+        //tooltipPanel.SetActive(true);
+        tooltipSettingPanel.SetActive(true);
         TagAlongManager.Instance.ControllerOff();
     }
 

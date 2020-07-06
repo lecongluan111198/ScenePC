@@ -84,9 +84,9 @@ public class ContextObject
         }
 
         MRTooltip tooltip = go.GetComponent<MRTooltip>();
-        if(tooltip != null && tooltip.TooltipDetails.Count != 0)
+        if (tooltip != null && tooltip.MapTooltipDetails.Count != 0)
         {
-            abComponents.Add(new TooltipComponent("TOOLTIP", tooltip.TooltipDetails));
+            abComponents.Add(new TooltipComponent("TOOLTIP", new HashSet<TooltipComponent.ToolTipDetail>(tooltip.MapTooltipDetails.Values)));
         }
         return abComponents;
     }

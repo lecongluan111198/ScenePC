@@ -76,6 +76,8 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         PhotonNetwork.NickName = AccountInfo.Instance.Username;
         if (!PhotonNetwork.IsMasterClient)
         {
+            //off old scene
+            LoadSceneManager.Instance.UnloadCurrentScene();
             Debug.Log("Not master");
             return;
         }

@@ -30,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3804500565139180995}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.381, y: 0.07800001, z: 2.305}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 6852661039232734549}
   m_RootOrder: 0
@@ -104,7 +104,7 @@ BoxCollider:
   m_GameObject: {fileID: 3804500565139180995}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 6817436595296672201}
   - component: {fileID: 6818036390193652679}
   - component: {fileID: 6819208583863746515}
-  - component: {fileID: 5508879305213351973}
+  - component: {fileID: 3199479820750982167}
   m_Layer: 0
   m_Name: ToolTip
   m_TagString: Untagged
@@ -385,10 +385,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   uniformDistortionStrength: 1
   startPoint:
-    position: {x: 0.381, y: 0.07800001, z: 2.305}
+    position: {x: 0, y: 0, z: 0.5}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   endPoint:
-    position: {x: 0.15333194, y: 0.03495355, z: 0}
+    position: {x: 0, y: -0.03495355, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!114 &6818036390193652679
 MonoBehaviour:
@@ -535,8 +535,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0.381, y: 0.07800001, z: 2.305}
-  - {x: 0.15333194, y: 0.03495355, z: 0}
+  - {x: 0, y: 0, z: 0.5}
+  - {x: 0, y: -0.03495355, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.01
@@ -601,7 +601,7 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &5508879305213351973
+--- !u!114 &3199479820750982167
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -610,19 +610,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6848381281134695999}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a5d5e678e13e7942b22f249a743d61d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 0
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
+  pivot: {fileID: 6849068411872562461}
+  anchor: {fileID: 3804500565139180995}
 --- !u!1 &6849051635440281005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1394,7 +1386,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6849129284166973465}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.381, y: 0.07800001, z: 2.305}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6852661039232734549}

@@ -177,6 +177,7 @@ public class MRGamePlayManager : MonoBehaviour
             getAndUpdateTransform(exGo.gameObject, go);
             //getAndUpdateComponent<MeshRenderer>(exGo.gameObject, go);
             getAndUpdateMeshRenderer(exGo.gameObject, go);
+            getAndUpdateSkinMeshRenderer(exGo.gameObject, go);
             getAndUpdateMeshFilter(exGo.gameObject, go);
             //getAndUpdateComponent<MeshFilter>(exGo.gameObject, go);
             getAndUpdateComponent<MeshCollider>(exGo.gameObject, go);
@@ -193,6 +194,31 @@ public class MRGamePlayManager : MonoBehaviour
         Destroy(src);
     }
 
+    private void getAndUpdateSkinMeshRenderer(GameObject src, GameObject dest)
+    {
+        SkinnedMeshRenderer com = src.GetComponent<SkinnedMeshRenderer>();
+        if (com != null)
+        {
+            MeshUtils.Combine(src, dest);
+            //SkinnedMeshRenderer newCom = addComponent<SkinnedMeshRenderer>(dest);
+            //newCom.sharedMesh = com.sharedMesh;
+            ////newCom.localBounds.center = com.localBounds.center;
+            //newCom.localBounds = com.localBounds;
+            //newCom.rootBone = com.rootBone;
+            //newCom.bones = com.bones;
+
+            //newCom.forceMatrixRecalculationPerRender = com.forceMatrixRecalculationPerRender;
+            //newCom.materials = com.materials;
+            //newCom.shadowCastingMode = com.shadowCastingMode;
+            //newCom.receiveShadows = com.receiveShadows;
+
+            //newCom.lightProbeUsage = com.lightProbeUsage;
+            //newCom.reflectionProbeUsage = com.reflectionProbeUsage;
+            //newCom.probeAnchor = com.probeAnchor;
+            //newCom.motionVectorGenerationMode = com.motionVectorGenerationMode;
+            //newCom.allowOcclusionWhenDynamic = com.allowOcclusionWhenDynamic;
+        }
+    }
 
     private void getAndUpdateComponent<T>(GameObject src, GameObject dest) where T : Component
     {
