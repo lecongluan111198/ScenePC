@@ -119,22 +119,21 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     private void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         //call when multiplayer scene is loaded
-        //currentScene = scene.name;
-        if (LoadSceneManager.Instance.CurrentScene == LoadSceneManager.Instance.gamePlayScene)
+
+        //create player
+        CreatePlayer();
+        if (PhotonNetwork.IsMasterClient)
         {
-            //load data
-            if (PhotonNetwork.IsMasterClient)
+            if (LoadSceneManager.Instance.CurrentScene == LoadSceneManager.Instance.gamePlayScene)
             {
-                //MRContextManager.Instance.loadContext();
+                //load data
                 MRGamePlayManager.Instance.loadPlayContext();
             }
-            //create player
-            CreatePlayer();
-        }
-        else if (LoadSceneManager.Instance.CurrentScene == LoadSceneManager.Instance.waitingRoomScene)
-        {
-            //load waiting room
+            else if (LoadSceneManager.Instance.CurrentScene == LoadSceneManager.Instance.waitingRoomScene)
+            {
+                //load waiting room
 
+            }
         }
     }
 
