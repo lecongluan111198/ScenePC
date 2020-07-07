@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -1664428257821495636}
   - component: {fileID: 7819613494581160279}
   - component: {fileID: 119268912389185678}
+  - component: {fileID: -3571575377608720074}
   m_Layer: 0
   m_Name: Template
   m_TagString: Untagged
@@ -49,7 +50,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 3c02da79776b0024b980f1efd8235938, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -138,3 +139,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47379235a1e8ede4bbdd6d23fab8bcdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-3571575377608720074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448616350633974371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d574097432e5af4d8ef54427b2cc736, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  child: {fileID: 0}

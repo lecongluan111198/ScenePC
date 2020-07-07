@@ -127,7 +127,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
             if (LoadSceneManager.Instance.CurrentScene == LoadSceneManager.Instance.gamePlayScene)
             {
                 //load data
-                MRGamePlayManager.Instance.loadPlayContext();
+                MRGamePlayManager.Instance.LoadPlayContext();
             }
             else if (LoadSceneManager.Instance.CurrentScene == LoadSceneManager.Instance.waitingRoomScene)
             {

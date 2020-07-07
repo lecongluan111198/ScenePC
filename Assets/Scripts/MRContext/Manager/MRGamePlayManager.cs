@@ -58,7 +58,7 @@ public class MRGamePlayManager : MonoBehaviour
 
     }
 
-    public void loadPlayContext()
+    public void LoadPlayContext()
     {
         currentContext = MRDataHolder.Instance.CurrentContext;
         string json = currentContext.Content;
@@ -80,20 +80,20 @@ public class MRGamePlayManager : MonoBehaviour
         using (var ms = new MemoryStream())
         {
             formater.Serialize(ms, bo.Key);
-            PV.RPC("updateMRObjectComponent", RpcTarget.AllBuffered, bo.Value.name, GUI.name, ms.ToArray(), true);
+            PV.RPC("UpdateMRObjectComponent", RpcTarget.AllBuffered, bo.Value.name, GUI.name, ms.ToArray(), true);
         }
         foreach (KeyValuePair<ContextObject, GameObject> entry in info.GameObjs)
         {
             using (var ms = new MemoryStream())
             {
                 formater.Serialize(ms, entry.Key);
-                PV.RPC("updateMRObjectComponent", RpcTarget.AllBuffered, entry.Value.name, container.name, ms.ToArray(), false);
+                PV.RPC("UpdateMRObjectComponent", RpcTarget.AllBuffered, entry.Value.name, container.name, ms.ToArray(), false);
             }
         }
     }
 
     [PunRPC]
-    private void updateMRObjectComponent(string objName, string containerName, byte[] data, bool isBackground)
+    private void UpdateMRObjectComponent(string objName, string containerName, byte[] data, bool isBackground)
     {
         ContextObject co = null;
         using (var ms = new MemoryStream(data))
@@ -113,11 +113,12 @@ public class MRGamePlayManager : MonoBehaviour
             return;
         }
 
-        //update mesh to template object
-        updateMesh(co.nameDownload, go);
-        ConvertContextUtils.addComponent<ObjectSetting>(go);
-
-        go.name = co.nameObj;
+        AbstractTemplate temp = go.GetComponent<AbstractTemplate>();
+        if (temp == null)
+        {
+            Debug.Log(co.nameObj + " doesn't contain template script");
+            return;
+        }
 
         if (container != null)
         {
@@ -127,7 +128,7 @@ public class MRGamePlayManager : MonoBehaviour
         //MR
         if (!isBackground)
         {
-            BoundingBox bbox = addComponent<BoundingBox>(go);
+            BoundingBox bbox = ConvertContextUtils.addComponent<BoundingBox>(go);
             bbox.Target = go.gameObject;
             bbox.BoundsOverride = go.GetComponent<BoxCollider>();
             bbox.HandleMaterial = handleMaterial;
@@ -135,23 +136,15 @@ public class MRGamePlayManager : MonoBehaviour
             bbox.ScaleHandlePrefab = scaleHandlePrefab;
             bbox.ScaleHandleSlatePrefab = scaleHandleSlatePrefab;
             bbox.RotationHandleSlatePrefab = rotationHandlePrefab;
-            ManipulationHandler mHandler = addComponent<ManipulationHandler>(go);
+            ManipulationHandler mHandler = ConvertContextUtils.addComponent<ManipulationHandler>(go);
             mHandler.HostTransform = go.transform;
-            addComponent<NearInteractionGrabbable>(go);
+            ConvertContextUtils.addComponent<NearInteractionGrabbable>(go);
         }
-        else
-        {
-            Rigidbody rigid = go.GetComponent<Rigidbody>();
-            if (rigid != null)
-            {
-                rigid.isKinematic = true;
-            }
-        }
-
+        temp.UpdateInformation(co);
         co.toGameObject(go);
     }
 
-    private void updateMesh(string srcName, GameObject dest)
+    private void UpdateMesh(string srcName, GameObject dest)
     {
         GameObject src = Instantiate(Resources.Load(ResourceManager.MRPrefab + srcName) as GameObject);
 
@@ -174,11 +167,11 @@ public class MRGamePlayManager : MonoBehaviour
             {
                 go = dest;
             }
-            getAndUpdateTransform(exGo.gameObject, go);
+            UpdateTransform(exGo.gameObject, go);
             //getAndUpdateComponent<MeshRenderer>(exGo.gameObject, go);
-            getAndUpdateMeshRenderer(exGo.gameObject, go);
-            getAndUpdateSkinMeshRenderer(exGo.gameObject, go);
-            getAndUpdateMeshFilter(exGo.gameObject, go);
+            UpdateMeshRenderer(exGo.gameObject, go);
+            UpdateSkinMeshRenderer(exGo.gameObject, go);
+            UpdateMeshFilter(exGo.gameObject, go);
             //getAndUpdateComponent<MeshFilter>(exGo.gameObject, go);
             getAndUpdateComponent<MeshCollider>(exGo.gameObject, go);
             getAndUpdateComponent<BoxCollider>(exGo.gameObject, go);
@@ -194,7 +187,7 @@ public class MRGamePlayManager : MonoBehaviour
         Destroy(src);
     }
 
-    private void getAndUpdateSkinMeshRenderer(GameObject src, GameObject dest)
+    private void UpdateSkinMeshRenderer(GameObject src, GameObject dest)
     {
         SkinnedMeshRenderer com = src.GetComponent<SkinnedMeshRenderer>();
         if (com != null)
@@ -230,7 +223,7 @@ public class MRGamePlayManager : MonoBehaviour
         T comDest = dest.GetComponent<T>();
         if (comDest == null)
         {
-            comDest = addComponent<T>(dest);
+            comDest = ConvertContextUtils.addComponent<T>(dest);
         }
         ConvertTypeUtils.GetCopyOf(comDest, comSrc);
         //FieldInfo[] fields = type.GetFields();
@@ -241,18 +234,18 @@ public class MRGamePlayManager : MonoBehaviour
     }
 
 
-    private void getAndUpdateTransform(GameObject src, GameObject dest)
+    private void UpdateTransform(GameObject src, GameObject dest)
     {
         dest.transform.localPosition = src.transform.localPosition;
         dest.transform.localRotation = src.transform.localRotation;
         dest.transform.localScale = src.transform.localScale;
     }
-    private void getAndUpdateMeshRenderer(GameObject src, GameObject dest)
+    private void UpdateMeshRenderer(GameObject src, GameObject dest)
     {
         MeshRenderer com = src.GetComponent<MeshRenderer>();
         if (com != null)
         {
-            MeshRenderer newCom = addComponent<MeshRenderer>(dest);
+            MeshRenderer newCom = ConvertContextUtils.addComponent<MeshRenderer>(dest);
             newCom.materials = com.materials;
 
             newCom.shadowCastingMode = com.shadowCastingMode;
@@ -265,7 +258,7 @@ public class MRGamePlayManager : MonoBehaviour
             newCom.allowOcclusionWhenDynamic = com.allowOcclusionWhenDynamic;
         }
     }
-    private void getAndUpdateMeshFilter(GameObject src, GameObject dest)
+    private void UpdateMeshFilter(GameObject src, GameObject dest)
     {
         MeshFilter com = src.GetComponent<MeshFilter>();
         if (com != null)
@@ -275,15 +268,15 @@ public class MRGamePlayManager : MonoBehaviour
         }
     }
 
-    private T addComponent<T>(GameObject go) where T : Component
-    {
-        T com = go.GetComponent<T>();
-        if (com == null)
-        {
-            com = go.AddComponent<T>();
-        }
-        return com;
-    }
+    //private T addComponent<T>(GameObject go) where T : Component
+    //{
+    //    T com = go.GetComponent<T>();
+    //    if (com == null)
+    //    {
+    //        com = go.AddComponent<T>();
+    //    }
+    //    return com;
+    //}
 
     public void Exit()
     {

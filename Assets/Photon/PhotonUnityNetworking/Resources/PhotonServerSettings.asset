@@ -39,6 +39,7 @@ MonoBehaviour:
   - SynchorizeDrag
   - updateMRObjectComponent
   - loadObjects
+  - UpdateMRObjectComponent
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
