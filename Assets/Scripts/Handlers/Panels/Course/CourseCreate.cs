@@ -24,7 +24,7 @@ public class CourseCreate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(avatar.sprite.name);
+        //Debug.Log(avatar.sprite.name);
     }
 
     public void ChangeAvatar()

@@ -9,7 +9,6 @@ public class GeneralTemplate : AbstractTemplate
 
     public override void UpdateInformation(ContextObject co)
     {
-        Debug.Log("UpdateInformation");
         GameObject go = gameObject;
         //update mesh to template object
         UpdateMesh(co.nameDownload, go);

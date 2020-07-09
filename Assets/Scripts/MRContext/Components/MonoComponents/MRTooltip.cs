@@ -55,7 +55,6 @@ public class MRTooltip : MonoBehaviour
 
     private void CreateTooltip(string title, Vector3 anchorPos, Vector3 pivotPos)
     {
-        Debug.Log("create tooltip");
         GameObject ttGo = Instantiate(Resources.Load(ResourceManager.MRTooltip) as GameObject);
         ttGo.transform.SetParent(transform);
         TooltipObject obj = ttGo.GetComponent<TooltipObject>();

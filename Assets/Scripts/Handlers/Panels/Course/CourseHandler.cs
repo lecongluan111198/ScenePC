@@ -51,7 +51,6 @@ public class CourseHandler : MonoBehaviour
 
     private void scrollRectCallBack(Vector2 value)
     {
-        Debug.Log("ScrollRect Changed: " + value);
         if (value.y <= -0.1f)
         {
             LoadOwnCourse();
