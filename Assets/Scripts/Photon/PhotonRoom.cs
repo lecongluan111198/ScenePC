@@ -78,7 +78,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         {
             //off old scene
             LoadSceneManager.Instance.UnloadCurrentScene();
-            Debug.Log("Not master");
+            LoadSceneManager.Instance.UpdateCurrentScene(LoadSceneManager.SceneType.GAMEPLAY);
             return;
         }
         //LoadWaitingRoomScene();
