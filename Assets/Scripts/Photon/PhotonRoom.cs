@@ -118,13 +118,8 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     private void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        //call when multiplayer scene is loaded
-
         //create player
-        if (LoadSceneManager.Instance.CurrentScene == LoadSceneManager.Instance.gamePlayScene)
-        {
-            CreatePlayer();
-        }
+        
         if (PhotonNetwork.IsMasterClient)
         {
             if (LoadSceneManager.Instance.CurrentScene == LoadSceneManager.Instance.gamePlayScene)
@@ -137,6 +132,10 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
                 //load waiting room
 
             }
+        }
+        if (LoadSceneManager.Instance.CurrentScene == LoadSceneManager.Instance.gamePlayScene || !PhotonNetwork.IsMasterClient)
+        {
+            CreatePlayer();
         }
     }
 
