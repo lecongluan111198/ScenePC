@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 5943120156720254068}
   - component: {fileID: -2127050965313592098}
   - component: {fileID: 7819613494581160279}
-  - component: {fileID: 119268912389185678}
   - component: {fileID: 487411654242557330}
   - component: {fileID: 3447276844403700111}
+  - component: {fileID: 8596724060981619155}
   m_Layer: 0
   m_Name: HeartTemplate
   m_TagString: Untagged
@@ -103,18 +103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9770981db01080e40b1a07c823167e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &119268912389185678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1448616350633974371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47379235a1e8ede4bbdd6d23fab8bcdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &487411654242557330
 Animator:
   serializedVersion: 3
@@ -125,7 +113,7 @@ Animator:
   m_GameObject: {fileID: 1448616350633974371}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8aad001faee0fd048a4cd25382d5959c, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -150,3 +138,15 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters: []
   m_SynchronizeLayers: []
+--- !u!114 &8596724060981619155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448616350633974371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc9b2cb78d7fb144994cb29829a0aaa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
