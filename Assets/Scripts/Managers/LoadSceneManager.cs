@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class LoadSceneManager : MonoBehaviour
 {
     public static LoadSceneManager Instance = null;
-
+    private PhotonView PV;
     private string currentScene = "";
     public string mainBoardScene;
     public string waitingRoomScene;
@@ -34,7 +34,7 @@ public class LoadSceneManager : MonoBehaviour
         {
             Destroy(this);
         }
-
+        PV = GetComponent<PhotonView>();
         LoadScene(SceneType.MAINBOARD, false);
     }
 
@@ -68,7 +68,8 @@ public class LoadSceneManager : MonoBehaviour
         {
             SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
         }
-        CurrentScene = name;
+        //CurrentScene = name;
+        PV.RPC("UpdateCurrentScene", RpcTarget.AllBuffered, name);
     }
 
     public void UnloadCurrentScene()
@@ -77,5 +78,11 @@ public class LoadSceneManager : MonoBehaviour
         {
             SceneManager.UnloadSceneAsync(CurrentScene);
         }
+    }
+
+    [PunRPC]
+    public void UpdateCurrentScene(string name)
+    {
+        LoadSceneManager.Instance.CurrentScene = name;
     }
 }
