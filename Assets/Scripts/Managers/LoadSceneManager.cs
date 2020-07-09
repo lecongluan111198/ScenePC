@@ -68,8 +68,9 @@ public class LoadSceneManager : MonoBehaviour
         {
             SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
         }
-        //CurrentScene = name;
-        PV.RPC("UpdateCurrentScene", RpcTarget.AllBuffered, name);
+        CurrentScene = name;
+
+        //PV.RPC("UpdateCurrentScene", RpcTarget.AllBuffered, name);
     }
 
     public void UnloadCurrentScene()
@@ -80,9 +81,27 @@ public class LoadSceneManager : MonoBehaviour
         }
     }
 
-    [PunRPC]
     public void UpdateCurrentScene(string name)
     {
-        LoadSceneManager.Instance.CurrentScene = name;
+        CurrentScene = name;
+    }
+
+    public void UpdateCurrentScene(SceneType type)
+    {
+        switch (type)
+        {
+            case SceneType.MAINBOARD:
+                CurrentScene = mainBoardScene;
+                break;
+            case SceneType.WAITING:
+                CurrentScene = waitingRoomScene;
+                break;
+            case SceneType.GAMEPLAY:
+                CurrentScene = gamePlayScene;
+                break;
+            case SceneType.MREDIT:
+                CurrentScene = mrEditScene;
+                break;
+        }
     }
 }

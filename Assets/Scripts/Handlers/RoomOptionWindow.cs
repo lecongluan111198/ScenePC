@@ -38,6 +38,7 @@ public class RoomOptionWindow : MonoBehaviour
             if (isConnect)
             {
                 Debug.Log("Connect to server success!");
+                LoadSceneManager.Instance.UpdateCurrentScene(LoadSceneManager.SceneType.MAINBOARD);
                 PhotonLobby.instance.JoinRoom(roomCode.text);
             }
             else

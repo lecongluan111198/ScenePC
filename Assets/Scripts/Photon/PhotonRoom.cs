@@ -165,6 +165,8 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     public override void OnLeftRoom()
     {
         base.OnLeftRoom();
+        LoadSceneManager.Instance.LoadScene(LoadSceneManager.SceneType.MAINBOARD, false);
+
         //if (PV.IsMine)
         //{
         //    Destroy(PhotonRoom.instance.gameObject);
