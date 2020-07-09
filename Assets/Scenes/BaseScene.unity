@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91175dcc15224463780e01a8a98b1b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  logLevel: 3
+  logLevel: 1
   ignoreGlobalLogLevel: 0
   voiceDetection: 1
   voiceDetectionThreshold: 0.01
@@ -244,8 +244,8 @@ MonoBehaviour:
   statsResetInterval: 1000
   speakerPrefab: {fileID: 0}
   primaryRecorder: {fileID: 1105063235}
-  globalRecordersLogLevel: 3
-  globalSpeakersLogLevel: 3
+  globalRecordersLogLevel: 1
+  globalSpeakersLogLevel: 1
   globalPlaybackDelay: 200
   Settings:
     AppIdRealtime: 
