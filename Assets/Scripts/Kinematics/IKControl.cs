@@ -15,6 +15,7 @@ public class IKControl : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         rightArm = animator.GetBoneTransform(HumanBodyBones.RightUpperArm);
+        
     }
     //a callback for calculating IK
     //private void LateUpdate()

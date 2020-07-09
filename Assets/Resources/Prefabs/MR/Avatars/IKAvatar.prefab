@@ -530,6 +530,7 @@ GameObject:
   - component: {fileID: 9134282817717021309}
   - component: {fileID: 4035115243803326510}
   - component: {fileID: -6568772744232922348}
+  - component: {fileID: -2864760542308819466}
   m_Layer: 0
   m_Name: IKAvatar
   m_TagString: Untagged
@@ -661,6 +662,20 @@ MonoBehaviour:
   AutoCreateRecorderIfNotFound: 0
   UsePrimaryRecorder: 1
   SetupDebugSpeaker: 1
+--- !u!114 &-2864760542308819466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5366319299692125241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f12031293c52e440b1b9ba070b07726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  username: {fileID: 0}
 --- !u!1 &5366319299699263061
 GameObject:
   m_ObjectHideFlags: 0
