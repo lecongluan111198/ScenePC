@@ -18,9 +18,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PV = GetComponent<PhotonView>();
+        PV = gameObject.GetComponent<PhotonView>();
         voiceController = GameObject.Find("VoiceController");
-        PhotonVoiceView voice = GetComponent<PhotonVoiceView>();
+        PhotonVoiceView voice = gameObject.GetComponent<PhotonVoiceView>();
         if (voice != null && voiceController != null)
         {
             voice.RecorderInUse = voiceController.GetComponent<Recorder>();
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("mine " + PV.IsMine);
+        //Debug.Log("mine " + PV.IsMine);
         //username.text = AccountInfo.Instance.Username;
         //if (PV.IsMine)
         //{
