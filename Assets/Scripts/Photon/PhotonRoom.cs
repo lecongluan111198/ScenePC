@@ -121,7 +121,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         //call when multiplayer scene is loaded
 
         //create player
-        if (LoadSceneManager.Instance.CurrentScene != LoadSceneManager.Instance.mainBoardScene)
+        if (LoadSceneManager.Instance.CurrentScene == LoadSceneManager.Instance.gamePlayScene)
         {
             CreatePlayer();
         }
