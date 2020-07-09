@@ -15,13 +15,15 @@ MonoBehaviour:
   AppSettings:
     AppIdRealtime: 32bf3838-1e9e-4155-91cb-4422f4d83252
     AppIdChat: 
-    AppIdVoice: 
+    AppIdVoice: 016ec088-c511-4ff4-bd6d-b181909fb1fa
     AppVersion: 
     UseNameServer: 1
     FixedRegion: 
     Server: 
     Port: 0
+    ProxyServer: 
     Protocol: 0
+    EnableProtocolFallback: 1
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
@@ -40,6 +42,7 @@ MonoBehaviour:
   - updateMRObjectComponent
   - loadObjects
   - UpdateMRObjectComponent
+  - ChangeColour
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -447,9 +447,7 @@ namespace Photon.Pun
             {
                 if (this.m_SynchronizeLayers[i].SynchronizeType == SynchronizeType.Discrete)
                 {
-                    object obj = stream.ReceiveNext();
-                    Debug.Log(obj.GetType());
-                    this.m_Animator.SetLayerWeight(this.m_SynchronizeLayers[i].LayerIndex, (float) obj);
+                    this.m_Animator.SetLayerWeight(this.m_SynchronizeLayers[i].LayerIndex, (float) stream.ReceiveNext());
                 }
             }
 
