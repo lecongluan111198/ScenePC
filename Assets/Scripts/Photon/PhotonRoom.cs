@@ -139,12 +139,13 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     private void CreatePlayer()
     {
+        Debug.Log("Create player " + PV.IsMine);
         //creates players network controller but not player character
         if (PV.IsMine)
         {
             if (LoadSceneManager.Instance.CurrentScene != LoadSceneManager.Instance.mainBoardScene)
             {
-                Debug.Log("Create player");
+                Debug.Log("Create player123");
                 GameObject player = PhotonNetwork.Instantiate(ResourceManager.Avatar + "IKAvatar", new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
                 player.transform.SetParent(Camera.main.transform);
                 player.transform.localPosition = new Vector3(-0.05f, -0.83f, 0.07f);
