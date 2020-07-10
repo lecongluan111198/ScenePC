@@ -8,9 +8,9 @@ using UnityEngine;
 public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
 {
     private Animator anim;
-    private string controllerName = "truck";
-    private string clipName = "Transform";
-    private EAnimMode mode = EAnimMode.START_LOOP;
+    public string controllerName = "truck";
+    public string clipName = "Transform";
+    public EAnimMode mode = EAnimMode.START_LOOP;
     private bool isLoop = false;
     private object _LOCK = new object();
 
@@ -19,13 +19,14 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
     public string ControllerName { get => controllerName; set => controllerName = value; }
     public bool IsLoop { get => isLoop; set => isLoop = value; }
 
+    private bool isPlaying = false;
     // Start is called before the first frame update
     void Start()
     {
         anim = ConvertContextUtils.addComponent<Animator>(gameObject);
         anim.applyRootMotion = true;
-        //anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(ResourceManager.AnimController + controllerName);
-
+        if (MRDataHolder.Instance.IsEdit)
+            anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(ResourceManager.AnimController + controllerName);
         if (anim.runtimeAnimatorController == null)
         {
             Destroy(this);
@@ -44,20 +45,12 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
                 IsLoop = true;
                 break;
         }
-
+        if (!anim.enabled)
+            anim.enabled = true;
+        Debug.Log(mode.ToString() + " " + !MRDataHolder.Instance.IsEdit);
         if ((mode == EAnimMode.START || mode == EAnimMode.START_LOOP) && !MRDataHolder.Instance.IsEdit)
         {
-            //foreach (AnimationClip ac in anim.runtimeAnimatorController.animationClips)
-            //{
-            //    AnimationClipSettings setting = AnimationUtility.GetAnimationClipSettings(ac);
-            //    if (setting.loopTime != isLoop)
-            //    {
-            //        setting.loopTime = IsLoop;
-            //        Debug.Log(ac.name);
-            //        Debug.Log(setting.loopTime);
-            //        AnimationUtility.SetAnimationClipSettings(ac, setting);
-            //    }
-            //}
+            Debug.Log("IsMaster " + PhotonNetwork.IsMasterClient);
             if (PhotonNetwork.IsMasterClient)
             {
                 //anim.SetTrigger(clipName);
@@ -68,15 +61,18 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
 
     public void FinishAnim()
     {
+        isPlaying = false;
         anim.SetBool("test", false);
+        Debug.Log("Stop animation");
         if (isLoop)
         {
             //anim.SetTrigger(clipName);
-            Play();
+            Invoke("Play", 0.001f);
         }
         else
         {
-            anim.enabled = false;
+            //if (anim.enabled)
+            //    anim.enabled = false;
         }
     }
 
@@ -155,8 +151,14 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
     public void Play()
     {
         //anim.SetTrigger(clipName);
-        anim.enabled = true;
-        anim.SetBool("test", true);
+        if (isPlaying == false)
+        {
+            //if (!anim.enabled)
+            //    anim.enabled = true;
+            isPlaying = true;
+            Debug.Log("Play animation");
+            anim.SetBool("test", true);
+        }
     }
 
     public void OnPointerDown(MixedRealityPointerEventData eventData)

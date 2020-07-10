@@ -29,6 +29,7 @@ public class AnimationComponent : AbstractComponent
 
     public override void updateInfomation(Component component)
     {
+        Debug.Log("Animation");
         try
         {
             CustAnimation anim = component as CustAnimation;

@@ -7,6 +7,7 @@ public class AnimationPanel : MonoBehaviour
 {
     private GameObject currentObject;
     private string nameAnim;
+    private string controlerName;
     private EAnimMode playMode = EAnimMode.CLICK;
     // Start is called before the first frame update
     void Start()
@@ -32,7 +33,11 @@ public class AnimationPanel : MonoBehaviour
     public void Play(string name)
     {
         Debug.Log(name);
-        nameAnim = name;
+        string[] split = name.Split(',');
+        if (split.Length < 2)
+            return;
+        controlerName = split[0];
+        nameAnim = split[1];
         CustAnimation anim = currentObject.GetComponent<CustAnimation>();
         if (anim == null)
         {
@@ -40,7 +45,7 @@ public class AnimationPanel : MonoBehaviour
         }
         anim.ClipName = nameAnim;
         anim.Mode = playMode;
-        anim.ControllerName = "truck";
+        anim.ControllerName = controlerName;
         anim.IsLoop = false;
         anim.refreshAnimation();
         anim.Play();
@@ -75,7 +80,7 @@ public class AnimationPanel : MonoBehaviour
         }
         anim.ClipName = nameAnim;
         anim.Mode = playMode;
-        anim.ControllerName = "truck";
+        anim.ControllerName = controlerName;
         gameObject.SetActive(false);
         TagAlongManager.Instance.ControllerOn();
     }
