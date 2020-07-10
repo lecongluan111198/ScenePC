@@ -237,7 +237,9 @@ public class MRGamePlayManager : MonoBehaviour
     private void UpdateTransform(GameObject src, GameObject dest)
     {
         dest.transform.localPosition = src.transform.localPosition;
-        dest.transform.localRotation = src.transform.localRotation;
+        //dest.transform.localRotation = src.transform.localRotation;
+        List<double> ro = ConvertTypeUtils.quaternionToList(src.transform.localRotation);
+        dest.transform.Rotate(ConvertTypeUtils.listToVector3(ro));
         dest.transform.localScale = src.transform.localScale;
     }
     private void UpdateMeshRenderer(GameObject src, GameObject dest)
