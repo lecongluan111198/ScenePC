@@ -48,6 +48,7 @@ public class MenuQuestionPanelV2 : MonoBehaviour
 
     public void chooseAnswer(int ans)
     {
+        
         if (correctAns == ans)
         {
             //show correct ans
@@ -60,6 +61,7 @@ public class MenuQuestionPanelV2 : MonoBehaviour
             Debug.Log("wrong");
             ansColors[ans].color = Color.red;
         }
+        Debug.Log(ansColors[ans].color == Color.red);
     }
 
     public void Close()

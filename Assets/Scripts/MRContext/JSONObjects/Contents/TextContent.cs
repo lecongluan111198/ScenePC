@@ -10,11 +10,13 @@ public class TextContent : Content
 
     public TextContent(string value) : base(EContent.TEXT)
     {
-        this.value = value;
+        this.Value = value;
     }
+
+    public string Value { get => value; set => this.value = value; }
 
     public override object GetValue()
     {
-        return value;
+        return Value;
     }
 }

@@ -34,10 +34,16 @@ public class ContextObject
 
     public GameObject toGameObject(GameObject go)
     {
+        
         go.transform.localPosition = ConvertTypeUtils.listToVector3(position);
         go.name = nameObj;
         go.transform.localScale = ConvertTypeUtils.listToVector3(scale);
-        go.transform.localRotation = ConvertTypeUtils.listToQuaternion(rotation);
+        //go.transform.rotation = ConvertTypeUtils.listToQuaternion(rotation);
+        //go.transform.rotation.eulerAngles.x = 0;
+        go.transform.Rotate(ConvertTypeUtils.listToVector3(rotation));
+
+        Debug.Log(nameObj + " " + ConvertTypeUtils.listToVector3(rotation).y + " " + go.transform.rotation.eulerAngles.y);
+
         ObjBasicInfo bInfo = ConvertContextUtils.addComponent<ObjBasicInfo>(go);
         bInfo.DownloadName = nameDownload;
         bInfo.FromServer = fromServer;
@@ -69,6 +75,12 @@ public class ContextObject
         if(qs != null)
         {
             abComponents.Add(new QuestionComponent("QS", qs.QuestionText, qs.Choose, qs.Answer));
+        }
+
+        QuestionV2 qs2 = go.GetComponent<QuestionV2>();
+        if (qs2 != null)
+        {
+            abComponents.Add(new QuestionComponentV2("QS", qs2.Question, qs2.Choose, qs2.Answer));
         }
 
         CustAnimation anim = go.GetComponent<CustAnimation>();
@@ -106,9 +118,11 @@ public class ContextObject
         ret.fromServer = bInfo.FromServer;
         ret.id = bInfo.Id;
         ret.position = ConvertTypeUtils.vector3ToList(tf.localPosition);
-        ret.rotation = ConvertTypeUtils.quaternionToList(tf.rotation);
+        ret.rotation = ConvertTypeUtils.vector3ToList(tf.localRotation.eulerAngles);
         ret.scale = ConvertTypeUtils.vector3ToList(tf.localScale);
         ret.components = toComponents(go);
+        Debug.Log(go.name + " " + tf.localRotation.eulerAngles);
+        Debug.Log(go.name + " " + tf.rotation.eulerAngles);
         return ret;
     }
 }

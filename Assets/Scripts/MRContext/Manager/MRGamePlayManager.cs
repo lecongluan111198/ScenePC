@@ -141,7 +141,7 @@ public class MRGamePlayManager : MonoBehaviour
             ConvertContextUtils.addComponent<NearInteractionGrabbable>(go);
         }
         temp.UpdateInformation(co);
-        co.toGameObject(go);
+        //co.toGameObject(go);
     }
 
     private void UpdateMesh(string srcName, GameObject dest)
@@ -238,8 +238,9 @@ public class MRGamePlayManager : MonoBehaviour
     {
         dest.transform.localPosition = src.transform.localPosition;
         //dest.transform.localRotation = src.transform.localRotation;
-        List<double> ro = ConvertTypeUtils.quaternionToList(src.transform.localRotation);
-        dest.transform.Rotate(ConvertTypeUtils.listToVector3(ro));
+        //List<double> ro = ConvertTypeUtils.vector3ToList(src.transform.localRotation.eulerAngles);
+        dest.transform.Rotate(src.transform.localRotation.eulerAngles);
+        //dest.transform.rotation = ConvertTypeUtils.listToQuaternion(ro);
         dest.transform.localScale = src.transform.localScale;
     }
     private void UpdateMeshRenderer(GameObject src, GameObject dest)

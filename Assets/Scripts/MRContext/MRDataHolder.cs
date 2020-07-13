@@ -31,7 +31,7 @@ public class MRDataHolder
         defaultContent = File.ReadAllText(path);
         currentContext = new Context()
         {
-            Id = 1,
+            Id = 2,
             AvatarId = 1,
             Content = defaultContent,
             CreateTime = 1587788312000,

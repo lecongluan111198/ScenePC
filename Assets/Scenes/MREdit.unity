@@ -3537,6 +3537,51 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -50
       objectReference: {fileID: 0}
+    - target: {fileID: 1980064656950785509, guid: 17055542f7f6d7d42a9e4ef31526f133,
+        type: 3}
+      propertyPath: keyboard
+      value: 
+      objectReference: {fileID: 2129274349}
+    - target: {fileID: 1169314830098267993, guid: 17055542f7f6d7d42a9e4ef31526f133,
+        type: 3}
+      propertyPath: keyboard
+      value: 
+      objectReference: {fileID: 2129274349}
+    - target: {fileID: 4385086201160044010, guid: 17055542f7f6d7d42a9e4ef31526f133,
+        type: 3}
+      propertyPath: keyboard
+      value: 
+      objectReference: {fileID: 2129274349}
+    - target: {fileID: 3798894185812051643, guid: 17055542f7f6d7d42a9e4ef31526f133,
+        type: 3}
+      propertyPath: keyboard
+      value: 
+      objectReference: {fileID: 2129274349}
+    - target: {fileID: 3990187368724250652, guid: 17055542f7f6d7d42a9e4ef31526f133,
+        type: 3}
+      propertyPath: keyboard
+      value: 
+      objectReference: {fileID: 2129274349}
+    - target: {fileID: 2399315898133363362, guid: 17055542f7f6d7d42a9e4ef31526f133,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1252320009}
+    - target: {fileID: 2399315898133363362, guid: 17055542f7f6d7d42a9e4ef31526f133,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Save
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141236964274432575, guid: 17055542f7f6d7d42a9e4ef31526f133,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1252320009}
+    - target: {fileID: 1141236964274432575, guid: 17055542f7f6d7d42a9e4ef31526f133,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Cancel
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17055542f7f6d7d42a9e4ef31526f133, type: 3}
 --- !u!224 &1252320007 stripped
@@ -3551,6 +3596,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1252320006}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1252320009 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1543466907, guid: 17055542f7f6d7d42a9e4ef31526f133,
+    type: 3}
+  m_PrefabInstance: {fileID: 1252320006}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252320008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5710ae3034ea8f4c8d478464c50b9ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1266564596
 PrefabInstance:
   m_ObjectHideFlags: 0

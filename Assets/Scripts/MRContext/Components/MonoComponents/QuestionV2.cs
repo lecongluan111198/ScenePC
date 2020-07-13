@@ -29,6 +29,7 @@ public class QuestionV2 : MonoBehaviour
 
     public void showQuestion()
     {
+        
         //get position
         Vector3 src = gameObject.transform.position;
         Vector3 dest = Camera.main.transform.position;
@@ -36,13 +37,20 @@ public class QuestionV2 : MonoBehaviour
         newPos.x = src.x + (dest.x - src.x) * t;
         newPos.y = src.y + (dest.y - src.y) * t;
         newPos.z = src.z + (dest.z - src.z) * t;
-        newPos.y += 0.6f;
+        newPos.y += 0.8f;
+
+        GameObject go = GameObject.Find("MenuQuestion(Clone)");
+        if (go != null && go.transform.position == newPos)
+        {
+            Destroy(go);
+        }
+
         GameObject menuQuestion = Instantiate(Resources.Load(ResourceManager.MRCanvasPrefab + "MenuQuestion") as GameObject);
         menuQuestion.transform.position = newPos;
-        MenuQuestionPanel panel = menuQuestion.GetComponent<MenuQuestionPanel>();
+        MenuQuestionPanelV2 panel = menuQuestion.GetComponent<MenuQuestionPanelV2>();
         if (panel != null)
         {
-            //panel.updateInfomation(this);
+            panel.updateInfomation(this);
         }
     }
 

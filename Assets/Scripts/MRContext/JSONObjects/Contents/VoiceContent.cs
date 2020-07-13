@@ -8,11 +8,13 @@ public class VoiceContent : Content
 
     public VoiceContent(float[] data) : base(EContent.VOICE)
     {
-        this.data = data;
+        this.Data = data;
     }
+
+    public float[] Data { get => data; set => data = value; }
 
     public override object GetValue()
     {
-        return data;
+        return Data;
     }
 }

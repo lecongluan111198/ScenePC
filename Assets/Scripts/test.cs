@@ -11,15 +11,13 @@ public class test : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = ConvertContextUtils.addComponent<AudioSource>(gameObject);
-        //List<AbstractComponent> ab = new List<AbstractComponent>();
-        //ab.Add(new BoxColliderComponent("BXC", false, new List<double>() { 1, 2, 3 }, new List<double>() { 1, 2, 3 }));
-        //ab.Add(new BoxColliderComponent("BXC1", false, new List<double>() { 4, 5, 6 }, new List<double>() { 4, 5, 6 }));
-        //string json = JSONUtils.toJSONString(ab);
-        //Debug.Log(json);
-        //List<AbstractComponent> ab2 = JSONUtils.toObject<List<AbstractComponent>>(json);
-        //Debug.Log(ab2[0].Name);
-        Debug.Log(Microphone.devices.Length);
+        string str = "{\"$type\":\"QuestionComponentV2, Assembly-CSharp\",\"Question\":{\"$type\":\"TextContent, Assembly-CSharp\",\"Value\":\"How many ribs are there in a human skeleton?\",\"Type\":1},\"Choose\":{\"$type\":\"System.Collections.Generic.List`1[[Content, Assembly-CSharp]], mscorlib\",\"$values\":[{\"$type\":\"TextContent, Assembly-CSharp\",\"Value\":\"20\",\"Type\":1},{\"$type\":\"TextContent, Assembly-CSharp\",\"Value\":\"30\",\"Type\":1},{\"$type\":\"TextContent, Assembly-CSharp\",\"Value\":\"24\",\"Type\":1},{\"$type\":\"TextContent, Assembly-CSharp\",\"Value\":\"40\",\"Type\":1}]},\"Answer\":2,\"Id\":6,\"Name\":\"QS\"}";
+        QuestionComponentV2 ques = JSONUtils.toObject<QuestionComponentV2>(str);
+        Debug.Log(ques.Question.GetValue());
+        QuestionV2 q2 = gameObject.AddComponent(ques.getType()) as QuestionV2;
+        ques.updateInfomation(q2);
+        Debug.Log(q2.Question.GetValue());
+
     }
 
     // Update is called once per frame

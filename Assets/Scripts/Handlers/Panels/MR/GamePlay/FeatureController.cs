@@ -42,7 +42,12 @@ public class FeatureController : MonoBehaviour
 
     public void showQuestion()
     {
-        Question question = currentObject.GetComponent<Question>();
+        //Question question = currentObject.GetComponent<Question>();
+        //if(question != null)
+        //{
+        //    question.showQuestion();
+        //}
+        QuestionV2 question = currentObject.GetComponent<QuestionV2>();
         if(question != null)
         {
             question.showQuestion();
