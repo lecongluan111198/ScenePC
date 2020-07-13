@@ -8,7 +8,7 @@ public class LoadSceneManager : MonoBehaviour
 {
     public static LoadSceneManager Instance = null;
     private PhotonView PV;
-    private string currentScene = "";
+    public string currentScene = "";
     public string mainBoardScene;
     public string waitingRoomScene;
     public string gamePlayScene;

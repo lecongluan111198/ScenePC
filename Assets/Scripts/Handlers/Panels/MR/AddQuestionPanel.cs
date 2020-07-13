@@ -45,8 +45,8 @@ public class AddQuestionPanel : MonoBehaviour
 
     public void ChangeQuestionType(int type)
     {
-        this.questionType = (EContent) type;
-        if(type == (int)EContent.TEXT)
+        this.questionType = (EContent)type;
+        if (type == (int)EContent.TEXT)
         {
             quesText.SetActive(true);
             quesVoice.SetActive(false);
@@ -131,19 +131,27 @@ public class AddQuestionPanel : MonoBehaviour
         Cancel();
     }
 
+    AudioSource currAudioSource;
+    string deviceName;
     public void StartRecord()
     {
-        if(Microphone.devices.Length > 0)
+        if (Microphone.devices.Length > 0)
         {
-            AudioSource audioSource = ConvertContextUtils.addComponent<AudioSource>(currentObject);
-            string deviceName = Microphone.devices[0].ToString();
-            Debug.Log(deviceName);
-            audioSource.clip = Microphone.Start(deviceName, true, 10, 44100);
+            currAudioSource = ConvertContextUtils.addComponent<AudioSource>(currentObject);
+            deviceName = Microphone.devices[0].ToString();
+            if (Microphone.IsRecording(deviceName))
+                return;
+            currAudioSource.clip = Microphone.Start(deviceName, true, 10, 44100);
         }
         else
         {
             Debug.Log("Cannot find any devices!");
         }
+    }
+
+    public void StopRecord()
+    {
+        Microphone.End(deviceName);
     }
 
     public void PlayRecord()

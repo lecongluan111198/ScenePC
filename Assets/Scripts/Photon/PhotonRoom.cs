@@ -133,8 +133,9 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
             }
         }
+        
         if (LoadSceneManager.Instance.CurrentScene == LoadSceneManager.Instance.gamePlayScene || 
-            (PhotonNetwork.IsConnected && !PhotonNetwork.IsMasterClient))
+            (PhotonNetwork.InRoom))
         {
             CreatePlayer();
         }
