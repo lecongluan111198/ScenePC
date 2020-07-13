@@ -176,9 +176,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1105063237}
+  - component: {fileID: 1105063240}
   - component: {fileID: 1105063236}
   - component: {fileID: 1105063235}
   - component: {fileID: 1105063238}
+  - component: {fileID: 1105063239}
   m_Layer: 0
   m_Name: VoiceController
   m_TagString: Untagged
@@ -296,6 +298,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JoinClip: {fileID: 8300000, guid: dd2973535af1c6a4a9c18e0973520b42, type: 3}
   LeaveClip: {fileID: 8300000, guid: f60c28e299c51fd47b838b76f2f9ec17, type: 3}
+--- !u!114 &1105063239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105063234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65b99afb3758e9e4689c28a18224eb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RandomRoom: 1
+  autoConnect: 1
+  autoTransmit: 1
+  publishUserId: 0
+  RoomName: 
+--- !u!114 &1105063240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105063234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 697c1cda529a1419782f2a2e3afe37a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KeepAliveInBackground: 60000
+  ApplyDontDestroyOnLoad: 1
+  logLevel: 3
+  enableSupportLogger: 0
+  updateInterval: 50
+  runInBackground: 1
+  statsResetInterval: 1000
+  speakerPrefab: {fileID: 1499113983356646, guid: 68d1999e77809664ab4e058635090f3c,
+    type: 3}
+  primaryRecorder: {fileID: 1105063235}
+  globalRecordersLogLevel: 3
+  globalSpeakersLogLevel: 3
+  globalPlaybackDelay: 200
+  Settings:
+    AppIdRealtime: 
+    AppIdChat: 
+    AppIdVoice: 016ec088-c511-4ff4-bd6d-b181909fb1fa
+    AppVersion: 
+    UseNameServer: 1
+    FixedRegion: 
+    Server: 
+    Port: 0
+    ProxyServer: 
+    Protocol: 0
+    EnableProtocolFallback: 1
+    AuthMode: 0
+    EnableLobbyStatistics: 0
+    NetworkLogging: 1
+  ShowSettings: 1
+  MinimalTimeScaleToDispatchInFixedUpdate: -1
+  AutoCreateSpeakerIfNotFound: 1
 --- !u!1 &1194366714
 GameObject:
   m_ObjectHideFlags: 0
