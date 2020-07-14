@@ -44,7 +44,7 @@ public class ContextObject
         //go.transform.Rotate(angle.x, angle.y, angle.z);
         go.transform.rotation = Quaternion.Euler(angle);
 
-        Debug.Log(nameObj + " " + angle.y + " " + go.transform.rotation.eulerAngles.y);
+        //Debug.Log(nameObj + " " + angle.y + " " + go.transform.rotation.eulerAngles.y);
 
         ObjBasicInfo bInfo = ConvertContextUtils.addComponent<ObjBasicInfo>(go);
         bInfo.DownloadName = nameDownload;

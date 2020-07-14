@@ -47,7 +47,6 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
         }
         if (!anim.enabled)
             anim.enabled = true;
-        Debug.Log(mode.ToString() + " " + !MRDataHolder.Instance.IsEdit);
         if ((mode == EAnimMode.START || mode == EAnimMode.START_LOOP) && !MRDataHolder.Instance.IsEdit)
         {
             if (PhotonNetwork.IsMasterClient)

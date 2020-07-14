@@ -33,7 +33,6 @@ public class MRTooltip : MonoBehaviour
     {
         foreach (TooltipComponent.ToolTipDetail detail in tooltipDetails)
         {
-            Debug.Log(detail.Title);
             CreateTooltip(detail.Title, ConvertTypeUtils.listToVector3(detail.AnchorPos), ConvertTypeUtils.listToVector3(detail.PivotPos));
         }
     }

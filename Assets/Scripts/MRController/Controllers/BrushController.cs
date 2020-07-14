@@ -49,8 +49,8 @@ public class BrushController : AbstractController
     private Transform brushObjectTransform;
     [SerializeField]
     private Renderer brushRenderer;
-    [Header("PHOTON")]
-    public PhotonView PV;
+    //[Header("PHOTON")]
+    //public PhotonView PV;
 
     //private ColorPickerWheel colorPicker;
     private Color currentStrokeColor = Color.white;
@@ -75,7 +75,7 @@ public class BrushController : AbstractController
 
     protected override void doOnStart()
     {
-        PV = gameObject.GetComponent<PhotonView>();
+        //PV = gameObject.GetComponent<PhotonView>();
         this.Type = ControllerType.BRUSH;
     }
 
@@ -92,8 +92,8 @@ public class BrushController : AbstractController
 
     private void InteractionSourcePressed(InteractionSourcePressedEventArgs obj)
     {
-        Debug.Log(obj.state.source.handedness);
-        Debug.Log(obj.pressType);
+        //Debug.Log(obj.state.source.handedness);
+        //Debug.Log(obj.pressType);
         if (obj.state.source.handedness == InteractionSourceHandedness.Right && obj.pressType == InteractionSourcePressType.Select)
         {
             Draw = true;
@@ -119,7 +119,6 @@ public class BrushController : AbstractController
 
     //    return colorPicker != null;
     //}
-    private readonly Random random = new Random();
     int increase = 0;
     private IEnumerator DrawOverTime()
     {
@@ -166,74 +165,15 @@ public class BrushController : AbstractController
         //    yield return null;
         //}
         ++increase;
+        string key = "" + AccountInfo.Instance.UID + increase;
+        Vector3 position;
         while (draw)
         {
-            Vector3 position = tip.position;
-            if (PhotonNetwork.IsConnected)
-            {
-                PV.RPC("DrawLine", RpcTarget.AllBuffered, position.x, position.y, position.z, "red", Time.unscaledTime, "" + AccountInfo.Instance.UID + increase);
-            }
-            else
-            {
-                DrawLine(position.x, position.y, position.z, "red", Time.unscaledTime, "" + AccountInfo.Instance.UID + increase);
-            }
-           
+            position = tip.position;
+            LineController.Instance.DrawLine(position.x, position.y, position.z, "red", Time.unscaledTime, key);
             yield return null;
         }
-        if (PhotonNetwork.IsConnected)
-        {
-            PV.RPC("StopDraw", RpcTarget.AllBuffered, "" + AccountInfo.Instance.UID + increase);
-        }
-        else
-        {
-            StopDraw("" + AccountInfo.Instance.UID + increase);
-        }
-    }
-
-    Dictionary<string, LineRenderer> lineMap = new Dictionary<string, LineRenderer>();
-    Dictionary<string, KeyValuePair<Vector3, float>> infoMap = new Dictionary<string, KeyValuePair<Vector3, float>>();
-
-    [PunRPC]
-    private void DrawLine(float sx, float sy, float sz, string color, float timeScale, string key)
-    {
-        Vector3 position = new Vector3(sx, sy, sz);
-        LineRenderer line;
-        if (!lineMap.ContainsKey(key))
-        {
-            // Create a new brush stroke by instantiating stokePrefab
-            GameObject newStroke = Instantiate(strokePrefab);
-            line = newStroke.GetComponent<LineRenderer>();
-            newStroke.transform.position = position;
-            line.SetPosition(0, position);
-            lineMap.Add(key, line);
-            infoMap.Add(key, new KeyValuePair<Vector3, float>(position, timeScale));
-        }
-        else
-        {
-            line = lineMap[key];
-        }
-
-        KeyValuePair<Vector3, float> pair = infoMap[key];
-        float lastPointAddedTime = pair.Value;
-        float initialWidth = line.widthMultiplier;
-        line.material.color = Color.red;
-        //brushRenderer.material.color = Color.blue;
-        line.widthMultiplier = Mathf.Lerp(initialWidth, initialWidth * 2, width);
-        if (Vector3.Distance(position, pair.Key) > minPositionDelta || Time.unscaledTime > lastPointAddedTime + maxTimeDelta)
-        {
-            // Spawn a new point
-            line.positionCount += 1;
-            line.SetPosition(line.positionCount - 1, position);
-        }
-    }
-
-    [PunRPC]
-    private void StopDraw(string key)
-    {
-        if (lineMap.ContainsKey(key))
-        {
-            lineMap.Remove(key);
-        }
+        LineController.Instance.StopDraw(key);
     }
 
 }

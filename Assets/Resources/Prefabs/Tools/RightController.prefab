@@ -119,6 +119,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1496130409796575418, guid: 472a7fdfb8599aa4da9b2e9b232204a8,
+        type: 3}
+      propertyPath: PV
+      value: 
+      objectReference: {fileID: 1705363988454506329, guid: f78dcc035474fa749b54d3835e351633,
+        type: 3}
     - target: {fileID: 1430356196732642, guid: 472a7fdfb8599aa4da9b2e9b232204a8, type: 3}
       propertyPath: m_Name
       value: BrushController

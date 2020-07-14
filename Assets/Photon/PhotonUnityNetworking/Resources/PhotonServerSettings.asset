@@ -44,6 +44,10 @@ MonoBehaviour:
   - UpdateMRObjectComponent
   - ChangeColour
   - UpdateCurrentScene
+  - DrawLine
+  - StopDraw
+  - RPCDrawLine
+  - RPCStopDraw
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
