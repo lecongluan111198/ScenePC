@@ -119,11 +119,12 @@ public class BrushController : AbstractController
 
     //    return colorPicker != null;
     //}
-
+    private readonly Random random = new Random();
+    int increase = 0;
     private IEnumerator DrawOverTime()
     {
         // Get the position of the tip
-        Vector3 lastPointPosition = tip.position;
+        //Vector3 lastPointPosition = tip.position;
         // Then wait one frame and get the position again
         yield return null;
 
@@ -134,40 +135,105 @@ public class BrushController : AbstractController
             yield break;
         }
 
-        Vector3 startPosition = tip.position;
+        //Vector3 startPosition = tip.position;
         // Create a new brush stroke by instantiating stokePrefab
-        GameObject newStroke = Instantiate(strokePrefab);
-        LineRenderer line = newStroke.GetComponent<LineRenderer>();
-        newStroke.transform.position = startPosition;
-        line.SetPosition(0, tip.position);
-        float initialWidth = line.widthMultiplier;
+        //GameObject newStroke = Instantiate(strokePrefab);
+        //LineRenderer line = newStroke.GetComponent<LineRenderer>();
+        //newStroke.transform.position = startPosition;
+        //line.SetPosition(0, tip.position);
+        //float initialWidth = line.widthMultiplier;
 
-        // Generate points in an instantiated Unity LineRenderer
+        //// Generate points in an instantiated Unity LineRenderer
+        //while (draw)
+        //{
+        //    // Move the last point to the draw point position
+        //    line.SetPosition(line.positionCount - 1, tip.position);
+        //    //line.material.color = colorPicker.SelectedColor;
+        //    //brushRenderer.material.color = colorPicker.SelectedColor;
+        //    line.material.color = Color.red;
+        //    brushRenderer.material.color = Color.blue;
+        //    lastPointAddedTime = Time.unscaledTime;
+        //    line.widthMultiplier = Mathf.Lerp(initialWidth, initialWidth * 2, width);
+
+        //    if (Vector3.Distance(lastPointPosition, tip.position) > minPositionDelta || Time.unscaledTime > lastPointAddedTime + maxTimeDelta)
+        //    {
+        //        // Spawn a new point
+        //        lastPointAddedTime = Time.unscaledTime;
+        //        lastPointPosition = tip.position;
+        //        line.positionCount += 1;
+        //        line.SetPosition(line.positionCount - 1, lastPointPosition);
+        //    }
+        //    yield return null;
+        //}
+        ++increase;
         while (draw)
         {
-            // Move the last point to the draw point position
-            line.SetPosition(line.positionCount - 1, tip.position);
-            //line.material.color = colorPicker.SelectedColor;
-            //brushRenderer.material.color = colorPicker.SelectedColor;
-            line.material.color = Color.red;
-            brushRenderer.material.color = Color.blue;
-            lastPointAddedTime = Time.unscaledTime;
-            line.widthMultiplier = Mathf.Lerp(initialWidth, initialWidth * 2, width);
-
-            if (Vector3.Distance(lastPointPosition, tip.position) > minPositionDelta || Time.unscaledTime > lastPointAddedTime + maxTimeDelta)
+            Vector3 position = tip.position;
+            if (PhotonNetwork.IsConnected)
             {
-                // Spawn a new point
-                lastPointAddedTime = Time.unscaledTime;
-                lastPointPosition = tip.position;
-                line.positionCount += 1;
-                line.SetPosition(line.positionCount - 1, lastPointPosition);
+                PV.RPC("DrawLine", RpcTarget.AllBuffered, position.x, position.y, position.z, "red", Time.unscaledTime, "" + AccountInfo.Instance.UID + increase);
             }
+            else
+            {
+                DrawLine(position.x, position.y, position.z, "red", Time.unscaledTime, "" + AccountInfo.Instance.UID + increase);
+            }
+           
             yield return null;
+        }
+        if (PhotonNetwork.IsConnected)
+        {
+            PV.RPC("StopDraw", RpcTarget.AllBuffered, "" + AccountInfo.Instance.UID + increase);
+        }
+        else
+        {
+            StopDraw("" + AccountInfo.Instance.UID + increase);
         }
     }
 
-    private void DrawLine(float x, float y, float z)
+    Dictionary<string, LineRenderer> lineMap = new Dictionary<string, LineRenderer>();
+    Dictionary<string, KeyValuePair<Vector3, float>> infoMap = new Dictionary<string, KeyValuePair<Vector3, float>>();
+
+    [PunRPC]
+    private void DrawLine(float sx, float sy, float sz, string color, float timeScale, string key)
     {
-        
+        Vector3 position = new Vector3(sx, sy, sz);
+        LineRenderer line;
+        if (!lineMap.ContainsKey(key))
+        {
+            // Create a new brush stroke by instantiating stokePrefab
+            GameObject newStroke = Instantiate(strokePrefab);
+            line = newStroke.GetComponent<LineRenderer>();
+            newStroke.transform.position = position;
+            line.SetPosition(0, position);
+            lineMap.Add(key, line);
+            infoMap.Add(key, new KeyValuePair<Vector3, float>(position, timeScale));
+        }
+        else
+        {
+            line = lineMap[key];
+        }
+
+        KeyValuePair<Vector3, float> pair = infoMap[key];
+        float lastPointAddedTime = pair.Value;
+        float initialWidth = line.widthMultiplier;
+        line.material.color = Color.red;
+        //brushRenderer.material.color = Color.blue;
+        line.widthMultiplier = Mathf.Lerp(initialWidth, initialWidth * 2, width);
+        if (Vector3.Distance(position, pair.Key) > minPositionDelta || Time.unscaledTime > lastPointAddedTime + maxTimeDelta)
+        {
+            // Spawn a new point
+            line.positionCount += 1;
+            line.SetPosition(line.positionCount - 1, position);
+        }
     }
+
+    [PunRPC]
+    private void StopDraw(string key)
+    {
+        if (lineMap.ContainsKey(key))
+        {
+            lineMap.Remove(key);
+        }
+    }
+
 }
