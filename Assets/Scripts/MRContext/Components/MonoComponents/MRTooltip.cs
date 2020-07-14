@@ -12,6 +12,7 @@ public class MRTooltip : MonoBehaviour
 
     public Dictionary<int, TooltipComponent.ToolTipDetail> MapTooltipDetails { get => mapTooltipDetails; set => mapTooltipDetails = value; }
 
+    private Vector3 distance = new Vector3(0.25f, 0.25f, 0.25f);
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +67,8 @@ public class MRTooltip : MonoBehaviour
             ConvertTypeUtils.vector3ToList(anchorPos), ConvertTypeUtils.vector3ToList(pivotPos));
         ToolTip tooltip = ttGo.GetComponent<ToolTip>();
         tooltip.ToolTipText = title;
+        ttGo.transform.position = Camera.main.transform.position;
+
     }
 
     public void UpdatePos(int index, Vector3 anchor, Vector3 pivot)

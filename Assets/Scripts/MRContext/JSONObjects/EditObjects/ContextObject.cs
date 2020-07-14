@@ -40,9 +40,11 @@ public class ContextObject
         go.transform.localScale = ConvertTypeUtils.listToVector3(scale);
         //go.transform.rotation = ConvertTypeUtils.listToQuaternion(rotation);
         //go.transform.rotation.eulerAngles.x = 0;
-        go.transform.Rotate(ConvertTypeUtils.listToVector3(rotation));
+        Vector3 angle = ConvertTypeUtils.listToVector3(rotation);
+        //go.transform.Rotate(angle.x, angle.y, angle.z);
+        go.transform.rotation = Quaternion.Euler(angle);
 
-        Debug.Log(nameObj + " " + ConvertTypeUtils.listToVector3(rotation).y + " " + go.transform.rotation.eulerAngles.y);
+        Debug.Log(nameObj + " " + angle.y + " " + go.transform.rotation.eulerAngles.y);
 
         ObjBasicInfo bInfo = ConvertContextUtils.addComponent<ObjBasicInfo>(go);
         bInfo.DownloadName = nameDownload;

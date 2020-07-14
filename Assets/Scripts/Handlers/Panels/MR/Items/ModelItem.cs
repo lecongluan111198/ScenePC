@@ -9,7 +9,7 @@ public class ModelItem : MonoBehaviour
     public Text text;
 
     private Model model;
-
+    private Vector3 distance = new Vector3(0.5f, 0.5f, 0.5f);
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +32,7 @@ public class ModelItem : MonoBehaviour
         {
             GameObject go = Instantiate(Resources.Load(ResourceManager.MRPrefab + model.Name) as GameObject);
             MREditContextManager.Instance.UpdateModel(go);
+            go.transform.position = Camera.main.transform.position + distance;
             ObjBasicInfo bInfo = ConvertContextUtils.addComponent<ObjBasicInfo>(go);
             bInfo.DownloadName = model.Name;
             bInfo.FromServer = model.FromServer;

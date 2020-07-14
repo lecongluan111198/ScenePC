@@ -16,6 +16,9 @@ public class AddQuestionPanel : MonoBehaviour
     [Header("QUESTION")]
     public GameObject quesText;
     public GameObject quesVoice;
+    public GameObject recordButton;
+    public GameObject stopRecordButton;
+    public GameObject playButton;
 
     private GameObject currentObject;
     private int correctPos = 0;
@@ -41,6 +44,9 @@ public class AddQuestionPanel : MonoBehaviour
         ansB.text = "";
         ansC.text = "";
         ansD.text = "";
+        recordButton.SetActive(true);
+        stopRecordButton.SetActive(false);
+        playButton.SetActive(false);
     }
 
     public void ChangeQuestionType(int type)
@@ -60,51 +66,38 @@ public class AddQuestionPanel : MonoBehaviour
 
     public void Save()
     {
-        //Question com = ConvertContextUtils.addComponent<Question>(currentObject);
-        //com.QuestionText = question.text;
-        //com.Choose = new List<string>() { ansA.text, ansB.text, ansC.text, ansD.text };
-        //foreach (Toggle tog in toggleGroup.ActiveToggles())
-        //{
-        //    if (tog.isOn)
-        //    {
-        //        switch (tog.name)
-        //        {
-        //            case "A":
-        //                correctPos = 0;
-        //                break;
-        //            case "B":
-        //                correctPos = 1;
-        //                break;
-        //            case "C":
-        //                correctPos = 2;
-        //                break;
-        //            case "D":
-        //                correctPos = 3;
-        //                break;
-        //        }
-        //        break;
-        //    }
-        //}
-        //com.Answer = correctPos;
-        //Cancel();
-
         QuestionV2 com = ConvertContextUtils.addComponent<QuestionV2>(currentObject);
 
         switch (questionType)
         {
             case EContent.TEXT:
                 com.Question = new TextContent(question.text);
-                com.Choose = new List<Content>()
-                {
-                    new TextContent(ansA.text),
-                    new TextContent(ansB.text),
-                    new TextContent(ansC.text),
-                    new TextContent(ansD.text)
-                };
                 break;
             case EContent.VOICE:
+                {
+                    AudioSource audioSource = ConvertContextUtils.addComponent<AudioSource>(currentObject);
+                    if (audioSource.clip != null)
+                    {
+                        float[] data = new float[audioSource.clip.channels * audioSource.clip.frequency];
+                        audioSource.clip.GetData(data, 0);
+                        com.Question = new VoiceContent(data);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
                 break;
+            default:
+                return;
         }
+        com.Choose = new List<Content>()
+        {
+            new TextContent(ansA.text),
+            new TextContent(ansB.text),
+            new TextContent(ansC.text),
+            new TextContent(ansD.text)
+        };
         foreach (Toggle tog in toggleGroup.ActiveToggles())
         {
             if (tog.isOn)
@@ -140,8 +133,13 @@ public class AddQuestionPanel : MonoBehaviour
             currAudioSource = ConvertContextUtils.addComponent<AudioSource>(currentObject);
             deviceName = Microphone.devices[0].ToString();
             if (Microphone.IsRecording(deviceName))
+            {
+                Debug.Log(deviceName + " is recording!");
                 return;
-            currAudioSource.clip = Microphone.Start(deviceName, true, 10, 44100);
+            }
+            currAudioSource.clip = Microphone.Start(deviceName, false, 60, 44100);
+            recordButton.SetActive(false);
+            stopRecordButton.SetActive(true);
         }
         else
         {
@@ -151,6 +149,9 @@ public class AddQuestionPanel : MonoBehaviour
 
     public void StopRecord()
     {
+        recordButton.SetActive(true);
+        stopRecordButton.SetActive(false);
+        playButton.SetActive(true);
         Microphone.End(deviceName);
     }
 
