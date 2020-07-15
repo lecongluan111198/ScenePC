@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -78,7 +79,7 @@ public class AddQuestionPanel : MonoBehaviour
                     AudioSource audioSource = ConvertContextUtils.AddComponent<AudioSource>(currentObject);
                     if (audioSource.clip != null)
                     {
-                        float[] data = new float[audioSource.clip.channels * audioSource.clip.frequency];
+                        float[] data = new float[audioSource.clip.samples * audioSource.clip.channels];
                         audioSource.clip.GetData(data, 0);
                         com.Question = new VoiceContent(data);
                     }

@@ -33,5 +33,6 @@ public class QuestionComponentV2 : AbstractComponent
         ques.Question = Question;
         ques.Answer = Answer;
         ques.Choose = Choose;
+        Debug.Log("Add quesiton V2 " + ques.Question.Type);
     }
 }

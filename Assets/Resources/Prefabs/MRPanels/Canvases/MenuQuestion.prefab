@@ -287,6 +287,8 @@ MonoBehaviour:
   - {fileID: 2887548210829541660}
   - {fileID: 6940745666823413965}
   - {fileID: 7822079161000049913}
+  voiceButton: {fileID: 5517477491572242075}
+  quesionText: {fileID: 719605582003378401}
 --- !u!222 &1319498997950692845
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -448,17 +450,17 @@ PrefabInstance:
     - target: {fileID: 1291186329300903045, guid: 477aa4e35a6ae05469bdf4a2e1a387da,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1291186329300903045, guid: 477aa4e35a6ae05469bdf4a2e1a387da,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1291186329300903045, guid: 477aa4e35a6ae05469bdf4a2e1a387da,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -447.83997
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5248148148748528781, guid: 477aa4e35a6ae05469bdf4a2e1a387da,
         type: 3}
@@ -488,17 +490,17 @@ PrefabInstance:
     - target: {fileID: 5172042220598642748, guid: 477aa4e35a6ae05469bdf4a2e1a387da,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5172042220598642748, guid: 477aa4e35a6ae05469bdf4a2e1a387da,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5172042220598642748, guid: 477aa4e35a6ae05469bdf4a2e1a387da,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -35
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5172042219648131879, guid: 477aa4e35a6ae05469bdf4a2e1a387da,
         type: 3}
@@ -598,7 +600,7 @@ PrefabInstance:
     - target: {fileID: 3497575089737464698, guid: 477aa4e35a6ae05469bdf4a2e1a387da,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.04776001
+      value: -0.011543536
       objectReference: {fileID: 0}
     - target: {fileID: 3443085798925109102, guid: 477aa4e35a6ae05469bdf4a2e1a387da,
         type: 3}
@@ -668,7 +670,7 @@ PrefabInstance:
     - target: {fileID: 2275282150184094317, guid: 477aa4e35a6ae05469bdf4a2e1a387da,
         type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1217466931354278072, guid: 477aa4e35a6ae05469bdf4a2e1a387da,
         type: 3}
@@ -856,11 +858,38 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6030284768493375388, guid: 477aa4e35a6ae05469bdf4a2e1a387da,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6030284768498907772, guid: 477aa4e35a6ae05469bdf4a2e1a387da,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3010961546297001697}
+    - target: {fileID: 6030284768498907772, guid: 477aa4e35a6ae05469bdf4a2e1a387da,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 477aa4e35a6ae05469bdf4a2e1a387da, type: 3}
 --- !u!224 &6411767390937426741 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5172042220468785714, guid: 477aa4e35a6ae05469bdf4a2e1a387da,
+    type: 3}
+  m_PrefabInstance: {fileID: 2251206659997137159}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5517477491572242075 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6030284768493375388, guid: 477aa4e35a6ae05469bdf4a2e1a387da,
+    type: 3}
+  m_PrefabInstance: {fileID: 2251206659997137159}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &719605582003378401 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1639708225037951462, guid: 477aa4e35a6ae05469bdf4a2e1a387da,
     type: 3}
   m_PrefabInstance: {fileID: 2251206659997137159}
   m_PrefabAsset: {fileID: 0}

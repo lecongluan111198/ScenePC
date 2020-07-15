@@ -34,7 +34,6 @@ public class ContextObject
 
     public GameObject ToGameObject(GameObject go)
     {
-        
         go.transform.localPosition = ConvertTypeUtils.ListToVector3(position);
         go.name = nameObj;
         go.transform.localScale = ConvertTypeUtils.ListToVector3(scale);
@@ -54,6 +53,7 @@ public class ContextObject
         foreach (AbstractComponent ab in components)
         {
             Component component =  go.GetComponent(ab.getType());
+            Debug.Log(ab.getType());
             if(component == null)
             {
                 component = go.AddComponent(ab.getType());
