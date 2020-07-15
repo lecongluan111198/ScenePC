@@ -7,7 +7,6 @@ using Photon.Pun;
 
 public class IKControl : MonoBehaviour
 {
-
     protected Animator animator;
     public bool ikActive = false;
     private Vector3 distance = new Vector3(10, 10, 10);
