@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using Photon.Pun;
 
 [RequireComponent(typeof(Animator))]
 
@@ -11,10 +12,21 @@ public class IKControl : MonoBehaviour
     public bool ikActive = false;
     private Vector3 distance = new Vector3(10, 10, 10);
     private Transform rightArm;
+    private PhotonView PV;
     void Start()
     {
         animator = GetComponent<Animator>();
         rightArm = animator.GetBoneTransform(HumanBodyBones.RightUpperArm);
+        PV = GetComponent<PhotonView>();
+        if (PV.IsMine)
+        {
+            //on ikActive
+            ikActive = true;
+        }
+    }
+
+    private void Update()
+    {
         
     }
     //a callback for calculating IK
