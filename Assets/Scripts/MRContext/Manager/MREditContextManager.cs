@@ -33,10 +33,10 @@ public class MREditContextManager : MonoBehaviour
 
     void Start()
     {
-        loadEditContext();
+        LoadEditContext();
     }
 
-    public void loadEditContext()
+    public void LoadEditContext()
     {
         if (!MRDataHolder.Instance.IsEdit)
         {
@@ -50,7 +50,7 @@ public class MREditContextManager : MonoBehaviour
             json = MRDataHolder.Instance.DefaultContent;
         }
         //list phase
-        List<ConvertContextUtils.ContextInfo> contextInfos = ConvertContextUtils.toGameObjects(json, false);
+        List<ConvertContextUtils.ContextInfo> contextInfos = ConvertContextUtils.ToGameObjects(json, false);
         if (contextInfos.Count == 0)
         {
             Debug.Log("Convert to ContextInfos error!");
@@ -60,63 +60,42 @@ public class MREditContextManager : MonoBehaviour
         ConvertContextUtils.ContextInfo info = contextInfos[0];
         KeyValuePair<ContextObject, GameObject> bo = info.Bo;
         //load background
-        updateBackground(bo.Key, bo.Value);
+        UpdateBackground(bo.Key, bo.Value);
         foreach (KeyValuePair<ContextObject, GameObject> entry in info.GameObjs)
         {
             GameObject go = entry.Value;
-            //go.transform.parent = container.transform;
+            //if not stroke
+            if (!entry.Key.nameDownload.Equals("BrushThinStroke"))
+            {
+                UpdateModel(go);
+            }
+            else
+            {
+                go.transform.parent = container.transform;
+            }
 
-            //BoundingBox bbox = go.AddComponent<BoundingBox>();
-            //bbox.Target = go.gameObject;
-            //bbox.BoundsOverride = go.GetComponent<BoxCollider>();
-            //ManipulationHandler mHandler = go.AddComponent<ManipulationHandler>();
-            //mHandler.HostTransform = go.transform;
-            //go.AddComponent<NearInteractionGrabbable>();
-            ////add record MR
-            //go.AddComponent<RecordTransform>();
-            //go.AddComponent<ObjectSetting>();
-            UpdateModel(go);
-            entry.Key.toGameObject(go);
+            entry.Key.ToGameObject(go);
         }
     }
 
-    private void updateBackground(ContextObject bo, GameObject go)
+    private void UpdateBackground(ContextObject bo, GameObject go)
     {
         go.transform.SetParent(GUI.transform);
-        ObjBasicInfo bInfo = ConvertContextUtils.addComponent<ObjBasicInfo>(go);
+        ObjBasicInfo bInfo = ConvertContextUtils.AddComponent<ObjBasicInfo>(go);
         bInfo.Id = 1;
         bInfo.DownloadName = bo.nameDownload;
         bInfo.FromServer = false;
-        bo.toGameObject(go);
+        bo.ToGameObject(go);
     }
 
-    //private void updateContextObject(ContextObject co, GameObject go)
-    //{
-    //    go.transform.parent = container.transform;
-    //    BoundingBox bbox = ConvertContextUtils.addComponent<BoundingBox>(go);
-    //    bbox.Target = go.gameObject;
-    //    bbox.BoundsOverride = ConvertContextUtils.addComponent<BoxCollider>(go);
-    //    ManipulationHandler mHandler = ConvertContextUtils.addComponent<ManipulationHandler>(go);
-    //    mHandler.HostTransform = go.transform;
-    //    ConvertContextUtils.addComponent<NearInteractionGrabbable>(go);
-    //    //add feature to use in edit mode
-    //    ConvertContextUtils.addComponent<RecordTransform>(go);
-    //    ConvertContextUtils.addComponent<ObjectSetting>(go);
-    //    ObjBasicInfo info = ConvertContextUtils.addComponent<ObjBasicInfo>(go);
-    //    info.Id = 1;
-    //    info.DownloadName = co.nameDownload;
-    //    info.FromServer = co.fromServer;
-    //    co.toGameObject(go);
-    //}
-
-    public void saveEditContext()
+    public void SaveEditContext()
     {
         Context context = MRDataHolder.Instance.CurrentContext;
-        RootObject rootObject = exportRootObject();
+        RootObject rootObject = ExportRootObject();
         string json = JSONUtils.toJSONString(rootObject);
         if (json != null && json != "")
         {
-            context.Content = json;
+            context.Content = StringCompressor.CompressString(json);
             File.WriteAllText(@"Assets/saveJSON.txt", json);
             Debug.Log(json);
             ContextModel.Instance.updateContext(context, (data) =>
@@ -137,7 +116,16 @@ public class MREditContextManager : MonoBehaviour
         }
     }
 
-    private List<ContextObject> toListObj()
+    private RootObject ExportRootObject()
+    {
+        List<ContextObject> objects = ToListObj();
+        ContextObject bo = ToBackgroundObject();
+        List<Phase> phases = ToPhase(bo, objects);
+        RootObject rootObject = ToRoot(phases);
+        return rootObject;
+    }
+
+    private List<ContextObject> ToListObj()
     {
         List<ContextObject> objects = new List<ContextObject>();
         foreach (Transform child in container.transform)
@@ -145,7 +133,7 @@ public class MREditContextManager : MonoBehaviour
             ObjBasicInfo bInfo = child.GetComponent<ObjBasicInfo>();
             if (bInfo != null)
             {
-                ContextObject contextObj = ContextObject.toContextObject(child.gameObject);
+                ContextObject contextObj = ContextObject.ToContextObject(child.gameObject);
                 if (contextObj != null)
                 {
                     objects.Add(contextObj);
@@ -154,7 +142,7 @@ public class MREditContextManager : MonoBehaviour
         }
         return objects;
     }
-    private ContextObject toBackgroundObject()
+    private ContextObject ToBackgroundObject()
     {
         ContextObject bo = null;
         foreach (Transform child in GUI.transform)
@@ -162,33 +150,25 @@ public class MREditContextManager : MonoBehaviour
             ObjBasicInfo bInfo = child.GetComponent<ObjBasicInfo>();
             if (bInfo != null)
             {
-                bo = ContextObject.toContextObject(child.gameObject);
+                bo = ContextObject.ToContextObject(child.gameObject);
                 break;
             }
         }
         return bo;
     }
-    private List<Phase> toPhase(ContextObject bo, List<ContextObject> objects)
+    private List<Phase> ToPhase(ContextObject bo, List<ContextObject> objects)
     {
         List<Phase> phases = new List<Phase>();
         Phase phrs = Phase.toPhase(bo, objects);
         phases.Add(phrs);
         return phases;
     }
-    private RootObject toRoot(List<Phase> phases)
+    private RootObject ToRoot(List<Phase> phases)
     {
         RootObject rootObject = RootObject.toRootObject(phases);
         return rootObject;
     }
-    private RootObject exportRootObject()
-    {
-        List<ContextObject> objects = toListObj();
-        //Debug.Log(objects.Count);
-        ContextObject bo = toBackgroundObject();
-        List<Phase> phases = toPhase(bo, objects);
-        RootObject rootObject = toRoot(phases);
-        return rootObject;
-    }
+
 
 
     public void Exit()

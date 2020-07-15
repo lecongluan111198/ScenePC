@@ -33,7 +33,7 @@ public class MRTooltip : MonoBehaviour
     {
         foreach (TooltipComponent.ToolTipDetail detail in tooltipDetails)
         {
-            CreateTooltip(detail.Title, ConvertTypeUtils.listToVector3(detail.AnchorPos), ConvertTypeUtils.listToVector3(detail.PivotPos));
+            CreateTooltip(detail.Title, ConvertTypeUtils.ListToVector3(detail.AnchorPos), ConvertTypeUtils.ListToVector3(detail.PivotPos));
         }
     }
 
@@ -63,7 +63,7 @@ public class MRTooltip : MonoBehaviour
         obj.CurrentIndex = currentIndex;
         obj.SetPosition(anchorPos, pivotPos);
         MapTooltipDetails[currentIndex++] = new TooltipComponent.ToolTipDetail(title,
-            ConvertTypeUtils.vector3ToList(anchorPos), ConvertTypeUtils.vector3ToList(pivotPos));
+            ConvertTypeUtils.Vector3ToList(anchorPos), ConvertTypeUtils.Vector3ToList(pivotPos));
         ToolTip tooltip = ttGo.GetComponent<ToolTip>();
         tooltip.ToolTipText = title;
         ttGo.transform.position = Camera.main.transform.position;
@@ -72,8 +72,8 @@ public class MRTooltip : MonoBehaviour
 
     public void UpdatePos(int index, Vector3 anchor, Vector3 pivot)
     {
-        MapTooltipDetails[index].AnchorPos = ConvertTypeUtils.vector3ToList(anchor);
-        MapTooltipDetails[index].PivotPos = ConvertTypeUtils.vector3ToList(pivot);
+        MapTooltipDetails[index].AnchorPos = ConvertTypeUtils.Vector3ToList(anchor);
+        MapTooltipDetails[index].PivotPos = ConvertTypeUtils.Vector3ToList(pivot);
     }
 
     private void BFS()

@@ -24,8 +24,8 @@ public class BoxColliderComponent : AbstractComponent
     public override void updateInfomation(Component component)
     {
         ((BoxCollider)component).isTrigger = isTrigger;
-        ((BoxCollider)component).center = ConvertTypeUtils.listToVector3(center);
-        ((BoxCollider)component).size = ConvertTypeUtils.listToVector3(size);
+        ((BoxCollider)component).center = ConvertTypeUtils.ListToVector3(center);
+        ((BoxCollider)component).size = ConvertTypeUtils.ListToVector3(size);
     }
 
     public override Type getType()

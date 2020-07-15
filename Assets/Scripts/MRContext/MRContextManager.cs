@@ -96,7 +96,7 @@ public class MRContextManager : MonoBehaviour
             ObjBasicInfo bInfo = child.GetComponent<ObjBasicInfo>();
             if (bInfo != null)
             {
-                ContextObject contextObj = ContextObject.toContextObject(child.gameObject);
+                ContextObject contextObj = ContextObject.ToContextObject(child.gameObject);
                 if (contextObj != null)
                 {
                     objects.Add(contextObj);
@@ -207,7 +207,7 @@ public class MRContextManager : MonoBehaviour
         }
 
 
-        obj.toGameObject(go);
+        obj.ToGameObject(go);
 
         if (!MRDataHolder.Instance.IsEdit)
         {
@@ -256,7 +256,7 @@ public class MRContextManager : MonoBehaviour
     }
     private void loadBackground(BackgroundObject bo)
     {
-        GameObject go = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, bo.nameBackground), ConvertTypeUtils.listToVector3(bo.position), ConvertTypeUtils.listToQuaternion(bo.rotation), 0);
+        GameObject go = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, bo.nameBackground), ConvertTypeUtils.ListToVector3(bo.position), ConvertTypeUtils.ListToQuaternion(bo.rotation), 0);
         //GameObject go = Instantiate(Resources.Load(ResourceManager.MRPrefab + bo.nameBackground) as GameObject, ConvertTypeUtils.listToVector3(bo.position), ConvertTypeUtils.listToQuaternion(bo.rotation), GUI.transform);
         go.transform.SetParent(GUI.transform);
         ObjBasicInfo bInfo = go.GetComponent<ObjBasicInfo>();

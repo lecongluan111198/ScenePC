@@ -11,8 +11,8 @@ public class GeneralTemplate : AbstractTemplate
     {
         GameObject go = gameObject;
         //update mesh to template object
-        UpdateMesh(co.nameDownload, go);
-        ConvertContextUtils.addComponent<ObjectSetting>(go);
+        UpdateMeshAndTransform(co.nameDownload, go);
+        ConvertContextUtils.AddComponent<ObjectSetting>(go);
 
         go.name = co.nameObj;
 
@@ -28,7 +28,7 @@ public class GeneralTemplate : AbstractTemplate
             anim.applyRootMotion = true;
         }
 
-        co.toGameObject(go);
+        co.ToGameObject(go);
     }
 
 }

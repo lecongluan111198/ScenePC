@@ -31,12 +31,12 @@ public class MRDataHolder
         defaultContent = File.ReadAllText(path);
         currentContext = new Context()
         {
-            Id = 3,
+            Id = 4,
             AvatarId = 1,
             Content = defaultContent,
             CreateTime = 1587788312000,
             Description = "Description for contexts",
-            Name = "context 3",
+            Name = "context 4",
             TeacherId = 1,
             Author = "Luan Lee"
         };
@@ -47,15 +47,22 @@ public class MRDataHolder
     public void updateCurrentContext(Context currentContext, bool isEdit = true)
     {
         this.currentContext = currentContext;
-        if(currentContext.Content != null && currentContext.Content != "" & currentContext.Content != "{}")
+        this.currentContext.Content = StringCompressor.DecompressString(currentContext.Content);
+        if (currentContext.Content != null && currentContext.Content != "" & currentContext.Content != "{}")
         {
-            defaultContent = currentContext.Content;
+           currentContext.Content = defaultContent;
         }
 
         this.isEdit = isEdit;
     }
 
-    public Context CurrentContext { get => currentContext; set => currentContext = value; }
+    public Context CurrentContext {
+        get {return currentContext; }
+        set {
+            currentContext = value;
+            currentContext.Content = StringCompressor.DecompressString(value.Content);
+        }
+    }
     public string DefaultContent { get => defaultContent; set => defaultContent = value; }
     public bool IsEdit { get => isEdit; set => isEdit = value; }
     public bool IsRecord { get => isRecord; set => isRecord = value; }

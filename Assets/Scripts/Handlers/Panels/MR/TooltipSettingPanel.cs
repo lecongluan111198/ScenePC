@@ -32,7 +32,7 @@ public class TooltipSettingPanel : MonoBehaviour
     {
         if(title.text != "")
         {
-            MRTooltip tooltip = ConvertContextUtils.addComponent<MRTooltip>(currentObject);
+            MRTooltip tooltip = ConvertContextUtils.AddComponent<MRTooltip>(currentObject);
             tooltip.AddTooltip(title.text);
         }
         gameObject.SetActive(false);

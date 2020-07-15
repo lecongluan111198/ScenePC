@@ -24,9 +24,9 @@ public class BackgroundObject
         BackgroundObject bo = new BackgroundObject();
         Transform tf = go.transform;
         bo.nameBackground = tf.transform.name.Replace("(Clone)", "");
-        bo.position = ConvertTypeUtils.vector3ToList(tf.transform.localPosition);
-        bo.rotation = ConvertTypeUtils.quaternionToList(tf.transform.localRotation);
-        bo.scale = ConvertTypeUtils.vector3ToList(tf.transform.localScale);
+        bo.position = ConvertTypeUtils.Vector3ToList(tf.transform.localPosition);
+        bo.rotation = ConvertTypeUtils.QuaternionToList(tf.transform.localRotation);
+        bo.scale = ConvertTypeUtils.Vector3ToList(tf.transform.localScale);
         return bo;
     }
 }

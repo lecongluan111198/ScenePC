@@ -6,7 +6,7 @@ using UnityEngine;
 
 public static class ConvertTypeUtils
 {
-    public static Vector3 listToVector3(List<double> list)
+    public static Vector3 ListToVector3(List<double> list)
     {
         Vector3 vector3 = new Vector3();
         vector3.x = Convert.ToSingle(list[0]);
@@ -14,7 +14,7 @@ public static class ConvertTypeUtils
         vector3.z = Convert.ToSingle(list[2]);
         return vector3;
     }
-    public static Quaternion listToQuaternion(List<double> list)
+    public static Quaternion ListToQuaternion(List<double> list)
     {
         Quaternion quaternion = new Quaternion();
         quaternion.x = (float)list[0];
@@ -23,7 +23,7 @@ public static class ConvertTypeUtils
         return quaternion;
     }
 
-    public static List<double> vector3ToList(Vector3 vector3)
+    public static List<double> Vector3ToList(Vector3 vector3)
     {
         List<double> list = new List<double>()
             {
@@ -33,7 +33,7 @@ public static class ConvertTypeUtils
             };
         return list;
     }
-    public static List<double> quaternionToList(Quaternion quaternion)
+    public static List<double> QuaternionToList(Quaternion quaternion)
     {
         List<double> list = new List<double>()
             {

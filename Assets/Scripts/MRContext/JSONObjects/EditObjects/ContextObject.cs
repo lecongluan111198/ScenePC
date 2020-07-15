@@ -32,21 +32,21 @@ public class ContextObject
         this.components = components;
     }
 
-    public GameObject toGameObject(GameObject go)
+    public GameObject ToGameObject(GameObject go)
     {
         
-        go.transform.localPosition = ConvertTypeUtils.listToVector3(position);
+        go.transform.localPosition = ConvertTypeUtils.ListToVector3(position);
         go.name = nameObj;
-        go.transform.localScale = ConvertTypeUtils.listToVector3(scale);
+        go.transform.localScale = ConvertTypeUtils.ListToVector3(scale);
         //go.transform.rotation = ConvertTypeUtils.listToQuaternion(rotation);
         //go.transform.rotation.eulerAngles.x = 0;
-        Vector3 angle = ConvertTypeUtils.listToVector3(rotation);
+        Vector3 angle = ConvertTypeUtils.ListToVector3(rotation);
         //go.transform.Rotate(angle.x, angle.y, angle.z);
         go.transform.rotation = Quaternion.Euler(angle);
 
         //Debug.Log(nameObj + " " + angle.y + " " + go.transform.rotation.eulerAngles.y);
 
-        ObjBasicInfo bInfo = ConvertContextUtils.addComponent<ObjBasicInfo>(go);
+        ObjBasicInfo bInfo = ConvertContextUtils.AddComponent<ObjBasicInfo>(go);
         bInfo.DownloadName = nameDownload;
         bInfo.FromServer = fromServer;
         bInfo.Id = id;
@@ -64,13 +64,13 @@ public class ContextObject
         return go;
     }
 
-    public static List<AbstractComponent> toComponents(GameObject go)
+    public static List<AbstractComponent> ToComponents(GameObject go)
     {
         List<AbstractComponent> abComponents = new List<AbstractComponent>();
         BoxCollider bxc = go.GetComponent<BoxCollider>();
         if (bxc != null)
         {
-            abComponents.Add(new BoxColliderComponent("BXC", bxc.isTrigger, ConvertTypeUtils.vector3ToList(bxc.center), ConvertTypeUtils.vector3ToList(bxc.size)));
+            abComponents.Add(new BoxColliderComponent("BXC", bxc.isTrigger, ConvertTypeUtils.Vector3ToList(bxc.center), ConvertTypeUtils.Vector3ToList(bxc.size)));
         }
         //expand for another components
         Question qs = go.GetComponent<Question>();
@@ -102,10 +102,16 @@ public class ContextObject
         {
             abComponents.Add(new TooltipComponent("TOOLTIP", new HashSet<TooltipComponent.ToolTipDetail>(tooltip.MapTooltipDetails.Values)));
         }
+
+        Stroke stroke = go.GetComponent<Stroke>();
+        if(stroke != null && stroke.Positions.Count != 0)
+        {
+            abComponents.Add(new StrokeComponent("STROKE", stroke.Positions));
+        }
         return abComponents;
     }
 
-    public static ContextObject toContextObject(GameObject go)
+    public static ContextObject ToContextObject(GameObject go)
     {
         ObjBasicInfo bInfo = go.GetComponent<ObjBasicInfo>();
         ContextObject ret = null;
@@ -119,12 +125,10 @@ public class ContextObject
         ret.nameDownload = bInfo.DownloadName;
         ret.fromServer = bInfo.FromServer;
         ret.id = bInfo.Id;
-        ret.position = ConvertTypeUtils.vector3ToList(tf.localPosition);
-        ret.rotation = ConvertTypeUtils.vector3ToList(tf.localRotation.eulerAngles);
-        ret.scale = ConvertTypeUtils.vector3ToList(tf.localScale);
-        ret.components = toComponents(go);
-        Debug.Log(go.name + " " + tf.localRotation.eulerAngles);
-        Debug.Log(go.name + " " + tf.rotation.eulerAngles);
+        ret.position = ConvertTypeUtils.Vector3ToList(tf.localPosition);
+        ret.rotation = ConvertTypeUtils.Vector3ToList(tf.localRotation.eulerAngles);
+        ret.scale = ConvertTypeUtils.Vector3ToList(tf.localScale);
+        ret.components = ToComponents(go);
         return ret;
     }
 }

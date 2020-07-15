@@ -20,7 +20,7 @@ public class test : MonoBehaviour
         defaultContent = StringCompressor.DecompressString(data);
         Debug.Log(defaultContent.Length);
 
-        audioSource = ConvertContextUtils.addComponent<AudioSource>(gameObject);
+        audioSource = ConvertContextUtils.AddComponent<AudioSource>(gameObject);
     }
 
     string deviceName;

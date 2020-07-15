@@ -68,7 +68,7 @@ public class MRGamePlayManager : MonoBehaviour
         }
         BinaryFormatter formater = new BinaryFormatter();
         //list phase
-        List<ConvertContextUtils.ContextInfo> contextInfos = ConvertContextUtils.toGameObjects(json);
+        List<ConvertContextUtils.ContextInfo> contextInfos = ConvertContextUtils.ToGameObjects(json);
         if (contextInfos.Count == 0)
         {
             Debug.Log("Convert to ContextInfos error!");
@@ -126,9 +126,14 @@ public class MRGamePlayManager : MonoBehaviour
         }
 
         //MR
-        if (!isBackground)
+        //if (co.nameDownload.Equals("BrushThinStroke"))
+        //{
+        //    temp.UpdateMeshAndTransform(co.nameDownload, temp.gameObject);
+        //    return;
+        //}
+        if (!isBackground && !co.nameDownload.Equals("BrushThinStroke"))
         {
-            BoundingBox bbox = ConvertContextUtils.addComponent<BoundingBox>(go);
+            BoundingBox bbox = ConvertContextUtils.AddComponent<BoundingBox>(go);
             bbox.Target = go.gameObject;
             bbox.BoundsOverride = go.GetComponent<BoxCollider>();
             bbox.HandleMaterial = handleMaterial;
@@ -136,9 +141,9 @@ public class MRGamePlayManager : MonoBehaviour
             bbox.ScaleHandlePrefab = scaleHandlePrefab;
             bbox.ScaleHandleSlatePrefab = scaleHandleSlatePrefab;
             bbox.RotationHandleSlatePrefab = rotationHandlePrefab;
-            ManipulationHandler mHandler = ConvertContextUtils.addComponent<ManipulationHandler>(go);
+            ManipulationHandler mHandler = ConvertContextUtils.AddComponent<ManipulationHandler>(go);
             mHandler.HostTransform = go.transform;
-            ConvertContextUtils.addComponent<NearInteractionGrabbable>(go);
+            ConvertContextUtils.AddComponent<NearInteractionGrabbable>(go);
         }
         temp.UpdateInformation(co);
         //co.toGameObject(go);
@@ -223,7 +228,7 @@ public class MRGamePlayManager : MonoBehaviour
         T comDest = dest.GetComponent<T>();
         if (comDest == null)
         {
-            comDest = ConvertContextUtils.addComponent<T>(dest);
+            comDest = ConvertContextUtils.AddComponent<T>(dest);
         }
         ConvertTypeUtils.GetCopyOf(comDest, comSrc);
         //FieldInfo[] fields = type.GetFields();
@@ -248,7 +253,7 @@ public class MRGamePlayManager : MonoBehaviour
         MeshRenderer com = src.GetComponent<MeshRenderer>();
         if (com != null)
         {
-            MeshRenderer newCom = ConvertContextUtils.addComponent<MeshRenderer>(dest);
+            MeshRenderer newCom = ConvertContextUtils.AddComponent<MeshRenderer>(dest);
             newCom.materials = com.materials;
 
             newCom.shadowCastingMode = com.shadowCastingMode;

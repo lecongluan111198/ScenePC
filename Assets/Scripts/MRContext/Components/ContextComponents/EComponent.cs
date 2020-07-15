@@ -12,6 +12,7 @@ enum EComponent
     ANIMTION = 3,
     RECORD_ANIMATION = 4,
     TOOLTIP = 5,
-    AUDIO_QUESTION = 6
+    AUDIO_QUESTION = 6,
+    STROKE = 7
 
 }

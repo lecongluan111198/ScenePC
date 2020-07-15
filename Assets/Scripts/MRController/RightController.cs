@@ -43,6 +43,14 @@ public class RightController : MonoBehaviour
         CurrController.gameObject.SetActive(true);
     }
 
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(2))
+        {
+            ChangeTypeController();
+        }
+    }
+
     private void OnEnable()
     {
         InteractionManager.InteractionSourcePressed += InteractionSourcePressed;
@@ -52,20 +60,24 @@ public class RightController : MonoBehaviour
     {
         if (obj.state.source.handedness == InteractionSourceHandedness.Right && obj.pressType == InteractionSourcePressType.Grasp)
         {
-            if(CurrController == null)
-            {
-                CurrController = controllers[currentIndex];
-            }
-            CurrController.gameObject.SetActive(false);
-
-            currentIndex++;
-            if (currentIndex >= controllers.Count)
-            {
-                currentIndex = 0;
-            }
-            CurrController = controllers[currentIndex];
-            CurrController.gameObject.SetActive(true);
-
+            ChangeTypeController();
         }
+    }
+
+    private void ChangeTypeController()
+    {
+        if (CurrController == null)
+        {
+            CurrController = controllers[currentIndex];
+        }
+        CurrController.gameObject.SetActive(false);
+
+        currentIndex++;
+        if (currentIndex >= controllers.Count)
+        {
+            currentIndex = 0;
+        }
+        CurrController = controllers[currentIndex];
+        CurrController.gameObject.SetActive(true);
     }
 }

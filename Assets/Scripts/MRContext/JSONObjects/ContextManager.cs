@@ -237,7 +237,7 @@ public class ContextManager : MonoBehaviour
     }
     private void loadBackground(backgroundObject bo)
     {
-        GameObject go = Instantiate(Resources.Load(ResourceManager.MRPrefab + bo.nameBackground) as GameObject, ConvertTypeUtils.listToVector3(bo.position), ConvertTypeUtils.listToQuaternion(bo.rotation), GUI.transform);
+        GameObject go = Instantiate(Resources.Load(ResourceManager.MRPrefab + bo.nameBackground) as GameObject, ConvertTypeUtils.ListToVector3(bo.position), ConvertTypeUtils.ListToQuaternion(bo.rotation), GUI.transform);
     }
     private void _Prepare(GameObject child)
     {

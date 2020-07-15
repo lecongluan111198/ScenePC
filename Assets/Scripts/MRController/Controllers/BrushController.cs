@@ -87,7 +87,16 @@ public class BrushController : AbstractController
         //}
 
         //brushRenderer.material.color = colorPicker.SelectedColor;
-        brushRenderer.material.color = Color.red;
+        //brushRenderer.material.color = Color.red;
+
+        //test
+        if (Input.GetMouseButtonDown(0))
+        {
+            Draw = true;
+        } else if (Input.GetMouseButtonUp(0))
+        {
+            Draw = false;
+        }
     }
 
     private void InteractionSourcePressed(InteractionSourcePressedEventArgs obj)

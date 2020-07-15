@@ -33,7 +33,7 @@ public class ModelItem : MonoBehaviour
             GameObject go = Instantiate(Resources.Load(ResourceManager.MRPrefab + model.Name) as GameObject);
             MREditContextManager.Instance.UpdateModel(go);
             go.transform.position = Camera.main.transform.position + distance;
-            ObjBasicInfo bInfo = ConvertContextUtils.addComponent<ObjBasicInfo>(go);
+            ObjBasicInfo bInfo = ConvertContextUtils.AddComponent<ObjBasicInfo>(go);
             bInfo.DownloadName = model.Name;
             bInfo.FromServer = model.FromServer;
             bInfo.Id = model.Id;

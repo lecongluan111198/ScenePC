@@ -18,6 +18,7 @@ public class LineController : MonoBehaviour
     private float width = 0f;
     private Dictionary<string, LineRenderer> lineMap = new Dictionary<string, LineRenderer>();
     private Dictionary<string, KeyValuePair<Vector3, float>> infoMap = new Dictionary<string, KeyValuePair<Vector3, float>>();
+    private Dictionary<string, Stroke> strokeMap = new Dictionary<string, Stroke>();
     private PhotonView PV;
 
     public static LineController Instance = null;
@@ -79,6 +80,19 @@ public class LineController : MonoBehaviour
             line.SetPosition(0, position);
             lineMap.Add(key, line);
             infoMap.Add(key, new KeyValuePair<Vector3, float>(position, timeScale));
+            if (MRDataHolder.Instance.IsEdit)
+            {
+                //set parent
+                newStroke.transform.SetParent(MREditContextManager.Instance.container.transform);
+                //add obj basic info
+                ObjBasicInfo info = ConvertContextUtils.AddComponent<ObjBasicInfo>(line.gameObject);
+                info.Id = 1;
+                info.DownloadName = "BrushThinStroke";
+                info.FromServer = false;
+                //add stroke com
+                Stroke stroke = ConvertContextUtils.AddComponent<Stroke>(line.gameObject);
+                strokeMap.Add(key, stroke);
+            }
         }
         else
         {
@@ -93,10 +107,14 @@ public class LineController : MonoBehaviour
         line.widthMultiplier = Mathf.Lerp(initialWidth, initialWidth * 2, width);
         if (Vector3.Distance(position, pair.Key) > minPositionDelta || Time.unscaledTime > lastPointAddedTime + maxTimeDelta)
         {
-            // Spawn a new point
             line.positionCount += 1;
-            //Debug.Log(key + " pos " + line.positionCount);
             line.SetPosition(line.positionCount - 1, position);
+            if (MRDataHolder.Instance.IsEdit)
+            {
+                //update pos in stroke com
+                Stroke stroke = strokeMap[key];
+                stroke.AddPosition(position);
+            }
         }
     }
 
@@ -107,6 +125,10 @@ public class LineController : MonoBehaviour
         {
             lineMap.Remove(key);
             infoMap.Remove(key);
+            if (MRDataHolder.Instance.IsEdit)
+            {
+                strokeMap.Remove(key);
+            }
         }
     }
 }

@@ -5987,11 +5987,21 @@ PrefabInstance:
       propertyPath: ButtonReleased.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 2103036518}
+    - target: {fileID: 7086080166658748310, guid: fc42194fc315fdb4ebd65168544cbbeb,
+        type: 3}
+      propertyPath: ButtonReleased.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SaveEditContext
+      objectReference: {fileID: 0}
     - target: {fileID: 520326757540051111, guid: fc42194fc315fdb4ebd65168544cbbeb,
         type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2103036518}
+    - target: {fileID: 520326757540051111, guid: fc42194fc315fdb4ebd65168544cbbeb,
+        type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SaveEditContext
+      objectReference: {fileID: 0}
     - target: {fileID: 6952320739798812554, guid: fc42194fc315fdb4ebd65168544cbbeb,
         type: 3}
       propertyPath: m_Mesh

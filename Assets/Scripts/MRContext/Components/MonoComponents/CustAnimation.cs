@@ -23,7 +23,7 @@ public class CustAnimation : MonoBehaviour, IMixedRealityPointerHandler
     // Start is called before the first frame update
     void Start()
     {
-        anim = ConvertContextUtils.addComponent<Animator>(gameObject);
+        anim = ConvertContextUtils.AddComponent<Animator>(gameObject);
         anim.applyRootMotion = true;
         if (MRDataHolder.Instance.IsEdit)
             anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(ResourceManager.AnimController + controllerName);

@@ -18,7 +18,7 @@ public abstract class AbstractTemplate : MonoBehaviour
 
     public abstract void UpdateInformation(ContextObject co);
 
-    protected void UpdateMesh(string srcName, GameObject dest)
+    public void UpdateMeshAndTransform(string srcName, GameObject dest)
     {
         GameObject src = Instantiate(Resources.Load(ResourceManager.MRPrefab + srcName) as GameObject);
 
@@ -61,7 +61,7 @@ public abstract class AbstractTemplate : MonoBehaviour
         Destroy(src);
     }
 
-    protected void UpdateSkinMeshRenderer(GameObject src, GameObject dest)
+    public void UpdateSkinMeshRenderer(GameObject src, GameObject dest)
     {
         SkinnedMeshRenderer com = src.GetComponent<SkinnedMeshRenderer>();
         if (com != null)
@@ -87,7 +87,7 @@ public abstract class AbstractTemplate : MonoBehaviour
         }
     }
 
-    protected void getAndUpdateComponent<T>(GameObject src, GameObject dest) where T : Component
+    public void getAndUpdateComponent<T>(GameObject src, GameObject dest) where T : Component
     {
         T comSrc = src.GetComponent<T>();
         if (comSrc == null)
@@ -97,7 +97,7 @@ public abstract class AbstractTemplate : MonoBehaviour
         T comDest = dest.GetComponent<T>();
         if (comDest == null)
         {
-            comDest = ConvertContextUtils.addComponent<T>(dest);
+            comDest = ConvertContextUtils.AddComponent<T>(dest);
         }
         ConvertTypeUtils.GetCopyOf(comDest, comSrc);
         //FieldInfo[] fields = type.GetFields();
@@ -108,19 +108,19 @@ public abstract class AbstractTemplate : MonoBehaviour
     }
 
 
-    protected void UpdateTransform(GameObject src, GameObject dest)
+    public void UpdateTransform(GameObject src, GameObject dest)
     {
         dest.transform.localPosition = src.transform.localPosition;
         dest.transform.localRotation = src.transform.localRotation;
         dest.transform.localScale = src.transform.localScale;
     }
 
-    protected void UpdateMeshRenderer(GameObject src, GameObject dest)
+    public void UpdateMeshRenderer(GameObject src, GameObject dest)
     {
         MeshRenderer com = src.GetComponent<MeshRenderer>();
         if (com != null)
         {
-            MeshRenderer newCom = ConvertContextUtils.addComponent<MeshRenderer>(dest);
+            MeshRenderer newCom = ConvertContextUtils.AddComponent<MeshRenderer>(dest);
             newCom.materials = com.materials;
 
             newCom.shadowCastingMode = com.shadowCastingMode;
@@ -134,7 +134,7 @@ public abstract class AbstractTemplate : MonoBehaviour
         }
     }
 
-    protected void UpdateMeshFilter(GameObject src, GameObject dest)
+    public void UpdateMeshFilter(GameObject src, GameObject dest)
     {
         MeshFilter com = src.GetComponent<MeshFilter>();
         if (com != null)

@@ -50,9 +50,9 @@ public class RecordAnimation : MonoBehaviour, IMixedRealityPointerHandler
             if (index < listStatuses.Count)
             {
                 RecordTransform.ObjectStatus status = listStatuses[index];
-                transform.localPosition = ConvertTypeUtils.listToVector3(status.Position);
-                transform.localRotation = ConvertTypeUtils.listToQuaternion(status.Rotation);
-                transform.localScale = ConvertTypeUtils.listToVector3(status.Scale);
+                transform.localPosition = ConvertTypeUtils.ListToVector3(status.Position);
+                transform.localRotation = ConvertTypeUtils.ListToQuaternion(status.Rotation);
+                transform.localScale = ConvertTypeUtils.ListToVector3(status.Scale);
                 index++;
             }
             else

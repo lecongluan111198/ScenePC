@@ -66,7 +66,7 @@ public class AddQuestionPanel : MonoBehaviour
 
     public void Save()
     {
-        QuestionV2 com = ConvertContextUtils.addComponent<QuestionV2>(currentObject);
+        QuestionV2 com = ConvertContextUtils.AddComponent<QuestionV2>(currentObject);
 
         switch (questionType)
         {
@@ -75,7 +75,7 @@ public class AddQuestionPanel : MonoBehaviour
                 break;
             case EContent.VOICE:
                 {
-                    AudioSource audioSource = ConvertContextUtils.addComponent<AudioSource>(currentObject);
+                    AudioSource audioSource = ConvertContextUtils.AddComponent<AudioSource>(currentObject);
                     if (audioSource.clip != null)
                     {
                         float[] data = new float[audioSource.clip.channels * audioSource.clip.frequency];
@@ -130,7 +130,7 @@ public class AddQuestionPanel : MonoBehaviour
     {
         if (Microphone.devices.Length > 0)
         {
-            currAudioSource = ConvertContextUtils.addComponent<AudioSource>(currentObject);
+            currAudioSource = ConvertContextUtils.AddComponent<AudioSource>(currentObject);
             deviceName = Microphone.devices[0].ToString();
             if (Microphone.IsRecording(deviceName))
             {
@@ -157,7 +157,7 @@ public class AddQuestionPanel : MonoBehaviour
 
     public void PlayRecord()
     {
-        AudioSource audioSource = ConvertContextUtils.addComponent<AudioSource>(currentObject);
+        AudioSource audioSource = ConvertContextUtils.AddComponent<AudioSource>(currentObject);
         audioSource.Play();
     }
 

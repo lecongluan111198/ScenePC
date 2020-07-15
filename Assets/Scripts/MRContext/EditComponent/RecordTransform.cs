@@ -31,9 +31,9 @@ public class RecordTransform : MonoBehaviour, IMixedRealityPointerHandler
 
         public ObjectStatus(Vector3 position, Quaternion rotation, Vector3 scale, float timeRange)
         {
-            this.Position = ConvertTypeUtils.vector3ToList(position);
-            this.Rotation = ConvertTypeUtils.quaternionToList(rotation);
-            this.Scale = ConvertTypeUtils.vector3ToList(scale);
+            this.Position = ConvertTypeUtils.Vector3ToList(position);
+            this.Rotation = ConvertTypeUtils.QuaternionToList(rotation);
+            this.Scale = ConvertTypeUtils.Vector3ToList(scale);
             this.TimeRange = timeRange;
         }
 
