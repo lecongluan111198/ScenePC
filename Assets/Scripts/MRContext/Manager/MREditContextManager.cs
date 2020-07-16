@@ -33,8 +33,8 @@ public class MREditContextManager : MonoBehaviour
 
     void Start()
     {
-        LoadEditContext();
         MRDataHolder.Instance.IsEdit = true;
+        LoadEditContext();
     }
 
     public void LoadEditContext()

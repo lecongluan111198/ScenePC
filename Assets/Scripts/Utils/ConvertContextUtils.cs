@@ -88,11 +88,11 @@ public class ConvertContextUtils
                     try
                     {
                         //loadedObj = GameObject.Instantiate(Resources.Load(ResourceManager.MRPrefab + obj.nameDownload) as GameObject);
-                        if (obj.nameDownload.Equals("Heart"))
-                        {
-                            loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, "Templates/HeartTemplate"), Vector3.zero, Quaternion.identity, 0);
-                        }
-                        else if (obj.nameDownload.Equals("BrushThinStroke"))
+                        //if (obj.nameDownload.Equals("Heart"))
+                        //{
+                        //    loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, "Templates/HeartTemplate"), Vector3.zero, Quaternion.identity, 0);
+                        //}
+                        if (obj.nameDownload.Equals("BrushThinStroke"))
                         {
                             loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, "Templates/StrokeTemplate"), Vector3.zero, Quaternion.identity, 0);
                         }
