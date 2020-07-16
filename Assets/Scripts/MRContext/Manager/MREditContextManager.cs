@@ -34,6 +34,7 @@ public class MREditContextManager : MonoBehaviour
     void Start()
     {
         LoadEditContext();
+        MRDataHolder.Instance.IsEdit = true;
     }
 
     public void LoadEditContext()
@@ -174,6 +175,7 @@ public class MREditContextManager : MonoBehaviour
     public void Exit()
     {
         LoadSceneManager.Instance.LoadScene(LoadSceneManager.SceneType.MAINBOARD, false);
+        MRDataHolder.Instance.IsEdit = false;
     }
 
     public void ShowMenuAddModel()
