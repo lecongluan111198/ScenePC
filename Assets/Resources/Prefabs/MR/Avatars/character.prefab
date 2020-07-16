@@ -2869,7 +2869,7 @@ GameObject:
   - component: {fileID: 6040864955741811630}
   - component: {fileID: -6106847830486114984}
   m_Layer: 0
-  m_Name: character
+  m_Name: IKAvatar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2937,8 +2937,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 905061422238012912, guid: e483a85979c03c34da2f57b30f6e27d8, type: 3}
-  - {fileID: 9134282817717021309, guid: e483a85979c03c34da2f57b30f6e27d8, type: 3}
+  - {fileID: -4524791471606372289}
+  - {fileID: -4392029784346792931}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
