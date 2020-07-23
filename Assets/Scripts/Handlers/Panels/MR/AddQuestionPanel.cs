@@ -14,12 +14,6 @@ public class AddQuestionPanel : MonoBehaviour
     public TMP_InputField ansC;
     public TMP_InputField ansD;
     public ToggleGroup toggleGroup;
-    [Header("QUESTION")]
-    public GameObject quesText;
-    public GameObject quesVoice;
-    public GameObject recordButton;
-    public GameObject stopRecordButton;
-    public GameObject playButton;
 
     private GameObject currentObject;
     private int correctPos = 0;
@@ -45,24 +39,24 @@ public class AddQuestionPanel : MonoBehaviour
         ansB.text = "";
         ansC.text = "";
         ansD.text = "";
-        recordButton.SetActive(true);
-        stopRecordButton.SetActive(false);
-        playButton.SetActive(false);
+        //recordButton.SetActive(true);
+        //stopRecordButton.SetActive(false);
+        //playButton.SetActive(false);
     }
 
     public void ChangeQuestionType(int type)
     {
-        this.questionType = (EContent)type;
-        if (type == (int)EContent.TEXT)
-        {
-            quesText.SetActive(true);
-            quesVoice.SetActive(false);
-        }
-        else
-        {
-            quesText.SetActive(false);
-            quesVoice.SetActive(true);
-        }
+        //this.questionType = (EContent)type;
+        //if (type == (int)EContent.TEXT)
+        //{
+        //    quesText.SetActive(true);
+        //    quesVoice.SetActive(false);
+        //}
+        //else
+        //{
+        //    quesText.SetActive(false);
+        //    quesVoice.SetActive(true);
+        //}
     }
 
     public void Save()
@@ -123,37 +117,6 @@ public class AddQuestionPanel : MonoBehaviour
         }
         com.Answer = correctPos;
         Cancel();
-    }
-
-    AudioSource currAudioSource;
-    string deviceName;
-    public void StartRecord()
-    {
-        if (Microphone.devices.Length > 0)
-        {
-            currAudioSource = ConvertContextUtils.AddComponent<AudioSource>(currentObject);
-            deviceName = Microphone.devices[0].ToString();
-            if (Microphone.IsRecording(deviceName))
-            {
-                Debug.Log(deviceName + " is recording!");
-                return;
-            }
-            currAudioSource.clip = Microphone.Start(deviceName, false, 60, 44100);
-            recordButton.SetActive(false);
-            stopRecordButton.SetActive(true);
-        }
-        else
-        {
-            Debug.Log("Cannot find any devices!");
-        }
-    }
-
-    public void StopRecord()
-    {
-        recordButton.SetActive(true);
-        stopRecordButton.SetActive(false);
-        playButton.SetActive(true);
-        Microphone.End(deviceName);
     }
 
     public void PlayRecord()

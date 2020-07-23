@@ -15,7 +15,11 @@ public class CourseModel : MonoBehaviour
         {
             if (_instance == null)
             {
-                go = new GameObject();
+                go = GameObject.Find("Holder");
+                if (go == null)
+                {
+                    go = new GameObject();
+                }
                 _instance = go.AddComponent<CourseModel>();
             }
             return _instance;

@@ -1,9 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using NAudio.Lame;
+using NAudio.Wave;
+using Newtonsoft.Json;
 using SimpleJSON;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 
 public class test : MonoBehaviour
@@ -22,13 +25,51 @@ public class test : MonoBehaviour
         //var defaultContent = File.ReadAllText(@"Assets/saveJSON1.txt");
         //QuestionComponentV2 ques = JSONUtils.toObject<QuestionComponentV2>(defaultContent);
         //Debug.Log(ques.Question.Type);
-        string data = "qSYAAB+LCAAAAAAAAAvtWV1v20YQ/CsC0YcWpYi7vW+/FK7SNgaSOImNoEAQpJRMW2woUiBpO2ng/95ZSrbl1ErlOKETxLIkWKfjce92d3Zm9T76oX03z6Kt6HlVtbvjv7NJGw+2myabjYt3w9HeNK3nURw9naZNNqqOyzbaksuPTbT1/uLyvXdNm82SUVUUWCKvyib5IyuzOp8kj/Km/Uu+fNld9J/FX72KB7NmUtVFPsaNfjhJi2Ne+uXl2tdfiMnlwuBoy8TROJ28Oaph4cH54OUCo6pss7cf2V5+0G2rTGcZJvF2JnU+/D2PFmMPqtOyqNKDK18c1tVsL6tPsjraOkwLWBjNqybnvd/wYJZTHlTH4yK7PI21JzOUJjFS4EHkvZde2XgoEiNC9xDaKjLW63goE2euDr46i6O6atMezJSJENIFSaSNUULa8NtQmFgkgl9sSDNJi+zLWxEvX3zLSTWbV2VWtjeN3u1x09bppB2dL7B5JL86w40XwXfTu348cjfInc1C/2rsv8mKrK3KH0cFNvrTNTmwnHC3SaAS0laq4Kx23jhrLcc7BW+NVhJDxisTU+Kk9Qg+rZSTxlOPCQATtRLewEhFSEDtkQA2ll4mylunA1lnnJcq1olXSBTtJXkrglPEM7+jFLm8z6/VW75HfpDV69fBtTvNfp0fHa0E3ggz+eMXPasFegVpSZpg8C5FECIw/gotXNCIyWCNgRel4tPcy//58v5zUiHQYJLUkoLVcKUH3CsnjBES1mgYrbQn/Bs40oywkq3bQT5THD1BgvPZ/zmKzuJLW59hfTbxwhEv6DpXnE9b3eY+QKfDnuu994Jtx7RpdTqYpeW7QZ2Pm0FaZ4N2muE9LwfpYHqMrwbNEm1+wWX73eISho+mVdXc9GDXGbRBWG64HzKrVt74ciVudTnp211uVy7n6Ngum1POKFoEir0IlGd7V+Jkv6qKNp9/NF+XczbFlIdpM93LOq99uPrPPLCfzx9kbZoX1zrzYuE6W+fPmy3KG8hbRuJoUqdlfjyL+Hgm06p+Wt0UJz+l1CGFkb7W+yCUB96IRAsUFu2CE8GSIa1R6wwACLjjrMdTyS7Fn+YnVduLkQFgA2yBfSQ9EAZGApBQcwPwEmxVWUswUhgSEptxjvAmDdOjz+EYhpB+vSII9VtiNwrHb4m9gv0GoKsG7CqNLSps2GpUCI2pwguBet+vV4RyJAhcSHjFt4eRBEpuEUccKogp4WCkFE46gulOOx76XF6ZZ8VJ3rNfNCmtIHbA+7wL3nN1xmewQgEaKLTGu8WesX8QtEABEirYPt0ikxA8coAIXA98NXS6yCkHLxllFJNG6Tml4T7BnALkwmIcwXN2XrjNBR7v7+4+2t95Gp1d9dpm5N+skv9RkZf55HWblm/W8v+VOXcrAUwindMIWvg78Ll18EJgOE4DAfUCKhk+vQGpVlJoMCK/wMW+RAD8Ch1sgXbKQAs7hySUMdmAEAjOW6B1MAoiAFqZh7x2IHGglcr3JQBEAig20kCPABAQeYrDsRuzBFMgXbRzF2Or8+4Fw/+erbUG3gfQ0rIsM9pC/AWkNeo3IIrxCd7XqCSScQrE3fakHSgh6WCHdArcQlpIUZRr5I1zkKcwxbGYQG3zKGmkoCUIOnWNdPgU9NGr6PMgP2IpcZK9brp9rIWgDyfeLQ7pJJC6ks1dKwKuBGaTw7nh4DQDkfddPw7O9iAFvs923BBRpxQqCBnEoAvWhUU7IgFVAz0wHuYj/mjRpeDpNrDTySIIjNHyvifxdUJMV2JkMJJDy5LiHpg2ODoANJgFMtuiAHnddYnBvhGfnNCoQ8GCsfeENEw7wYCRJwb4ooTsVAwSxEOyOCVs4IY2NyoYBrUi6Bt8acHXvoZOxek0bQd5w/2JweFx2R3KoDocFACh+pvoTczr6uD4wu5xXmS36hYcZN3W8/JoMC6q6uB2iy3wHGsd3napEv5f08cQ932MS2HWea9PXWYYpWwAc0StAQZ0hFKQBScHh3egmAAjBzKkMSpQTcHWNWmAle5TmoEAWUgySGQmbQTgZEgy0pNnUELtpE5SsvynILjfaqWxgmvj55ZmYpUcPczSul3LiLpv75YGUWJZFoDH4liYSig+OTBaQgWCL63onI4T1h/QpR5pECXGCy+sgAXeOk+uoztd1bG+66ErkDYvCFRY265RIjHd+F5/k4GOjZeve/6z0W8yIh66BHwV7jXBgpAjYZmy9sdvpMOfMkFYTgLfcRkpnXcIdQluDe7T9Qj5Bz6HUBMSkcg6cAOCs13ms/QKw7nOAY+rg6xbheGl5s3V5zBUp2VzWNWslEZFPl8OPz9PusX91cX9t3ceb+/v7D753lpKwDAoM5BpiyKFqmS4B4dqxNxaGMUtbteBPyQRoUyBaEM82ztoKHnUTWskAZqcg4z+SEdJAdUUatcCaO87St863H1XHaXF818GIW+uqSYAAA==";
-        string json = StringCompressor.DecompressString(data);
-        Debug.Log(json);
-        File.WriteAllText(@"Assets/saveJSON1.txt", json);
+
         //audioSource = ConvertContextUtils.AddComponent<AudioSource>(gameObject);
+        //Test();
+        TestSpeech(@"F:\Library\IT\Thesis\Unity\Resources\Unity\test.mp3");
     }
 
+    private string IBM_API_KEY = Convert.ToBase64String(Encoding.GetEncoding("UTF-8").GetBytes("apikey:8qcqzy1NoIIIWPDSkSYm7QR0eKRII6GgoRG1O4Pzr9sa"));
+    public void TestSpeech(string filePath)
+    {
+        WWWForm form = new WWWForm();
+        Dictionary<string, string> header = new Dictionary<string, string>();
+        header.Add("Authorization", "Basic " + IBM_API_KEY);
+        header.Add("Content-Type", "audio/mp3");
+        form.AddBinaryData("speech", File.ReadAllBytes(filePath));
+        StartCoroutine(APIRequest.Instance.doPost(API.SPEECH_TO_TEXT_API, form, header, (response) => {
+            if (response.result != null)
+            {
+                List<Dictionary<string, object>> result = JSONUtils.toObject<List<Dictionary<string, object>>>(response.getStringParam("results", "[]"));
+                if (result.Count != 0)
+                {
+                    var alternatives = JSONUtils.toObject<List<Dictionary<string, object>>>(result[0]["alternatives"].ToString());
+                    if (alternatives != null && alternatives.Count != 0)
+                    {
+                        string transcript = alternatives[0]["transcript"] as string;
+                        Debug.Log(transcript);
+                        return;
+                    }
+                }
+            }
+        }));
+    }
+
+    public void Test()
+    {
+        var data = "[{\"final\":true,\"alternatives\":[{\"transcript\":\"one three four \",\"confidence\":0.51}]}]";
+        List<Dictionary<string, object>> result = JSONUtils.toObject<List<Dictionary<string, object>>>(data);
+        if (result.Count != 0)
+        {
+            var alternatives = JSONUtils.toObject<List<Dictionary<string, object>>>(result[0]["alternatives"].ToString());
+            if (alternatives != null && alternatives.Count != 0)
+            {
+                string transcript = alternatives[0]["transcript"] as string;
+            }
+        }
+    }
     string deviceName;
     // Update is called once per frame
     void Update()

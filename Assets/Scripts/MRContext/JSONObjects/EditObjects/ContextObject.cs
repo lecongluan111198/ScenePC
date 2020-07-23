@@ -53,7 +53,6 @@ public class ContextObject
         foreach (AbstractComponent ab in components)
         {
             Component component =  go.GetComponent(ab.getType());
-            Debug.Log(ab.getType());
             if(component == null)
             {
                 component = go.AddComponent(ab.getType());

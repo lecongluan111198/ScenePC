@@ -5,6 +5,7 @@ using UnityEngine;
 public class API 
 {
     public static string DOMAIN = "https://hcmus-server.appspot.com/";
+    public static string SPEECH_TO_TEXT_API = @"https://api.kr-seo.speech-to-text.watson.cloud.ibm.com/instances/5f7bf89b-d9c0-4ad1-a0ba-90db6a639d91/v1/recognize";
     //public static string DOMAIN = "http://localhost:8080/";
 
     public static string USER_LOGIN = DOMAIN + "login";

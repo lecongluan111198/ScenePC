@@ -101,6 +101,49 @@ public class APIRequest
         }
     }
 
+    public IEnumerator doPost(string url, WWWForm form, Dictionary<string, string> header, Action<APIResponse> callBack)
+    {
+        //form = new WWWForm();
+        //byte[] data = File.ReadAllBytes(@"C:\Users\User\AppData\LocalLow\DefaultCompany\ScenePC\recordings\200723-030104-431.wav");
+        //byte[] data = File.ReadAllBytes(@"F:\Library\IT\Thesis\Unity\Resources\Unity\hello.wav");
+        //byte[] data = File.ReadAllBytes(@"F:\Library\IT\Thesis\Unity\Resources\Unity\hello.mp3");
+        //byte[] data = File.ReadAllBytes(@"F:\Library\IT\Thesis\Unity\Resources\Unity\audio-file.flac");
+        //Debug.Log(data.Length);
+        //form.AddBinaryData("hello.wav", data);
+        
+        //form.AddBinaryData("hello.mp3", data);
+
+        using (var request = UnityWebRequest.Post(url, form))
+        {
+            foreach (KeyValuePair<string, string> entry in header)
+            {
+                Debug.Log(entry.Key + " " + entry.Value);
+                request.SetRequestHeader(entry.Key, entry.Value);
+            }
+            //string base64 = Convert.ToBase64String(Encoding.GetEncoding("UTF-8").GetBytes("apikey:8qcqzy1NoIIIWPDSkSYm7QR0eKRII6GgoRG1O4Pzr9sa"));
+            //request.SetRequestHeader("Authorization", "Basic " + base64);
+            //request.SetRequestHeader("Content-Type", "audio/mp3");
+            yield return request.SendWebRequest();
+
+            while (!request.isDone)
+            {
+                yield return null;
+            }
+            Debug.Log(request.responseCode);
+            Debug.Log(request.downloadHandler.text);
+            if (request.responseCode == 200)
+            {
+                string reponseJson = request.downloadHandler.text;
+                callBack(APIResponse.textToReponse(reponseJson));
+            }
+            else
+            {
+                //Debug.Log(API.ERROR_CONNECT);
+                callBack(null);
+            }
+        }
+    }
+
 
 
     /// <summary>
