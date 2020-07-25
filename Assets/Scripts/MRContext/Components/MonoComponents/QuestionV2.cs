@@ -50,7 +50,7 @@ public class QuestionV2 : MonoBehaviour
         MenuQuestionPanelV2 panel = menuQuestion.GetComponent<MenuQuestionPanelV2>();
         if (panel != null)
         {
-            panel.updateInfomation(this);
+            panel.UpdateInfomation(this);
         }
     }
 

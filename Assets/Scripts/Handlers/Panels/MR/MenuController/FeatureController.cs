@@ -88,7 +88,7 @@ public class FeatureController : MonoBehaviour
             QuestionV2 question = MRDataHolder.Instance.CurrentClickObject.GetComponent<QuestionV2>();
             if (question != null)
             {
-                question.showQuestion();
+                questionPanel.GetComponent<MenuQuestionPanelV2>().ShowMenuQuestion(question);
             }
         }
     }

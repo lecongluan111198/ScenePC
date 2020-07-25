@@ -23,7 +23,14 @@ public class MenuQuestionPanelV2 : MonoBehaviour
 
     }
 
-    public void updateInfomation(QuestionV2 data)
+    public void ShowMenuQuestion(QuestionV2 data)
+    {
+        UpdateInfomation(data);
+        gameObject.SetActive(true);
+        FeatureController.Instance.OffController();
+    }
+
+    public void UpdateInfomation(QuestionV2 data)
     {
         //update question
         if (data.Question.Type == EContent.TEXT)
@@ -61,7 +68,7 @@ public class MenuQuestionPanelV2 : MonoBehaviour
         correctAns = data.Answer;
     }
 
-    public void chooseAnswer(int ans)
+    public void ChooseAnswer(int ans)
     {
 
         if (correctAns == ans)
@@ -92,7 +99,6 @@ public class MenuQuestionPanelV2 : MonoBehaviour
     public void Close()
     {
         gameObject.SetActive(false);
-        //TagAlongManager.Instance.ControllerOn();
-        //SettingMenuPanel.Instance.OnController();
+        FeatureController.Instance.OnController();
     }
 }
