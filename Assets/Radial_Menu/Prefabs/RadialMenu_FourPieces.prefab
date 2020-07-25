@@ -483,7 +483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angle: -135
   arrow: {fileID: 1148061873680662}
-  title: Add Model
+  title: Exit
   text: {fileID: 114839380859319514}
   isActive: 1
   img: {fileID: 114199003977019394}
@@ -909,7 +909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angle: 45
   arrow: {fileID: 1148061873680662}
-  title: Add Model
+  title: Question
   text: {fileID: 114839380859319514}
   isActive: 1
   img: {fileID: 1145552423375403659}
@@ -1478,7 +1478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angle: 135
   arrow: {fileID: 1148061873680662}
-  title: Add Model
+  title: Animation
   text: {fileID: 114839380859319514}
   isActive: 1
   img: {fileID: 7540021294852717878}
@@ -1660,7 +1660,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angle: -45
   arrow: {fileID: 1148061873680662}
-  title: Add Model
+  title: Room Information
   text: {fileID: 114839380859319514}
   isActive: 1
   img: {fileID: 496159467588036730}

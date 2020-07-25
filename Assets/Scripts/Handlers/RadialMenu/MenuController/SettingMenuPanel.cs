@@ -13,6 +13,7 @@ public class SettingMenuPanel : MonoBehaviour
     public GameObject tooltipSettingPanel;
     public GameObject confirmExitPanel;
     public GameObject confirmDeletePanel;
+    public GameObject transformPanel;
     [Header("BUTTONS")]
     public List<RadialMenuItem> menuItems = new List<RadialMenuItem>();
     [Header("ANIMATION")]
@@ -119,7 +120,8 @@ public class SettingMenuPanel : MonoBehaviour
         //TODO: get data from server and add to list of animations
         if (menuItems[5].isActive)
         {
-            animationPanel.SetActive(true);
+            //animationPanel.SetActive(true);
+            transformPanel.GetComponent<TransformControllerPanel>().ShowTransformController();
             OffController();
         }
     }

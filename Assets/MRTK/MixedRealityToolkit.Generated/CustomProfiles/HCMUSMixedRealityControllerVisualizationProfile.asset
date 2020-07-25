@@ -24,7 +24,7 @@ MonoBehaviour:
     type: 3}
   globalRightControllerModel: {fileID: 1875388798535698470, guid: f78dcc035474fa749b54d3835e351633,
     type: 3}
-  globalLeftHandVisualizer: {fileID: 1227372834072826, guid: 378f91dbbff9e2343b27a467467750bf,
+  globalLeftHandVisualizer: {fileID: 1875388798535698470, guid: d4e4a2738217a164a80029f120f711fa,
     type: 3}
   globalRightHandVisualizer: {fileID: 1875388798535698470, guid: f78dcc035474fa749b54d3835e351633,
     type: 3}

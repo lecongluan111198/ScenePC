@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1705318183226487439}
   - component: {fileID: 6538966451141445398}
   m_Layer: 0
-  m_Name: Animation
+  m_Name: Transform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angle: 112.5
   arrow: {fileID: 1148061873680662}
-  title: Add Animation
+  title: Transform
   text: {fileID: 114839380859319514}
   isActive: 0
   img: {fileID: 114327335728914952}
@@ -613,7 +613,7 @@ GameObject:
   - component: {fileID: 1692506568}
   - component: {fileID: 1692506569}
   m_Layer: 0
-  m_Name: RadialMenu_Canvas
+  m_Name: RadialMenu_EightPieces
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -752,6 +752,9 @@ MonoBehaviour:
   recordOptionPanel: {fileID: 0}
   tooltipPanel: {fileID: 0}
   tooltipSettingPanel: {fileID: 0}
+  confirmExitPanel: {fileID: 0}
+  confirmDeletePanel: {fileID: 0}
+  transformPanel: {fileID: 0}
   menuItems:
   - {fileID: 1180488908091514221}
   - {fileID: 4499088414285280869}
@@ -1212,7 +1215,7 @@ GameObject:
   - component: {fileID: 7104295781515870293}
   - component: {fileID: 1795865313935907834}
   m_Layer: 0
-  m_Name: RecordAnim
+  m_Name: Animation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1307,7 +1310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angle: 67.5
   arrow: {fileID: 1148061873680662}
-  title: Record Animation
+  title: Animation
   text: {fileID: 114839380859319514}
   isActive: 0
   img: {fileID: 114706875467432168}
@@ -2148,13 +2151,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63248039474071768}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0, z: 0.9238796, w: -0.38268325}
   m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children: []
   m_Father: {fileID: 224896809331375224}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 225}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 8, y: -14}
@@ -2186,7 +2189,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 579a3fd45627d694f9e481ef569b6a9b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 940b52308050c98459fe65892f462049, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2427,7 +2430,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 940b52308050c98459fe65892f462049, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 500a5536de9826a4c9515c60a9396530, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
