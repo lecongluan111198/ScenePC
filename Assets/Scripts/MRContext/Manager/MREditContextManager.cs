@@ -181,7 +181,7 @@ public class MREditContextManager : MonoBehaviour
     public void ShowMenuAddModel()
     {
         menuModel.SetActive(true);
-        TagAlongManager.Instance.ControllerOff();
+        //TagAlongManager.Instance.ControllerOff();
     }
 
     public void UpdateModel(GameObject go)

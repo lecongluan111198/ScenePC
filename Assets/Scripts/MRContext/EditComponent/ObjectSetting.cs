@@ -27,7 +27,12 @@ public class ObjectSetting : MonoBehaviour, IMixedRealityPointerHandler
             //settingMennu.CurrentObject = gameObject;
             MRDataHolder.Instance.CurrentClickObject = gameObject;
             //settingPanel.SetActive(true);
-            TagAlongManager.Instance.ControllerOut();
+            //TagAlongManager.Instance.ControllerOut();
+            if (MRDataHolder.Instance.IsEdit)
+            {
+                SettingMenuPanel.Instance.OnController();
+                SettingMenuPanel.Instance.EnableObjectController();
+            }
             //TODO: set transform directly with player
             isDown = false;
         }

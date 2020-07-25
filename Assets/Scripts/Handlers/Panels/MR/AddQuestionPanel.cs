@@ -128,6 +128,7 @@ public class AddQuestionPanel : MonoBehaviour
     public void Cancel()
     {
         gameObject.SetActive(false);
-        TagAlongManager.Instance.ControllerOn();
+        SettingMenuPanel.Instance.OnController();
+        //TagAlongManager.Instance.ControllerOn();
     }
 }

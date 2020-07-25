@@ -92,6 +92,7 @@ public class MenuQuestionPanelV2 : MonoBehaviour
     public void Close()
     {
         gameObject.SetActive(false);
-        TagAlongManager.Instance.ControllerOn();
+        //TagAlongManager.Instance.ControllerOn();
+        //SettingMenuPanel.Instance.OnController();
     }
 }

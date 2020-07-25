@@ -30,7 +30,8 @@ public class RecordNotifyPanel : MonoBehaviour
     {
         Debug.Log("Cancel");
         gameObject.SetActive(false);
-        TagAlongManager.Instance.ControllerOn();
+        //TagAlongManager.Instance.ControllerOn();
+        SettingMenuPanel.Instance.OnController();
     }
 
     public void Record()

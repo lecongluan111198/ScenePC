@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 3459721807804181128}
   - component: {fileID: 3459721807804181131}
   - component: {fileID: 6819384525911517060}
-  - component: {fileID: 5966357524071068362}
   - component: {fileID: 988835283966178556}
   - component: {fileID: 9222047792194311961}
   m_Layer: 0
@@ -145,29 +144,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pivotAxis: 0
   targetTransform: {fileID: 0}
---- !u!114 &5966357524071068362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8983167212958668531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88dc343dc1990ba44a9ee3638c9149fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  question: {fileID: 0}
-  answers:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  ansColors:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!225 &988835283966178556
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -193,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objList: {fileID: 7997945372020233243}
-  modelItem: {fileID: 6345327422314802900, guid: 109c9aa6d2ee630429136d1363252351,
+  modelItem: {fileID: 6345327422314802900, guid: b2c5858b79a31404cb08b6826463935f,
     type: 3}
 --- !u!1001 &6051676955465423599
 PrefabInstance:
@@ -412,9 +388,29 @@ PrefabInstance:
       propertyPath: m_VerticalFit
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6957769398536798872, guid: 412ac938285d23f49bf6b6ef8d863628,
+        type: 3}
+      propertyPath: m_Constraint
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6957769398536798872, guid: 412ac938285d23f49bf6b6ef8d863628,
+        type: 3}
+      propertyPath: m_ConstraintCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6957769398536798872, guid: 412ac938285d23f49bf6b6ef8d863628,
+        type: 3}
+      propertyPath: m_CellSize.x
+      value: 1250
+      objectReference: {fileID: 0}
+    - target: {fileID: 6957769398536798872, guid: 412ac938285d23f49bf6b6ef8d863628,
+        type: 3}
+      propertyPath: m_CellSize.y
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 879414944504611, guid: 412ac938285d23f49bf6b6ef8d863628, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -551.4971
+      value: -551.52045
       objectReference: {fileID: 0}
     - target: {fileID: 879414944504611, guid: 412ac938285d23f49bf6b6ef8d863628, type: 3}
       propertyPath: m_SizeDelta.y
@@ -427,11 +423,6 @@ PrefabInstance:
     - target: {fileID: 879414944504611, guid: 412ac938285d23f49bf6b6ef8d863628, type: 3}
       propertyPath: m_AnchorMin.y
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 601082846140886799, guid: 412ac938285d23f49bf6b6ef8d863628,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5118249252331695905, guid: 412ac938285d23f49bf6b6ef8d863628,
         type: 3}
@@ -451,12 +442,12 @@ PrefabInstance:
     - target: {fileID: 370414089789364154, guid: 412ac938285d23f49bf6b6ef8d863628,
         type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 370414089789364154, guid: 412ac938285d23f49bf6b6ef8d863628,
         type: 3}
       propertyPath: m_Size
-      value: 0.9999889
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 717874484708015903, guid: 412ac938285d23f49bf6b6ef8d863628,
         type: 3}
@@ -477,6 +468,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: CLOSE
+      objectReference: {fileID: 0}
+    - target: {fileID: 601082846140886799, guid: 412ac938285d23f49bf6b6ef8d863628,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 601082846140886799, guid: 412ac938285d23f49bf6b6ef8d863628, type: 3}

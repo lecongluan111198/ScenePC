@@ -81,6 +81,7 @@ public class MenuTooltip : MonoBehaviour
     public void Cancel()
     {
         gameObject.SetActive(false);
-        TagAlongManager.Instance.ControllerOn();
+        //TagAlongManager.Instance.ControllerOn();
+        SettingMenuPanel.Instance.OnController();
     }
 }

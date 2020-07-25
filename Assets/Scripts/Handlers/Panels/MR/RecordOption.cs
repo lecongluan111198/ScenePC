@@ -41,7 +41,8 @@ public class RecordOption : MonoBehaviour
             recorAnim.Mode = playMode;
         }
         gameObject.SetActive(false);
-        TagAlongManager.Instance.ControllerOn();
+        //TagAlongManager.Instance.ControllerOn();
+        SettingMenuPanel.Instance.OnController();
     }
 
     public void ChangPlayMode(int mode)
@@ -71,6 +72,7 @@ public class RecordOption : MonoBehaviour
             Destroy(recorAnim);
         }
         gameObject.SetActive(false);
-        TagAlongManager.Instance.ControllerOn();
+        //TagAlongManager.Instance.ControllerOn();
+        SettingMenuPanel.Instance.OnController();
     }
 }

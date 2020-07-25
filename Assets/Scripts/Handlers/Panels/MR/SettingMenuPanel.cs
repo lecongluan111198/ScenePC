@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class SettingMenuPanel : MonoBehaviour
 {
-    private GameObject currentObject;
-
+    [Header("PANELS")]
     public GameObject animationPanel;
     public GameObject notifyRecord;
     public GameObject questionPanel;
     public GameObject recordOptionPanel;
     public GameObject tooltipPanel;
     public GameObject tooltipSettingPanel;
+    [Header("BUTTONS")]
+    public List<RadialMenuItem> menuItems = new List<RadialMenuItem>();
+    [Header("ANIMATION")]
+    public Animator anim;
 
     public static SettingMenuPanel Instance = null;
 
@@ -29,22 +32,82 @@ public class SettingMenuPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DisableObjectController();
+        OffController();
     }
 
     private void OnEnable()
     {
-        //currentObject = MRContextManager.Instance.CurrentObject;
-        currentObject = MRDataHolder.Instance.CurrentClickObject;
-        //Debug.Log(Camera.main.transform.forward.y);
-        //Vector3 cameraPos = Camera.main.transform.position;
-        //Vector3 distance = MRDataHolder.Instance.Distance;
-        //transform.position = new Vector3(cameraPos.x + distance.x, cameraPos.y + distance.y, cameraPos.z + distance.z);
+        OnController();
+        EnableObjectController();
     }
 
     // Update is called once per frame
     void Update()
     {
+    }
 
+    public void OffController()
+    {
+        anim.SetBool("open", false);
+    }
+
+    public void OnController()
+    {
+        anim.SetBool("open", true);
+    }
+
+    public void DisableObjectController()
+    {
+        for(int i = 3; i< menuItems.Count; i++)
+        {
+            menuItems[i].isActive = false;
+        }
+    }
+
+    public void EnableObjectController()
+    {
+        for (int i = 3; i < menuItems.Count; i++)
+        {
+            menuItems[i].isActive = true;
+        }
+    }
+
+    public void AddModel()
+    {
+        MREditContextManager.Instance.ShowMenuAddModel();
+        OffController();
+    }
+
+    public void Save()
+    {
+        MREditContextManager.Instance.SaveEditContext();
+        OffController();
+    }
+
+    public void Exit()
+    {
+        MREditContextManager.Instance.Exit();
+        OffController();
+    }
+
+    public void AddQuestion()
+    {
+        if (menuItems[3].isActive)
+        {
+            questionPanel.SetActive(true);
+            OffController();
+        }
+    }
+
+    public void ShowTooltipMenu()
+    {
+        //tooltipPanel.SetActive(true);
+        if (menuItems[4].isActive)
+        {
+            tooltipSettingPanel.SetActive(true);
+            OffController();
+        }
     }
 
     public void AvailableAnimation()
@@ -53,54 +116,49 @@ public class SettingMenuPanel : MonoBehaviour
         //MRContextManager.Instance.ShowAnimation();
 
         //TODO: get data from server and add to list of animations
-        animationPanel.SetActive(true);
-        TagAlongManager.Instance.ControllerOff();
+        if (menuItems[5].isActive)
+        {
+            animationPanel.SetActive(true);
+            OffController();
+        }
     }
 
     public void RecordAnim()
     {
-        //TODO: show notify recording animation
-        notifyRecord.SetActive(true);
-        TagAlongManager.Instance.ControllerOff();
+        if (menuItems[6].isActive)
+        {
+            notifyRecord.SetActive(true);
+            OffController();
+        }
+    }
+
+    public void Delete()
+    {
+        if (menuItems[7].isActive)
+        {
+            Destroy(MRDataHolder.Instance.CurrentClickObject);
+            MRDataHolder.Instance.CurrentClickObject = null;
+            DisableObjectController();
+        }
     }
 
     public void ShowRecordOption()
     {
         recordOptionPanel.SetActive(true);
-        TagAlongManager.Instance.ControllerOff();
-    }
-
-    public void AddQuestion()
-    {
-        questionPanel.SetActive(true);
-        TagAlongManager.Instance.ControllerOff();
-    }
-
-    public void ShowTooltipMenu()
-    {
-        //tooltipPanel.SetActive(true);
-        tooltipSettingPanel.SetActive(true);
-        TagAlongManager.Instance.ControllerOff();
+        //OffController();
     }
 
     public void ShowTooltipSetting(string itemName)
     {
         tooltipSettingPanel.SetActive(true);
         tooltipSettingPanel.GetComponent<TooltipSettingPanel>().objName.text = itemName;
-        TagAlongManager.Instance.ControllerOff();
-    }
-
-    public void Delete()
-    {
-        Destroy(currentObject);
-        MRDataHolder.Instance.CurrentClickObject = null;
-        TagAlongManager.Instance.ControllerIn();
+        //OffController();
     }
 
     public void Close()
     {
-        Debug.Log("close");
-        //gameObject.SetActive(false);
-        TagAlongManager.Instance.ControllerIn();
+        DisableObjectController();
+        OffController();
+        MRDataHolder.Instance.CurrentClickObject = null;
     }
 }

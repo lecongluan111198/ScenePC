@@ -41,5 +41,6 @@ public class TooltipSettingPanel : MonoBehaviour
     public void Cancel()
     {
         gameObject.SetActive(false);
+        SettingMenuPanel.Instance.OnController();
     }
 }
