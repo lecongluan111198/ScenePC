@@ -16,6 +16,12 @@ public class FeatureController : MonoBehaviour
 
     public static FeatureController Instance = null;
 
+    public enum EFeature
+    {
+        QUESTION = 2,
+        ANIMATION = 3
+    }
+
     private void Awake()
     {
         if (Instance == null)
@@ -48,6 +54,16 @@ public class FeatureController : MonoBehaviour
     public void OnController()
     {
         anim.SetBool("open", true);
+    }
+
+    public void DisableFeature(EFeature feature)
+    {
+        menuItems[(int) feature].isActive = false;
+    }
+
+    public void EnableFeature(EFeature feature)
+    {
+        menuItems[(int) feature].isActive = true;
     }
 
     public void DisableObjectController()

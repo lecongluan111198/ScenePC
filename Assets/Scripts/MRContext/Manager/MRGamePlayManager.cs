@@ -133,14 +133,14 @@ public class MRGamePlayManager : MonoBehaviour
         //}
         if (!isBackground && !co.nameDownload.Equals("BrushThinStroke"))
         {
-            BoundingBox bbox = ConvertContextUtils.AddComponent<BoundingBox>(go);
-            bbox.Target = go.gameObject;
-            bbox.BoundsOverride = go.GetComponent<BoxCollider>();
-            bbox.HandleMaterial = handleMaterial;
-            bbox.HandleGrabbedMaterial = handleGrabbedMaterial;
-            bbox.ScaleHandlePrefab = scaleHandlePrefab;
-            bbox.ScaleHandleSlatePrefab = scaleHandleSlatePrefab;
-            bbox.RotationHandleSlatePrefab = rotationHandlePrefab;
+            //BoundingBox bbox = ConvertContextUtils.AddComponent<BoundingBox>(go);
+            //bbox.Target = go.gameObject;
+            //bbox.BoundsOverride = go.GetComponent<BoxCollider>();
+            //bbox.HandleMaterial = handleMaterial;
+            //bbox.HandleGrabbedMaterial = handleGrabbedMaterial;
+            //bbox.ScaleHandlePrefab = scaleHandlePrefab;
+            //bbox.ScaleHandleSlatePrefab = scaleHandleSlatePrefab;
+            //bbox.RotationHandleSlatePrefab = rotationHandlePrefab;
             ManipulationHandler mHandler = ConvertContextUtils.AddComponent<ManipulationHandler>(go);
             mHandler.HostTransform = go.transform;
             ConvertContextUtils.AddComponent<NearInteractionGrabbable>(go);

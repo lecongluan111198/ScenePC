@@ -37,6 +37,14 @@ public class ObjectSetting : MonoBehaviour, IMixedRealityPointerHandler
             {
                 FeatureController.Instance.OnController();
                 FeatureController.Instance.EnableObjectController();
+                if(gameObject.GetComponent<QuestionV2>() == null)
+                {
+                    FeatureController.Instance.DisableFeature(FeatureController.EFeature.QUESTION);
+                }
+                if (gameObject.GetComponent<CustAnimation>() == null || gameObject.GetComponent<RecordAnimation>() == null)
+                {
+                    FeatureController.Instance.DisableFeature(FeatureController.EFeature.ANIMATION);
+                }
             }
             //TODO: set transform directly with player
             isDown = false;
