@@ -11,6 +11,8 @@ public class SettingMenuPanel : MonoBehaviour
     public GameObject recordOptionPanel;
     public GameObject tooltipPanel;
     public GameObject tooltipSettingPanel;
+    public GameObject confirmExitPanel;
+    public GameObject confirmDeletePanel;
     [Header("BUTTONS")]
     public List<RadialMenuItem> menuItems = new List<RadialMenuItem>();
     [Header("ANIMATION")]
@@ -87,8 +89,7 @@ public class SettingMenuPanel : MonoBehaviour
 
     public void Exit()
     {
-        MREditContextManager.Instance.Exit();
-        OffController();
+        confirmExitPanel.GetComponent<ConfirmExitPanel>().ShowConfirm();
     }
 
     public void AddQuestion()
@@ -136,9 +137,10 @@ public class SettingMenuPanel : MonoBehaviour
     {
         if (menuItems[7].isActive)
         {
-            Destroy(MRDataHolder.Instance.CurrentClickObject);
-            MRDataHolder.Instance.CurrentClickObject = null;
-            DisableObjectController();
+            //Destroy(MRDataHolder.Instance.CurrentClickObject);
+            //MRDataHolder.Instance.CurrentClickObject = null;
+            //DisableObjectController();
+            confirmDeletePanel.GetComponent<ConfirmDeletePanel>().ShowConfirm();
         }
     }
 

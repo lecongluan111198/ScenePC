@@ -33,6 +33,11 @@ public class ObjectSetting : MonoBehaviour, IMixedRealityPointerHandler
                 SettingMenuPanel.Instance.OnController();
                 SettingMenuPanel.Instance.EnableObjectController();
             }
+            else
+            {
+                FeatureController.Instance.OnController();
+                FeatureController.Instance.EnableObjectController();
+            }
             //TODO: set transform directly with player
             isDown = false;
         }
