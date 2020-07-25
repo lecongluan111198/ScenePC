@@ -20,7 +20,7 @@ MonoBehaviour:
   useDefaultModels: 1
   defaultControllerModelMaterial: {fileID: 2100000, guid: 54322026142964d4084eda2478d9b1a2,
     type: 2}
-  globalLeftControllerModel: {fileID: 1370450866519632, guid: 626257b1a6cd47c2a32a18cf75b2fb23,
+  globalLeftControllerModel: {fileID: 1875388798535698470, guid: d4e4a2738217a164a80029f120f711fa,
     type: 3}
   globalRightControllerModel: {fileID: 1875388798535698470, guid: f78dcc035474fa749b54d3835e351633,
     type: 3}

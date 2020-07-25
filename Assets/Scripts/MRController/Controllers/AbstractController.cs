@@ -35,7 +35,7 @@ public abstract class AbstractController : MonoBehaviour
 
     protected void OnEnable()
     {
-        InteractionManager.InteractionSourcePressed += InteractionSourcePressed;
+        //InteractionManager.InteractionSourcePressed += InteractionSourcePressed;
         doOnEnable();
     }
 
