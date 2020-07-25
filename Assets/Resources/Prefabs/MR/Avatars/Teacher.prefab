@@ -2869,7 +2869,7 @@ GameObject:
   - component: {fileID: 6040864955741811630}
   - component: {fileID: -6106847830486114984}
   m_Layer: 0
-  m_Name: IKAvatar
+  m_Name: Teacher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2908,7 +2908,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8678615731385254154}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 89708f8c75508bb4a94f540a6d494d71, type: 3}
   m_Controller: {fileID: 9100000, guid: 415f5fcec9854494db74fe964e0850bb, type: 2}
   m_CullingMode: 1
@@ -2982,7 +2982,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8678615731385254154}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2545bbff70f58f42ac5ceffe19551b2, type: 3}
   m_Name: 

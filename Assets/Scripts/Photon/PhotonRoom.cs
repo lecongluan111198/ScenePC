@@ -144,9 +144,20 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     private void CreatePlayer()
     {
         Debug.Log("Create player");
-        GameObject player = PhotonNetwork.Instantiate(ResourceManager.Avatar + "IKAvatar", new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
-        player.transform.SetParent(Camera.main.transform);
-        player.transform.localPosition = new Vector3(-0.05f, -0.83f, 0.07f);
+        //string role = AccountInfo.Instance.Role.ToLower();
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            GameObject player = PhotonNetwork.Instantiate(ResourceManager.Avatar + "Teacher", new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
+            player.transform.SetParent(Camera.main.transform);
+            player.transform.localPosition = new Vector3(-0.009f, -1.59f, -0.05f);
+        }
+        else
+        {
+            GameObject player = PhotonNetwork.Instantiate(ResourceManager.Avatar + "Student", new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
+            player.transform.SetParent(Camera.main.transform);
+            player.transform.localPosition = new Vector3(-0.215f, -1.587f, -0.22f);
+        }
+       
     }
 
     //public void StartGame()
