@@ -16,6 +16,10 @@ public class FeatureController : MonoBehaviour
 
     public static FeatureController Instance = null;
 
+    private bool isOn = false;
+
+    public bool IsOn { get => isOn; set => isOn = value; }
+
     public enum EFeature
     {
         QUESTION = 2,
@@ -49,11 +53,13 @@ public class FeatureController : MonoBehaviour
     public void OffController()
     {
         anim.SetBool("open", false);
+        IsOn = false;
     }
 
     public void OnController()
     {
         anim.SetBool("open", true);
+        IsOn = true;
     }
 
     public void DisableFeature(EFeature feature)

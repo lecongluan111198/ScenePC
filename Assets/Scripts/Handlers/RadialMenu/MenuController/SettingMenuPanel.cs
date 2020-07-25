@@ -5,8 +5,8 @@ using UnityEngine;
 public class SettingMenuPanel : MonoBehaviour
 {
     [Header("PANELS")]
-    public GameObject animationPanel;
-    public GameObject notifyRecord;
+    //public GameObject animationPanel;
+    //public GameObject notifyRecord;
     public GameObject questionPanel;
     public GameObject recordOptionPanel;
     public GameObject tooltipPanel;
@@ -14,12 +14,17 @@ public class SettingMenuPanel : MonoBehaviour
     public GameObject confirmExitPanel;
     public GameObject confirmDeletePanel;
     public GameObject transformPanel;
+    public GameObject animationController;
     [Header("BUTTONS")]
     public List<RadialMenuItem> menuItems = new List<RadialMenuItem>();
     [Header("ANIMATION")]
     public Animator anim;
 
     public static SettingMenuPanel Instance = null;
+
+    private bool isOn = false;
+
+    public bool IsOn { get => isOn; set => isOn = value; }
 
     private void Awake()
     {
@@ -53,11 +58,13 @@ public class SettingMenuPanel : MonoBehaviour
     public void OffController()
     {
         anim.SetBool("open", false);
+        IsOn = false;
     }
 
     public void OnController()
     {
         anim.SetBool("open", true);
+        IsOn = true;
     }
 
     public void DisableObjectController()
@@ -112,7 +119,7 @@ public class SettingMenuPanel : MonoBehaviour
         }
     }
 
-    public void AvailableAnimation()
+    public void ShowTransformController()
     {
         //TODO: show available animation
         //MRContextManager.Instance.ShowAnimation();
@@ -126,12 +133,13 @@ public class SettingMenuPanel : MonoBehaviour
         }
     }
 
-    public void RecordAnim()
+    public void ShowAnimationController()
     {
         if (menuItems[6].isActive)
         {
-            notifyRecord.SetActive(true);
+            //notifyRecord.SetActive(true);
             OffController();
+            animationController.GetComponent<AnimationControllerPanel>().OnController();
         }
     }
 

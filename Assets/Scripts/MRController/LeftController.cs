@@ -45,9 +45,9 @@ public class LeftController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(2))
+        if (Input.GetKey(KeyCode.Escape))
         {
-            ChangeTypeController();
+            ShowController();
         }
     }
 
@@ -58,9 +58,36 @@ public class LeftController : MonoBehaviour
 
     private void InteractionSourcePressed(InteractionSourcePressedEventArgs obj)
     {
-        if (obj.state.source.handedness == InteractionSourceHandedness.Right && obj.pressType == InteractionSourcePressType.Grasp)
+        if (obj.state.source.handedness == InteractionSourceHandedness.Left && obj.pressType == InteractionSourcePressType.Grasp)
         {
-            ChangeTypeController();
+            //ChangeTypeController();
+            ShowController();
+        }
+    }
+
+    public void ShowController()
+    {
+        if (MRDataHolder.Instance.IsEdit)
+        {
+            if (SettingMenuPanel.Instance.IsOn)
+            {
+                SettingMenuPanel.Instance.OffController();
+            }
+            else
+            {
+                SettingMenuPanel.Instance.OnController();
+            }
+        }
+        else
+        {
+            if (FeatureController.Instance.IsOn)
+            {
+                FeatureController.Instance.OffController();
+            }
+            else
+            {
+                FeatureController.Instance.OnController();
+            }
         }
     }
 

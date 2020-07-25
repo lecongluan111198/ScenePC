@@ -158,7 +158,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1692506567}
-        m_MethodName: AvailableAnimation
+        m_MethodName: ShowTransformController
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -746,8 +746,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ef5c5b4afe6cb448c7e2fdfe193c77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationPanel: {fileID: 0}
-  notifyRecord: {fileID: 0}
   questionPanel: {fileID: 0}
   recordOptionPanel: {fileID: 0}
   tooltipPanel: {fileID: 0}
@@ -755,6 +753,7 @@ MonoBehaviour:
   confirmExitPanel: {fileID: 0}
   confirmDeletePanel: {fileID: 0}
   transformPanel: {fileID: 0}
+  animationController: {fileID: 0}
   menuItems:
   - {fileID: 1180488908091514221}
   - {fileID: 4499088414285280869}
@@ -893,7 +892,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1622238509284050}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.000006967445}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0006179, y: 1.0006176, z: 1.0006177}
   m_Children:
   - {fileID: 224819564408333370}
@@ -1358,7 +1357,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1692506567}
-        m_MethodName: RecordAnim
+        m_MethodName: ShowAnimationController
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1941,7 +1940,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1907268735568892}
   m_LocalRotation: {x: 0.000000014901158, y: -0.000000029802315, z: 0.9238796, w: -0.38268325}
-  m_LocalPosition: {x: 0, y: 0, z: 0.012611076}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0006192, y: 1.0006187, z: 1.0006182}
   m_Children:
   - {fileID: 4258903364266205009}
