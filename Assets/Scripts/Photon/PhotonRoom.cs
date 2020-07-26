@@ -145,7 +145,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     {
         Debug.Log("Create player");
         //string role = AccountInfo.Instance.Role.ToLower();
-        if (!PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient)
         {
             GameObject player = PhotonNetwork.Instantiate(ResourceManager.Avatar + "Teacher", new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
             player.transform.SetParent(Camera.main.transform);
