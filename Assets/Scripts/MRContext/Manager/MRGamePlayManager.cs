@@ -141,6 +141,7 @@ public class MRGamePlayManager : MonoBehaviour
             //bbox.ScaleHandlePrefab = scaleHandlePrefab;
             //bbox.ScaleHandleSlatePrefab = scaleHandleSlatePrefab;
             //bbox.RotationHandleSlatePrefab = rotationHandlePrefab;
+            ConvertContextUtils.AddComponent<BoxCollider>(go);
             ManipulationHandler mHandler = ConvertContextUtils.AddComponent<ManipulationHandler>(go);
             mHandler.HostTransform = go.transform;
             ConvertContextUtils.AddComponent<NearInteractionGrabbable>(go);
