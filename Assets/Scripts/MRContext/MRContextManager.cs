@@ -152,7 +152,7 @@ public class MRContextManager : MonoBehaviour
             Debug.Log(json);
             ContextModel.Instance.updateContext(context, (data) =>
             {
-                if (data == null)
+                if (!data.Key)
                 {
                     Debug.Log("Cannot save");
                 }

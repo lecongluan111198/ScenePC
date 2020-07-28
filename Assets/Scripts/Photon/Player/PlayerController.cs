@@ -9,8 +9,11 @@ public class PlayerController : MonoBehaviour
 {
     //public Animator anim;
     //public TextMesh username;
-    //private PhotonView PV;
+    public Speaker speaker;
+
+    private PhotonView PV;
     private GameObject voiceController;
+    
 
     private void Awake()
     {
@@ -18,13 +21,22 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //PV = gameObject.GetComponent<PhotonView>();
-        voiceController = GameObject.Find("VoiceController");
+        PV = gameObject.GetComponent<PhotonView>();
         PhotonVoiceView voice = gameObject.GetComponent<PhotonVoiceView>();
-        if (voice != null && voiceController != null)
+        if (PV.IsMine)
         {
-            voice.RecorderInUse = voiceController.GetComponent<Recorder>();
+            voiceController = GameObject.Find("VoiceController");
+            if (voice != null && voiceController != null)
+            {
+                voice.RecorderInUse = voiceController.GetComponent<Recorder>();
+            }
         }
+        else
+        {
+            Destroy(voice);
+            Destroy(speaker);
+        }
+        
     }
 
     // Update is called once per frame

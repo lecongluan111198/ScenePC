@@ -35,7 +35,27 @@ public class LessonDetail : MonoBehaviour
     public void LoadData(Context context)
     {
         this.context = context;
+        if (this.context.Content.Equals("{}"))
+        {
+            Debug.Log(context.Id);
+            ContextModel.Instance.loadContext(context.Id, (data) =>
+            {
+                if (data != null)
+                {
+                    this.context = data;
+                    Debug.Log(this.context.Content);
+                }
+                UpdateInformation();
+            });
+        }
+        else
+        {
+            UpdateInformation();
+        }
+    }
 
+    private void UpdateInformation()
+    {
         title.SetText(context.Name);
         description.SetText(context.Description);
         author.SetText("Unknown");
@@ -66,5 +86,6 @@ public class LessonDetail : MonoBehaviour
     public void DeleteLesson()
     {
 
-    }
+    } 
+     
 }

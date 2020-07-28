@@ -150,7 +150,7 @@ public class ContextModel : MonoBehaviour
         }));
     }
 
-    public void updateContext(Context context, Action<Context> callBack)
+    public void updateContext(Context context, Action<KeyValuePair<bool, string>> callBack)
     {
         ReqParamBuilder reqBuilder = new ReqParamBuilder(API.UPDATE_CONTEXT);
         string uri = reqBuilder.AddParam("id", context.Id)
@@ -163,23 +163,48 @@ public class ContextModel : MonoBehaviour
                 .build();
         StartCoroutine(APIRequest.Instance.doPost(API.UPDATE_CONTEXT, reqBuilder.toMap(), (data) =>
         {
-            if(data != null)
+            //if(data != null)
+            //{
+            //    if (data.error >= 0)
+            //    {
+            //        Context updatedContext = parseContext(data.result);
+            //        callBack(updatedContext);
+            //    }
+            //    else
+            //    {
+            //        Debug.Log(data.error + ": " + data.message);
+            //        callBack(null);
+            //    }
+            //}
+            //else
+            //{
+            //    Debug.Log("data is null");
+            //    callBack(null);
+            //}
+            if (data == null)
+            {
+                Debug.Log(uri);
+                callBack(new KeyValuePair<bool, string>(false, "Data is empty"));
+            }
+            else
             {
                 if (data.error >= 0)
                 {
-                    Context updatedContext = parseContext(data.result);
-                    callBack(updatedContext);
+                    Context newContext = parseContext(data.result);
+                    if (newContext != null)
+                    {
+                        callBack(new KeyValuePair<bool, string>(true, "Update successfully"));
+                    }
+                    else
+                    {
+                        callBack(new KeyValuePair<bool, string>(false, "Update failly"));
+                    }
                 }
                 else
                 {
                     Debug.Log(data.error + ": " + data.message);
-                    callBack(null);
+                    callBack(new KeyValuePair<bool, string>(false, data.message));
                 }
-            }
-            else
-            {
-                Debug.Log("data is null");
-                callBack(null);
             }
         }));
     }

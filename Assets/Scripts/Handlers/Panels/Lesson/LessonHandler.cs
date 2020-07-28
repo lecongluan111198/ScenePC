@@ -17,6 +17,13 @@ public class LessonHandler : MonoBehaviour
     private int length = 12;
     private int currentOwnOffset = -1;
 
+    GameObject MenuManager;
+
+    private void Start()
+    {
+        MenuManager = GameObject.Find("Menu Manager");
+    }
+
     public void LoadLesson()
     {
         if (currentOwnOffset < 0)
@@ -38,5 +45,15 @@ public class LessonHandler : MonoBehaviour
                 loadingAnim.Play("Modal Window Out");
             });
         }
+    }
+
+    public void CreateLesson()
+    {
+        MenuManager.GetComponent<MainBoardHandler>().LoadLessonCreate();
+    }
+
+    public void AddLesson(Context context)
+    {
+
     }
 }

@@ -47,6 +47,12 @@ public class MainBoardHandler : MonoBehaviour
         topManager.ExtraPanelAnim(1);
     }
 
+    public void LoadLessonCreate()
+    {
+        //LessonCreate.GetComponent<LessonCreate>();
+        topManager.ExtraPanelAnim(3);
+    }
+
     public void LoadCourseCreate()
     {
         CourseCreate.GetComponent<CourseCreate>().ClearInformation();

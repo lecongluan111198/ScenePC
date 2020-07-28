@@ -3000,6 +3000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f12031293c52e440b1b9ba070b07726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speaker: {fileID: 6066282639672321232}
 --- !u!114 &-6106847830486114984
 MonoBehaviour:
   m_ObjectHideFlags: 0

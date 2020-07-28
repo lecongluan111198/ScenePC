@@ -101,13 +101,13 @@ public class MREditContextManager : MonoBehaviour
             Debug.Log(json);
             ContextModel.Instance.updateContext(context, (data) =>
             {
-                if (data == null)
+                if (!data.Key)
                 {
-                    Debug.Log("Cannot save");
+                    Debug.Log(data.Value);
                 }
                 else
                 {
-                    Debug.Log("Success");
+                    Debug.Log(data.Value);
                 }
             });
         }

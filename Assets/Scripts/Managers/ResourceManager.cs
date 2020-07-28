@@ -34,6 +34,16 @@ public class ResourceManager
         "Images/Backgrounds/Lessons/tube_icon"
     };
 
+    static Dictionary<string, int> CONTEXT_ID = new Dictionary<string, int>()
+    {
+        { "book_icon" , 0},
+        { "city_icon" , 1},
+        { "history_icon" , 2},
+        { "leaf_icon" , 3},
+        { "tree_icon" , 4},
+        { "tube_icon" , 5},
+    };
+
     static Dictionary<string, int> COURSE_ID = new Dictionary<string, int>()
     {
         { "Placeholder 1" , 0},
@@ -56,6 +66,15 @@ public class ResourceManager
             return -1;
         }
         return COURSE_ID[name];
+    }
+
+    public static int GetContextAvatarId(string name)
+    {
+        if (!CONTEXT_ID.ContainsKey(name))
+        {
+            return -1;
+        }
+        return CONTEXT_ID[name];
     }
 
 }

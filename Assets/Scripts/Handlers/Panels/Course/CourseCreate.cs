@@ -19,8 +19,8 @@ public class CourseCreate : MonoBehaviour
     public TMP_Text successMessage;
     public GameObject AddButton;
     public GameObject EditButton;
-    
 
+    private Course course;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,10 +41,12 @@ public class CourseCreate : MonoBehaviour
         avatar.sprite = Resources.Load<Sprite>(pathImage);
         AddButton.SetActive(true);
         EditButton.SetActive(false);
+        course = null;
     }
 
     public void UpdateInformation(Course course)
     {
+        this.course = course;
         Name.text = course.Name;
         Description.text = course.Description;
         status.isOn = course.Status;
@@ -56,7 +58,7 @@ public class CourseCreate : MonoBehaviour
 
     public void AddCourse()
     {
-        Course course = new Course();
+        course = new Course();
         course.Author = AccountInfo.Instance.Username;
         course.AvatarId = ResourceManager.GetCourseAvatarId(avatar.sprite.name);
         course.Name = Name.text;
@@ -85,7 +87,7 @@ public class CourseCreate : MonoBehaviour
 
     public void UpdateCourse()
     {
-        Course course = new Course();
+        //Course course = new Course();
         course.Author = AccountInfo.Instance.Username;
         course.AvatarId = ResourceManager.GetCourseAvatarId(avatar.sprite.name);
         course.Name = Name.text;
