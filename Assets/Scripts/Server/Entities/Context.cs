@@ -22,4 +22,18 @@ public class Context
     public int AvatarId { get => avatarId; set => avatarId = value; }
     public string Author { get => author; set => author = value; }
     public long CreateTime { get => createTime; set => createTime = value; }
+
+    public static Context CloneContext(Context context)
+    {
+        Context newContext = new Context();
+        newContext.Id = context.Id;
+        newContext.Name = context.Name;
+        newContext.TeacherId = context.TeacherId;
+        newContext.Description = context.Description;
+        newContext.Author = context.Author;
+        newContext.AvatarId = context.AvatarId;
+        newContext.CreateTime = context.CreateTime;
+        newContext.Content = context.Content;
+        return newContext;
+    }
 }

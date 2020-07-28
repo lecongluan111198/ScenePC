@@ -34,6 +34,7 @@ public class IKControl : MonoBehaviour
     //    rightArm.LookAt(RightController.Instance.transform.position*100);
     //   // rightShoulder.position = rightShoulder.position + RightController.Instance.transform.position;
     //}
+
     void OnAnimatorIK()
     {
         if (RightController.Instance != null && RightController.Instance.enabled)

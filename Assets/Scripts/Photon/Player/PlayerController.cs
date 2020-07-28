@@ -7,66 +7,56 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    //public Animator anim;
-    //public TextMesh username;
-    public Speaker speaker;
+    [Header("ANIMATION")]
+    public Animator anim;
 
-    private PhotonView PV;
-    private GameObject voiceController;
-    
+    public static PlayerController Instance = null;
+    private GameObject minePlayer;
+
+    private bool isOn = false;
+
+    public bool IsOn { get => isOn; set => isOn = value; }
 
     private void Awake()
     {
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        PV = gameObject.GetComponent<PhotonView>();
-        PhotonVoiceView voice = gameObject.GetComponent<PhotonVoiceView>();
-        if (PV.IsMine)
+        if (Instance == null)
         {
-            voiceController = GameObject.Find("VoiceController");
-            if (voice != null && voiceController != null)
-            {
-                voice.RecorderInUse = voiceController.GetComponent<Recorder>();
-            }
+            Instance = this;
         }
-        else
+        else if (Instance != this)
         {
-            Destroy(voice);
-            Destroy(speaker);
+            Destroy(this);
         }
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddMinePlayer(GameObject player)
     {
-
+        minePlayer = player;
     }
 
-    private void OnEnable()
+    public void DoAction(int num)
     {
-        //Debug.Log("mine " + PV.IsMine);
-        //username.text = AccountInfo.Instance.Username;
-        //if (PV.IsMine)
-        //{
-        //    Camera.main.transform.localPosition = new Vector3(0, 0.64f, -0.071f);
-        //    transform.SetParent(Camera.main.transform);
-        //    transform.localPosition = new Vector3(0, 0, 0);
-        //}
-        //else
-        //{
-
-        //}
+        if(minePlayer != null)
+        {
+            minePlayer.GetComponent<PlayerSetup>().DoAction((EAction)num);
+        }
     }
 
-    public void SetUserName(string name)
+    public void OffController()
     {
-        //username.text = name;
+        anim.SetBool("open", false);
+        IsOn = false;
     }
 
-    private void FixedUpdate()
+    public void OnController()
     {
+        anim.SetBool("open", true);
+        IsOn = true;
     }
+
+    public void Close()
+    {
+        OffController();
+    }
+
 }

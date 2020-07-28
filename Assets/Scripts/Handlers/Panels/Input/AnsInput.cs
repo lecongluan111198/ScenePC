@@ -40,7 +40,7 @@ public class AnsInput : MonoBehaviour
             deviceName = Microphone.devices[0].ToString();
             if (Microphone.IsRecording(deviceName))
             {
-                Debug.Log(deviceName + " is recording!");
+                Debug.Log("Cannot record because of that " + deviceName + " is recording!");
                 return;
             }
             audioSource.clip = Microphone.Start(deviceName, false, 60, 44100);

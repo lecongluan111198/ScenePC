@@ -17,6 +17,7 @@ public class LessonDetail : MonoBehaviour
 
     [Header("RESOURCE")]
     public Animator roomOption;
+    public Animator loadingAnim;
 
     private Context context;
 
@@ -37,6 +38,7 @@ public class LessonDetail : MonoBehaviour
         this.context = context;
         if (this.context.Content.Equals("{}"))
         {
+            loadingAnim.Play("Modal Window In");
             Debug.Log(context.Id);
             ContextModel.Instance.loadContext(context.Id, (data) =>
             {
@@ -46,6 +48,7 @@ public class LessonDetail : MonoBehaviour
                     Debug.Log(this.context.Content);
                 }
                 UpdateInformation();
+                loadingAnim.Play("Modal Window Out");
             });
         }
         else

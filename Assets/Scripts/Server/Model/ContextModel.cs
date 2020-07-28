@@ -130,13 +130,15 @@ public class ContextModel : MonoBehaviour
 
     public void createContext(Context context, Action<Context> callBack)
     {
-        ReqParamBuilder reqBuilder = new ReqParamBuilder(API.LOAD_COURSE_CONTEXT);
-        string uri = reqBuilder.AddParam("teacherId", context.TeacherId)
-                .AddParam("name", context.Name)
+        ReqParamBuilder reqBuilder = new ReqParamBuilder(API.CREATE_CONTEXT);
+        string uri = reqBuilder.AddParam("name", context.Name)
                 .AddParam("description", context.Description)
                 .AddParam("content", context.Content)
+                .AddParam("avatarId", context.AvatarId)
+                .AddParam("createTime", context.CreateTime)
+                .AddParam("teacherId", context.TeacherId)
                 .build();
-        StartCoroutine(APIRequest.Instance.doPost(uri, "", (data) =>
+        StartCoroutine(APIRequest.Instance.doPost(API.CREATE_CONTEXT, reqBuilder.toMap(), (data) =>
         {
             if (data.error >= 0)
             {
@@ -163,24 +165,6 @@ public class ContextModel : MonoBehaviour
                 .build();
         StartCoroutine(APIRequest.Instance.doPost(API.UPDATE_CONTEXT, reqBuilder.toMap(), (data) =>
         {
-            //if(data != null)
-            //{
-            //    if (data.error >= 0)
-            //    {
-            //        Context updatedContext = parseContext(data.result);
-            //        callBack(updatedContext);
-            //    }
-            //    else
-            //    {
-            //        Debug.Log(data.error + ": " + data.message);
-            //        callBack(null);
-            //    }
-            //}
-            //else
-            //{
-            //    Debug.Log("data is null");
-            //    callBack(null);
-            //}
             if (data == null)
             {
                 Debug.Log(uri);

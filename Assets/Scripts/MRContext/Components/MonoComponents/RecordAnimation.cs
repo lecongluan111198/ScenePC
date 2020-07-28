@@ -51,7 +51,7 @@ public class RecordAnimation : MonoBehaviour, IMixedRealityPointerHandler
             {
                 RecordTransform.ObjectStatus status = listStatuses[index];
                 transform.localPosition = ConvertTypeUtils.ListToVector3(status.Position);
-                transform.localRotation = ConvertTypeUtils.ListToQuaternion(status.Rotation);
+                transform.localRotation = Quaternion.Euler(ConvertTypeUtils.ListToVector3(status.Rotation));
                 transform.localScale = ConvertTypeUtils.ListToVector3(status.Scale);
                 index++;
             }

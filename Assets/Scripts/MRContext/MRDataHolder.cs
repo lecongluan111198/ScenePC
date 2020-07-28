@@ -46,18 +46,18 @@ public class MRDataHolder
 
     public void updateCurrentContext(Context currentContext, bool isEdit = true)
     {
-        this.currentContext = currentContext;
+        this.currentContext = Context.CloneContext(currentContext);
         this.currentContext.Content = StringCompressor.DecompressString(currentContext.Content);
-        if (currentContext.Content != null && currentContext.Content != "" & currentContext.Content != "{}")
+        if (currentContext.Content == null || currentContext.Content.Equals("") || currentContext.Content.Equals("{}"))
         {
-           currentContext.Content = defaultContent;
+            currentContext.Content = defaultContent;
         }
 
         this.isEdit = isEdit;
     }
 
     public Context CurrentContext {
-        get {return currentContext; }
+        get { return currentContext; }
         set {
             currentContext = value;
             currentContext.Content = StringCompressor.DecompressString(value.Content);
@@ -67,4 +67,6 @@ public class MRDataHolder
     public bool IsEdit { get => isEdit; set => isEdit = value; }
     public bool IsRecord { get => isRecord; set => isRecord = value; }
     public GameObject CurrentClickObject { get => currentClickObject; set => currentClickObject = value; }
+
+    
 }

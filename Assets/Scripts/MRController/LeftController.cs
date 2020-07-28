@@ -23,13 +23,13 @@ public class LeftController : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
         else
         {
-            if(Instance != this)
+            if (Instance != this)
             {
                 Destroy(gameObject);
             }
@@ -49,6 +49,10 @@ public class LeftController : MonoBehaviour
         {
             ShowController();
         }
+        else if (Input.GetKey(KeyCode.F1))
+        {
+            ShowPlayerController();
+        }
     }
 
     private void OnEnable()
@@ -58,10 +62,17 @@ public class LeftController : MonoBehaviour
 
     private void InteractionSourcePressed(InteractionSourcePressedEventArgs obj)
     {
-        if (obj.state.source.handedness == InteractionSourceHandedness.Left && obj.pressType == InteractionSourcePressType.Grasp)
+        if (obj.state.source.handedness == InteractionSourceHandedness.Left)
         {
-            //ChangeTypeController();
-            ShowController();
+            if (obj.pressType == InteractionSourcePressType.Grasp)
+            {
+                ShowController();
+            }
+            else if (obj.pressType == InteractionSourcePressType.Menu)
+            {
+                //show action
+                ShowPlayerController();
+            }
         }
     }
 
@@ -75,6 +86,10 @@ public class LeftController : MonoBehaviour
             }
             else
             {
+                if (MRDataHolder.Instance.CurrentClickObject == null)
+                {
+                    SettingMenuPanel.Instance.DisableObjectController();
+                }
                 SettingMenuPanel.Instance.OnController();
             }
         }
@@ -86,11 +101,29 @@ public class LeftController : MonoBehaviour
             }
             else
             {
+                if (MRDataHolder.Instance.CurrentClickObject == null)
+                {
+                    FeatureController.Instance.DisableObjectController();
+                }
                 FeatureController.Instance.OnController();
             }
         }
     }
 
+    public void ShowPlayerController()
+    {
+        if (!MRDataHolder.Instance.IsEdit)
+        {
+            if (PlayerController.Instance.IsOn)
+            {
+                PlayerController.Instance.OffController();
+            }
+            else
+            {
+                PlayerController.Instance.OnController();
+            }
+        }
+    }
     private void ChangeTypeController()
     {
         if (CurrController == null)
