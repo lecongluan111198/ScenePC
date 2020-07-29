@@ -18,9 +18,13 @@ public class MenuQuestionPanelV2 : MonoBehaviour
     private int position = 0;
     private int samplerate = 44100;
     private float frequency = 440;
+
     private void OnEnable()
     {
-
+        foreach(Image image in ansColors)
+        {
+            image.color = Color.white;
+        }
     }
 
     public void ShowMenuQuestion(QuestionV2 data)
