@@ -80,7 +80,7 @@ public class LineController : MonoBehaviour
             line.SetPosition(0, position);
             lineMap.Add(key, line);
             infoMap.Add(key, new KeyValuePair<Vector3, float>(position, timeScale));
-            if (MRDataHolder.Instance.IsEdit)
+            if (MRDataHolder.Instance.IsEdit && LoadSceneManager.Instance.CurrentScene == "MREdit")
             {
                 //set parent
                 newStroke.transform.SetParent(MREditContextManager.Instance.container.transform);

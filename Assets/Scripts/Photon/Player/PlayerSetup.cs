@@ -3,6 +3,7 @@ using Photon.Voice.PUN;
 using Photon.Voice.Unity;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
 
@@ -11,6 +12,7 @@ public class PlayerSetup : MonoBehaviour
     //public Animator anim;
     //public TextMesh username;
     public Speaker speaker;
+    public TMP_Text username;
 
     private PhotonView PV;
     private GameObject voiceController;
@@ -37,7 +39,7 @@ public class PlayerSetup : MonoBehaviour
             //Destroy(voice);
             //Destroy(speaker);
         }
-
+        SetUserName(PV.Owner.NickName);
     }
 
     private void Update()
@@ -56,7 +58,7 @@ public class PlayerSetup : MonoBehaviour
 
     public void SetUserName(string name)
     {
-        //username.text = name;
+        username.text = name;
     }
 
     public void DoAction(EAction action)
