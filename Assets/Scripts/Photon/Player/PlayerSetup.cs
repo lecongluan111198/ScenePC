@@ -34,8 +34,8 @@ public class PlayerSetup : MonoBehaviour
         }
         else
         {
-            Destroy(voice);
-            Destroy(speaker);
+            //Destroy(voice);
+            //Destroy(speaker);
         }
 
     }
