@@ -95,18 +95,26 @@ public class PhotonLobby : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     public void CreateRoom()
     {
-        Debug.Log("Creating room!");
-        string roomName = PhotonRoomUtils.GetRoomName();
-        RoomOptions roomOps = new RoomOptions()
+        try
         {
-            IsVisible = true,
-            IsOpen = true,
-            MaxPlayers = 10
-        };
-        PhotonNetwork.CreateRoom(roomName, roomOps);
-        Debug.Log("Room: " + roomName);
-        createdRoomName = roomName;
-        PhotonRoom.instance.RoomName = roomName;
+            Debug.Log("Creating room!");
+            string roomName = PhotonRoomUtils.GetRoomName();
+            RoomOptions roomOps = new RoomOptions()
+            {
+                IsVisible = true,
+                IsOpen = true,
+                MaxPlayers = 10
+            };
+            PhotonNetwork.CreateRoom(roomName, roomOps);
+            Debug.Log("Room: " + roomName);
+            createdRoomName = roomName;
+            PhotonRoom.instance.RoomName = roomName;
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError(ex);
+        }
+
     }
 
     public void JoinRoom(string roomName)
