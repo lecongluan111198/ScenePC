@@ -1,4 +1,5 @@
 ﻿using Microsoft.MixedReality.Toolkit.UI;
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,14 +12,16 @@ public class PlanetSpeedController : MonoBehaviour
     [Header("TEXT VALUES")]
     public TextMesh speedText;
 
+    private PhotonView PV;
     private float speed = 50;
     public static PlanetSpeedController Instance = null;
 
     public float Speed { get => speed; set => speed = value; }
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
+
         if (Instance == null)
         {
             Instance = this;
@@ -27,6 +30,10 @@ public class PlanetSpeedController : MonoBehaviour
         {
             Destroy(this);
         }
+    }
+    void Start()
+    {
+        PV = GetComponent<PhotonView>();
     }
 
     // Update is called once per frame
@@ -39,5 +46,12 @@ public class PlanetSpeedController : MonoBehaviour
     {
         speed = speedSlider.SliderValue * 100;
         speedText.text = Math.Round(speed, 1).ToString();
+        PV.RPC("UpdateSpeed", RpcTarget.AllBuffered, speed);
+    }
+
+    [PunRPC]
+    public void UpdateSpeed(float speed)
+    {
+        this.speed = speed;
     }
 }
