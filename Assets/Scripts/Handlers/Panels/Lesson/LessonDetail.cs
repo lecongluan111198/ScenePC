@@ -76,7 +76,7 @@ public class LessonDetail : MonoBehaviour
 
     public void PlayContext()
     {
-        //MRDataHolder.Instance.IsEdit = false;
+        MRDataHolder.Instance.IsEdit = false;
         roomOption.Play("Modal Window In");
     }
 

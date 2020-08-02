@@ -40,7 +40,7 @@ public class MRDataHolder
             TeacherId = 1,
             Author = "Luan Lee"
         };
-        isEdit = true;
+        isEdit = false;
         IsRecord = false;
     }
 
