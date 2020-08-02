@@ -7,28 +7,19 @@ public class GeneralTemplate : AbstractTemplate
 {
     public GameObject child;
 
-    public override void UpdateInformation(ContextObject co)
+    protected override GameObject UpdateOtherComponents(GameObject src, GameObject dest, ContextObject co)
     {
-        GameObject go = gameObject;
-        //update mesh to template object
-        UpdateMeshAndTransform(co.nameDownload, go);
-        ConvertContextUtils.AddComponent<ObjectSetting>(go);
-
-        go.name = co.nameObj;
-
-        Rigidbody rigid = go.GetComponent<Rigidbody>();
+        Rigidbody rigid = dest.GetComponent<Rigidbody>();
         if (rigid != null)
         {
             rigid.isKinematic = true;
         }
 
-        Animator anim = go.GetComponent<Animator>();
+        Animator anim = dest.GetComponent<Animator>();
         if (anim != null)
         {
             anim.applyRootMotion = true;
         }
-
-        co.ToGameObject(go);
+        return dest;
     }
-
 }

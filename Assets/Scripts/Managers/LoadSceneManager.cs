@@ -43,15 +43,19 @@ public class LoadSceneManager : MonoBehaviour
         switch (type)
         {
             case SceneType.MAINBOARD:
+                MRDataHolder.Instance.IsEdit = false;
                 LoadScene(mainBoardScene, isPhoton);
                 break;
             case SceneType.WAITING:
+                MRDataHolder.Instance.IsEdit = false;
                 LoadScene(waitingRoomScene, isPhoton);
                 break;
             case SceneType.GAMEPLAY:
+                MRDataHolder.Instance.IsEdit = false;
                 LoadScene(gamePlayScene, isPhoton);
                 break;
             case SceneType.MREDIT:
+                MRDataHolder.Instance.IsEdit = true;
                 LoadScene(mrEditScene, isPhoton);
                 break;
         }

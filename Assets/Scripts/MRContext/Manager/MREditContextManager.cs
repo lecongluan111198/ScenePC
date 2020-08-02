@@ -37,6 +37,14 @@ public class MREditContextManager : MonoBehaviour
         LoadEditContext();
     }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.P))
+        {
+            SaveEditContext();
+        }
+    }
+
     public void LoadEditContext()
     {
         if (!MRDataHolder.Instance.IsEdit)
@@ -81,6 +89,8 @@ public class MREditContextManager : MonoBehaviour
 
     private void UpdateBackground(ContextObject bo, GameObject go)
     {
+        if (go == null)
+            return;
         go.transform.SetParent(GUI.transform);
         ObjBasicInfo bInfo = ConvertContextUtils.AddComponent<ObjBasicInfo>(go);
         bInfo.Id = 1;
@@ -155,6 +165,10 @@ public class MREditContextManager : MonoBehaviour
                 break;
             }
         }
+        if(bo == null)
+        {
+            bo = new ContextObject(1, "", "", false, new List<double>() { 0, 0, 0 }, new List<double>() { 0, 0, 0 }, new List<double>() { 1, 1, 1 }, new List<AbstractComponent>());
+        }
         return bo;
     }
     private List<Phase> ToPhase(ContextObject bo, List<ContextObject> objects)
@@ -175,7 +189,7 @@ public class MREditContextManager : MonoBehaviour
     public void Exit()
     {
         LoadSceneManager.Instance.LoadScene(LoadSceneManager.SceneType.MAINBOARD, false);
-        MRDataHolder.Instance.IsEdit = false;
+        //MRDataHolder.Instance.IsEdit = false;
     }
 
     public void ShowMenuAddModel()

@@ -52,10 +52,19 @@ public class ContextObject
 
         foreach (AbstractComponent ab in components)
         {
-            Component component =  go.GetComponent(ab.getType());
-            if(component == null)
+            Component component = null;
+            if (go.GetComponent<PlanetTemplate>() && ab.getType() == typeof(MRTooltip))
             {
-                component = go.AddComponent(ab.getType());
+                go.transform.Find(go.name);
+                component = ConvertContextUtils.AddComponent<MRTooltip>(go.transform.Find(go.name).gameObject);
+            }
+            else
+            {
+                component = go.GetComponent(ab.getType());
+                if (component == null)
+                {
+                    component = go.AddComponent(ab.getType());
+                }
             }
             ab.updateInfomation(component);
         }

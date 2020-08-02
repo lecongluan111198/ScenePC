@@ -76,13 +76,13 @@ public class LessonDetail : MonoBehaviour
 
     public void PlayContext()
     {
-        MRDataHolder.Instance.IsEdit = false;
+        //MRDataHolder.Instance.IsEdit = false;
         roomOption.Play("Modal Window In");
     }
 
     public void EditLesson()
     {
-        MRDataHolder.Instance.IsEdit = true;
+        //MRDataHolder.Instance.IsEdit = true;
         LoadSceneManager.Instance.LoadScene(LoadSceneManager.SceneType.MREDIT, false);
     }
 

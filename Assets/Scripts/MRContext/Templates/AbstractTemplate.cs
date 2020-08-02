@@ -1,5 +1,8 @@
-﻿using System.Collections;
+﻿using Microsoft.MixedReality.Toolkit.UI;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public abstract class AbstractTemplate : MonoBehaviour
@@ -7,20 +10,38 @@ public abstract class AbstractTemplate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public abstract void UpdateInformation(ContextObject co);
-
-    public void UpdateMeshAndTransform(string srcName, GameObject dest)
+    public void UpdateInformation(ContextObject co)
     {
-        GameObject src = Instantiate(Resources.Load(ResourceManager.MRPrefab + srcName) as GameObject);
+        try
+        {
+            GameObject src = Instantiate(Resources.Load(ResourceManager.MRPrefab + co.nameDownload) as GameObject);
+            DoUpdate(src, gameObject, co);
+            ConvertContextUtils.AddComponent<ObjectSetting>(gameObject);
+            gameObject.name = co.nameObj;
+            co.ToGameObject(gameObject);
+            Destroy(src);
+        }
+        catch (Exception ex)
+        {
+            Debug.Log(ex);
+        }
+
+    }
+
+    protected abstract GameObject UpdateOtherComponents(GameObject src, GameObject dest, ContextObject co);
+
+    protected void DoUpdate(GameObject src, GameObject dest, ContextObject co)
+    {
+        //GameObject src = Instantiate(Resources.Load(ResourceManager.MRPrefab + srcName) as GameObject);
 
         GameObject go = dest;
         Queue<GameObject> parent = new Queue<GameObject>();
@@ -41,24 +62,67 @@ public abstract class AbstractTemplate : MonoBehaviour
             {
                 go = dest;
             }
+            go.name = exGo.name;
+
             UpdateTransform(exGo.gameObject, go);
             //getAndUpdateComponent<MeshRenderer>(exGo.gameObject, go);
             UpdateMeshRenderer(exGo.gameObject, go);
             //UpdateSkinMeshRenderer(exGo.gameObject, go);
             UpdateMeshFilter(exGo.gameObject, go);
-            //getAndUpdateComponent<MeshFilter>(exGo.gameObject, go);
-            getAndUpdateComponent<MeshCollider>(exGo.gameObject, go);
-            getAndUpdateComponent<BoxCollider>(exGo.gameObject, go);
-            go.name = exGo.name;
+            UpdateBillBoard(exGo.gameObject, go);
+            UpdateText(exGo.gameObject, go);
+            UpdateRectTransform(exGo.gameObject, go);
+            
+            UpdateOtherComponents(exGo.gameObject, go, co);
 
             foreach (Transform child in exGo.transform)
             {
                 queue.Enqueue(child.gameObject);
                 parent.Enqueue(go);
             }
+            if (!exGo.gameObject.activeInHierarchy)
+            {
+                go.SetActive(false);
+            }
         }
 
-        Destroy(src);
+        //Destroy(src);
+    }
+    public void UpdateBillBoard(GameObject src, GameObject dest)
+    {
+        Billboard com = src.GetComponent<Billboard>();
+        if (com != null)
+        {
+            if (UnityEditorInternal.ComponentUtility.CopyComponent(com))
+            {
+                UnityEditorInternal.ComponentUtility.PasteComponentAsNew(dest);
+            }
+        }
+    }
+
+    public void UpdateRectTransform(GameObject src, GameObject dest)
+    {
+        RectTransform com = src.GetComponent<RectTransform>();
+        if (com != null)
+        {
+            if (UnityEditorInternal.ComponentUtility.CopyComponent(com))
+            {
+                RectTransform newCom = ConvertContextUtils.AddComponent<RectTransform>(dest);
+                UnityEditorInternal.ComponentUtility.PasteComponentValues(newCom);
+                newCom.sizeDelta = com.sizeDelta;
+            }
+        }
+    }
+    public void UpdateText(GameObject src, GameObject dest)
+    {
+        TextMeshPro com = src.GetComponent<TextMeshPro>();
+        if (com != null)
+        {
+            if (UnityEditorInternal.ComponentUtility.CopyComponent(com))
+            {
+                UnityEditorInternal.ComponentUtility.PasteComponentAsNew(dest);
+            }
+        }
     }
 
     public void UpdateSkinMeshRenderer(GameObject src, GameObject dest)
@@ -108,39 +172,50 @@ public abstract class AbstractTemplate : MonoBehaviour
     }
 
 
-    public void UpdateTransform(GameObject src, GameObject dest)
+    public GameObject UpdateTransform(GameObject src, GameObject dest)
     {
         dest.transform.localPosition = src.transform.localPosition;
         dest.transform.localRotation = src.transform.localRotation;
         dest.transform.localScale = src.transform.localScale;
+        return dest;
     }
 
-    public void UpdateMeshRenderer(GameObject src, GameObject dest)
+    public GameObject UpdateMeshRenderer(GameObject src, GameObject dest)
     {
         MeshRenderer com = src.GetComponent<MeshRenderer>();
         if (com != null)
         {
-            MeshRenderer newCom = ConvertContextUtils.AddComponent<MeshRenderer>(dest);
-            newCom.materials = com.materials;
+            if (UnityEditorInternal.ComponentUtility.CopyComponent(com))
+            {
+                UnityEditorInternal.ComponentUtility.PasteComponentAsNew(dest);
+            }
+            //MeshRenderer newCom = ConvertContextUtils.AddComponent<MeshRenderer>(dest);
+            //newCom.materials = com.materials;
 
-            newCom.shadowCastingMode = com.shadowCastingMode;
-            newCom.receiveShadows = com.receiveShadows;
+            //newCom.shadowCastingMode = com.shadowCastingMode;
+            //newCom.receiveShadows = com.receiveShadows;
 
-            newCom.lightProbeUsage = com.lightProbeUsage;
-            newCom.reflectionProbeUsage = com.reflectionProbeUsage;
-            newCom.probeAnchor = com.probeAnchor;
-            newCom.motionVectorGenerationMode = com.motionVectorGenerationMode;
-            newCom.allowOcclusionWhenDynamic = com.allowOcclusionWhenDynamic;
+            //newCom.lightProbeUsage = com.lightProbeUsage;
+            //newCom.reflectionProbeUsage = com.reflectionProbeUsage;
+            //newCom.probeAnchor = com.probeAnchor;
+            //newCom.motionVectorGenerationMode = com.motionVectorGenerationMode;
+            //newCom.allowOcclusionWhenDynamic = com.allowOcclusionWhenDynamic;
         }
+        return dest;
     }
 
-    public void UpdateMeshFilter(GameObject src, GameObject dest)
+    public GameObject UpdateMeshFilter(GameObject src, GameObject dest)
     {
         MeshFilter com = src.GetComponent<MeshFilter>();
         if (com != null)
         {
-            MeshFilter newCom = dest.AddComponent<MeshFilter>();
-            newCom.mesh = com.mesh;
+            //MeshFilter newCom = dest.AddComponent<MeshFilter>();
+            //newCom.mesh = com.mesh;
+            if (UnityEditorInternal.ComponentUtility.CopyComponent(com))
+            {
+                UnityEditorInternal.ComponentUtility.PasteComponentAsNew(dest);
+            }
         }
+        return dest;
     }
 }
