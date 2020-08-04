@@ -207,7 +207,8 @@ public class MREditContextManager : MonoBehaviour
         bbox.BoundsOverride = go.GetComponent<BoxCollider>();
         ManipulationHandler mHandler = go.AddComponent<ManipulationHandler>();
         mHandler.HostTransform = go.transform;
-        go.AddComponent<NearInteractionGrabbable>();
+        //go.AddComponent<NearInteractionGrabbable>();
+        go.AddComponent<NearInteractionTouchable>();
         //add record MR
         go.AddComponent<RecordTransform>();
         go.AddComponent<ObjectSetting>();

@@ -12,7 +12,7 @@ public class MRDataHolder
     private bool isEdit;
     private bool isRecord;
     private GameObject currentClickObject;
-
+    private float speed = 50;
     public static MRDataHolder Instance
     {
         get
@@ -67,6 +67,5 @@ public class MRDataHolder
     public bool IsEdit { get => isEdit; set => isEdit = value; }
     public bool IsRecord { get => isRecord; set => isRecord = value; }
     public GameObject CurrentClickObject { get => currentClickObject; set => currentClickObject = value; }
-
-    
+    public float Speed { get => speed; set => speed = value; }
 }

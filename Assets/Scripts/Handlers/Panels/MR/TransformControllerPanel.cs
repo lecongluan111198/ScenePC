@@ -57,7 +57,7 @@ public class TransformControllerPanel : MonoBehaviour
         GameObject currentObject = MRDataHolder.Instance.CurrentClickObject;
         float v = scale.SliderValue * 4 + 1;
         currentObject.transform.localScale = new Vector3(v, v, v);
-        currScale.text = Math.Round(scale.SliderValue + 1, 1).ToString();
+        currScale.text = Math.Round(v, 1).ToString();
     }
 
     public void OnUpdateHorizontalRotation()

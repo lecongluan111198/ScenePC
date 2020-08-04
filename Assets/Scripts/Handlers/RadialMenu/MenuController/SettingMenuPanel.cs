@@ -69,7 +69,7 @@ public class SettingMenuPanel : MonoBehaviour
 
     public void DisableObjectController()
     {
-        for(int i = 3; i< menuItems.Count; i++)
+        for (int i = 3; i < menuItems.Count; i++)
         {
             menuItems[i].isActive = false;
         }

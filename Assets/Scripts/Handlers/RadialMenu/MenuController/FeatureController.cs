@@ -13,6 +13,9 @@ public class FeatureController : MonoBehaviour
     public List<RadialMenuItem> menuItems = new List<RadialMenuItem>();
     [Header("ANIMATION")]
     public Animator anim;
+    [Header("PLANET")]
+    public GameObject speedTransform;
+    public GameObject scaleTransform;
 
     public static FeatureController Instance = null;
 
@@ -141,5 +144,20 @@ public class FeatureController : MonoBehaviour
         //TagAlongManager.Instance.ControllerIn();
         DisableObjectController();
         OffController();
+    }
+
+
+    public void ShowSpeedController()
+    {
+        //notifyRecord.SetActive(true);
+        //OffController();
+        speedTransform.GetComponent<PlanetSpeedController>().ShowPanel();
+    }
+
+    public void ShowScaleController()
+    {
+        //notifyRecord.SetActive(true);
+        //OffController();
+        scaleTransform.GetComponent<PlanetScaleController>().ShowPanel();
     }
 }

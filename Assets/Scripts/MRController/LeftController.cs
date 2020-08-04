@@ -53,6 +53,14 @@ public class LeftController : MonoBehaviour
         {
             ShowPlayerController();
         }
+        else if (Input.GetKey(KeyCode.F2))
+        {
+            ShowPlanetSpeedController();
+        }
+        else if (Input.GetKey(KeyCode.F3))
+        {
+            ShowPlanetScaleController();
+        }
     }
 
     private void OnEnable()
@@ -139,5 +147,20 @@ public class LeftController : MonoBehaviour
         }
         CurrController = controllers[currentIndex];
         CurrController.gameObject.SetActive(true);
+    }
+
+    private void ShowPlanetSpeedController()
+    {
+        if (!MRDataHolder.Instance.IsEdit)
+        {
+            FeatureController.Instance.ShowSpeedController();
+        }
+    }
+    private void ShowPlanetScaleController()
+    {
+        if (!MRDataHolder.Instance.IsEdit && MRDataHolder.Instance.CurrentClickObject)
+        {
+            FeatureController.Instance.ShowScaleController();
+        }
     }
 }

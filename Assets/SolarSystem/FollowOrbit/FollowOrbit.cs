@@ -75,7 +75,7 @@ public class FollowOrbit : MonoBehaviour
             {
                 //transform.position = Vector3.MoveTowards(transform.position, localOrbitPositions[numberOfpositions- earthOffset], Time.deltaTime * orbitSpeed * ConfigManager.instance.orbitSpeedInDaysPerSecond);
                 //transform.position = Vector3.MoveTowards(transform.position, localOrbitPositions[numberOfpositions - earthOffset], Time.deltaTime * orbitSpeed * 85.1f);
-                transform.position = Vector3.MoveTowards(transform.position, localOrbitPositions[numberOfpositions - earthOffset], Time.deltaTime * orbitSpeed * PlanetSpeedController.Instance.Speed);
+                transform.position = Vector3.MoveTowards(transform.position, localOrbitPositions[numberOfpositions - earthOffset], Time.deltaTime * orbitSpeed * MRDataHolder.Instance.Speed);
             }
 
             if (earthOffset >= numberOfpositions)
