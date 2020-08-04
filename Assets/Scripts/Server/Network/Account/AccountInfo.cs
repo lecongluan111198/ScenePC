@@ -7,7 +7,7 @@ public class AccountInfo
 {
     private static AccountInfo instance = null;
     private int uid = 1;
-    private string username = "LuanLee";
+    private string username = "ToanDT";
     private string email = "lecongluan111198@gmail.com";
     private string role = "ADMIN";
     private string session = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNTk3Mjg5NzUzLCJpYXQiOjE1OTQ2OTc3NTN9.Unl59d_LTDy57T-SuiVnrnMY167gcEYsfIqdNNCcs1-6XrrXVUMacEdavF7gsTRw4MvqlUKibQ53IInyPp6kfg";

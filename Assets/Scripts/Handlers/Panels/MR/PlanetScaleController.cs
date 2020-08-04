@@ -1,4 +1,5 @@
 ﻿using Microsoft.MixedReality.Toolkit.UI;
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ public class PlanetScaleController : MonoBehaviour
     public PinchSlider scale;
     [Header("TEXT VALUES")]
     public TextMesh currScale;
+    [Header("PHOTON")]
+    public PhotonView PV;
 
     // Start is called before the first frame update
     void Start()
@@ -54,7 +57,18 @@ public class PlanetScaleController : MonoBehaviour
     {
         GameObject currentObject = MRDataHolder.Instance.CurrentClickObject;
         float v = scale.SliderValue * 9 + 1;
-        currentObject.transform.localScale = new Vector3(v, v, v);
         currScale.text = Math.Round(v, 1).ToString();
+        //currentObject.transform.localScale = new Vector3(v, v, v);
+        PV.RPC("UpdateScale", RpcTarget.AllBuffered, currentObject.name, v);
+    }
+
+    [PunRPC]
+    public void UpdateScale(string name, float scale)
+    {
+        Debug.Log(name);
+        Transform currentObj = GameObject.Find(name).transform;
+        Transform targetObject = currentObj.Find(name);
+        targetObject.localScale = new Vector3(scale, scale, scale);
+
     }
 }
