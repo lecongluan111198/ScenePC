@@ -275,6 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speaker: {fileID: 0}
+  username: {fileID: 0}
 --- !u!1 &585498150
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,6 +1152,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1943494408316402134, guid: 25b5352bbe47e6a4f93fb87562abb505,
+        type: 3}
+      propertyPath: viewIdField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9160605979397064474, guid: 25b5352bbe47e6a4f93fb87562abb505,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25b5352bbe47e6a4f93fb87562abb505, type: 3}
 --- !u!1001 &2200819488436224425
@@ -1219,6 +1230,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969802492071931487, guid: ab5576aaa3d3bd544942a30656c2f33a,
+        type: 3}
+      propertyPath: viewIdField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8786674832715398978, guid: ab5576aaa3d3bd544942a30656c2f33a,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab5576aaa3d3bd544942a30656c2f33a, type: 3}
