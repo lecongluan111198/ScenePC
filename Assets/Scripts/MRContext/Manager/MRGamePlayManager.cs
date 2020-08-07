@@ -23,7 +23,7 @@ public class MRGamePlayManager : MonoBehaviour
     public GameObject rotationHandlePrefab;
 
 
-    private PhotonView PV;
+    public PhotonView PV;
     private Context currentContext;
 
     public static MRGamePlayManager Instance = null;
@@ -41,7 +41,7 @@ public class MRGamePlayManager : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        PV = gameObject.GetComponent<PhotonView>();
+        //PV = gameObject.GetComponent<PhotonView>();
         Debug.Log(PV);
 
     }
@@ -95,6 +95,7 @@ public class MRGamePlayManager : MonoBehaviour
     [PunRPC]
     private void UpdateMRObjectComponent(string objName, string containerName, byte[] data, bool isBackground)
     {
+        Debug.Log("aaaa");
         ContextObject co = null;
         using (var ms = new MemoryStream(data))
         {

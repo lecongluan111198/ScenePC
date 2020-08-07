@@ -934,7 +934,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 0}
-  viewIdField: 992
+  viewIdField: 3
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &865695986
@@ -960,6 +960,7 @@ MonoBehaviour:
     type: 3}
   rotationHandlePrefab: {fileID: 3868891704370700786, guid: 969c9b04d1b1848489de0d6efe6250fc,
     type: 3}
+  PV: {fileID: 865695985}
 --- !u!4 &865695987
 Transform:
   m_ObjectHideFlags: 0
