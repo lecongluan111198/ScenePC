@@ -164,7 +164,7 @@ public class APIRequest
             {
                 yield return null;
             }
-
+            Debug.Log(request.responseCode);
             if (request.responseCode == 200)
             {
                 string reponseJson = request.downloadHandler.text;

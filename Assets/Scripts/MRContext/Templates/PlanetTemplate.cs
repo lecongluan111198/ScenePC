@@ -1,11 +1,17 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlanetTemplate : AbstractTemplate
 {
-
+    private PhotonView PV;
     public Material[] materials;
+
+    private void Start()
+    {
+        PV = GetComponent<PhotonView>();
+    }
 
     private void UpdateIndividualPlanetData(GameObject src, GameObject go)
     {
@@ -138,8 +144,11 @@ public class PlanetTemplate : AbstractTemplate
     protected override GameObject UpdateOtherComponents(GameObject src, GameObject dest, ContextObject co)
     {
         UpdateLineRenderer(src, dest, co);
-        UpdateFollowOrbit(src, dest);
-        UpdateObjectRotation(src, dest);
+        if (PV.IsMine)
+        {
+            UpdateFollowOrbit(src, dest);
+            UpdateObjectRotation(src, dest);
+        }
         UpdateIndividualPlanetData(src, dest);
         UpdateSphereCollider(src, dest);
         return dest;
