@@ -11,6 +11,14 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
         [Experimental]
         [SerializeField] private NonNativeKeyboard keyboard = null;
 
+        private void Start()
+        {
+            if (keyboard == null && MREditContextManager.Instance != null)
+            {
+                keyboard = MREditContextManager.Instance.keyboard;
+            }
+        }
+
         public void OnPointerDown(PointerEventData eventData)
         {
             if (keyboard.isActiveAndEnabled)

@@ -45,19 +45,19 @@ public class LeftController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.F1))
         {
             ShowController();
         }
-        else if (Input.GetKey(KeyCode.F1))
+        else if (Input.GetKey(KeyCode.F2))
         {
             ShowPlayerController();
         }
-        else if (Input.GetKey(KeyCode.F2))
+        else if (Input.GetKey(KeyCode.F3))
         {
             ShowPlanetSpeedController();
         }
-        else if (Input.GetKey(KeyCode.F3))
+        else if (Input.GetKey(KeyCode.F4))
         {
             ShowPlanetScaleController();
         }

@@ -95,7 +95,6 @@ public class MRGamePlayManager : MonoBehaviour
     [PunRPC]
     private void UpdateMRObjectComponent(string objName, string containerName, byte[] data, bool isBackground)
     {
-        Debug.Log("aaaa");
         ContextObject co = null;
         using (var ms = new MemoryStream(data))
         {
@@ -117,8 +116,16 @@ public class MRGamePlayManager : MonoBehaviour
         AbstractTemplate temp = go.GetComponent<AbstractTemplate>();
         if (temp == null)
         {
-            Debug.Log(co.nameObj + " doesn't contain template script");
-            return;
+            if (co.nameDownload.Equals("Gorilla") || co.nameDownload.Equals("Description"))
+            {
+                //go.name = co.nameObj;
+                co.ToGameObject(go);
+            }
+            else
+            {
+                Debug.Log(co.nameObj + " doesn't contain template script");
+                return;
+            }
         }
 
         if (container != null)
@@ -147,7 +154,10 @@ public class MRGamePlayManager : MonoBehaviour
             mHandler.HostTransform = go.transform;
             ConvertContextUtils.AddComponent<NearInteractionGrabbable>(go);
         }
-        temp.UpdateInformation(co);
+        if(temp != null)
+        {
+            temp.UpdateInformation(co);
+        }
         //co.toGameObject(go);
     }
 

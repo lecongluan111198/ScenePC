@@ -9,12 +9,13 @@ public class SettingMenuPanel : MonoBehaviour
     //public GameObject notifyRecord;
     public GameObject questionPanel;
     public GameObject recordOptionPanel;
-    public GameObject tooltipPanel;
+    //public GameObject tooltipPanel;
     public GameObject tooltipSettingPanel;
     public GameObject confirmExitPanel;
     public GameObject confirmDeletePanel;
     public GameObject transformPanel;
     public GameObject animationController;
+    public GameObject descriptionController;
     [Header("BUTTONS")]
     public List<RadialMenuItem> menuItems = new List<RadialMenuItem>();
     [Header("ANIMATION")]
@@ -111,11 +112,11 @@ public class SettingMenuPanel : MonoBehaviour
 
     public void ShowTooltipMenu()
     {
-        //tooltipPanel.SetActive(true);
         if (menuItems[4].isActive)
         {
             tooltipSettingPanel.SetActive(true);
             OffController();
+            //descriptionController.GetComponent<DescriptionController>().OnController();
         }
     }
 

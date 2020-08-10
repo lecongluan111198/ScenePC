@@ -22,14 +22,17 @@ public class SynchronizeEvent : MonoBehaviour, IMixedRealityPointerHandler
     void Update()
     {
         //Debug.Log("enabled");
-        if (!isEnableCollider ||
-            (RightController.Instance != null && RightController.Instance.enabled && RightController.Instance.CurrController.Type == AbstractController.ControllerType.BRUSH))
+        if (!MRDataHolder.Instance.IsEdit)
         {
-            EnableBoxCollider(false);
-        }
-        else
-        {
-            EnableBoxCollider(true);
+            if (!isEnableCollider ||
+                (RightController.Instance != null && RightController.Instance.enabled && RightController.Instance.CurrController.Type == AbstractController.ControllerType.BRUSH))
+            {
+                EnableBoxCollider(false);
+            }
+            else
+            {
+                EnableBoxCollider(true);
+            }
         }
     }
 

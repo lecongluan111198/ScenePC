@@ -29,10 +29,10 @@ public class RecordTransform : MonoBehaviour, IMixedRealityPointerHandler
             this.TimeRange = timeRange;
         }
 
-        public ObjectStatus(Vector3 position, Quaternion rotation, Vector3 scale, float timeRange)
+        public ObjectStatus(Vector3 position, Vector3 rotation, Vector3 scale, float timeRange)
         {
             this.Position = ConvertTypeUtils.Vector3ToList(position);
-            this.Rotation = ConvertTypeUtils.QuaternionToList(rotation);
+            this.Rotation = ConvertTypeUtils.Vector3ToList(rotation);
             this.Scale = ConvertTypeUtils.Vector3ToList(scale);
             this.TimeRange = timeRange;
         }
@@ -65,7 +65,7 @@ public class RecordTransform : MonoBehaviour, IMixedRealityPointerHandler
             {
                 listStatuses.RemoveAt(0);
             }
-            listStatuses.Add(new ObjectStatus(transform.localPosition, transform.localRotation, transform.localScale, 0f));
+            listStatuses.Add(new ObjectStatus(transform.localPosition, transform.localRotation.eulerAngles, transform.localScale, 0f));
         }
     }
 

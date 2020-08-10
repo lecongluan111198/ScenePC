@@ -8,28 +8,30 @@ public class OwnershipTransfer : MonoBehaviourPun, IMixedRealityPointerHandler
 {
     private void OnMouseDown()
     {
-        base.photonView.RequestOwnership();
+        if (!MRDataHolder.Instance.IsEdit)
+            base.photonView.RequestOwnership();
     }
 
     public void OnPointerDown(MixedRealityPointerEventData eventData)
     {
-        base.photonView.RequestOwnership();
+        if (!MRDataHolder.Instance.IsEdit)
+            base.photonView.RequestOwnership();
     }
 
     public void OnPointerClicked(MixedRealityPointerEventData eventData)
     {
-        
+
     }
 
 
     public void OnPointerDragged(MixedRealityPointerEventData eventData)
     {
-        
+
     }
 
     public void OnPointerUp(MixedRealityPointerEventData eventData)
     {
-       
+
     }
 
 }

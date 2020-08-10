@@ -102,7 +102,15 @@ public class ConvertContextUtils
                         }
                         else
                         {
-                            loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, "Templates/Template"), Vector3.zero, Quaternion.identity, 0);
+                            if (obj.nameDownload.Equals("Gorilla") || obj.nameDownload.Equals("Description"))
+                            {
+                                loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, obj.nameDownload), Vector3.zero, Quaternion.identity, 0);
+                            }
+                            else
+                            {
+                                loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, "Templates/Template"), Vector3.zero, Quaternion.identity, 0);
+                            }
+                            
                         }
                     }
                     catch (Exception ex)
@@ -118,10 +126,10 @@ public class ConvertContextUtils
 
             }
 
-            //if(loadedObj != null)
-            //{
-            //    loadedObj.name = obj.nameObj;
-            //}
+            if (loadedObj != null)
+            {
+                loadedObj.name = obj.nameObj;
+            }
         }
         return loadedObj;
     }

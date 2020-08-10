@@ -25,7 +25,6 @@ public abstract class AbstractTemplate : MonoBehaviour
         {
             GameObject src = Instantiate(Resources.Load(ResourceManager.MRPrefab + co.nameDownload) as GameObject);
             DoUpdate(src, gameObject, co);
-            ConvertContextUtils.AddComponent<ObjectSetting>(gameObject);
             gameObject.name = co.nameObj;
             co.ToGameObject(gameObject);
             Destroy(src);
@@ -67,11 +66,15 @@ public abstract class AbstractTemplate : MonoBehaviour
             UpdateTransform(exGo.gameObject, go);
             //getAndUpdateComponent<MeshRenderer>(exGo.gameObject, go);
             UpdateMeshRenderer(exGo.gameObject, go);
-            //UpdateSkinMeshRenderer(exGo.gameObject, go);
+            UpdateSkinMeshRenderer(exGo.gameObject, go);
             UpdateMeshFilter(exGo.gameObject, go);
             UpdateBillBoard(exGo.gameObject, go);
             UpdateText(exGo.gameObject, go);
             UpdateRectTransform(exGo.gameObject, go);
+            UpdateAnimator(exGo.gameObject, go);
+            UpdateMeshCollider(exGo.gameObject, go);
+            UpdateLight(exGo.gameObject, go);
+            UpdateTerrain(exGo.gameObject, go);
             
             UpdateOtherComponents(exGo.gameObject, go, co);
 
@@ -125,12 +128,28 @@ public abstract class AbstractTemplate : MonoBehaviour
         }
     }
 
+    public void UpdateAnimator(GameObject src, GameObject dest)
+    {
+        Animator com = src.GetComponent<Animator>();
+        if (com != null)
+        {
+            if (UnityEditorInternal.ComponentUtility.CopyComponent(com))
+            {
+                UnityEditorInternal.ComponentUtility.PasteComponentAsNew(dest);
+            }
+        }
+    }
+
     public void UpdateSkinMeshRenderer(GameObject src, GameObject dest)
     {
         SkinnedMeshRenderer com = src.GetComponent<SkinnedMeshRenderer>();
         if (com != null)
         {
-            MeshUtils.Combine(src, dest);
+            if (UnityEditorInternal.ComponentUtility.CopyComponent(com))
+            {
+                UnityEditorInternal.ComponentUtility.PasteComponentAsNew(dest);
+            }
+            //MeshUtils.Combine(src, dest);
             //SkinnedMeshRenderer newCom = addComponent<SkinnedMeshRenderer>(dest);
             //newCom.sharedMesh = com.sharedMesh;
             ////newCom.localBounds.center = com.localBounds.center;
@@ -217,5 +236,50 @@ public abstract class AbstractTemplate : MonoBehaviour
             }
         }
         return dest;
+    }
+
+    public void UpdateMeshCollider(GameObject src, GameObject dest)
+    {
+        MeshCollider com = src.GetComponent<MeshCollider>();
+        if (com != null)
+        {
+            if (UnityEditorInternal.ComponentUtility.CopyComponent(com))
+            {
+                UnityEditorInternal.ComponentUtility.PasteComponentAsNew(dest);
+            }
+        }
+    }
+
+    public void UpdateLight(GameObject src, GameObject dest)
+    {
+        Light com = src.GetComponent<Light>();
+        if (com != null)
+        {
+            if (UnityEditorInternal.ComponentUtility.CopyComponent(com))
+            {
+                UnityEditorInternal.ComponentUtility.PasteComponentAsNew(dest);
+            }
+        }
+    }
+
+    public void UpdateTerrain(GameObject src, GameObject dest)
+    {
+        Terrain com = src.GetComponent<Terrain>();
+        if (com != null)
+        {
+            if (UnityEditorInternal.ComponentUtility.CopyComponent(com))
+            {
+                UnityEditorInternal.ComponentUtility.PasteComponentAsNew(dest);
+            }
+        }
+
+        TerrainCollider com1 = src.GetComponent<TerrainCollider>();
+        if (com != null)
+        {
+            if (UnityEditorInternal.ComponentUtility.CopyComponent(com1))
+            {
+                UnityEditorInternal.ComponentUtility.PasteComponentAsNew(dest);
+            }
+        }
     }
 }

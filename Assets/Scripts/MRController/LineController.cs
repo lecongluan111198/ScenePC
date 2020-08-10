@@ -102,7 +102,9 @@ public class LineController : MonoBehaviour
         KeyValuePair<Vector3, float> pair = infoMap[key];
         float lastPointAddedTime = pair.Value;
         float initialWidth = line.widthMultiplier;
-        line.material.color = Color.red;
+        line.material.color = Color.yellow;
+        //line.startColor = Color.yellow;
+        //line.endColor = Color.yellow;
         //brushRenderer.material.color = Color.blue;
         line.widthMultiplier = Mathf.Lerp(initialWidth, initialWidth * 2, width);
         if (Vector3.Distance(position, pair.Key) > minPositionDelta || Time.unscaledTime > lastPointAddedTime + maxTimeDelta)

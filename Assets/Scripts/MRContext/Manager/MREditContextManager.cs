@@ -1,4 +1,5 @@
-﻿using Microsoft.MixedReality.Toolkit.Input;
+﻿using Microsoft.MixedReality.Toolkit.Experimental.UI;
+using Microsoft.MixedReality.Toolkit.Input;
 using Microsoft.MixedReality.Toolkit.UI;
 using Photon.Pun;
 using System.Collections;
@@ -14,6 +15,8 @@ public class MREditContextManager : MonoBehaviour
     [Header("CONTAINER")]
     public GameObject container;
     public GameObject GUI;
+    [Header("KEYBOARD")]
+    public NonNativeKeyboard keyboard;
 
     public static MREditContextManager Instance = null;
 

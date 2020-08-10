@@ -15,6 +15,7 @@ public class ContextObject
     public List<double> rotation { get; set; }
     public List<double> scale { get; set; }
     public List<AbstractComponent> components { get; set; }
+    public string value { get; set; }
 
     public ContextObject()
     {
@@ -44,12 +45,13 @@ public class ContextObject
         go.transform.rotation = Quaternion.Euler(angle);
 
         //Debug.Log(nameObj + " " + angle.y + " " + go.transform.rotation.eulerAngles.y);
-
+        ConvertContextUtils.AddComponent<ObjectSetting>(go);
         ObjBasicInfo bInfo = ConvertContextUtils.AddComponent<ObjBasicInfo>(go);
         bInfo.DownloadName = nameDownload;
         bInfo.FromServer = fromServer;
         bInfo.Id = id;
-
+        bInfo.Content = value == null ? "" : value;
+        //bInfo.UpdateText();
         foreach (AbstractComponent ab in components)
         {
             Component component = null;
@@ -133,6 +135,7 @@ public class ContextObject
         ret.nameDownload = bInfo.DownloadName;
         ret.fromServer = bInfo.FromServer;
         ret.id = bInfo.Id;
+        ret.value = bInfo.Content == null ? "" : bInfo.Content;
         ret.position = ConvertTypeUtils.Vector3ToList(tf.localPosition);
         ret.rotation = ConvertTypeUtils.Vector3ToList(tf.localRotation.eulerAngles);
         ret.scale = ConvertTypeUtils.Vector3ToList(tf.localScale);
