@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class PlanetTemplate : AbstractTemplate
 {
-    private PhotonView PV;
+    public PhotonView PV;
     public Material[] materials;
 
     private void Start()
     {
-        PV = GetComponent<PhotonView>();
+        //PV = GetComponent<PhotonView>();
     }
 
     private void UpdateIndividualPlanetData(GameObject src, GameObject go)

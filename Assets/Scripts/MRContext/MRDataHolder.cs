@@ -13,6 +13,10 @@ public class MRDataHolder
     private bool isRecord;
     private GameObject currentClickObject;
     private float speed = 50;
+    //private List<string> objectWhitelist = new List<string>() {"Sun", "Earth", "Jupiter", "Mars", "Mercury", "Neptune", "Pluto", "Saturn", "Uranus", "Venus", "Gorilla", "Leopard", "Description" };
+    private List<string> objectWhitelist = new List<string>() {"Gorilla", "Leopard", "Description" };
+
+
     public static MRDataHolder Instance
     {
         get
@@ -31,12 +35,12 @@ public class MRDataHolder
         defaultContent = File.ReadAllText(path);
         currentContext = new Context()
         {
-            Id = 4,
-            AvatarId = 1,
+            Id = 5,
+            AvatarId = 3,
             Content = defaultContent,
             CreateTime = 1587788312000,
             Description = "Description for contexts",
-            Name = "context 4",
+            Name = "context 5",
             TeacherId = 1,
             Author = "Luan Lee"
         };
@@ -68,4 +72,5 @@ public class MRDataHolder
     public bool IsRecord { get => isRecord; set => isRecord = value; }
     public GameObject CurrentClickObject { get => currentClickObject; set => currentClickObject = value; }
     public float Speed { get => speed; set => speed = value; }
+    public List<string> ObjectWhitelist { get => objectWhitelist; set => objectWhitelist = value; }
 }

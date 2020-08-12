@@ -92,7 +92,11 @@ public class ConvertContextUtils
                         //{
                         //    loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, "Templates/HeartTemplate"), Vector3.zero, Quaternion.identity, 0);
                         //}
-                        if (obj.nameDownload.Equals("BrushThinStroke"))
+                        if (MRDataHolder.Instance.ObjectWhitelist.Contains(obj.nameDownload))
+                        {
+                            loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, obj.nameDownload), Vector3.zero, Quaternion.identity, 0);
+                        }
+                        else if (obj.nameDownload.Equals("BrushThinStroke"))
                         {
                             loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, "Templates/StrokeTemplate"), Vector3.zero, Quaternion.identity, 0);
                         }
@@ -102,16 +106,24 @@ public class ConvertContextUtils
                         }
                         else
                         {
-                            if (obj.nameDownload.Equals("Gorilla") || obj.nameDownload.Equals("Description"))
-                            {
-                                loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, obj.nameDownload), Vector3.zero, Quaternion.identity, 0);
-                            }
-                            else
-                            {
-                                loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, "Templates/Template"), Vector3.zero, Quaternion.identity, 0);
-                            }
-                            
+                            loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, "Templates/Template"), Vector3.zero, Quaternion.identity, 0);
                         }
+                        //else if (obj.nameDownload.Equals("Sun") || obj.nameDownload.Equals("Earth") || obj.nameDownload.Equals("Jupiter") || obj.nameDownload.Equals("Mars") || obj.nameDownload.Equals("Mercury") || obj.nameDownload.Equals("Neptune") || obj.nameDownload.Equals("Pluto") || obj.nameDownload.Equals("Saturn") || obj.nameDownload.Equals("Uranus") || obj.nameDownload.Equals("Venus"))
+                        //{
+                        //    loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, "Templates/PlanetTemplate"), Vector3.zero, Quaternion.identity, 0);
+                        //}
+                        //else
+                        //{
+                        //    if (obj.nameDownload.Equals("Gorilla") || obj.nameDownload.Equals("Leopard") || obj.nameDownload.Equals("Description"))
+                        //    {
+                        //        loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, obj.nameDownload), Vector3.zero, Quaternion.identity, 0);
+                        //    }
+                        //    else
+                        //    {
+                        //        loadedObj = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, "Templates/Template"), Vector3.zero, Quaternion.identity, 0);
+                        //    }
+                            
+                        //}
                     }
                     catch (Exception ex)
                     {

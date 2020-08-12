@@ -75,6 +75,7 @@ public abstract class AbstractTemplate : MonoBehaviour
             UpdateMeshCollider(exGo.gameObject, go);
             UpdateLight(exGo.gameObject, go);
             UpdateTerrain(exGo.gameObject, go);
+            UpdateParticle(exGo.gameObject, go);
             
             UpdateOtherComponents(exGo.gameObject, go, co);
 
@@ -277,6 +278,18 @@ public abstract class AbstractTemplate : MonoBehaviour
         if (com != null)
         {
             if (UnityEditorInternal.ComponentUtility.CopyComponent(com1))
+            {
+                UnityEditorInternal.ComponentUtility.PasteComponentAsNew(dest);
+            }
+        }
+    }
+
+    public void UpdateParticle(GameObject src, GameObject dest)
+    {
+        ParticleSystem com = src.GetComponent<ParticleSystem>();
+        if (com != null)
+        {
+            if (UnityEditorInternal.ComponentUtility.CopyComponent(com))
             {
                 UnityEditorInternal.ComponentUtility.PasteComponentAsNew(dest);
             }

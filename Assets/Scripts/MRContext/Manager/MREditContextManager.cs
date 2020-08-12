@@ -33,11 +33,13 @@ public class MREditContextManager : MonoBehaviour
     }
 
     private Context currentContext;
-
+    //private static HashSet<string> currentNames = new HashSet<string>();
+    private static Dictionary<string, int> currentNames = new Dictionary<string, int>();
     void Start()
     {
         MRDataHolder.Instance.IsEdit = true;
         LoadEditContext();
+        //get name
     }
 
     private void Update()
@@ -87,6 +89,15 @@ public class MREditContextManager : MonoBehaviour
             }
 
             entry.Key.ToGameObject(go);
+            if (currentNames.ContainsKey(go.name))
+            {
+                currentNames[go.name]++;
+                go.name = go.name + currentNames[go.name];
+            }
+            else
+            {
+                currentNames[go.name] = 0;
+            }
         }
     }
 
@@ -168,7 +179,7 @@ public class MREditContextManager : MonoBehaviour
                 break;
             }
         }
-        if(bo == null)
+        if (bo == null)
         {
             bo = new ContextObject(1, "", "", false, new List<double>() { 0, 0, 0 }, new List<double>() { 0, 0, 0 }, new List<double>() { 1, 1, 1 }, new List<AbstractComponent>());
         }
@@ -214,5 +225,14 @@ public class MREditContextManager : MonoBehaviour
         //add record MR
         go.AddComponent<RecordTransform>();
         go.AddComponent<ObjectSetting>();
+        if (currentNames.ContainsKey(go.name))
+        {
+            currentNames[go.name]++;
+            go.name += currentNames[go.name];
+        }
+        else
+        {
+            currentNames[go.name] = 0;
+        }
     }
 }

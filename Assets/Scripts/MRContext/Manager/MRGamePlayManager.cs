@@ -109,14 +109,15 @@ public class MRGamePlayManager : MonoBehaviour
         GameObject go = GameObject.Find(objName);
         if (go == null)
         {
-            Debug.Log(co.nameObj + " is null");
+            Debug.Log(objName + " is null");
             return;
         }
 
         AbstractTemplate temp = go.GetComponent<AbstractTemplate>();
         if (temp == null)
         {
-            if (co.nameDownload.Equals("Gorilla") || co.nameDownload.Equals("Description"))
+            //if (co.nameDownload.Equals("Gorilla") || co.nameDownload.Equals("Leopard") || co.nameDownload.Equals("Description"))
+            if (MRDataHolder.Instance.ObjectWhitelist.Contains(co.nameDownload))
             {
                 //go.name = co.nameObj;
                 co.ToGameObject(go);
