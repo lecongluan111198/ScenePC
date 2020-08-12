@@ -138,10 +138,11 @@ public class ConvertContextUtils
 
             }
 
-            if (loadedObj != null)
-            {
-                loadedObj.name = obj.nameObj;
-            }
+            //if set name before update information, other client cannot find this gameobject 
+            //if (loadedObj != null)
+            //{
+            //    loadedObj.name = obj.nameObj;
+            //}
         }
         return loadedObj;
     }
