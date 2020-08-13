@@ -23,22 +23,25 @@ public abstract class AbstractTemplate : MonoBehaviour
     {
         try
         {
-            GameObject src = Instantiate(Resources.Load(ResourceManager.MRPrefab + co.nameDownload) as GameObject);
-            DoUpdate(src, gameObject, co);
-            gameObject.name = co.nameObj;
-            co.ToGameObject(gameObject);
-            Destroy(src);
+            if (!co.nameDownload.Equals(""))
+            {
+                GameObject src = Instantiate(Resources.Load(ResourceManager.MRPrefab + co.nameDownload) as GameObject);
+                DoUpdate(src, gameObject, co);
+                Destroy(src);
+                //gameObject.name = co.nameObj;
+                co.ToGameObject(gameObject);
+            }
         }
         catch (Exception ex)
         {
-            Debug.Log(ex);
+            Debug.LogError(ex);
         }
 
     }
 
     protected abstract GameObject UpdateOtherComponents(GameObject src, GameObject dest, ContextObject co);
 
-    protected void DoUpdate(GameObject src, GameObject dest, ContextObject co)
+    protected virtual void DoUpdate(GameObject src, GameObject dest, ContextObject co)
     {
         //GameObject src = Instantiate(Resources.Load(ResourceManager.MRPrefab + srcName) as GameObject);
 
@@ -47,6 +50,7 @@ public abstract class AbstractTemplate : MonoBehaviour
         Queue<GameObject> queue = new Queue<GameObject>();
         parent.Enqueue(null);
         queue.Enqueue(src);
+
         while (queue.Count != 0)
         {
             GameObject exGo = queue.Dequeue();
@@ -54,6 +58,7 @@ public abstract class AbstractTemplate : MonoBehaviour
 
             if (parentGo != null)
             {
+
                 go = new GameObject();
                 go.transform.SetParent(parentGo.transform);
             }

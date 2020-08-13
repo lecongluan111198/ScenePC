@@ -75,11 +75,14 @@ public class ObjBasicInfo : MonoBehaviour
         {
             //text.gameObject.SetActive(false);
             //contentText.gameObject.SetActive(true);
-            text.text = content;
+            if (text != null)
+            {
+                text.text = content;
+            }
         }
         catch (Exception e)
         {
-            Debug.Log(e);
+            Debug.LogError(e);
         }
     }
 }

@@ -89,15 +89,15 @@ public class MREditContextManager : MonoBehaviour
             }
 
             entry.Key.ToGameObject(go);
-            if (currentNames.ContainsKey(go.name))
-            {
-                currentNames[go.name]++;
-                go.name = go.name + currentNames[go.name];
-            }
-            else
-            {
-                currentNames[go.name] = 0;
-            }
+            //if (currentNames.ContainsKey(go.name))
+            //{
+            //    currentNames[go.name]++;
+            //    go.name = go.name + currentNames[go.name];
+            //}
+            //else
+            //{
+            //    currentNames[go.name] = 0;
+            //}
         }
     }
 

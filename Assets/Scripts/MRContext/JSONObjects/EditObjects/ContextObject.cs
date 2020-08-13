@@ -57,8 +57,9 @@ public class ContextObject
             Component component = null;
             if (go.GetComponent<PlanetTemplate>() && ab.getType() == typeof(MRTooltip))
             {
-                go.transform.Find(go.name);
-                component = ConvertContextUtils.AddComponent<MRTooltip>(go.transform.Find(go.name).gameObject);
+                //go.transform.Find(go.name);
+                //Debug.Log(go.name);
+                //component = ConvertContextUtils.AddComponent<MRTooltip>(go.transform.Find(go.name).gameObject);
             }
             else
             {
@@ -68,7 +69,11 @@ public class ContextObject
                     component = go.AddComponent(ab.getType());
                 }
             }
-            ab.updateInfomation(component);
+
+            if (component != null)
+            {
+                ab.updateInfomation(component);
+            }
         }
 
         return go;

@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class PlanetTemplate : AbstractTemplate
@@ -11,6 +12,73 @@ public class PlanetTemplate : AbstractTemplate
     private void Start()
     {
         //PV = GetComponent<PhotonView>();
+    }
+
+    protected override void DoUpdate(GameObject src, GameObject dest, ContextObject co)
+    {
+        //GameObject src = Instantiate(Resources.Load(ResourceManager.MRPrefab + srcName) as GameObject);
+
+        GameObject go = dest;
+        Queue<GameObject> parent = new Queue<GameObject>();
+        Queue<GameObject> queue = new Queue<GameObject>();
+        parent.Enqueue(null);
+        queue.Enqueue(src);
+
+        while (queue.Count != 0)
+        {
+            GameObject exGo = queue.Dequeue();
+            GameObject parentGo = parent.Dequeue();
+
+            if (parentGo != null)
+            {
+                if(exGo.GetComponent<FollowOrbit>() || exGo.GetComponent<SphereCollider>())
+                {
+                    go = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, "Templates/Template"), Vector3.zero, Quaternion.identity, 0);
+                }
+                else
+                {
+                    go = new GameObject();
+                }
+
+                if(exGo.GetComponent<SphereCollider>())
+                {
+                    ConvertContextUtils.AddComponent<ObjectSetting>(go);
+                }
+                go.transform.SetParent(parentGo.transform);
+            }
+            else
+            {
+                go = dest;
+            }
+            go.name = exGo.name;
+
+            UpdateTransform(exGo.gameObject, go);
+            UpdateMeshRenderer(exGo.gameObject, go);
+            UpdateSkinMeshRenderer(exGo.gameObject, go);
+            UpdateMeshFilter(exGo.gameObject, go);
+            UpdateBillBoard(exGo.gameObject, go);
+            UpdateText(exGo.gameObject, go);
+            UpdateRectTransform(exGo.gameObject, go);
+            UpdateAnimator(exGo.gameObject, go);
+            UpdateMeshCollider(exGo.gameObject, go);
+            UpdateLight(exGo.gameObject, go);
+            UpdateTerrain(exGo.gameObject, go);
+            UpdateParticle(exGo.gameObject, go);
+
+            UpdateOtherComponents(exGo.gameObject, go, co);
+
+            foreach (Transform child in exGo.transform)
+            {
+                queue.Enqueue(child.gameObject);
+                parent.Enqueue(go);
+            }
+            if (!exGo.gameObject.activeInHierarchy)
+            {
+                go.SetActive(false);
+            }
+        }
+
+        //Destroy(src);
     }
 
     private void UpdateIndividualPlanetData(GameObject src, GameObject go)
