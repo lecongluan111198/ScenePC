@@ -36,6 +36,7 @@ public class CourseHandler : MonoBehaviour
     void Start()
     {
         MenuManager = GameObject.Find("Menu Manager");
+        LoadCourse();
     }
 
     // Update is called once per frame
@@ -94,6 +95,7 @@ public class CourseHandler : MonoBehaviour
                 {
                     if (data != null)
                     {
+                        Debug.Log(data.Count);
                         //var group = listOwn.GetComponent<GridLayoutGroup>();
                         if (data.Count < length)
                         {

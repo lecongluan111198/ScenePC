@@ -26,22 +26,28 @@ public class ResourceManager
 
     public static List<string> LESSON_AVATARS = new List<string>()
     {
-        "Images/Backgrounds/Lessons/book_icon",
         "Images/Backgrounds/Lessons/city_icon",
+        "Images/Backgrounds/Lessons/book_icon",
         "Images/Backgrounds/Lessons/history_icon",
         "Images/Backgrounds/Lessons/leaf_icon",
         "Images/Backgrounds/Lessons/tree_icon",
-        "Images/Backgrounds/Lessons/tube_icon"
+        "Images/Backgrounds/Lessons/tube_icon",
+        "Images/Backgrounds/Lessons/body_icon",
+        "Images/Backgrounds/Lessons/gorilla_icon",
+        "Images/Backgrounds/Lessons/earth_icon"
     };
 
     static Dictionary<string, int> CONTEXT_ID = new Dictionary<string, int>()
     {
-        { "book_icon" , 0},
-        { "city_icon" , 1},
+        { "book_icon" , 1},
+        { "city_icon" , 0},
         { "history_icon" , 2},
         { "leaf_icon" , 3},
         { "tree_icon" , 4},
         { "tube_icon" , 5},
+        { "body_icon" , 6},
+        { "gorilla_icon" , 7},
+        { "earth_icon" , 8},
     };
 
     static Dictionary<string, int> COURSE_ID = new Dictionary<string, int>()

@@ -34,6 +34,9 @@ public class PlanetTemplate : AbstractTemplate
                 if(exGo.GetComponent<FollowOrbit>() || exGo.GetComponent<SphereCollider>())
                 {
                     go = PhotonNetwork.Instantiate(Path.Combine(ResourceManager.MRPrefab, "Templates/Template"), Vector3.zero, Quaternion.identity, 0);
+                    //call rpc
+
+                    //return
                 }
                 else
                 {

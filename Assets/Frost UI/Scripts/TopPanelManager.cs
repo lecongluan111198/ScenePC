@@ -51,6 +51,7 @@ namespace Michsky.UI.Frost
             currentPanel = panels[currentPanelIndex];
             currentPanelAnimator = currentPanel.GetComponent<Animator>();
             currentPanelAnimator.Play(panelFadeIn);
+                        
         }
 
         public void PanelAnim(int newPanel)
